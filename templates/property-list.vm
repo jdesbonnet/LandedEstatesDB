@@ -1,0 +1,72 @@
+#parse ("/_nuig_ot_header.vm")
+
+<div class="a-z">
+|&nbsp;
+#foreach ($l in $alphabet)
+	#if ($l == $letter)
+	<b>$l</b>
+	#else
+	<a href="property-list.jsp?letter=$l">$l</a>
+	#end
+	&nbsp;|&nbsp;
+#end
+
+<br />
+
+<a href="property-list.jsp?letter=_all">List all houses</a>
+
+</div>
+
+
+
+#if ($properties) 
+<table border="1" class="listTable">
+<thead>
+<tr>
+<th>House name</th>
+<th>Description</th>
+<th>Image(s)</th>
+</tr>
+</thead>
+
+#foreach ($p in $properties) 
+<tr>
+<td>
+#if ($p.getName() && $p.getName().length()>0)
+<a href="property-show.jsp?id=$p.getId()">$p.getName()</a>
+&nbsp;
+#else
+<a href="property-show.jsp?id=$p.getId()"><em>no name</em></a>
+#end
+
+</td>
+
+<td>$!p.getDescription() &nbsp;</td>
+
+<td>
+#foreach ($image in $p.getImages())
+<a href="image-show.jsp?id=$image.getId()"><img 
+alt="image #$image.getId()"
+title="$jsp.escape($image.getCaption())"
+src="$contextPath/img/tn/${image.getId()}.jpg" 
+/></a>
+#end
+</td>
+
+<!--
+<td>
+#if ($p.getGridReference())
+<a href="javascript:popupMap('gridref=$p.getGridReference()');">$!p.getGridReference()</a>
+#end
+ &nbsp;</td>
+-->
+
+
+</tr>
+#end
+</table>
+#parse ("/_yahoo_map.vm")
+#end
+
+
+#parse ("/_nuig_ot_footer.vm")

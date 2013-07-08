@@ -1,0 +1,10 @@
+#parse ("/_nuig_ot_header.vm")
+
+<blockquote class="notAvailable">
+
+This record is not available at this time.  Phase II (Munster) records will 
+be available on completion of the project in 2011.
+
+</blockquote>
+
+#parse ("/_nuig_ot_footer.vm")

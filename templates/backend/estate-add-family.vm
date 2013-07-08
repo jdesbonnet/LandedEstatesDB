@@ -1,0 +1,36 @@
+#parse ("/backend/_header.vm")
+
+<h2>Add family to estate $estate.getName()</h2>
+
+<form action="estate-add-family-submit.jsp" method="POST">
+<input type="hidden" name="estate_id" value="$estate.getId()" />
+
+<div id="acdiv">
+<label for="acinput">Family to add:</label>
+<input id="acinput" type="text" name="family" size="32" />
+
+<br clear="both" />
+
+<div id="acc"></div>
+
+</div>
+
+
+<input type="submit" value="Add" />
+<input type="submit" name="_submit_cancel" value="Cancel" />
+</form>
+
+<script type="text/javascript" src="$YUI/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="$YUI/build/connection/connection-min.js"></script> 
+<script type="text/javascript" src="$YUI/build/autocomplete/autocomplete-min.js"></script>
+
+<script type="text/javascript">
+var queryService = "./family-query.jsp"; 
+var querySchema = ["\n", "\t"];
+var ds = new YAHOO.widget.DS_XHR(queryService, querySchema); 
+ds.responseType = YAHOO.widget.DS_XHR.TYPE_FLAT; 
+var ac = new YAHOO.widget.AutoComplete('acinput','acc', ds);
+</script>
+
+
+#parse ("/backend/_footer.vm")

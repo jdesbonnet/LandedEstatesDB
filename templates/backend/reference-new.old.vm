@@ -1,0 +1,37 @@
+#parse ("/backend/_header.vm")
+
+<h2>Create new reference for estate: $estate.getName()</h2>
+
+<form action="reference-new-submit.jsp" method="POST">
+
+<input type="hidden" name="estate_id"
+value="$estate.getId()" />
+
+<div>
+<label for="description">Reference description</label>
+<input type="text" size="40" id="name" name="description"
+value="" />
+</div>
+
+<div>
+<label for="source">Source (please select only one)</label>
+#foreach ($catName in $categoryHash.keySet())
+	<select name="source_id">
+	<option value="">** $catName **</option>
+	#foreach ($refSource in $categoryHash.get($catName)) 
+		<option value="$refSource.getId()">$refSource.getName()</option>
+	#end
+	</select>
+#end
+</div>
+
+
+<input type="submit" value="Save &amp; add new reference" />
+<input type="submit" name="_submit_exit" value="Save &amp; 
+return to estate record" />
+
+</form>
+
+
+#parse ("/backend/_footer.vm")
+

@@ -1,0 +1,11 @@
+#set ($useGoogleMap = "true")
+#parse ("/backend/_header.vm")
+
+
+<div id="mapContainer"></div>
+
+
+#parse ("/backend/_google_map_hp.vm")
+
+
+#parse ("/backend/_footer.vm")

@@ -1,0 +1,69 @@
+#parse ("/_nuig_ot_header.vm")
+
+<h1>Estates A-Z</h1>
+
+<div class="a-z">
+|&nbsp;
+#foreach ($l in $alphabet)
+	#if ($l == $letter)
+	<b>$l</b>
+	#else
+	<a href="estate-list.jsp?letter=$l">$l</a>
+	#end
+	&nbsp;|&nbsp;
+#end
+
+<br />
+
+<a href="estate-list.jsp?letter=_all">List all estates</a>
+
+</div>
+
+
+
+#if ($estates) 
+<table border="1" class="listTable">
+<thead>
+<tr>
+<th>Estate name</th>
+<th>Associated families</th>
+<th>Houses</th>
+</tr>
+</thead>
+
+#foreach ($estate in $estates) 
+<tr>
+<td>
+<a href="estate-show.jsp?id=$estate.getId()">$estate.getName()</a>
+&nbsp;
+</td>
+
+<td>
+#foreach ($family in $estate.getFamilies())
+<a href="family-show.jsp?id=$family.getId()">$family.getName()</a>
+#if ($family.getTitle() && $family.getTitle().length() > 0)
+<em>($family.getTitle())</em>
+#end
+&nbsp; &nbsp;
+#end
+&nbsp;
+</td>
+
+<td>
+#foreach ($property in $estate.getProperties())
+<a href="property-show.jsp?id=$property.getId()&estate_id=$estate.getId()">$property.getName()</a>
+&nbsp; &nbsp;
+#end
+&nbsp; 
+</td>
+
+
+</tr>
+#end
+</table>
+
+
+#end
+
+
+#parse ("/_nuig_ot_footer.vm")

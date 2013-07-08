@@ -1,0 +1,34 @@
+#parse ("/backend/_header.vm")
+
+<div class="error">
+#if ($exception.getMessage())
+Error: $!exception.getMessage()
+#else
+Error: $!exception.getClass().getName()
+#end
+
+#if ($note)
+<p>
+$note
+</p>
+#end
+
+</div>
+
+
+<h3>Error details:</h3>
+<p>
+Error class: $!exception.getClass().getName()
+</p>
+<p>
+Error message: $!exception.toString()
+</p>
+
+<p>
+Stack trace:
+#foreach ($tl in $exception.getStackTrace())
+$tl<br /> 
+#end
+</p>
+
+#parse ("/backend/_footer.vm")

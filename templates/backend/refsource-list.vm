@@ -1,0 +1,40 @@
+#parse ("/backend/_header.vm")
+
+<table border="1" class="listTable">
+<thead>
+<tr>
+<th>name</th>
+<th>category</th>
+<th>contact person</th>
+<th>contact telephone</th>
+<th>contact email</th>
+<th>actions</th>
+</tr>
+</thead>
+
+#foreach ($source in $referenceSources)
+<tr>
+<td>
+<a href="refsource-show.jsp?id=$source.getId()">
+#if (! $source.getName() || $source.getName().length() == 0) 
+<em>(no name)</em>
+#else
+$source.getName()
+#end
+</a>
+</td>
+<td>$!source.getCategory().getName()</td>
+<td>$!source.getContactPerson() &nbsp;</td>
+<td>$!source.getContactTelephone() &nbsp;</td>
+<td>$!source.getContactEmail() &nbsp;</td>
+<td>
+[
+<a href="refsource-delete.jsp?id=$source.getId()"
+onClick="return confirm('Are you sure you want to delete reference source?');">delete</a>
+]
+</td>
+</tr>
+#end
+</table>
+	
+#parse ("/backend/_footer.vm")

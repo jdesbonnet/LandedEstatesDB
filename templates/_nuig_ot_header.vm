@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+#if ($pageTitle)
+<title>$pageTitle</title>
+#else
+<title>Landed Estates Database</title>
+#end
+<!-- Meta Tags -->
+
+<!-- End Meta Tags -->
+<meta name="robots" content="index, follow" />
+<meta name="classification" content="Education" />
+<meta name="distribution" content="Global" />
+<meta name="doc-type" content="Public" />
+<meta name="doc-class" content="Completed" />
+<meta name="doc-rights" content="Public" />
+
+#if ($pageDescription) 
+<meta name="description" content="$pageDescription" />
+#end
+
+<link rel="shortcut icon" href="http://www.nuigalway.ie/favicon.ico" />
+
+<link type="text/css" rel="stylesheet" href="$YUI/reset-fonts-grids/reset-fonts-grids.css" />
+<link type="text/css" rel="stylesheet" href="$rootLevel/css/style.css" title="Default" />
+<link type="text/css" rel="stylesheet" href="$rootLevel/css/main.css" title="Default" />
+</head>
+
+<body>
+
+<noscript>
+Javascript is disabled by your browser. Some features of this site 
+will be impaired because of this. 
+</noscript>
+
+<!-- DOTS -->
+<div id="dots">
+
+<!-- CONTAINER -->
+<div id="container">
+
+	<!-- CHANGEABLE -->
+	<div id="changeable"> 
+
+	<!-- TOP-BAR -->
+	##include("/includes/skins/2005/topbar_html.inc")
+	<!-- END TOP-BAR -->
+	
+	<!-- LOGO-IMAGE -->
+    ##include ("/includes/skins/2005/logoimage_html.inc")
+    <div class="linedots"><img alt="spacer" src="http://www.nuigalway.ie/images/spacer.png" height="1" /></div>
+<div id="logoimage">
+  <a title="NUI Galway Home Page" href="http://www.nuigalway.ie"><img alt="NUI Galway Logo" src="http://www.nuigalway.ie/images/logos/logo.png" /></a>
+</div>
+ 	<div id="browserWarning" class="errormessage"> <img src="http://www.nuigalway.ie/cms/images/caution.png" alt="Warning Icon" /> <p><strong>Warning:</strong> Your browser doesn't support all of the features in this Web site. Please view our <a title="NUI Galway Accessibility Information" href="http://www.nuigalway.ie/accessibility.php">accessibility page</a> for more details.</p></div>
+	<!-- END LOGO-IMAGE -->
+  
+	<!-- BREADCRUMB -->
+	<div id="breadcrumb">
+		<div id="searcharea"><img alt="You are here" class="breadcrumbimage" src="http://www.nuigalway.ie/images/breadcrumb_youarehere.png" /></div>
+		<div id="breadcrumbwide"><span class="verdanabold"><a title="Landed Estates Database" 
+		href="http://www.landedestates.ie/">Landed Estates Database</a></span><span class="breadcrumbimage"><img alt="NUI Galway Home" src="http://www.nuigalway.ie/images/arrows/research_breadcrumb.png"/></span></div>
+	</div>
+	<!-- END BREADCRUMB -->
+
+	<!-- LEFTBAR-BODY-RIGHTBAR -->
+	<div id="navcon">
+  
+		<!-- LEFTBAR -->
+		<div id="leftbar">
+
+		<div id="prinav">
+			<ul id="sidenav">
+			
+			<!-- /includes/sidenav.inc -->
+			<li id="navhome"><a accesskey="1" tabindex="3" title="NUI Galway Home Page [access key '1']" href="http://www.nuigalway.ie/">NUI Galway Home</a></li>
+			<li class="activeLI"><span class="active"></span><a title="Landed Estates" href="/">Landed Estates Database&nbsp;&rsaquo;&rsaquo;</a>
+			<ul id="snSubMenu">
+				<li><span id="link0" class="youarehere"></span><a title="Home Page" href="index.jsp">Home Page</a></li>
+				<li><span id="link1" class="youarehere"></span><a title="Help" href="help.jsp">More Information</a>
+				<li><span id="link1" class="youarehere"></span><a title="Estates" href="estate-list.jsp">Estates A-Z</a></li>
+				<li><span id="link1" class="youarehere"></span><a title="Families" href="family-list.jsp">Families A-Z</a></li>
+				<li><span id="link1" class="youarehere"></span><a title="Houses" href="property-list.jsp">Houses A-Z</a></li>
+				<li><span id="link1" class="youarehere"></span><a title="Reference Sources" href="refsource-list.jsp">Reference Sources</a></li>
+				<li><span id="link1" class="youarehere"></span><a title="Images" href="images.jsp">Images</a></li>
+				<li><span id="link1" class="youarehere"></span><a title="Map" href="map.jsp">Map</a></li>
+				<li><span id="link1" class="youarehere"></span><a title="Images" href="property-list.jsp">Search</a>
+				<form action="search.jsp" method="GET">
+			<input id="f_q" type="text" name="q" value="$!q" />
+			<input type="submit" value="Go" />
+			</form>
+				</li>
+			</ul>
+			</li>
+			
+			</ul>
+			
+			<p></p>
+			
+			<div style="text-align:center;">
+			<a href="http://www.nuigalway.ie/mooreinstitute/"><img
+			alt="Moore Institute logo" 
+			style="border:0px; padding: 10px 0px;" 
+			src="$contextPath/assets/MooreInstituteLogo180w.jpg" /></a>
+			
+			<a href="http://www.irchss.ie"><img 
+			alt="Irish Research Council for the Humanities and Social Sciences (IRCHSS) logo"
+			style="border:0px; padding: 10px 0px;"  
+			src="$contextPath/assets/IRCHSS.gif"></a>
+			</div>
+			
+			<p></p>
+			
+		</div>
+			
+		</div> 
+		<!-- END LEFTBAR -->
+
+  	<!-- BODY -->
+		<div id="bodywide">
+		

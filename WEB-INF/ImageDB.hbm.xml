@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+ 
+	<class name="ie.wombat.imagetable.Image" 
+	  	entity-name="Image"
+	  	table="image">
+	  	
+	  	<cache usage="nonstrict-read-write" />
+	  	
+     	<id name="id" column="id" >
+            <generator class="native"/>
+        </id>
+        
+        <property name="state" />
+        <property name="filename" />
+    	<property name="caption" />
+    	<property name="description" />
+   	 	<property name="mimetype" />
+    	<property name="width" />
+		<property name="height" />
+		<property name="intermediateWidth" column="im_width" />
+		<property name="intermediateHeight" column="im_height" />
+		<property name="thumbnailWidth" column="tn_width" />
+		<property name="thumbnailHeight" column="tn_height" />
+		<property name="digest" />
+		
+		<many-to-one 
+			name="imageData"
+			class="ie.wombat.imagetable.ImageData"
+			entity-name="ImageData"
+			column="image_data_id" 
+		/>
+
+		<many-to-one 
+			name="intermediateImageData"
+			class="ie.wombat.imagetable.ImageData"
+			entity-name="ImageData"
+			column="im_data_id" 
+		/>
+		
+		<many-to-one 
+			name="thumbnailImageData"
+			class="ie.wombat.imagetable.ImageData"
+			entity-name="ImageData"
+			column="tn_data_id" 
+		/>
+		
+	
+	</class>
+	
+	<class name="ie.wombat.imagetable.ImageData" 
+		entity-name="ImageData"
+		table="image_data">
+		<id name="id" column="id" >
+            <generator class="native"/>
+        </id>
+        <property name="mimetype"/>
+		<property name="byteArray" column="data"/>
+	</class>
+        
+</hibernate-mapping>

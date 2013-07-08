@@ -1,0 +1,13 @@
+#parse ("/backend/_header.vm")
+
+<ul>
+<li> <a href="change-list.jsp">Show recent changes</a></li>
+<li> <a href="export.jsp">Export database to XML</a></li>
+<li> <a href="tools-dbbackup.jsp">Backup database</a></li>
+<li> <a href="reindex.jsp">Rebuild search index</a></li>
+<li> <a href="cdrom-make.jsp">Make CD-ROM</a></li>
+
+</ul>
+
+
+#parse ("/backend/_footer.vm")

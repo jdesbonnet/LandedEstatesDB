@@ -1,0 +1,1586 @@
+/* CSS Document */
+/* This stylesheet is organised to complement the structure of a standard NUI Galway Web
+page General, typographical definitions appear first, followed by groups selectors that
+relate to a particular region of the Web page. */
+
+/*Typographical definitions:*/
+body {
+	font: 13px Arial, Helvetica, Verdana, sans-serif;
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+	color: #666;
+	background-color: #fcfcfc;
+}
+p {
+	font-size: 1em;
+}
+table {
+	font-size: 1em;
+	font-family: Arial, Helvetica, Verdana, sans-serif;
+}
+tr {
+	font-size: 1em;
+	font-family: Arial, Helvetica, Verdana, sans-serif;
+}
+td {
+	font-size: 1em;
+	font-family: Arial, Helvetica, Verdana, sans-serif;
+}
+h1 {
+	width: 100%;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 1.4em;
+	clear: both;
+	color: #000;
+	font-weight: bold;
+	text-transform: uppercase;
+	background-color: transparent;
+	margin: 8px 0px 4px 0px;
+	padding: 0px 0px 8px 0px;
+	background: url(http://www.nuigalway.ie/images/dashed_line_500.png) bottom left no-repeat;
+}
+h2 {
+	/*width: 95%;*/
+	margin: 20px 0px 15px 0px;
+	padding: 6px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 1.3em;
+	font-weight: bold;
+	text-transform: uppercase;
+	background-color: transparent;
+	background: url(http://www.nuigalway.ie/images/gradients/gradient_h2.png) repeat-x;
+}
+h3 {
+	/*width: 95%;*/
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 1.2em;
+	margin: 10px 0px 15px 0px;
+	padding: 0px;
+	color: #000;
+	font-weight: bold;
+	background-color: transparent;
+}
+h4 {
+	/*width: 95%;*/
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 1.1em;
+	margin: 0px 0px 5px 0px;
+	padding: 0px;
+	color: #000;
+	font-weight: bold;
+	background-color: transparent;
+}
+h5 {
+	/*width: 95%;*/
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 1em;
+	margin: 0px 0px 5px 0px;
+	padding: 0px;
+	color: #000;
+	font-weight: bold;
+	background-color: transparent;
+}
+h6 {
+	/*width: 95%;*/
+	margin: 0px 0px 5px 0px;
+	padding: 0px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: .95em;
+	font-weight: bold;
+	color: #000;
+	background-color: transparent;
+}
+
+/* START LAYOUT DIVS */
+
+#dots {
+	width: 1000px;
+	text-align: left;
+	margin: 5px auto;
+}
+
+#container { 
+	width: 1000px;
+	padding: 0px;
+	margin: 0px;
+	border: 1px solid #ddd;
+	text-align: left;
+	background-color: #fff;
+	color: #666;
+	background: url(http://www.nuigalway.ie/images/leftbar_greyline.png);
+}
+
+#topbar {
+	width: 1000px;
+	height: 30px;
+	vertical-align: middle;
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+	background-color: #fff;
+	color: #666;
+}
+#topbartext {
+	float: left;
+	padding: 8px 0px 0px 8px;
+	margin: 0px;
+	border: 0px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #555;
+	background-color: transparent;
+}
+#topbartextright {
+	float: right;
+	padding: 8px 8px 0px 0px;
+	margin: 0px;
+	border: 0px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #555;
+	background-color: transparent;
+}
+#topbar img {
+	vertical-align: middle;
+	border: 0px;
+	padding: 0px;
+	margin: 0px;
+}
+#topbar a {
+	text-decoration: none;
+	color: #555;
+	background-color: transparent;
+}
+#reduceFont {
+	position: relative;
+}
+#cssDDLB {
+	width: 120px;
+	height: 14px;
+	font-size: 11px;
+	vertical-align: top;
+}
+#cssColour {
+	background:  url(http://www.nuigalway.ie/images/youarehere_grey.png) no-repeat;
+	background-position: left;
+	height: 10px;
+	vertical-align: inherit;
+	padding-left: 6px;
+	visibility: visible;
+}
+#cssHiContrast {
+	padding: 0px 2px 0px 6px;
+	background: none;
+}
+
+#logoimage {
+	width: 1000px;
+	height: 110px;
+	float: left;
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+	background-image: url(http://www.nuigalway.ie/images/headers/loading.png);
+}
+#logoimage img {
+	border: 0px;
+	padding: 0px;
+	margin: 20px 0px 0px 28px;
+}
+/* START TEMP DIVS*/
+#searchbreadcrumb {
+	width: 1000px;
+	height: 30px;
+	float: left;
+	margin: 5px 0px 0px 0px;
+	padding: 0px;
+	border: 0px;
+}
+#searcharea {
+	width: 204px;
+	height: 30px;
+	float: left;
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+	background-color: #68075A; /*#66241C*/
+	color: #666;
+}
+/* END TEMP DIVS*/
+#breadcrumb {
+	width: 1000px;
+	height: 30px;
+	float: left;
+	margin: 5px 0px 0px 0px;
+	padding: 0px;
+	border: 0px;
+}
+#breadcrumbwide {
+	width: 795px;
+	height: 30px;
+	float: right;
+	margin: 0px;
+	padding: 0px;
+	background-color: #68075A; /*#66241C;*/
+	color: #fff;
+}
+#breadcrumbwide a {
+	color: #fff;
+	background-color: transparent;
+	text-decoration: none;
+}
+#breadcrumbwide a:hover {
+	text-decoration: underline;
+}
+.breadcrumbimage {
+	float: right;
+	width: auto;
+	border: 0px;
+	padding: 0px;
+	margin: 0px;
+}
+
+#navcon {
+	width: 1000px;
+	margin: 5px 0px 0px 0px;
+	border: 0px;
+	padding: 0px;
+	float: left;
+}
+#leftbar {
+	width: 204px;
+	font-family: Arial, Helvetica, sans-serif;
+	float: left;
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+}
+#body {
+	position: relative;
+	width: 600px;
+	float: left;
+	margin: 0px 8px 8px 8px;
+	/* hack for IE 5.2 - Mac */
+	margin-right: -50px;
+	/*End hack*/
+	background-color: #fff;
+	padding: 0px 0px 8px 0px;
+	border: 0px;
+	overflow: hidden;
+}
+#bodywide {
+	position: relative;
+	width: 770px;
+	float: right;
+	background-color: #fff;
+	margin: 0px 8px 8px 8px;
+	padding: 0px 0px 8px 0px;
+	border: 0px;
+	overflow: hidden;
+}
+#bodyfull {
+	position: relative;
+	width: auto;
+	/*float: right;*/
+	margin: 0px;
+	padding: 8px;
+	border: 0px;
+	background-image: none;
+	background-color: #fff;
+	overflow: hidden;
+}
+#rightbar {
+	width: 154px;
+	float: right;
+	margin: 4px 0px 0px 0px;
+	padding: 0px;
+	border: 0px;
+}
+#rightbarimage {
+	width: 150px;
+	height: 130px;
+	margin: 0px 0px 0px 0px;
+	padding: 0px;
+	border: 0px;
+}
+#quicklinks {
+	width: 154px;
+	float: right;
+	margin: 10px 0px 0px 0px;
+	padding: 0px;
+	border: 0px;
+}
+
+#footer {
+	background-color: #fff;
+	font-size: 1em; 
+	float: left;
+	width: 1000px;
+	color: #555; 
+	height: 32px;
+}
+#footer a:link {text-decoration: none; border-bottom:1px dotted #555; background-color: transparent; color: #555;}
+#footer a:visited {text-decoration: none; background-color: transparent; color: #555;}
+#footer a:active {text-decoration: none; border-bottom:1px dotted #555; color: #555; background-color: transparent;}
+#footer a:hover {text-decoration: none; border-bottom:1px solid #555; color: #555; background-color: transparent;}
+#footerleft {
+	width: 204px; 
+	height: 32px;
+	float: left;
+	background-color: #C8C8C8;
+	color: #000;
+}
+#footerright {
+	width: 795px; 
+	height: 32px;
+	float: right;
+	background-color: #C8C8C8;
+	color: #000;
+}
+#footerleft ul {
+	list-style-type: none;
+	padding: 8px 0px 0px 0px;
+	margin: 0px;
+	border: 0px;
+}
+#footerleft li {
+	display: inline;
+	padding: 0px 0px 0px 8px;
+	border: 0px;
+	margin: 0px;
+	font-size: 1em;
+}
+#footerright ul {
+	list-style-type: none;
+	padding: 8px 0px 0px 2px;
+	margin: 0px;
+	border: 0px;
+}
+#footerright li {
+	display: inline;
+	padding: 0px 0px 0px 8px;
+	border: 0px;
+	margin: 0px;
+	font-size: 1em;
+}
+#valid {
+	width: 1000px;
+	height: auto;
+	color: #555;
+	text-align: center;
+	clear: both;
+	font-size: 1em;
+	background-color: #fff;
+	padding: 10px 0px 0px 0px;
+	border: 0px;
+	margin: 0px;
+}
+#valid a:link {text-decoration: none; border-bottom:1px dotted #555; background-color: transparent; color: #555;}
+#valid a:visited {text-decoration: none; background-color: transparent; color: #555;}
+#valid a:active {text-decoration: none; border-bottom:1px dotted #555; background-color: transparent;}
+#valid a:hover {text-decoration: none; border-bottom:1px solid #555; background-color: transparent;}
+
+#pagebottom {
+	width: 1000px;
+	position: relative;
+	background-color: #fcfcfc;
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+	clear: both;
+}
+
+/* END LAYOUT DIVS */
+
+/* START STYLES/CLASSES/OBJECTS */
+
+#breakingNews {
+	padding: 1px;
+	border: 1px solid #ccc;
+	margin: 10px 0 0 0;
+}
+#breakingNewsItem {
+	position: relative;
+	width: 100%;
+	height: 180px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	cursor: pointer;
+}
+#breakingNewsText {
+	position: absolute;
+	width: 100%;
+	height: 40px;
+	background: url(http://www.nuigalway.ie/images/newsTextBackground_666-80.png) repeat-x;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	bottom: 0px;
+	left: 0px;
+}
+#breakingNewsFader {
+ 	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 390px;
+	height: 180px;
+	/* css3 standard */
+	opacity:1;
+	/* mozilla */
+	-moz-opacity:1;
+	/* safari / konquorer */
+	-khtml-opacity:1;
+	filter: alpha(opacity=100);
+	background-color: #ffffff;
+}
+.breakingNewsControl {
+	position: absolute;
+	height: 16px;
+	top: 1px;
+	background: url(http://www.nuigalway.ie/images/trans_efefef.png) repeat-x;
+	color: #555;
+	right: 1px;
+	margin: 0;
+	padding: 2px;
+	/*border: 1px solid #efefef;*/
+	border: 0px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+}
+.breakingNewsControl img {
+	vertical-align: middle;
+}
+
+.box {
+    width: 96%;
+    display:block;
+		float:left;
+    border:1px solid #ddd;
+    min-height:120px;
+    margin :0 10px 10px 0;
+		list-style: none;
+		padding: 2px;
+}
+.box h1 { 
+    font-family: Arial, Verdana, Helvetica, sans-serif;
+    font-size: 1.2em;
+    color: #666;
+    background-color: #ddd;
+    margin:0;
+    padding:0;
+    line-height:22px; 
+		text-indent:5px;
+    width: 100%;
+}
+.boxleft {
+    width: 340px;
+    display:block;
+    float:left;
+    border:1px solid #ddd;
+    min-height:120px;
+    margin :0 10px 10px 10px;
+		list-style: none;
+}
+.box p {
+		padding:2px;
+}
+.boxleft h1 { 
+    font-family: Arial, Verdana, Helvetica, sans-serif;
+    font-size: 1.2em;
+    color: #666;
+    background-color: #ddd;
+    margin:0;
+    padding:0;
+    line-height:22px; 
+		text-indent:5px;
+    width: 100%;
+}
+.boxleft p {
+		padding:2px;
+}
+.boxright {
+    width: 340px;
+    display:block;
+    float:right;
+    border:1px solid #ddd;
+    min-height:120px;
+    margin :0 10px 10px 10px;
+    list-style: none;
+}
+.boxright h1 {
+    font-family: Arial, Verdana, Helvetica, sans-serif;
+    font-size: 1.2em;
+    color: #666;
+    background-color: #ddd;
+    margin:0;
+    padding:0;
+    line-height:22px;
+	text-indent:5px;
+    width: 100%;
+}
+.boxright p {
+		padding: 2px;
+}
+.boxrightbar {
+	width: 180px;
+	display: block;
+	float: right;
+	border: 1px solid #ddd;
+	margin: 0 10px 10px 10px;
+	padding: 2px;
+}
+.rightbarbox {
+	width: 154px;
+	display: block;
+	float: right;
+	border: 1px solid #ddd;
+	margin: 0 10px 10px 10px;
+	padding: 2px;
+}
+
+/* Content layout classes */
+
+.twoColumnGrid {
+	width: 99%;
+	float: left;
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+.leftColumn {
+	width: 49%;
+	float: left;
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+.rightColumn {
+	width: 49%;
+	float: right;
+	border: 0;
+	margin: 0;
+	padding: 0;	
+}
+.rightColumnContent {
+	border: 0;
+	margin: 10px 10px 0px 25px;
+	padding: 5px;
+}
+.rightColumnContentDashed {
+	border: 1px dashed #666;
+	margin: 20px 10px 0px 25px;
+	padding: 5px;
+}
+.columnContentDashed {
+	border: 1px dashed #666;
+	margin: 20px 0px 0px 0px;
+	padding: 5px;
+	/*margin: 0;*/
+}
+.columnContent {
+	border: 0;
+	margin: 0px 10px 0px 0px;
+	padding: 5px;
+}
+.genericBackgroundGradient {
+	background: url(http://www.nuigalway.ie/images/gradients/generic_gradient.png) repeat-x;
+}
+
+/* Style classes */
+
+.linedots {
+	background-image: url(http://www.nuigalway.ie/images/linedots.png); 
+	width: 1000px;
+	height: 1px;
+	padding: 0px;
+	margin: 0px;
+	border: 0px;
+	clear: both;
+}
+.noheight {
+  /*Used in a container span for </form> fields - stops the end form from causing a line break in everything except opera */
+  height: 0px;
+	padding: 0px;
+	margin: 0px;
+}
+.verdanabold {
+	padding-top: 8px; 
+	padding-left: 8px; 
+	float: left;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #fff;
+	background-color: transparent;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+.whitebox {
+  background: url(http://www.nuigalway.ie/images/whitebox.png) no-repeat 50% 50%;
+	width: 5px;
+	height: 23px;
+	float: left;
+}
+.youarehere {
+	width: 10px;
+	height: 20px;
+	float: right;
+	background: url(http://www.nuigalway.ie/images/arrows/arrow_maroon_left.png) no-repeat 0px 50%;
+	display: none;
+}
+.bodytext {
+	margin: 10px 0px 0px 0px;
+	padding: 0px;
+	background-color: transparent;
+	color: #555;
+}
+.imgbody {
+	margin: 0px 6px 10px 0px;
+	padding: 3px;
+	float: left;
+	border: 1px solid #ddd;
+}
+.imgbodyright {
+	margin: 0px 6px 10px 0px;
+	padding: 3px;
+	float: right;
+	border: 1px solid #ddd;
+}
+.imgright {
+	margin: 0px 4px 4px 0px;
+	border: 0px;
+	padding: 2px 2px 10px 0px;
+	float: right;
+}
+.quote {
+	margin: 2px 10px 2px 10px;
+	font-size: 1.5em;
+	color: #993300;	
+}
+.bodytext a[href^="http:"] {
+	background: transparent url(http://www.nuigalway.ie/images/externalLink.png) no-repeat scroll right center;
+	padding-right: 10px;
+}
+.bodytext a[href*="nuigalway.ie"] {
+	background-image: none;
+	padding-right: 0;
+}
+a[href^="javascript:mail"] {
+	background: transparent url(http://www.nuigalway.ie/images/email.png) no-repeat scroll right center;
+	padding: 5px 20px 5px 0;
+}
+a[href$=".pdf"] {
+	background: transparent url(http://www.nuigalway.ie/images/pdf.png) no-repeat scroll right center;
+	padding: 5px 20px 5px 0;
+}
+.bodytext a[href$=".pdf"] {
+	background: transparent url(http://www.nuigalway.ie/images/pdf.png) no-repeat scroll right center;
+	padding: 5px 20px 5px 0;
+}
+a[href$=".doc"] {
+	background: transparent url(http://www.nuigalway.ie/images/doc.png) no-repeat scroll right center;
+	padding: 5px 20px 5px 0;
+}
+a[href$=".xls"] {
+	background: transparent url(http://www.nuigalway.ie/images/xls.png) no-repeat scroll right center;
+	padding: 5px 20px 5px 0;
+}
+a[href$=".ppt"] {
+	background: transparent url(http://www.nuigalway.ie/images/ppt.png) no-repeat scroll right center;
+	padding: 5px 20px 5px 0;
+}
+a[href$=".pps"] {
+	background: transparent url(http://www.nuigalway.ie/images/ppt.png) no-repeat scroll right center;
+	padding: 5px 20px 5px 0;
+}
+a[href$=".zip"] {
+	background: transparent url(http://www.nuigalway.ie/images/zip.png) no-repeat scroll right center;
+	padding: 5px 20px 5px 0;
+}
+.noicon {
+	background: none ! important;
+	padding: 0 ! important;
+}
+.bodytext a:link {text-decoration: none; border-bottom:1px dotted #555; background-color: transparent;}
+.bodytext a:visited {text-decoration: none; border-bottom:1px dotted #555; background-color: transparent;}
+.bodytext a:active {text-decoration: none; border-bottom:1px dotted #555;; background-color: transparent;}
+.bodytext a:hover {text-decoration: none; border-bottom:1px solid #555; background-color: transparent;}
+
+table .bodytext a:link {text-decoration: none; border-bottom:1px dotted #555; background-color: transparent;}
+table .bodytext a:visited {text-decoration: none; border-bottom:1px dotted #555; background-color: transparent;}
+table .bodytext a:active {text-decoration: none; border-bottom:1px dotted #555;; background-color: transparent;}
+table .bodytext a:hover {text-decoration: none; border-bottom:1px solid #555; background-color: transparent;}
+
+.bodyheadsub {
+	background-color: #fff;
+	color: #555;
+}
+.spacer {
+	height: 5px;
+	clear: both;
+	background-color: transparent;
+	color: #000;
+}
+.sitemapprint {
+	float: right;
+}
+.cursorlinked {
+	cursor: pointer;
+}
+hr {
+	clear: both;
+	width: 99%;
+	text-align: center;
+	border: none 0;
+	border-top: 1px dashed #bbb;
+	height: 1px;
+}
+.clear {
+	clear: both;
+}
+.grayedOut {
+	color: #bbbbbb;
+	background-color: transparent;
+}
+.bulletlist {
+   width: 100%; 
+	/*display: block;*/
+	list-style: none;
+	margin: 5px 0px 5px 0px;
+	padding: 0px;
+	line-height: 1.5;
+	/*height: auto;*/
+	/*position: relative;*/
+}
+.bulletlist li {
+	/*display: block;*/
+	width: 100%;
+	list-style: none;
+	padding: 0px 0px 0px 12px;
+	/*position: relative;*/
+	background: url(http://www.nuigalway.ie/images/arrows/arrow_maroon.png) no-repeat 2px 8px;
+	color: #666;
+	background-color: transparent;
+	line-height: 1.5;
+	/*height: auto;*/
+}
+.bold {
+	font-weight: bold;
+}
+.boldNUIGalway {
+	font-weight: bold;
+	color: #68075A;
+}
+.subnavlinks {
+	display: block;
+	color: inherit;
+	width: 204px;
+	height: 23px;	
+	border-bottom: 1px solid #90bade;
+	text-decoration: none;
+	float: left;
+	background-color: #E8E8E8;
+}
+.sitemap {
+	width: 100%;
+	border: 0px;
+}
+.sitemap tr {
+	vertical-align: top;
+}
+.sitemap td {
+	line-height: 1.5;
+	width: 50%;
+	margin: 0px;
+	padding: 0px;
+	vertical-align: top;
+}
+.sitemap a {
+	line-height: 1.5;
+}
+.sitemapSearchButton {
+	font-family: arial, helvetica, sans-serif;
+	font-size: 1em;
+	width: 190px;
+}
+.highlight {
+	background-color: #f0f0f0;
+	color: #666;
+	font-family: inherit;
+	font-weight: normal;
+	border: 1px solid #68075A;
+	padding: 5px;
+	margin: 5px 0px 5px 0px;
+	width: 90%;
+}
+.highlight a {
+	color: #555;
+	background-color: transparent;
+}
+.shaded {
+	font: inherit;
+	color: inherit;
+	background-color: #F6F2F2;
+	padding: 3px;
+}
+.sitemap a:link {text-decoration: none; border-bottom:1px dotted #555; background-color: transparent;}
+.sitemap a:visited {text-decoration: none; background-color: transparent;}
+.sitemap a:active {text-decoration: none; border-bottom:1px dotted #555;; background-color: transparent;}
+.sitemap a:hover {text-decoration: none; border-bottom:1px solid #555; background-color: transparent;}
+
+.tableborder a:link {text-decoration: none; border-bottom:1px dotted #555; background-color: transparent;}
+.tableborder a:visited {text-decoration: none; background-color: transparent;}
+.tableborder a:active {text-decoration: none; border-bottom:1px dotted #555; background-color: transparent;}
+.tableborder a:hover {text-decoration: none; border-bottom:1px solid #555; background-color: transparent;}
+
+.tabledashed {
+	border-collapse: collapse;
+	border: 1px solid #68075A;
+	width: 99%;
+	margin-left: 1px;
+}
+.tabledashed td, th {
+	border: 1px dashed #BB9E9C;
+  	color: #000;
+	padding: 4px;
+}
+.tabledashed tbody tr:hover {
+  background: #E6DCDB;
+}
+.dashedborder {
+	border: 1px dashed #666;
+	background-color: #e0ffff !important;
+	padding: 3px;
+	width: 90% !important;
+}
+.atimage {
+	vertical-align: middle;
+}
+.footertext {
+	margin-top: 5px;
+	width: 1000px;
+	height: 30px;
+	color: #555;
+	text-align: center;
+	clear: both;
+	font-size: 1em;
+	background-color: transparent;
+}
+.smalltext {
+	color: #555;
+	font-size: .85em;
+}
+.smallTextWhite {
+	color: #fff;
+	font-size: .95em;
+	padding: 5px;
+}
+.smallTextWhite a:link {text-decoration: none; border-bottom:1px dotted #fff; background-color: transparent; color: #fff;}
+.smallTextWhite a:visited {text-decoration: none; border-bottom:1px dotted #fff; background-color: transparent; color: #fff;}
+.smallTextWhite a:active {text-decoration: none; border-bottom:1px dotted #fff;; background-color: transparent; color: #fff;}
+.smallTextWhite a:hover {text-decoration: none; border-bottom:1px solid #555; background-color: transparent; color: #fff;}
+
+.headerred {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 1.2em;
+	color: #68075A;
+	font-weight: bold;
+	text-transform: uppercase;
+	background-color: transparent;
+}
+.equations {
+	font-family: serif, garamond;
+	font-size: 1.2em;
+	color: #666666;
+	background-color: inherit;
+}
+.justify {
+	text-align: justify;
+}
+.lineHeight {
+	line-height: 22px;
+}
+.errormessage {
+	position: absolute;
+	left: 205px;
+	top: 32px;
+	width: 796px;
+	height: 131px;
+	border: 1px solid black;
+	background-color: #FFFFFF;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 1em;
+	color: #990000;
+	display: none;
+	overflow: scroll;
+	padding: 2px;
+}
+.errormessage tr {
+	vertical-align: top;
+}
+.errormessage img {
+	vertical-align: baseline;
+}
+.pagenav {
+	display: block;
+}
+fieldset {
+  width: 95%;	
+}
+dl {
+	width: 95%;
+}
+.button {
+	repeat: no-repeat;
+	margin-bottom: -3px;
+}	
+.navlinkstop {
+	list-style: none;
+	display: block;
+	line-height: 20px;
+	text-decoration: none;
+	padding: 0px;
+	border: 0px;
+	float: left;
+}
+.randomSpotLight {
+  display: none;
+}
+#viewAllSpotlights {
+  cursor: pointer;
+}
+
+/* END STYLES/CLASSES */
+
+/* START SIDENAV */
+
+#prinav {
+	width: 202px;
+	padding: 0px;
+	margin: 0px;
+	border-bottom: 1px solid #C8C8C8;
+	color: #fff;
+	background-color: transparent;
+}
+#sidenav {
+	width: 202px;
+	padding: 0px;
+	margin: 0px;
+	border-top: 1px solid #C8C8C8;	
+	border-bottom: 1px solid #fff;
+	border-right: 1px solid #fff;
+	border-left: 1px solid #fff;
+	color: #fff;
+	background-color: transparent;
+}
+#sidenavSitemap {
+	padding: 0px;
+	margin: 0px;
+	line-height: 22px;
+	background-color: transparent;
+}
+#sidenav ul { 
+	line-height: 22px;
+	text-align: left;
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+	float: left;
+}
+#sidenav li {
+	width: 202px;
+	font-size: 1em;
+	list-style: none;
+	display: block;
+	line-height: 22px;
+	margin: 0px;
+	background-color: #68075A; /*66241C*/
+	color: inherit;
+	border-top: 1px solid #fff;
+	float: left;
+}
+#sidenav li a {
+	display: block;
+	padding: 2px 10px 0px 7px;
+	color: #fff;
+	background-color: transparent;
+	text-decoration: none;
+}
+#sidenav li a:hover {
+}
+#sidenav li ul li {
+	background-color: #E6DCDB;
+	font-size: 1em;
+	color: inherit;
+	margin: 0px;
+	border-top: 1px solid #BB9E9C;
+	float: left;	
+}
+#sidenav li ul li a {
+	display: block; 
+	line-height: 22px;
+	background: url(http://www.nuigalway.ie/images/arrows/arrow_maroon.png) no-repeat 6px 10px;
+	padding: 2px 0px 0px 18px;
+	color: #666;
+	background-color: transparent;
+	text-decoration: none;
+}
+#sidenav li ul li a:hover {
+	background-color: #BB9E9C;
+	color: #000;
+}
+#sidenav li ul li ul {
+	display: none;
+}
+#sidenav li ul li ul li {
+	background-color: #fff;
+	font-size: .98em;
+	color: inherit;
+	margin: 0px;
+	float: left;
+	border-top: 1px solid #E6DCDB;
+}
+#sidenav li ul li ul li a {
+	display: block;
+	line-height: 20px;
+	background: none;
+	padding: 2px 0px 0px 23px;
+	color: #666;
+	background-color: transparent;
+	text-decoration: none;
+}
+#sidenav li ul li ul li a:hover {
+	background-color: #F3EFF0;
+	color: #000;
+	font-weight: normal;
+}
+#sidenav li ul li ul li ul {
+	display: none;
+}
+#sidenav li ul li ul li ul li {
+	background-color: #fff;
+	font-size: .95em;
+	color: inherit;
+	margin: 0px;
+	border: 0px;
+	float: left;
+	font-weight: normal;
+}
+#sidenav li ul li ul li ul li a {
+	display: block;
+	line-height: 20px;
+	/*background: none;*/
+	background: url(http://www.nuigalway.ie/images/arrows/dash_greyblue_small.png) no-repeat 27px 10px;
+	padding: 2px 0px 0px 33px;
+	color: #666;
+	background-color: transparent;
+	text-decoration: none;
+}
+#sidenav li ul li ul li ul li a:hover {
+	background-color: #efefef;
+	color: #000;
+}
+#sidenav li ul li ul li ul li ul {
+	display: none;
+}
+#sidenav li ul li ul li ul li ul li {
+	background-color: #fff;
+	font-size: .92em;
+	color: inherit;
+	margin: 0px;
+	border: 0px;
+	float: left;
+	font-weight: normal;
+}
+#sidenav li ul li ul li ul li ul li a {
+	display: block;
+	line-height: 20px;
+	background: none;
+	padding: 2px 0px 0px 42px;
+	color: #666;
+	background-color: transparent;
+	text-decoration: none;
+}
+#sidenav li ul li ul li ul li ul li a:hover {
+	background-color: #efefef;
+	color: #000;
+}
+#sidenav li.activeLI {
+	background-color: #555;
+}
+
+/* END SIDENAV */
+
+/* START IMPORTANT LINKS */
+
+#importantlinks {
+	width: 201px;
+	float: left;
+	margin: 15px 0px 10px 1px;
+	padding: 0px;
+	border: 0px;
+	position: relative;
+	border-bottom: 1px solid #E6DCDB;
+}
+#importantlinks ul { 
+	list-style: none;
+	text-align: left;
+	float: left;
+	margin: 0px;
+	padding: 0px;
+}
+#importantlinks li {
+	width: 201px;
+	list-style: none;
+	display: block;
+	line-height: 22px;
+	margin: 0px;
+	padding: 0px;
+	color: #000;
+	float: left;
+	background-color: #E6DCDB; /*#BB9E9C*/
+}
+#importantlinks li a {
+	display: block;
+	padding: 0px 0px 0px 12px;
+	background: url(http://www.nuigalway.ie/images/arrows/arrow_maroon.png) no-repeat 2px 9px;
+	background-color: #fff;
+	color: #666;
+	text-decoration: none;
+	border-top: 1px dotted #ccc;
+}
+#importantlinks li a:hover {
+	background-color: #efefef;
+	color: #000;
+}
+#importantlinks li ul li {	
+	font-size: .95em;
+}
+#importantlinks li ul li a {
+	display: block;
+	padding: 0px 0px 0px 20px;
+	background: none;
+	color: #666;
+	background-color: #fff;
+	text-decoration: none;
+	border-top: 1px solid #fff;
+}
+#importantlinks li ul li a:hover {
+	background-color: #efefef;
+	color: #000;
+}
+#importantlinks li ul li ul li {	
+	font-size: .94em;
+}
+#importantlinks li ul li ul li a {
+	display: block;
+	padding: 0px 0px 0px 28px;
+	background: none;
+	color: #666;
+	background-color: #fff;
+	text-decoration: none;
+	border-top: 1px solid #fff;
+}
+#importantlinks li ul li ul li a:hover {
+	background-color: #efefef;
+	color: #000;
+}
+
+/* END IMPORTANT LINKS */
+
+/* START LINK SEARCH */
+
+#linkSearch {
+	width: 201px;
+	float: left;
+	margin: 10px 0px 0px 1px;
+	padding: 3px 0px 0px 0px;
+	border-bottom: 1px solid #E6DCDB;
+	background-color: #fff;
+	color: #333;
+}
+#linkSearchTitle {
+	line-height: 20px;
+	height: 20px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 10px;
+	text-transform: uppercase;
+	color: #333;
+	background-color: #E6DCDB;
+}
+#linkSearch form {
+	margin: 0px;
+	padding: 3px;
+	font-weight: normal;
+	color: #333;
+	background-color: #fff;
+}
+#lsTip {
+	font-weight: normal;
+	font-size: .93em;
+	color: #333;
+	background-color: #fff;
+	line-height: 16px;
+	display: block;
+	padding: 3px;
+}
+#linkSearch ul {
+	width: 199px;
+	list-style: none;
+	text-align: left;
+	margin: 0px;
+	padding: 0px;
+	float: left;
+}
+#linkSearch ul li {
+	width: 199px;
+	font-size: .95em;
+	list-style: none;
+	display: inline; /*for IE5 and IE6 */
+	line-height: 20px;
+	margin: 0px;
+	padding: 1px 0px 1px 3px;
+	float: left;
+	color: #333;
+	/*border-top: 1px solid #E6DCDB;*/
+}
+#linkSearch ul li a {
+	display: block;
+	padding: 0px 0px 0px 12px;
+	background: url(http://www.nuigalway.ie/images/arrows/arrow_maroon.png) no-repeat 2px 8px;
+	color: #666;
+	background-color: #fff;
+	text-decoration: none;
+}
+#linkSearch ul li a:hover {
+	background-color: #E6DCDB;
+	color: #333;
+}
+#searchresults {
+	font-weight: bold;
+}
+#lsResultCount {
+	border-top: dotted 1px #ccc;
+}
+#lsSearchingSitemap, #lsSearchingCourses {
+	border-top: dotted 1px #ccc;
+}
+#lsSearchingCampusMap {
+	border-top: dotted 1px #ccc;
+}
+
+/* END LINK SEARCH */
+
+/* START QUICK LINKS DIV DROPDOWN */
+
+#quicklinksdivdropdown {
+	position: absolute;
+	display: inline;
+	width: 150px;
+	top: 10px;
+	right: 10px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background-color: transparent;
+}
+#qlheader {
+  visibility: visible;
+	z-index: 2000;
+	position: relative;
+	cursor: pointer;
+	border: 1px dotted #666;
+	padding: 2px;
+	margin: 0;
+}
+#qlheader img {
+	vertical-align: middle;
+}
+#quicklinksdivdropdown div {
+	float: right;
+	clear: both;
+	display: inline;
+}
+#quicklinksdivdropdown ul { 
+	width: 150px;
+	list-style: none;
+	text-align: left;
+	margin: 0;
+	background-color: #efefef;
+	padding: 1px;
+	float: right;	
+	border: 1px solid #999;
+	position: relative;
+	z-index: 1000;
+	display: none;
+}
+#quicklinksdivdropdown li {
+	width: 100%;
+	list-style: none;
+	display: inline; /*for IE5 and IE6 */
+	line-height: 22px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	cursor: pointer;
+	float: left;
+}
+#quicklinksdivdropdown li a {
+	display: block;
+	padding: 0px 0px 0px 12px;
+	background: url(http://www.nuigalway.ie/images/arrows/arrow.png) no-repeat 2px 8px;
+	color: #666;
+	background-color: #efefef;
+	text-decoration: none;
+}
+#quicklinksdivdropdown li a:hover {
+	background-color: #fff;
+	color: #000;
+}
+
+/* END QUICK LINKS DIV DROPDOWN */
+
+/* START QUICK NEWS */
+
+#quicknews ul { 
+	width: 150px;
+	list-style: none;
+	text-align: left;
+	margin: 0px;
+	padding: 0px;
+	float: left;	
+}
+#quicknews li {
+	width: 150px;
+	list-style: none;
+	display: inline; /*for IE5 and IE6 */
+	line-height: 20px;
+	margin: 0px;
+	padding: 0px;
+	font-size: .8em;
+	background-color: #fff;
+	float: left;
+	color: #666;
+	border-top: 10px solid #fff;
+}
+#quicknews li.head {
+	background-color:  #f1b025;
+	font-weight: bold;
+	color: #000;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	text-transform: uppercase;
+	font-size: .9em;
+}
+
+/* END QUICK NEWS */
+
+/* START BULLETINS BODY */
+
+#bulletinsBody {
+	width: 760px;
+	margin: 0px 0px 15px 0px;
+	padding: 0px;
+	border: 0px;
+	overflow: auto;
+}
+#bulletinsBody ul { 
+	width: 758px;
+	list-style: none;
+	text-align: left;
+	margin: 0px 0px 0px 0px;
+	padding: 0;
+	float: left;	
+}
+#bulletinsBody li {
+	width: 758px;
+	list-style: none;
+	display: inline; /*for IE5 and IE6 */
+	line-height: 20px;
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+	background-color: #C8C8C8;
+	color: #333;
+	float: left;
+	border-bottom: 1px solid #fff;
+}
+#bulletinsBody li a {
+	display: block;
+	padding: 0px 5px 0px 5px;
+	color: #666;
+	background-color: #f0f0f0;
+	text-decoration: none;
+}
+#bulletinsBody li a.whatisthis {
+	background: none;
+	background-color: #C8C8C8;
+	color: #000;
+	padding: 0px 0px 0px 0px;
+	display: inline;
+}
+#bulletinsBody li a:hover {
+	background-color: #999999;
+	color: #fff;
+}
+#bulletinsBody li a.whatisthis:hover {
+	background-color: #C8C8C8;
+	color: #000;
+}
+#bulletinsBody a img {
+	border: 0px;
+}
+
+/* END BULLETINS BODY */
+
+/* START SHOW MORE */
+
+.primaryBox {
+	width: 95%;
+	padding: 10px;
+	background-color:#CCE8F6;
+	border: 1px solid #D7D7D7;
+	position: relative;
+}
+.genericBox {
+	background-color: #fff;
+	border: 1px solid #D7D7D7;
+	padding: 5px;
+	margin-bottom: 25px;
+	position: relative;
+	clear: both;
+	height: 1%;
+}
+.genericBox p {
+	margin: 0;
+	border: 0;
+	padding: 1px 1px 1px 12px;
+	background: url(http://www.nuigalway.ie/images/arrows/arrow_maroon.png) no-repeat 2px 8px;
+}
+.genericBox .corner, .primaryBox .corner {
+	background-color: #CCE8F6;
+}
+.genericBox .tl, .genericBox .tr, .genericBox .bl, .genericBox .br, .primaryBox .tl, .primaryBox .tr, .primaryBox .bl, .primaryBox .br {
+	font-size:1px;
+	height:1px;
+	width:1px;
+	z-index:100;
+}
+.genericBox .tl, .primaryBox .tl {
+	left:-1px;
+	position:absolute;
+	top:-1px;
+}
+.genericBox .tr, .primaryBox .tr {
+	position:absolute;
+	right:-1px;
+	top:-1px;
+}
+.genericBox .bl, .primaryBox .bl {
+	bottom:-1px;
+	left:-1px;
+	position:absolute;
+}
+.genericBox .br, .primaryBox .br {
+	bottom:-1px;
+	position:absolute;
+	right:-1px;
+}
+.toggleLink {
+	background-color: #fff;
+	border-bottom: 1px solid #D7D7D7;
+	border-left: 1px solid #D7D7D7;
+	border-right: 1px solid #D7D7D7;
+	bottom: -31px;
+	display: inline-block;
+	left: 10px;
+	padding-left: 5px;
+	margin: 0;
+	line-height: 30px;
+	padding-right: 5px;
+	width: 90px;
+	position: absolute;
+	text-decoration: none;
+	outline: none;
+}
+.toggleLink:hover {
+	border-color:#AEAEAE;
+	background-color: #0099CC;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+/* END SHOW MORE */
+
+/* START WHAT IS THIS */
+
+.whatisthis {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: .95em;
+	color: #333;
+}
+a.whatisthis {
+  position: relative;
+  z-index: 100;
+  color: #000;
+  text-decoration: none;
+}
+a.whatisthis img { 
+	border: 0px;
+}
+a.whatisthis:hover {
+	z-index: 101;
+	cursor: help;
+	border: 0px;
+}
+a.whatisthis span {
+	display: none;
+}
+a.whatisthis span strong {
+	font-family: inherit;
+	color: #990000;
+	text-decoration: underline;
+}
+a.whatisthis:hover span {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 14px;
+	font-weight: normal;
+	text-transform: none;
+	display: block;
+  position: absolute;
+  padding: 3px;
+  top: 1.5em; 
+	left: -7em; 
+	width: 108px;
+  border: 1px solid #1B5793;
+  background-color: #E0F2FF; 
+	color: #000;
+  text-align: left;
+}
+
+/* END WHAT IS THIS */
+
+/* Hack for < IE6 */
+/* Hiding from IE5/Mac  \*/
+* html #breakingNewsText {
+	background-color: #555;
+}
+* html .breakingNewsControl {
+	background-color: #efefef;
+}
+* html body {
+	text-align: center;
+}
+* html p {
+	text-align: left;
+}
+* html .bulletlist {
+	/*float: left;*/
+}
+* html .columnContent {
+	margin: 0;
+	padding: 0;
+}
+/* End Hack */

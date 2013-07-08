@@ -1,0 +1,151 @@
+#parse ("/backend/_header.vm")
+
+<h2>Edit house record</h2>
+
+<form action="property-edit-submit.jsp" method="POST">
+<input type="hidden" name="id" 
+value="$property.getId()" />
+<input type="hidden" name="estate_id"
+value="$estate.getId()" />
+
+<div>
+<label for="name">Property name</label>
+<input type="text" size="40" id="name" name="name"
+value="$!property.getName()" />
+</div>
+
+
+<div>
+<label for="field_description">Description</label>
+<textarea id="field_description" name="description"
+rows="10" cols="80"/>$!property.getDescription()</textarea>
+</div>
+
+<div>
+<label for="field_townloand">Townland</label>
+<input type="text" size="40" id="field_townland" name="townland"
+value="$!property.getTownland()" />
+</div>
+
+<div>
+<label for="field_civil_parish">Civil Parish</label>
+<input type="text" size="40" id="field_civil_parish" name="civil_parish"
+value="$!property.getCivilParish()" />
+</div>
+
+
+<div>
+<label for="field_plu">Poor Law Union (PLU)</label>
+<input type="text" size="40" id="field_plu" name="plu"
+value="$!property.getPlu()" />
+</div>
+
+<div>
+<label for="field_ded">DED</label>
+<input type="text" size="40" id="field_ded" name="ded"
+value="$!property.getDed()" />
+</div>
+
+
+<div>
+<label for="field_barony">Barony</label>
+<input type="text" size="40" id="field_barony" name="barony"
+value="$!property.getBarony()" />
+</div>
+
+<div>
+<label for="field_county">County</label>
+<select id="field_county" name="county">
+#foreach ($county in $counties)
+#if ($property.getCounty() == $county )
+<option value="$county" selected="yes">$county</option>
+#else
+<option value="$county">$county</option>
+#end
+#end
+</select>
+</div>
+
+
+<h3>Map/Grid Reference</h3>
+
+<div>
+<label for="os_sheet">OS Sheet Number</label>
+<input type="text" id="os_sheet" name="os_sheet"
+size="4"
+value="$!property.getOsSheet()" />
+</div>
+
+<div>
+<label for="discovery_map">Discovery Series Map#</label>
+<input type="text"
+id="field_discovery_map" name="discovery_map"
+size="4"
+value="$!property.getDiscoveryMap()" />
+</div>
+
+
+<div>
+<label for="field_grid_ref">Grid Reference: </label>
+<input type="text" 
+id="field_grid_ref" name="grid_ref"
+size="48"
+value="$!property.getGridReference()" />
+
+<button type="button"
+onClick="window.open('popup-map.jsp?id=$property.getId()', 'popupMap', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=420,height=450');"
+/>Map</button>
+</div>
+
+
+<div>
+<label>Images</label>
+
+#if ($property.getImages().size() > 0) 
+#foreach ($image in $property.getImages())
+<div style="margin-bottom: 5px;">
+<a href="image-show.jsp?id=$image.getId()"><img border="1"
+alt="image #$image.getId()" title="image #$image.getId()"
+src="$contextPath/img/tn/${image.getId()}.jpg" align="left"/></a>
+<br>
+<b>Caption:</b> $!image.getCaption().
+<b>Description:</b> $!image.getDescrption()
+
+<p>
+[
+<a href="image-show.jsp?id=$image.getId()">edit</a>
+]
+&nbsp;
+[
+<a href="image-delete.jsp?id=$image.getId()&property_id=$property.getId()"
+onClick="return confirm('Are you sure you want to delete this image?');">delete</a>
+]
+</p>
+
+</div>
+<br clear="both" />
+
+
+#end
+#else
+<em>no images</em>
+#end
+
+<p>
+Click on image thumbnail to edit image caption/description.
+</p>
+
+<p>
+[
+<a href="image-new.jsp?property_id=$property.getId()">Add image</a>
+]
+</p>
+
+</div>
+
+<input type="submit" value="Submit" />
+</form>
+
+
+#parse ("/backend/_footer.vm")
+

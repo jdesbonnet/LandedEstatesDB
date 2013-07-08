@@ -1,0 +1,5 @@
+#parse ("/_nuig_ot_header.vm")
+
+<div id="mapContainer" class="homepageMap">map goes here...</div>
+<div id="mapConsole">console here</div>
+#parse ("/_nuig_ot_footer.vm")

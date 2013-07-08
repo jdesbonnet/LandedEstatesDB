@@ -1,0 +1,53 @@
+#parse ("/_nuig_ot_header.vm")
+
+<h2>Family: $family.getName()
+#if ($family.getTitle() && $family.getTitle().length()>0 )
+<em>($family.getTitle())</em>
+#end
+</h2>
+
+<table border="1" class="listTable">
+
+<tr>
+<td width="150">Family name:</td>
+<td>$family.getName()</td>
+</tr>
+
+<tr>
+<td>Family title:</td>
+<td>$!family.getTitle()</td>
+</tr>
+
+<tr valign="top">
+<td>Description:</td>
+<td>$!family.getDescription()</td>
+</tr>
+
+
+
+<tr valign="top">
+<td>Estates:</td>
+<td>
+<ul class="bulletList">
+#foreach ($estate in $estates) 
+##if ($estate.getProjectPhase() == 1)
+<li> <a href="estate-show.jsp?id=$estate.getId()">$estate.getName()</a>
+#if ($estate.getDescription())
+- $estate.getDescription()
+#end
+</li>
+##end  ## end project phase test
+#end  ## end loop
+</ul>
+
+#if ($estates.size() == 0) 
+<em>no estate records found</em>
+#end
+</td>
+</tr>
+
+</table>
+
+
+#parse ("/_nuig_ot_footer.vm")
+

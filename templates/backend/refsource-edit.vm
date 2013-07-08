@@ -1,0 +1,59 @@
+#parse ("/backend/_header.vm")
+
+<h2>Edit source: $!source.getName()</h2>
+
+<form action="refsource-edit-submit.jsp" method="POST">
+<input type="hidden" name="id" 
+value="$!source.getId()" />
+
+<div>
+<label for="field_name">Source name</label>
+<input type="text" size="40" id="field_name" name="name"
+value="$!source.getName()" />
+</div>
+
+
+<div>
+<label for="field_description">Description</label>
+<textarea id="field_description" name="description"
+rows="10" cols="60">$!source.getDescription()</textarea>
+</div>
+
+<div>
+<label for="field_category_id">Category</label>
+<select name="category_id" id="field_category_id">
+#foreach ($category in $categories)
+#if ($category.getId() == $source.getCategory().getId())
+<option value="$category.getId()" selected="yes">$category.getName()</option>
+#else
+<option value="$category.getId()">$category.getName()</option>
+#end
+#end
+</select>
+</div>
+
+
+<div>
+<label for="field_contact_person">Contact person</label>
+<input type="text" size="40" id="field_contact_person" name="contact_person"
+value="$!source.getContactPerson()" />
+</div>
+
+<div>
+<label for="field_contact_telephone">Contact telephone</label>
+<input type="text" size="40" id="field_contact_telephone" name="contact_telephone"
+value="$!source.getContactTelephone()" />
+</div>
+
+<div>
+<label for="field_contact_email">Contact email</label>
+<input type="text" size="40" id="field_contact_email" name="contact_email"
+value="$!source.getContactEmail()" />
+</div>
+
+
+<input type="submit" value="Submit" />
+</form>
+
+
+#parse ("/backend/_footer.vm")

@@ -1,0 +1,1 @@
+<br /><span class="arialblacksmall">This page was last updated <?php echo date( "F d, Y.", getlastmod() );?></span>

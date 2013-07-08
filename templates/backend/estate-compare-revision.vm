@@ -1,0 +1,33 @@
+#parse ("/backend/_header.vm")
+
+estateCurrent=$estateCurrent
+<p>
+estatePrevious = $estatePrevious
+
+
+<table border="1">
+<thead>
+<tr>
+<th></th>
+<th>Current revision (version $estateCurrent.getVersion())</th>
+<th>Previous revision (version $estatePrevious.getVersion())</th>
+</tr>
+</thead>
+
+<tr>
+<th>Name</th>
+<td>$estateCurrent.getName()</td>
+<td>$estatePrevious.getName()</td>
+</tr>
+
+
+<th>Description</th>
+<td>$estateCurrent.getDescription()</td>
+<td>$estatePrevious.getDescription()</td>
+</tr>
+</table>
+
+
+
+#include ("/parse/_footer.vm")
+

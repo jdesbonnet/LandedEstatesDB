@@ -1,0 +1,16 @@
+#parse ("/cdrom/_header.vm")
+
+<h2>Estates index</h2>
+
+<ul>
+#foreach ($estate in $estates)
+<li> <a href="e${estate.getId()}.htm">$estate.getName()</a>
+#if ($estate.getDescription())
+- $estate.getDescription()
+#end
+</li>
+#end
+</ul>
+
+#parse ("/cdrom/_footer.vm")
+

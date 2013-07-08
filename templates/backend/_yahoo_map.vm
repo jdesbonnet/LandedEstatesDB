@@ -1,0 +1,63 @@
+## 
+## Javascript to generate map. Map will be rendered in div#map
+## Input parameters: properties (list of Propery objects) cx,cy (center)
+##
+
+<script type="text/javascript" 
+src="http://api.maps.yahoo.com/ajaxymap?v=3.0&appid=$yahooMapKey"></script>
+<script type="text/javascript">
+
+function createMarker (lat,lon,html) {
+	var mp = new YGeoPoint(lat,lon);
+	return new YMarker(mp);
+}
+
+var centerPoint = new YGeoPoint($cx,$cy);
+var map = new YMap(document.getElementById('mapContainer'),YAHOO_MAP_REG);
+
+// Add controls
+map.addPanControl(); 
+map.addZoomLong(); 
+map.addTypeControl();
+
+map.drawZoomAndCenter(centerPoint, 3);
+
+#if ($markCenter)
+var marker = new YMarker(centerPoint);
+marker.addLabel("X");
+map.addOverlay(marker);
+#end
+
+var html;
+      	
+#foreach ($p in $properties)
+	html = "<a href=\"property-show.jsp?id=$p.getId()\">$p.getName()</a> "
+			+ " (townland of $p.getTownland())<br />$p.getGridReference()<br />"
+			+ " <a href=\"property-nearby.jsp?id=$p.getId()&r_km=$radiusKm\">[show nearby]</a>";
+	map.addOverlay(createMarker($p.getLongitudeDeg(), $p.getLatitudeDeg(),html));
+#end
+	
+#if ($property) 
+ 		// Center property
+ 		var html = "<a href=\"property-show.jsp?id=$property.getId()\">House: "
+		+ " $property.getName()</a> (townland of $property.getTownland())<br />"
+		+ " $property.getGridReference()";
+		var marker = createMarker($property.getLongitudeDeg(), $property.getLatitudeDeg(),html);
+		map.addOverlay(marker);
+#end
+	
+		#if ($radius)
+		##var rLon = $radius*$degPerMLon;
+		##var rLat = $radius*$degPerMLat;
+		##var points = [];	
+		##points.push(new GPoint($cx - rLon, $cy - rLat));
+		##points.push(new GPoint($cx + rLon, $cy - rLat));
+		##points.push(new GPoint($cx + rLon, $cy + rLat));
+		##points.push(new GPoint($cx - rLon, $cy + rLat));
+		##points.push(new GPoint($cx - rLon, $cy - rLat));
+		##map.addOverlay(new GPolyline(points));
+		#end
+</script>
+
+      	
+      

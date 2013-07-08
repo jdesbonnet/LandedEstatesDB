@@ -1,0 +1,28 @@
+#parse ("/backend/_header.vm")
+
+<h2>Create new house record belonging to $estate.getName()</h2>
+
+<form action="property-new-submit.jsp" method="POST">
+<input type="hidden" name="estate_id" 
+value="$estate.getId()" />
+
+<div>
+<label for="name">New house name</label>
+<input type="text" size="40" id="name" name="name"/>
+</div>
+
+<div>
+<label for="project_phase">Project Phase</label>
+<select id="project_phase" name="project_phase">
+<option value="1">Phase 1: Connaught</option>
+<option value="2" selected="yes">Phase 2: Munster</option>
+</select>
+</div>
+
+
+<input type="submit" value="Next&gt;" />
+</form>
+
+
+#parse ("/backend/_footer.vm")
+

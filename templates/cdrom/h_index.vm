@@ -1,0 +1,16 @@
+#parse ("/cdrom/_header.vm")
+
+<h2>Property index</h2>
+
+<ul>
+#foreach ($property in $properties)
+<li> <a href="p${property.getId()}.htm">$property.getName()</a>
+#if ($property.getDescription())
+- $property.getDescription()
+#end
+</li>
+#end
+</ul>
+
+#parse ("/cdrom/_footer.vm")
+

@@ -1,0 +1,32 @@
+#parse ("/_nuig_ot_header.vm")
+
+<p>
+#if ($showCaptions) 
+<a href="?captions=false">[No captions]</a>
+#else
+<a href="?captions=true">[Show captions]</a>
+#end
+</p>
+
+
+#if ($showCaptions)
+	#foreach ($image in $images) 
+	<div class="imageAndCaption">
+	<a href="image-show.jsp?id=$image.getId()"><img 
+	src="$contextPath/img/tn/${image.getId()}.jpg" /></a>
+	<br />$image.getCaption()
+	</div>
+	#end
+#else
+	#foreach ($image in $images) 
+	<a href="image-show.jsp?id=$image.getId()"><img 
+	src="$contextPath/img/tn/${image.getId()}.jpg" 
+	alt="image #$image.getId()"
+	title="image #$image.getId(), $jsp.escape($image.getCaption())" 
+	/></a>
+	#end
+#end
+
+
+
+#parse ("/_nuig_ot_footer.vm")

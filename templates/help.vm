@@ -1,0 +1,191 @@
+#parse ("/_nuig_ot_header.vm")
+
+<div class="help">
+<h1>CONNACHT LANDED ESTATES PROJECT</h1>
+
+<h2>User Information</h2>
+
+
+<h3>Estate Search</h3>
+
+<p>
+Click on the Estates link at the side of the Screen. An A-Z list will appear. Click on desired
+letter and scroll down to find Estate. Note that estates are entered by the surnames of the
+families who owned them at various times and not by geographical location. (See notes below
+re Estate entries).
+</p>
+
+<p>
+The Estate Record is the most comprehensive entry in the database as it contains a
+description of the estate, the names of the families associated with it, the houses it contained
+and details of reference sources for more information.
+</p>
+
+
+<h3>Family Search</h3>
+
+<p>
+Click on the Families link at the side of the screen. An A-Z list will appear. Click on the letter
+of the family sought. (See notes below re how Families were entered on database). Scroll
+down the alphabetical list to find the required family. Clicking on any family name will link to
+the family record and the estates with which they are associated.
+</p>
+
+<h3>Reference Sources</h3>
+
+<p>
+Clicking on this tab will bring you to a master list of the reference sources used to compile
+the information in the database. Details of reference sources for each estate are contained
+within the individual estate records. Clicking on the reference source title links within estate
+records or in the master Reference Source list will take you to a list of estate records which
+have used these reference sources. (NOTE: It is not advisable to click on a reference such as
+the 1876 Landowners Survey or Griffith’s Valuation, as these will have been included in many
+hundreds of estate records!).
+</p>
+
+
+<h3>Images</h3>
+
+<p>
+There are over 4500 houses recorded in the database and images have been added for
+approximately half of those. Many of the images are digital photographs of the properties
+as they exist today taken by the research team. A significant number are from the National
+Inventory of Architectural Heritage’s <a href="http://www.buildingsofireland.ie/">Buildings 
+of Ireland</a> database (www.buildingsofireland.ie)
+by kind permission of their principal researcher, Willie Cummings. A small number of images
+have been drawn from websites and the web address is clearly stated in the caption to these
+images. Some images have been provided by other bodies or individuals and these are also
+noted.
+</p>
+
+<h3>Search</h3>
+<p> 
+The Search box allows a free text search in the estate and house descriptions.
+</p>
+
+<h3>Map</h3>
+
+<p>
+The Map page contains a map of Connacht and Munster with markers, indicating the location
+of each barony. Zoom in using the plus sign to se the houses in these locations. (See notes
+below re Houses included). Click on any gree house marker and the house name, townland
+and grid reference from the Ordnance Survey of Ireland national grid will appear. The house
+name is a link, so click on that to go into the full record for that house. The estates with which
+that house was associated appear as links in the record.
+</p>
+
+
+<h3>Contacting Us</h3>
+
+<p>
+Email <a href="mailto:info@landedestates.ie">info@landedestates.ie</a>. Please allow
+up to 4 weeks for a reply.
+</p>
+
+
+<h2>Notes</h2>
+
+<h3>Houses</h3>
+
+<p>
+There are over 4500 houses recorded in the database. The basic criteria for recording was
+a buildings valuation of >£10 in Griffith’s Valuation. However, in practice we recorded many
+more houses, including those with <£10 valuation but which, it was clear, belonged to a
+particular estate or which had formerly been of greater significance. As far as possible we
+used later editions of Ordnance Survey maps to locate houses not built at the time of Griffith’s
+Valuation. We are aware, however, that houses may have been omitted, especially either
+those built later in the nineteenth century or which had fallen into disuse before the first
+Ordnance Survey maps were published. We would appreciate further details on properties of
+this kind.
+</p>
+
+<table class="listTable">
+<thead>
+<tr>
+<th width="300">House Name / Description</th>
+<th>Townland</th>
+<th>Civil Parish</th>
+
+<th>PLU</th>
+<th>DED</th>
+<th>Barony</th>
+<th>County</th>
+<th>OS Grid Reference / Map</th>
+</tr>
+</thead>
+
+<tr valign="top">
+<td>
+
+
+<img alt="image" src="/LandedEstates/img/tn/920.jpg" align="right" />
+
+<a href="property-show.jsp?id=129">Ballinamore</a>
+<br />
+
+In 1938 the Ormsbys sold Ballinamore to a Scottish order of nuns, the Order of St John, who used the house as a school.   The building was donated to Western Care in the 1970s.   It now functions as a nursing home.
+
+
+
+
+</td>
+
+<td>Ballinamore &nbsp;</td>
+<td>Killedan &nbsp;</td>
+<td>Swineford &nbsp;</td>
+<td>Ballinamore 110 &nbsp;</td>
+
+<td>Gallen &nbsp;</td>
+<td>Mayo &nbsp;</td>
+<td>
+<a href="javascript:popupMap('gridref=M315 869')">M315 869</a>
+Discovery map #31.
+OS Sheet #80.
+</td>
+
+</tr>
+
+
+</table>
+
+
+<p>
+As the example indicates, the house information includes a description as well 
+as the locational details. The spellings used for these have been based on the 
+Index to Towns, Townlands, Parishes and Baronies of Ireland 1851 (reprint, 
+Baltimore: Genealogical Publishing Co, 1988) with the exception of the District
+ Electoral Division details which were 
+taken from the 1904 edition of the Townlands Index.
+</p>
+
+
+<h3>Families</h3>
+
+<p>
+Over 2700 families have been included in the database. The surname was used to create
+the Families index. Where variants of spellings occur in different reference sources, we
+have tried to reflect that in the index, using the most common spelling first, e.g Tenison/
+Tennison. Where an established family name subsequently became hyphenated we have
+tried to reflect that in the entry also e.g Tenison/Tennison/King-Tenison. However, where the
+hyphenated version was in constant use over a long period this has been given an entry of its
+own, e.g. Shawe-Taylor or Gore Booth. There are many examples of families with the same
+surname in the database. We have tried as far as possible to distinguish these by reference
+to either the name of their residence or the name of the barony where most of their land was
+located. Examples include Blakes in county Galway, Kellys in county Roscommon, Powers in
+Tipperary and Waterford and O’Briens in Clare.
+</p>
+
+<h3>Estates</h3>
+
+<p>
+The basic criteria for inclusion in the Estates record was the possession of >500 acres as
+recorded in such principal sources as Griffith’s Valuation or the 1876 Landowner’s Survey.
+In practice there are estates <500 acres included as well, where there is evidence that
+these were part of the family, social and political network which constituted landed society in
+Connacht and Munster between 1700 and 1920.
+</p>
+
+
+</div><!-- end div.help -->
+
+#parse ("/_nuig_ot_footer.vm")

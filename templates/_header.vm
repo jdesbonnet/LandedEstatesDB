@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+<title>Landed Estates Database</title>
+<link rel="stylesheet" type="text/css" href="$YUI/reset-fonts-grids/reset-fonts-grids.css" />
+<link rel="stylesheet" type="text/css" href="$contextPath/css/yui-tabs.css" />
+<link rel="stylesheet" type="text/css" href="$contextPath/css/style.css" />
+
+<script src="$YUI/utilities/utilities.js"></script>
+
+<script type="text/javascript">var YMAPPID = "$yahooMapKey";</script>
+<script src="http://us.js2.yimg.com/us.js.yimg.com/lib/map/js/api/ymapapi_3_7_1_10.js"></script>
+
+<script type="text/javascript">
+function popupMap (mapParam) {
+	window.open('popup-map.jsp?' + mapParam,
+		'popupMap', 
+		'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=420,height=450'
+		);
+}
+/* Fix fields that have '?' instead of quote marks due to ISO-8850-1 / UTF-8 mixup */
+function questionToQuoteMark (fieldId) {
+	var el = document.getElementById(fieldId);
+	var elText = el.value;
+	var i = 0;
+	var newText = "";
+	for (i = 0; i < elText.length; i++) {
+		if ( elText.charAt(i) == '?') {
+			newText += "'";
+		} else {
+			newText += elText.charAt(i);
+		}
+	}
+	el.value = newText;
+}
+</script>
+
+</head>
+
+
+<body>
+
+<div id="doc2" class="yui-t1">
+
+<div id="hd">
+<img id="nuigLogo" src="assets/logo.png">
+<img id="topBanner" src="assets/header.png">
+</div>
+
+
+<h1>Landed Estates Database</h1>
+
+
+<div class="navset" id="nav">
+<div class="hd">
+<h3>EventDB Tabs</h3>
+<ul>
+#foreach ($tab in $tabs)
+	#if ($tab.getId() == $tabId)
+		<li class="on" title="selected"><a href="$tab.getURL()"><strong><em>$tab.getLabel()</em></strong></a></li>
+		#set ($activeTab = $tab)
+	#else
+		<li><a href="$tab.getURL()"><em>$tab.getLabel()</em></a></li>
+	#end
+#end
+</ul>
+</div>
+
+<div class="bd">
+
+<form id="searchForm" action="search.jsp" method="GET">
+Search:
+<input type="text" name="q" value="$!q"/>
+<input type="submit" value="Search" />
+</form>
+
+<h4>Level2</h4>
+	<ul>
+	#set ($subTabIndex = 0)
+	#foreach ($subTab in $activeTab.getSubTabs())
+		#if ($subTabIndex == 0)
+			<li class="first"><a href="$subTab.getURL()">$subTab.getLabel()</a></li>
+		#else
+			<li><a href="$subTab.getURL()">$subTab.getLabel()</a></li>
+		#end
+		#set ($subTabIndex = $subTabIndex + 1)
+	#end
+	</ul>
+</div><!-- end DIV.bd -->				
+</div><!-- end DIV#nav -->	
+
+</div><!-- end DIV#hd -->
+
+<div id="bd">
+<div class="yui-b">

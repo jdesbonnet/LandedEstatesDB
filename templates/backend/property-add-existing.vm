@@ -1,0 +1,37 @@
+#parse ("/backend/_header.vm")
+
+<h2>Add existing house to estate $estate.getName()</h2>
+
+<form action="property-add-existing-submit.jsp" method="POST">
+<input type="hidden" name="estate_id" 
+value="$estate.getId()" />
+
+
+<div id="acdiv">
+<label for="acinput">House:</label>
+<input id="acinput" type="text" name="property" size="80" />
+<div id="acc">
+</div>
+</div>
+
+
+<script src="$YUI/build/yahoo-dom-event/yahoo-dom-event.js"></script> 
+<script src="$YUI/build/connection/connection-min.js"></script> 
+<script src="$YUI/build/autocomplete/autocomplete-min.js"></script>
+
+<script type="text/javascript">
+var queryService = "./property-query.jsp"; 
+var querySchema=["\n", "\t"];
+var ds = new YAHOO.widget.DS_XHR(queryService, querySchema);  
+ds.responseType = YAHOO.widget.DS_XHR.TYPE_FLAT;
+var ac = new YAHOO.widget.AutoComplete('acinput',
+			'acc', ds);
+</script> 
+
+
+<input type="submit" value="Add house" />
+</form>
+
+
+#parse ("/backend/_footer.vm")
+

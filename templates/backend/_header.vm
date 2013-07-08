@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+<title>Landed estates database backend</title>
+<link rel="stylesheet" type="text/css" href="$YUI/build/reset-fonts-grids/reset-fonts-grids.css" />
+<link rel="stylesheet" type="text/css" href="$contextPath/css/yui-tabs.css" />
+<link rel="stylesheet" type="text/css" href="$contextPath/css/style.css" />
+
+#if ($serverName == "cms.galway.net")
+## http://cms.galway.net:8080/LandedEstates/jsp/backend/ key
+##set ($key="ABQIAAAACiVUmU_-T-yGE8bdrmcK9xTcLdfMcAat2lRJiVOUTslhlCmJdhQ6Xbk2FMQ4PeYQupO7BPRrLCynLg")
+## http://cms.galway.net:8080/LandedEstates06/jsp/backend/ key
+##set ($key="ABQIAAAACiVUmU_-T-yGE8bdrmcK9xS06Wq7opkOvzgtYDDq_DkAxQMSphSJVT4Qb9NAqPDeCzEzaYklpdi1UQ")
+## http://cms.galway.net:8080/LandedEstates067/jsp/backend/ key
+##set ($key="ABQIAAAACiVUmU_-T-yGE8bdrmcK9xS0FV-mPaxnzRE97VV4opEmid8LwBQClDb7ernYGJQA_nMBdZHY5ZnSGQ")
+
+#elseif ($serverName == "localhost")
+## http://localhost:8080/LandedEstates/jsp/backend/ key
+#set ($key="ABQIAAAACiVUmU_-T-yGE8bdrmcK9xSEEAilHGOEXYIw5NxOwK61X2Jn6hQgiOnzpxiodJTXPbWypon281olwg")
+
+#elseif ($serverName == "test.galway.net")
+#set ($key="ABQIAAAACiVUmU_-T-yGE8bdrmcK9xQbb25MsXJJxGxIKpwyW7AUoVZ1QRRu70qwvkPvvUe6NRtBCjUVpmdXlw")
+#end
+
+<script type="text/javascript">
+function popupMap (mapParam) {
+	window.open('popup-map.jsp?' + mapParam,
+		'popupMap', 
+		'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=420,height=450'
+		);
+}
+/* Fix fields that have '?' instead of quote marks due to ISO-8850-1 / UTF-8 mixup */
+function questionToQuoteMark (fieldId) {
+	var el = document.getElementById(fieldId);
+	var elText = el.value;
+	var i = 0;
+	var newText = "";
+	for (i = 0; i < elText.length; i++) {
+		if ( elText.charAt(i) == '?') {
+			newText += "'";
+		} else {
+			newText += elText.charAt(i);
+		}
+	}
+	el.value = newText;
+}
+</script>
+
+</head>
+
+#if ($useGoogleMap)
+<body onLoad="loadGoogleMap()" onUnload="GUnload()">
+#else
+<body>
+#end
+
+<div id="doc2" class="yui-t7">
+
+<div id="hd">
+
+<div style="float:right">
+#if ($user)
+$user.getUsername() logged in.
+<a href="logout.jsp">Log out</a>.
+#else
+not logged in
+#end
+</div>
+
+
+<h1>Landed Estates Database</h1>
+
+
+<div class="navset" id="nav">
+<div class="hd">
+<h3>LEDB Tabs</h3>
+<ul>
+#foreach ($tab in $tabs)
+	#if ($tab.getId() == $tabId)
+		<li class="on" title="selected"><a href="$tab.getURL()"><strong><em>$tab.getLabel()</em></strong></a></li>
+		#set ($activeTab = $tab)
+	#else
+		<li><a href="$tab.getURL()"><em>$tab.getLabel()</em></a></li>
+	#end
+#end
+</ul>
+</div>
+
+<div class="bd">
+
+<div style="float:right">
+
+<form style="display:inline;" id="searchForm" action="search.jsp" method="GET">
+Search:
+<input type="text" name="q" value="$!q"/>
+<input type="submit" value="Search" />
+</form>
+
+<form id="phaseSelect" style="display:inline;" method="GET">
+Filter: 
+<select name="p" onChange="reloadPageWithNewPhase(this.value)">
+<option value="">All database</option>
+
+#if ($phase == 1)
+<option value="1" selected="yes">Phase 1</option>
+#else
+<option value="1">Phase 1</option>
+#end
+
+#if ($phase == 2)
+<option value="2" selected="yes">Phase 2</option>
+#else
+<option value="2">Phase 2</option>
+#end
+
+</select>
+</form>
+
+</div>
+
+
+<h4>Level2</h4>
+	<ul>
+	#set ($subTabIndex = 0)
+	#foreach ($subTab in $activeTab.getSubTabs())
+		#if ($subTabIndex == 0)
+			<li class="first"><a href="$subTab.getURL()">$subTab.getLabel()</a></li>
+		#else
+			<li><a href="$subTab.getURL()">$subTab.getLabel()</a></li>
+		#end
+		#set ($subTabIndex = $subTabIndex + 1)
+	#end
+	</ul>
+</div><!-- end DIV.bd -->				
+</div><!-- end DIV#nav -->	
+
+</div><!-- end DIV#hd -->
+
+<div id="bd">
+<div class="yui-b">

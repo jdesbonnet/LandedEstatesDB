@@ -1,0 +1,44 @@
+#parse ("/backend/_header.vm")
+
+<h2>Houses near 
+<a href="property-show.jsp?id=$property.getId()">$property.getName()</a>
+ (search radius $radiusKm km)</h2>
+
+<div id="mapContainer"></div>
+
+<ul class="bulletList">
+#foreach ($p in $properties)
+#if ($p.getId() != $property.getId())
+<li> <a href="property-show.jsp?id=$p.getId()">$p.getName()</a>
+$jsp.calcDistanceInKm($property,$p)km</li>
+#end
+#end
+</ul>
+
+#if ($nearbyProperties.size() == 0) 
+<em>none</em>
+#end
+
+<form>
+<input type="hidden" name="id" value="$property.getId()" />
+<input type="hidden" name="estate_id" value="$estate.getId()" />
+Re-query with search radius <input type="text" name="r_km"
+size="8"
+value="$radiusKm" />
+<input type="submit" value="Search" />
+</form>
+
+
+
+#set ($cx = $property.getLongitudeDeg())
+#set ($cy = $property.getLatitudeDeg())
+#set ($zoom = 6)
+
+#if ($useGoogleMap)
+#parse ("/backend/_google_map.vm")
+#else
+#parse ("/backend/_yahoo_map.vm")
+#end
+
+#parse ("/backend/_footer.vm")
+

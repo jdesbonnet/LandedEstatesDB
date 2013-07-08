@@ -1,0 +1,64 @@
+#parse ("/backend/_header.vm")
+
+<div class="a-z">
+|&nbsp;
+#foreach ($l in $alphabet)
+	#if ($l == $letter)
+	<b>$l</b>
+	#else
+	<a href="family-list.jsp?letter=$l">$l</a>
+	#end
+	&nbsp;|&nbsp;
+#end
+
+<br />
+
+<a href="family-list.jsp?letter=_all">List all families</a>
+
+</div>
+
+
+#if ($families)
+<table border="1" class="listTable">
+<thead>
+<tr>
+<th>family</th>
+<th>title</th>
+<th>description</th>
+<th>estates</th>
+<th>actions</th>
+</tr>
+</thead>
+
+#foreach ($family in $families)
+<tr>
+
+<td><a href="family-show.jsp?id=$family.getId()">$family.getName()</a></td>
+
+<td>$!family.getTitle() &nbsp;</td>
+
+<td>$!family.getDescription() &nbsp;</td>
+
+<td>
+#foreach ($estate in $family.getEstates())
+<a href="estate-show.jsp?id=$estate.getId()">$estate.getName()</a>
+&nbsp; &nbsp;
+#end
+&nbsp;
+</td>
+
+
+<td>
+[
+<a href="family-delete.jsp?id=$family.getId()"
+onClick="return confirm('Are you sure you want to delete family name?');"
+>delete</a>
+]
+</td>
+</tr>
+#end
+</table>
+
+#end
+
+#parse ("/backend/_footer.vm")

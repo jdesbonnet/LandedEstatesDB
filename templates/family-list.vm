@@ -1,0 +1,52 @@
+#parse ("/_nuig_ot_header.vm")
+
+<h1>Family A-Z</h1>
+
+<div class="a-z">
+|&nbsp;
+#foreach ($l in $alphabet)
+	#if ($l == $letter)
+	<b>$l</b>
+	#else
+	<a href="family-list.jsp?letter=$l">$l</a>
+	#end
+	&nbsp;|&nbsp;
+#end
+
+<br />
+
+<a href="family-list.jsp?letter=_all">List all families</a>
+
+</div>
+
+
+#if ($families)
+<dl>
+
+
+#foreach ($family in $families)
+<dt><a href="family-show.jsp?id=$family.getId()">$family.getName()
+#if ($family.getTitle() && $family.getTitle().length() > 0)
+<em>($!family.getTitle())</em>
+#end
+</a></dt>
+
+<dd>
+$!family.getDescription() 
+
+#set ($familyEstates = $family.getEstates())
+#if ($familyEstates.size() > 0)
+	Estates: <ul>
+	#foreach ($estate in $familyEstates)
+	<li> <a href="estate-show.jsp?id=$estate.getId()">$estate.getName()</a></li>
+	#end
+	</ul>
+#end
+
+#end
+</dl>
+
+
+#end
+
+#parse ("/_nuig_ot_footer.vm")

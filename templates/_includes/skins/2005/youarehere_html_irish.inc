@@ -1,0 +1,1 @@
+<div id="searcharea"><img alt="T&aacute; t&uacute; anseo" class="breadcrumbimage" src="http://www.nuigalway.ie/images/breadcrumb_youarehere_irish.png" /></div>

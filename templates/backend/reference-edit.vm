@@ -1,0 +1,51 @@
+#parse ("/backend/_header.vm")
+
+#if ($reference.getId())
+<h2>Edit reference on estate: $estate.getName()</h2>
+#else
+<h2>Create new reference for estate: $estate.getName()</h2>
+#end
+
+<form action="reference-edit-submit.jsp" method="POST">
+<input type="hidden" name="id" 
+value="$!reference.getId()" />
+<input type="hidden" name="estate_id"
+value="$estate.getId()" />
+
+<div>
+<label for="field_description">Reference description</label>
+
+##<input type="text" size="60" id="name" name="description"
+##value="$!reference.getDescription()" />
+
+<textarea id="field_description" name="description"
+rows="5" cols="60" wrap="virtual">$!reference.getDescription()</textarea>
+
+<button type="button" onClick="questionToQuoteMark('field_description')">convert ? to '</button>
+
+</div>
+
+<div>
+<label for="field_source_id">Source</label>
+<select id="field_source_id" name="source_id" style="width:600px">
+<!--
+<option value=""> -- Select Reference Source --</option>
+-->
+<option value=""> ** Unknown reference source **</option>
+#foreach ($source in $referenceSources)
+<option value="$source.getId()"
+	#if ($source.getId() == $reference.getSource().getId())
+		selected="yes"
+	#end
+>$source.getName()</option>
+#end
+</select>
+</div>
+
+
+<input type="submit" value="Submit" />
+</form>
+
+
+#parse ("/backend/_footer.vm")
+

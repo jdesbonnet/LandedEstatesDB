@@ -1,0 +1,139 @@
+#parse ("/_nuig_ot_header.vm")
+
+#if ($showBarcode)
+<img id="recordIdBarcode" alt="Barcode"
+src="$contextPath/bc/39/P$property.getId()"
+/>
+#end
+
+<h2>House: $property.getName()</h2>
+
+<table border="1" class="listTable">
+
+<tr valign="top">
+<td width="150">Estate(s):</td>
+<td colspan="2">
+<ul class="noBullet">
+#foreach ($estate in $estates)
+<li> <a href="estate-show.jsp?id=$estate.getId()">$estate.getName()</a></li>
+#end
+</ul>
+</td>
+</tr>
+
+<tr><td>Property/House name:</td><td colspan="2">$property.getName()</td></tr>
+<tr><td>Description:</td><td colspan="2">$!property.getDescription()</td></tr>
+
+
+
+<!-- Location info -->
+
+<tr>
+<td>Townland:</td>
+<td>$!property.getTownland()</td>
+<td width="550" rowspan="9">
+#if ($property.hasGridReference())
+<div id="mapContainer" style="width:550px; height:300px;"></div>
+#end
+</td>
+</tr>
+
+<tr>
+<td>Civil Parish:</td>
+<td>
+#if ($property.getCivilParish())
+$!property.getCivilParish()
+#else
+<em>n/a</em>
+#end
+</td>
+</tr>
+
+<tr>
+<td>Poor Law Union:</td>
+<td>
+#if ($property.getPlu())
+$property.getPlu()
+#else
+<em>n/a</em>
+#end
+</td>
+</tr>
+
+<tr>
+<td>DED:</td>
+<td>
+#if ($property.getDed())
+$!property.getDed()
+#else
+<em>n/a</em>
+#end</td>
+</tr>
+
+<tr><td>Barony:</td>
+<td>
+#if ($property.getBarony())
+$!property.getBarony()
+#else 
+<em>n/a</em>
+#end
+</td>
+</tr>
+
+
+<tr><td>County:</td><td>$!property.getCounty()</td></tr>
+<tr><td>OS Sheet Number:</td><td>$!property.getOsSheet()</td></tr>
+#if ($property.hasGridReference())
+<tr>
+<td>OSI Grid Reference:</td>
+<td>$property.getGridReference()</td>
+</tr>
+<tr><td>Latitude / Longitude:</td>
+<td>
+$jsp.formatLatLon($property)
+<br>
+[ <a href="property-kml.jsp?id=$property.getId()">Google Earth</a> ] 
+[ <a href="http://maps.google.com?ll=$property.getLatitude(),$property.getLongitude()&z=10">Google Maps</a> ]
+</td></tr>
+#else
+<tr><td>OSI Grid Reference:</td><td><em>n/a</em></td></tr>
+<tr><td>Latitude/Longitude:</td><td><em>n/a</em></td></tr>
+#end
+</table>
+
+<p>
+[
+<a href="property-nearby.jsp?id=$property.getId()">show nearby</a>
+]
+</p>
+
+<script>
+## Hint to map drawing JS code below to draw a single marker at this location
+var drawMarker=true;
+var markerLoc=[$property.getLatitude(),$property.getLongitude()];
+</script>
+
+<h3>Images</h3>
+
+#if ($property.getImages().size() > 0) 
+#foreach ($image in $property.getImages()) 
+<div class="imageAndCaption">
+<a href="image-show.jsp?id=$image.getId()"><img 
+src="$contextPath/img/im/${image.getId()}.jpg" /></a>
+<br />
+$image.getCaption()
+</div>
+#end
+</ul>
+#else
+<em>no images</em>
+#end
+
+#if ($property.hasGridReference())
+#set ($cx=$property.getLongitudeDeg())
+#set ($cy=$property.getLatitudeDeg())
+##parse ("/backend/_google_map.vm")
+#end
+
+#parse ("/_nuig_ot_footer.vm")
+

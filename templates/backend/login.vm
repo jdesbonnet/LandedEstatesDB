@@ -1,0 +1,32 @@
+<html>
+
+<head>
+<title>Landed estates database backend</title>
+<link rel="stylesheet" type="text/css" href="$contextPath/css/style.css" />
+</head>
+
+<body>
+
+<h1>Landed Estates Database</h1>
+
+<form id="loginBox" action="login-submit.jsp" method="POST" >
+
+<table>
+<tr>
+<td>Username:</td>
+<td><input type="text" size="20" name="username"  /></td>
+</tr>
+
+<tr>
+<td>Password:</td>
+<td><input type="text" size="20" name="password"  /></td>
+</tr>
+
+</table>
+
+
+<input type="submit" value="Login" />
+</form>
+
+
+#parse ("/backend/_footer.vm")

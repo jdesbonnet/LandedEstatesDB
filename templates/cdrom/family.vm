@@ -1,0 +1,24 @@
+#parse ("/cdrom/_header.vm")
+
+<h2>Family: $family.getName()</h2>
+
+$family.getDescription()
+
+<h3>Estates</h3>
+
+<ul>
+#foreach ($estate in $family.getEstates()) 
+<li> <a href="e${estate.getId()}.htm">$estate.getName()</a>
+#if ($estate.getDescription())
+- $estate.getDescription()
+#end
+</li>
+#end
+</ul>
+
+#if ($estates.size() == 0) 
+<em>no estate records found</em>
+#end
+
+#parse ("/cdrom/_footer.vm")
+

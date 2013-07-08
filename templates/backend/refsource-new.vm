@@ -1,0 +1,17 @@
+#parse ("/backend/_header.vm")
+
+<h2>Create new reference source</h2>
+
+<form action="refsource-new-submit.jsp" method="POST">
+
+<div>
+<label for="name">Source name</label>
+<input type="text" size="40" id="name" name="name" />
+</div>
+
+<input type="submit" value="Next" />
+</form>
+
+
+#parse ("/backend/_footer.vm")
+

@@ -1,0 +1,51 @@
+#parse ("/backend/_header.vm")
+
+<h2>Create new reference for estate $estate.getName()</h2>
+
+<form action="reference-new-submit.jsp" method="POST">
+
+<input type="hidden" name="estate_id"
+value="$estate.getId()" />
+
+<div>
+<label for="field_description">Reference description</label>
+
+##<input type="text" size="40" id="name" name="description"
+##value="" />
+
+<textarea id="field_description" name="description"
+rows="5" cols="60" wrap="virtual"></textarea>
+
+</div>
+
+<div id="acdiv">
+<label for="acinput">Reference source:</label>
+<input id="acinput" type="text" name="refsource" size="80" />
+<br clear="both">
+<div id="acc"></div>
+</div>
+
+<br clear="both">
+
+<input type="submit" value="Save &amp; add new reference" />
+<input type="submit" name="_submit_exit" value="Save &amp; return to estate record"  />
+
+</form>
+
+<script type="text/javascript" src="$YUI/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="$YUI/build/connection/connection-min.js"></script> 
+<script type="text/javascript" src="$YUI/build/autocomplete/autocomplete-min.js"></script>
+
+
+<script type="text/javascript">
+var queryService = "./refsource-query.jsp"; 
+var querySchema = ["\n", "\t"];
+var ds = new YAHOO.widget.DS_XHR(queryService, querySchema); 
+ds.responseType = YAHOO.widget.DS_XHR.TYPE_FLAT;
+//var ac = new YAHOO.widget.AutoComplete('field_refsource','acc', ds);
+var ac = new YAHOO.widget.AutoComplete('acinput','acc', ds);
+</script> 
+
+
+#parse ("/backend/_footer.vm")
+

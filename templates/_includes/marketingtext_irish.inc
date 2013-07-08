@@ -1,0 +1,1 @@
+Gabh an saol,<br/>gabh an t-eolas,<br/>gabh an todhchai

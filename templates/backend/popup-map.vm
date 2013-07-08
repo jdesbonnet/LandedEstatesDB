@@ -1,0 +1,47 @@
+
+<div id="mapContainerPopup" style="width:400px; height:400px;"> ... loading map ...</div>
+
+<button type="button" onClick="window.close()">Close</button>
+
+<script type="text/javascript" 
+src="http://api.maps.yahoo.com/ajaxymap?v=3.0&appid=$yahooMapKey"></script>
+<script type="text/javascript">
+
+
+/*
+ * On map click/double-click move marker and upload "location" field with
+ * new lat/lon.
+ */
+function myMouseClickHandler (oEvent, clickLoc) {
+	map.removeMarkersAll();
+	var newPoint = new YGeoPoint(clickLoc.Lat,clickLoc.Lon);
+	marker = new YMarker(newPoint);
+	marker.addLabel("X");
+	map.addOverlay(marker);
+	window.opener.document.getElementById("field_grid_ref").value="("+clickLoc.Lat+","+clickLoc.Lon+")";
+}
+
+
+var myPoint = new YGeoPoint($lat,$lon);
+var map = new YMap(document.getElementById('mapContainerPopup'),YAHOO_MAP_REG);
+
+// Add controls
+map.addPanControl(); 
+map.addZoomLong(); 
+map.addTypeControl();
+
+map.drawZoomAndCenter(myPoint, $zoom);
+
+YEvent.Capture(map, EventsList.MouseDoubleClick, myMouseClickHandler);
+
+var marker = new YMarker(myPoint);
+marker.addLabel("X");
+
+
+
+// Call onSmartWinEvent when the user clicks on the marker
+//YEvent.Capture(marker, EventsList.MouseClick, onSmartWinEvent);
+// Display the marker
+map.addOverlay(marker);
+</script>
+

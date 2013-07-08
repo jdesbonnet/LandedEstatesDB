@@ -1,0 +1,73 @@
+#parse ("/_nuig_ot_header.vm")
+
+<h2>CONNACHT AND MUNSTER LANDED ESTATES DATABASE</h2>
+
+<table class="twoColLayout">
+<tr valign="top">
+
+<td width="50%" class="col1">
+
+<p>
+The Connacht and Munster Landed Estates project, funded by the 
+<a href="http://www.irchss.ie">Irish Council for Research
+in the Humanities and Social Sciences</a>
+ and the <a href="http://www.hea.ie/">Programme for Research in Third Level
+Institutions</a> respectively, undertook the research for, and the publication of, a comprehensive
+and integrated resource guide to landed estates and historic houses in Connacht and
+Munster, c. 1700-1914. The aim of the guide is to assist and support researchers working on
+the social, economic, political and cultural history of these provinces from c.1700 to 1914.
+</p>
+
+<p>
+The project involved the distillation and collation of data from a broad range of historical
+sources, and the concise codification of these data on an estate/name basis. The optimum
+use of the data determined that the database be published in electronic form. Full details of
+the sources used can be viewed under Reference Sources in the database. See the Help link
+for further details on the creation of the database.
+</p>
+
+<p>
+The Project was hosted by the 
+<a href="http://www.nuigalway.ie/mooreinstitute/">Moore Institute for Research in the Humanities and Social
+Sciences</a>
+at the National University of Ireland, Galway.
+</p>
+
+<p>
+Project Principal: Prof. Gearóid Ó Tuathaigh. <br />
+Researchers: Ms. Marie Boran & Ms. Brigid Clesham.<br />
+Technical Adviser: Mr. Joe Desbonnet.<br />
+</p>
+
+<p>
+The project can be contacted via email: 
+<a href="mailto:info@landedestates.ie">info@landedestates.ie</a>
+</p>
+
+
+</td>
+
+<td width="50%" class="col2" align="center">
+
+<img src="$contextPath/assets/Glenmore.cropped.small.jpg" /><br />
+<div class="caption">
+<a href="$contextPath/jsp/property-show.jsp?id=184">Glenmore House</a> (Attishane, Co. Mayo)
+</div>
+
+<img src="$contextPath/assets/Finavarra.small.jpg" />
+<div class="caption">
+<a href="$contextPath/jsp/property-show.jsp?id=1615">Finavarra House</a> (Co. Clare)
+</div>
+
+<a href="$contextPath/jsp/map.jsp"><img 
+src="$contextPath/assets/map.small.jpg" /></a>
+<div class="caption">
+<a href="$contextPath/jsp/map.jsp">Interactive Map of Houses and Estates</a>
+</div>
+</td>
+
+</tr>
+</table>
+
+
+#parse ("/_nuig_ot_footer.vm")

@@ -1,0 +1,25 @@
+#parse ("/_nuig_ot_header.vm")
+
+<h2>Search Results: Estates</h2>
+
+<ul class="bulletList">
+#foreach ($result in $results) 
+	#if ($result.getLuceneId().startsWith("E"))
+	<li>(Estate) <a href="estate-show.jsp?id=$result.getId()">
+	#elseif ($result.getLuceneId().startsWith("H")) 
+	<li>(House) <a href="property-show.jsp?id=$result.getId()">
+	#elseif ($result.getLuceneId().startsWith("R")) 
+	<li> (Reference Source) <a href="refsource-show.jsp?id=$result.getId()">
+	#end
+	$result.getName()</a> -
+	$result.getDescription()
+	</li>
+#end
+</ul>
+
+
+#if ($results.size() == 0) 
+No results for search term '$q'
+#end
+
+#parse ("/_nuig_ot_footer.vm")

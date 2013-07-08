@@ -1,0 +1,33 @@
+#parse ("/_nuig_ot_header.vm")
+
+<table border="1" class="listTable">
+<thead>
+<tr>
+<th>name</th>
+<th>category</th>
+<th>contact person</th>
+<th>contact telephone</th>
+<th>contact email</th>
+</tr>
+</thead>
+
+#foreach ($source in $referenceSources)
+<tr>
+<td>
+<a href="refsource-show.jsp?id=$source.getId()">
+#if (! $source.getName() || $source.getName().length() == 0) 
+<em>(no name)</em>
+#else
+$source.getName()
+#end
+</a>
+</td>
+<td>$!source.getCategory().getName()</td>
+<td>$!source.getContactPerson() &nbsp;</td>
+<td>$!source.getContactTelephone() &nbsp;</td>
+<td>$!source.getContactEmail() &nbsp;</td>
+</tr>
+#end
+</table>
+	
+#parse ("/_nuig_ot_footer.vm")

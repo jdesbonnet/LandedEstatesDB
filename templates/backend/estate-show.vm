@@ -1,0 +1,157 @@
+#parse ("/backend/_header.vm")
+
+<h1>Estate: $estate.getName()</h1>
+
+#if ($showBarcode)
+<img id="recordIdBarcode" alt="Barcode"
+src="$contextPath/bc/39/E$estate.getId()"
+/>
+#end
+
+<h3>Associated Families</h3>
+
+<ul class="bulletList">
+#foreach ($family in $estate.getFamilies())
+<li> <a href="family-show.jsp?id=$family.getId()">$family.getName()</a> 
+#if ($family.getTitle() && $family.getTitle().length() > 0)
+<em>($family.getTitle())</em>
+#end
+</li>
+#end
+</ul>
+
+#if ($estate.getFamilies().size() == 0)
+<em>none</em>
+#end
+
+
+<h3>Description</h3>
+$!estate.getDescription()
+
+
+<h3>Houses</h3>
+
+#if ($estate.getProperties().size() == 0) 
+<em>none</em>
+#else
+<table class="listTable">
+<thead>
+<tr>
+<th width="300">House Name / Description</th>
+<th>Townland</th>
+<th>Civil Parish</th>
+<th>PLU</th>
+<th>DED</th>
+<th>Barony</th>
+<th>County</th>
+<th>OS Grid Reference / Map</th>
+</tr>
+</thead>
+
+#foreach ($property in $estate.getProperties()) 
+<tr valign="top">
+<td>
+
+##
+## If just one image float to right of cell
+##
+
+#if ($property.getImages().size() == 1)
+#foreach ($image in $property.getImages())
+<img alt="image" src="$contextPath/img/tn/$image.getId()" align="right" />
+#end
+#end
+
+<a href="property-show.jsp?id=$property.getId()">$property.getName()</a>
+<br />
+
+$!property.getDescription()
+
+##
+## If more than one property then list after description
+##
+
+#if ($property.getImages().size() > 1)
+<br />
+#foreach ($image in $property.getImages())
+<img alt="image" src="$contextPath/img/tn/$image.getId()" />
+#end
+#end
+
+
+</td>
+
+<td>$!property.getTownland() &nbsp;</td>
+<td>$!property.getCivilParish() &nbsp;</td>
+<td>$!property.getPlu() &nbsp;</td>
+<td>$!property.getDed() &nbsp;</td>
+<td>$!property.getBarony() &nbsp;</td>
+<td>$!property.getCounty() &nbsp;</td>
+<td>
+#if ($property.hasGridReference())
+<a href="javascript:popupMap('gridref=$property.getGridReference()')">$property.getGridReference()</a>
+#end
+#if ($property.getDiscoveryMap())
+Discovery map #$property.getDiscoveryMap().
+#end
+#if ($property.getOsSheet())
+OS Sheet #$property.getOsSheet().
+#end
+</td>
+
+</tr>
+#end
+</table>
+#end
+
+
+#if ($estate.getReferences().size() == 0)
+<em>none</em>
+#end
+
+
+#foreach ($referenceCategoryName in $referenceCategoryNames)
+<h3>$referenceCategoryName</h3>
+<ul class="bulletList">
+#foreach ($reference in $referenceCategories.get($referenceCategoryName))
+<li> <a href="refsource-show.jsp?id=$reference.getSource().getId()">$jsp.markingsToHtml($reference.getSource().getName())</a>: 
+$jsp.markingsToHtml($reference.getDescription()) </li>
+#end
+</ul>
+#end
+
+#if ($problemReferences.size() > 0)
+<div class="warning">
+<h3>problematic references</h3>
+<ul class="bulletList">
+#foreach ($ref in $problemReferences)
+	<li> <a href="reference-edit.jsp?id=$ref.getId()">Reference#$ref.getId()</a>,
+	source=
+	#if ($ref.getSource() ) 
+		$ref.getSource().getName(): 
+	#else 
+		<span class="errorMessage">No reference source set</span>
+	#end
+	
+	description=
+	#if ($ref.getDescription())
+		$ref.getDescription()
+	#else
+		<span class="errorMessage">No reference description</span>
+	#end
+	
+	</li>
+#end
+</ul>
+Please edit this Estate record and correct issues highlighted above.
+</div>
+#end
+
+<p>
+[
+<a href="estate-edit.jsp?id=$estate.getId()">edit</a>
+]
+</p>
+
+#parse ("/backend/_footer.vm")
+

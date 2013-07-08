@@ -1,0 +1,46 @@
+#parse ("/_nuig_ot_header.vm")
+
+<h3>Image #$image.getId(), $property.getName()</h3>
+
+
+
+<a href="$contextPath/img/orig/${image.getId()}.jpg">
+<img alt="$image.getCaption()"
+title="$image.getCaption()"
+src="$contextPath/img/im/${image.getId()}.jpg" 
+/></a>
+<br />
+Click on image for original full size version.
+<br />
+
+
+<table>
+<tr>
+<td>House:</td>
+<td>
+<a href="property-show.jsp?id=$property.getId()">$property.getName()</a>
+of 
+#if ($estates.size() == 1)
+estate <a href="estate-show.jsp?id=$estate.getId()">$estate.getName()</a>
+#else
+of estates
+#foreach ($estate in $estates)
+<a href="estate-show.jsp?id=$estate.getId()">$estate.getName()</a>,
+#end
+#end
+
+</td>
+</tr>
+
+<tr>
+<td>Caption:</td>
+<td> $!image.getCaption()</td>
+</tr>
+
+<tr>
+<td>Description:</td>
+<td>$!image.getDescription()</td>
+</tr>
+</table>
+
+#parse ("/_nuig_ot_footer.vm")

@@ -1,0 +1,29 @@
+</div><!-- end DIV.yui-b -->
+</div><!-- end DIV#bd -->
+
+
+<div id="ft">
+Landed Estates Database,
+$VERSION
+</div>
+
+</div><!-- end DIV#doc -->
+
+<script type="text/javascript">
+function reloadPageWithNewPhase (newPhase) {
+	var loc = document.location;
+	
+	// Strip query string and rebuild URL
+	var re = /\.jsp\?.*$/gi;
+	var loc = "" + document.location;
+	loc = loc.replace(re, ".jsp")
+		+ "?letter=$!letter"
+		+ "&p=" + newPhase;
+
+	// Jump to rebuilt URL
+	document.location = loc;
+}
+</script>
+
+</body>
+</html>

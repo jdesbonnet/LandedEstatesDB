@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+<title>$title</title>
+<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+
+<body>
+
+<div id="doc2" class="yui-t7">
+
+<div id="hd">
+<h1>Landed Estates Database - CDROM</h1>
+
+<div class="menubar">
+<a href="index.htm">Home</a>
+<a href="f_index.htm">Family index</a>
+<a href="e_index.htm">Estate index</a>
+<a href="p_index.htm">Property index</a>
+<a href="a_index.htm">Full database index</a>
+</div>
+
+</div><!-- end header-->
+
+
+<div id="bd">
+<div id="yui-main">
+<div class="yui-b">

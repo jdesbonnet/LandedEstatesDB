@@ -1,0 +1,29 @@
+#parse ("/backend/_header.vm")
+
+<h2>Add new image to house $property.getName()</h2>
+
+<form action="image-new-submit.jsp" 
+enctype="multipart/form-data" method="POST">
+
+<input type="hidden" name="property_id" value="$propertyId" />
+
+<div>
+<label for="file1">Image File</label>
+
+File from hard disk:
+<input type="file" name="file1" id="file1"/>
+or URL of image from the web:
+<input type="text" 
+id="field_url" name="url"
+size="40" />
+</div>
+
+<div>
+<label for="field_caption">Caption</label>
+<textarea name="caption" id="field_caption" 
+rows="8" cols="80"/></textarea>
+</div>
+
+<input type="submit" value="Upload File" />
+</form>
+#parse ("/backend/_footer.vm")

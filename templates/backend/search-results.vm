@@ -1,0 +1,18 @@
+#parse ("/backend/_header.vm")
+
+<h2>Search Results: Estates</h2>
+
+<ul>
+#foreach ($estate in $results) 
+<li>
+<a href="estate-show.jsp?id=$estate.getId()">$estate.getName()</a> -
+$estate.getDescription()
+</li>
+#end
+</ul>
+
+#if ($nResults == 0) 
+no results for search term '$q'
+#end
+
+#parse ("/backend/_footer.vm")

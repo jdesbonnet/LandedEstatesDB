@@ -1,0 +1,82 @@
+## 
+## Javascript to generate map. Map will be rendered in div#map
+## Input parameters: properties (list of Propery objects) cx,cy (center)
+##
+
+<!-- _yahoo_map.vm -->
+<script type="text/javascript" 
+src="http://api.maps.yahoo.com/ajaxymap?v=3.7&appid=$yahooMapKey"></script>
+<script type="text/javascript">
+
+#if ($property) 
+ 	var house = { id: $property.getId(), name:"$property.getName()",
+ 	townland: "$property.getTownland()", gr: "$property.getGridReference()",
+ 	lat: $property.getLatitude(), lon: $property.getLongitude() };	
+#end
+
+var houses = [
+	#foreach ($p in $properties)
+	{id:$p.getId(), name:"$p.getName()", 
+	townland:"$p.getTownland()", gr: "$p.getGridReference()",
+	lat: $p.getLatitude(), lon: $p.getLongitude() } ,
+	#end
+];
+
+// Make HTML for map marker bubble
+function makeHouseMarkerHTML (house) {
+	var html = "<a href=\"property-show.jsp?id=" + house.id + "\"><b>"
+	+ house.name + "</b></a> "
+	+ "Townland:" + house.townland + "<br />";
+	return html;
+}
+
+function createMarker (house, label) {
+	var marker = new YMarker(new YGeoPoint(house.lat,house.lon));
+	marker.addLabel(label);
+	marker.addAutoExpand(house.name);
+	var html = makeHouseMarkerHTML(house);
+	YEvent.Capture(marker, EventsList.MouseClick, 
+		function() {
+			marker.openSmartWindow(html);
+		}
+	);
+	return marker;
+}
+
+var map = new YMap(document.getElementById('mapContainer'),YAHOO_MAP_REG);
+map.addPanControl(); 
+map.addZoomLong(); 
+map.addTypeControl();
+
+// Calculate best zoom and center
+var housePoints = [];
+for (var i = 0; i < houses.length; i++) {
+	housePoints.push (new YGeoPoint(houses[i].lat, houses[i].lon));
+}
+var bzc = map.getBestZoomAndCenter(housePoints);
+	
+	
+// If house defined use that for center, else use calculated best center
+var centerPoint;
+if (house) {
+	centerPoint = new YGeoPoint(house.lat,house.lon);
+} else {
+	centerPoint = bzc.YGeoPoint;
+}
+map.drawZoomAndCenter(centerPoint, bzc.zoomLevel);
+
+if (house) {
+	var marker = new YMarker(new YGeoPoint(house.lat,house.lon));
+	marker.addLabel("X");
+	//marker.addSmartWindowText(makeHouseMarkerHTML(house));
+	map.addOverlay(marker);
+}
+
+var html;
+for (var i = 0; i < houses.length; i++) {
+	var marker = createMarker (houses[i],i);
+	map.addOverlay(marker);
+}
+</script>
+<!-- end _yahoo_map.vm -->
+     

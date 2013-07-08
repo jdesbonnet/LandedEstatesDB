@@ -1,0 +1,31 @@
+#parse ("/backend/_header.vm")
+
+<h2>Edit image #$image.getId()</h2>
+
+<form action="image-edit-submit.jsp" method="POST">
+<input type="hidden" name="id" value="$image.getId()" />
+<input type="hidden" name="next" value="$next" />
+
+<img alt="image $image.getId()" src="$contextPath/img/im/${image.getId()}.jpg" />
+
+<div>
+<label for="field_caption">Caption</label>
+<textarea
+name="caption" id="field_caption" 
+rows="4" cols="80"/>$!image.getCaption()</textarea>
+</div>
+
+
+<div>
+<label for="field_description">Description</label>
+<textarea
+name="description" id="field_description" 
+rows="4" cols="80"/>$!image.getDescription()</textarea>
+</div>
+
+
+<input type="submit" value="Save" />
+</form>
+
+#parse ("/backend/_footer.vm")
+

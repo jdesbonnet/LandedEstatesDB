@@ -1,0 +1,57 @@
+#parse ("/backend/_header.vm")
+
+<h2>Reference source: $source.getName()</h2>
+
+
+
+<table>
+<tr><td>Category: </td><td>$source.getCategory().getName() </td></tr>
+<tr valign="top"><td>Description: </td><td>$!source.getDescription()</td></tr>
+
+<td>Contact person:</td> <td>$!source.getContactPerson() </td></tr>
+<td>Telephone:</td> <td> $!source.getContactTelephone()</td></tr>
+<td>Email:</td><td>$!source.getContactEmail()</td></tr>
+</table>
+
+<h2>Estate records citing this source</h2>
+
+<p>
+Found $records.size() estate records citing this source.
+</p>
+
+<ul>
+#foreach ($estate in $records) 
+<li> 
+Estate <a href="estate-show.jsp?id=$estate.getId()">$estate.getName()</a>
+
+(families: 
+#foreach ($family in $estate.getFamilies())
+<a href="family-show.jsp?id=$family.getId()">
+$family.getName()
+#if ($family.getTitle())
+<em>($family.getTitle())</em>
+#end
+</a>
+;
+#end
+)
+
+<ul>
+#foreach ($reference in $estate.getReferences())
+#if ($reference.getSource() == $source)
+<li> <a href="reference-edit.jsp?id=$reference.getId()&estate_id=$estate.getId()">Reference #$reference.getId()</a>: $!reference.getDescription() </li>
+#end
+#end
+</ul>
+
+</li>
+#end
+</ul>
+
+
+<p>
+<a href="refsource-edit.jsp?id=$source.getId()">[Edit Reference Source Record]</a>
+</p>
+
+
+#parse ("/backend/_footer.vm")

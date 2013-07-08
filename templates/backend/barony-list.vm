@@ -1,0 +1,32 @@
+#parse ("/backend/_header.vm")
+
+<div class="a-z">
+|&nbsp;
+#foreach ($l in $alphabet)
+	#if ($l == $letter)
+	<b>$l</b>
+	#else
+	<a href="estate-list.jsp?letter=$l">$l</a>
+	#end
+	&nbsp;|&nbsp;
+#end
+
+<br />
+
+<a href="estate-list.jsp?letter=_all">List all estates</a>
+
+</div>
+
+
+#foreach ($b in $baronies) 
+<h2>$b.getName()</h2>
+<ul>
+#foreach ($h in $b.getHouses())
+<li> <a href="http://landedestates.ie/LandedEstates/jsp/backend/property-edit.jsp?id=$h.getId()">$h.getName() (House#$h.getId())</a></li>
+#end
+</ul>
+#end
+
+
+
+#parse ("/backend/_footer.vm")
