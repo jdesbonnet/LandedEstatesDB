@@ -1,0 +1,217 @@
+25 Nov 2010: 1.2.5b1
+  * Update maps to use Google Maps (API v3). Using Yahoo maps up to this point.
+
+28 Sep 2009: 1.2.4
+  * Fix ordering of reference in backend. Ref Mantis 94.
+  
+23 Sep 2009: 1.2.3
+  * Fix ordering of references Ref Mantis 94 in front end.
+  
+22 Sep 2009: 1.2.2
+  * Mantis 142: Maps not working in IE8. Update YUI to version 2.8.0 and Yahoo Map libraries to 3.8.
+  * Fix minor HTML errors in template.
+  
+20 July 2009: 1.2.1
+  * commons-logging-1.0.4 library missing
+  
+30 June 2009: 1.2.0
+
+  * Incorporate mods by Evan Ryder. 
+  
+
+DB FIXES:
+ delete from estate_properties where property_id=31;
+ move tables from latin1 to utf-8
+ 
+ 
+  ! Items in tools menu not working (eg db dump)
+  ! Top menu styling: no need for different styles for link vs visited link
+
+13 Feb 2009: 1.1
+  * Additional Phase II record lockdown code. 
+  
+21 Jul 2008: Version 1.0.0
+  * Fix DED and PLU non-display bug on property-show.jsp
+  * Make Lucene index dir configurable from web.xml
+  * Change Reference.hbm.xml to ignore ReferenceSource not found 
+
+24 Jan 2008: Version 0.8.0
+  * Integrate NUIG template for front end. 
+  * Vastly improve performance of show-refsource page
+  * Improve show nearby page
+  * Update code to use Java 1.5 generics
+  
+
+18 Nov 2007: Version 0.7.0
+  * Front end (very similar to back end, but no login/edit functionality
+    
+17 Oct 2007: Version 0.6.9
+  * Implement read-only users
+  
+29 May 2007: Version 0.6.8
+  * Yahoo Maps
+  
+17 May 2007: Version 0.6.7
+  * Some minor changes to Hibernate config (remove lazy=true)
+  
+5 Mar 2007: Version 0.6.7 
+
+  * Use hosting at yahooapis.com for YUI CSS and JS
+  * Update wombat-imagetable.jar to latest version (uses ImageMagick for tn gen)
+  * Optimization of DB (creation of index on join tables)
+  * CSS changes: Use YUI Grids doc2 layout (950px wide)
+  * Button to fix '?' characters due to ISO-8859-1 / UTF-8 mixup.
+  * Order families, houses and references in Estate record by respective 
+  primary key (was randomly sorted before)
+  * Change widget for reference description in reference-new/reference-edit
+  to textarea
+ 
+14 Dec 2006: Version 0.6.6
+
+  * Fix (again) autocomplete problem. Test with IE7.
+  * Minor changes to UI for consistency.
+  
+13 Dec 2006: Version 0.6.5
+  * Upgrade YUI to 0.12 which should fix '(' and '&' IE 6 bug in auto-complete
+  
+27 Nov 2006: Version 0.6.4
+  * Fix bug in family-query, property-query and refsource-query (auto-complete
+  field queries). Single quote in query causing
+  HQL syntax error. Also possible malicious injection vulnerability. Fix by
+  using '?' place holders in query and use setString() method.
+  
+18 Nov 2006: Version 0.6.3
+
+  * Fix estate delete bug
+  * Change property-add-existing to use autocomplete mechanism to select house
+  
+6 Nov 2006: Version 0.6.2
+  * Update version of wombat-imagetable.jar (new version does not clash with image 
+  caches of other image tables using the same library)
+  * Log memory use prior and after image upload
+  
+20 Oct 2006: Version 0.6.1
+
+  * Sort references in estate-show.jsp by source name
+  * Update system to use UTF-8 encoding in DB and software (note that presence of both
+  commons-logging and log4j caused bizarre character encoing problems.. ie forms always
+  interpreting POST submissions in ISO-8859-1 despite being directed to use UTF-8).
+  * Some misc tidying up
+  
+16 Sep 2006: Version 0.6.0
+
+  * Use YUI tabs
+  * Use autocompletion widget where appropriate
+  * Image database
+  * Google Map V2 API
+  * Refactor db handling: automatically open session/tx on all JSP scripts and 
+  automatically close session/tx
+
+(notes: some bad records in estate_families (every family_id < 108 can be
+deleted and estate_references: reference_id=208 )
+
+  
+11 Jul 2006: Version 0.5.5
+  * Sort family by letter alphabetically
+    
+10 Apr 2006: Version 0.5.4
+  * Add county Leitrim, remove Clare and Donegal from county pull down menu.
+  
+2 Apr 2006: Version 0.5.3
+  * Autoselect GoogleMap key
+  * Modify estate-edit-submit so that save only occurs if a change has been made. Also
+  the object load and save occurs in one transaction now.
+  * Remove 0,0 locations from centroid calculations for map centering on backend home page.
+  
+28 Mar 2006: Version 0.5.2
+  * Fix problems relating from migration of int -> Long for estateId
+  
+28 Mar 2006: Version 0.5.1
+  * Sort by name for estate by letter, house by letter
+  * In estate-show and property-show use zone letter grid reference eg M123456
+  * Implement backup facility
+  * Update to latest WombatGIS library. xeenn grid refs (eg G1234) now possible.
+  * Grid references not handled properly in some cases, resulting in a 0 lat, 0 lon which
+  causes centroid calculation to be off. FIXED
+  * Distance calculations in nearby houses seems off in come cases FIXED
+  
+17 Mar 2006: Version  0.5.0
+
+  * Fix GoogleMaps in IE
+  * Implement experimental barcoding of records
+  * Move CSS out of HTML to separate file (/css/style.css)
+  * Map of all houses with grid reference on home page
+  * Draw bounding box corresponding to search radius on property-nearby map.
+  * Fix bug in getPropertiesByGridReference()
+  
+15 Mar 2006: Version 0.4.4
+  * reference-new: Split reference source pull down menu into seperate menus
+  for each category of reference source.
+  * fix grid reference bug: a blank grid reference caused an error.
+  
+8 Mar 2006: Version 0.4.3
+  * Edit estates "Save" button took user back to index.jsp. Changed so that
+  user is return to show-estate.jsp page.
+  * Change property-edit to use tradtional OSI grid reference format (zone
+  letter, easting, northing)
+  * Experimental italics marker (two single quotes) implemented in reference
+  descriptions.
+    
+3 Mar 2006: Version: 0.4.2
+  * A-Z for Estate and Family records. Remove all except western counties
+  from county drop down.
+  
+28 Feb 2005: Version: 0.4.1
+  * Fix some bugs relating to reference sources and buttons in IE.
+  
+15 Feb 2005: Version: 0.4.0
+
+  * Fix search engine: index was being recreated on each record modification.
+  * Existing houses can now be added to estate records
+  * Show house now displays list of estates associated with that house
+  * Show family now has colums for family title and associated estates
+  * List reference sources alphabetically in refsource-list
+  * Expand estate records in refsource-show to list reference descriptions
+  * Add 'title' field to family
+  * Add new family, new reference, new house links in edit estate form
+  will now submit form data.
+  
+8 Feb 2005 ?: Version 0.3.4
+
+  * In family-show page: add estate descriptions to estate list
+  * Improvements to CD-ROM generation
+  
+26 Jan 2005: Version 0.3.3
+
+  * Hyperlink reference sources
+  * Introduce refsource-show page, listing citing Estate records
+  * Query for nearby properties in property-show page
+  
+24 Jan 2005: Version 0.3.2
+  * Fix add reference bug
+  * Add support for Google maps
+  * Hyperlink family names in estate list
+  
+18 Jan 2005: Version 0.3.1
+
+  * Add reference source categoris
+  
+12 Jan 2005: Version 0.3
+
+  * Search improved
+  * Hyperlinking improved
+  * CD-ROM maker
+  * User model implemented
+  * County drop down box
+  
+Dec 2005: Version 0.2 (not released)
+
+  * Incorporate search
+
+5 Dec 2005: Version 0.1
+
+First release. Basic functionality. Missing functionality 
+in this release:
+  * No dates with family name association
+  * No search
+  * No front end
