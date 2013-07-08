@@ -8,7 +8,7 @@ public class EmploymentRecord implements Indexable {
 	private Long id;
 	private String description;
 	
-	private House house;
+	private Property house;
 	
 	
 	public Long getId() {
