@@ -3,11 +3,24 @@ package ie.wombat.landedestates;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Family implements Indexable {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
+	
 	private String name;
 	private String title;
 	private String description;
+	
+	@OneToMany
 	private Set<Estate> estates = new HashSet<Estate> ();
 	
 	private Integer projectPhase;

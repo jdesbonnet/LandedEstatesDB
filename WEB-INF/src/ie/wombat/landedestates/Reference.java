@@ -1,5 +1,9 @@
 package ie.wombat.landedestates;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  * Reference. The Comparable interface sorts by the source name.
  * 
@@ -8,9 +12,13 @@ package ie.wombat.landedestates;
  */
 public class Reference implements Comparable {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
+	
 	private String description;
 	private ReferenceSource source;
+	
 	public String getDescription() {
 		return description;
 	}

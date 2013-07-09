@@ -3,17 +3,27 @@ package ie.wombat.landedestates;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
 import org.apache.log4j.Logger;
 
 import ie.wombat.gis.InvalidGridReferenceException;
 import ie.wombat.gis.OSIGridReference;
 import ie.wombat.imagetable.Image;
 
+@Entity
 public class Property implements Indexable {
 
 	private static Logger log = Logger.getLogger(Property.class);
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
+	
 	private String name;
 	private String description;
 	private String townland;
@@ -30,6 +40,7 @@ public class Property implements Indexable {
 	private int easting;
 	private int northing;
 	
+	@OneToMany
 	private Set<Image> images = new HashSet<Image>();
 	
 	private Integer projectPhase;
