@@ -25,6 +25,8 @@
 	<mapping resource="ImageDB.hbm.xml" />
 	<mapping resource="Barony.hbm.xml" />
 	<mapping resource="HeatMapRecord.hbm.xml" />
+	<mapping resource="EmployeeRecord.hbm.xml" />
+
     </session-factory>
     
     
