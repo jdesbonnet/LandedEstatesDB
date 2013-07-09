@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-public class EmploymentRecord implements Indexable {
+public class EmployeeRecord implements Indexable {
 	private Long id;
 	private String description;
 	
