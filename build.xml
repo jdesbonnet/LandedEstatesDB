@@ -85,9 +85,7 @@
 			</fileset>
 		</copy>
 
-		<!--
-				<copy file="./WEB-INF/persistence.${serverType}.xml" tofile="./WEB-INF/classes/META-INF/persistence.xml" />
-		-->
+		<copy file="./WEB-INF/persistence.${serverType}.xml" tofile="./WEB-INF/classes/META-INF/persistence.xml" />
 		
 		<copy todir="./WEB-INF/classes">
 			<fileset dir="${build.classes}" />
