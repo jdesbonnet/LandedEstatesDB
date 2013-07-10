@@ -279,7 +279,7 @@ public class DB {
 		return result;
 	}
 	
-	public List<Property> getPropertiesByLetter (Session session, String letter) {
+	public List<Property> getPropertiesByLetter (EntityManager em, String letter) {
 		
 		String query = "from Property as p where p.name like ? order by p.name";
 		List<Property> result = em.createQuery(query)
@@ -332,27 +332,6 @@ public class DB {
 	}
 
 	
-	/**
-	 * @deprecated
-	 * @param reference
-	 */
-	public void saveReference(Reference reference) {
-		Session session = HibernateUtil.currentSession();
-		Transaction tx = session.beginTransaction();
-
-		if (reference.getId() == null) {
-			session.save(reference);
-		} else {
-			session.update(reference);
-		}
-
-		session.flush();
-
-		saveObjectRevision(session, reference.getId(), 0, reference);
-
-		tx.commit();
-		HibernateUtil.closeSession();
-	}
 
 	public ReferenceSource[] getReferenceSources(Session session) {
 		String query = "from ReferenceSource order by name";
@@ -378,14 +357,8 @@ public class DB {
 
 	}
 	
-	public ReferenceCategory getReferenceCategory(int id) {
-		Session session = HibernateUtil.currentSession();
-		Transaction tx = session.beginTransaction();
-		ReferenceCategory category = (ReferenceCategory) session.load(
-				ReferenceCategory.class, new Long(id));
-		tx.commit();
-		HibernateUtil.closeSession();
-		return category;
+	public ReferenceCategory getReferenceCategory(EntityManager em, Long id) {
+		return (ReferenceCategory) em.find(ReferenceCategory.class, id);
 	}
 	
 
@@ -401,18 +374,7 @@ public class DB {
 		session.delete(source);
 	}
 	
-	public void saveReferenceSource(ReferenceSource source) {
-		Session session = HibernateUtil.currentSession();
-		Transaction tx = session.beginTransaction();
 
-		if (source.getId() == null) {
-			session.save(source);
-		} else {
-			session.update(source);
-		}
-		tx.commit();
-		HibernateUtil.closeSession();
-	}
 
 	/*
 	public void removePropertyFromEstate (Long estateId, Long propertyId) {
@@ -427,21 +389,6 @@ public class DB {
 	}
 	*/
 
-	public void removeReferenceFromEstate(int estateId, int referenceId) {
-		removeReferenceFromEstate(new Long(estateId), new Long(referenceId));
-	}
-
-	public void removeReferenceFromEstate(Long estateId, Long referenceId) {
-		Session session = HibernateUtil.currentSession();
-		Transaction tx = session.beginTransaction();
-		Reference reference = (Reference) session.load(Reference.class,
-				referenceId);
-		Estate estate = (Estate) session.load(Estate.class, estateId);
-		estate.getReferences().remove(reference);
-		tx.commit();
-		HibernateUtil.closeSession();
-	}
-	
 	/**
 	 * Return User object corresponding to username and password, or 
 	 * null if no matching username/password exists.
@@ -450,14 +397,11 @@ public class DB {
 	 * @param password
 	 * @return
 	 */
-	public User verifyUsernamePassword (String username, String password) {
-		Session session = HibernateUtil.currentSession();
-		Transaction tx = session.beginTransaction();
-		String query = "from User where username='" + username + "'";
-		List result = session.createQuery(query).list();
-		tx.commit();
-		HibernateUtil.closeSession();
+	public User verifyUsernamePassword (EntityManager em, String username, String password) {
 		
+		String query = "from User where username='" + username + "'";
+		List<User> result = em.createQuery(query).getResultList();
+	
 		if (result.size() == 0) {
 			return null;
 		}
@@ -641,42 +585,32 @@ public class DB {
 	/*
 	 * 
 	 */
-	public ObjectHistory[] getRecentChanges() {
+	public List<ObjectHistory> getRecentChanges(EntityManager em) {
 		long startTime = System.currentTimeMillis();
 
-		Session session = HibernateUtil.currentSession();
-		Transaction tx = session.beginTransaction();
+		
 		String query = "from ObjectHistory order by modified desc";
-		List result = session.createQuery(query).list();
-		tx.commit();
-		HibernateUtil.closeSession();
-
+		List<ObjectHistory> result = em.createQuery(query).getResultList();
+	
 		System.err.println("getRecentChanges(): duration = "
 				+ (System.currentTimeMillis() - startTime));
 
-		ObjectHistory[] ret = new ObjectHistory[result.size()];
-		result.toArray(ret);
-		return ret;
+		return result;
+		
 	}
 
-	public ObjectHistory[] getRevisionHistory(String className, Long id) {
+	public List<ObjectHistory> getRevisionHistory(EntityManager em, String className, Long id) {
 		long startTime = System.currentTimeMillis();
 
-		Session session = HibernateUtil.currentSession();
-		Transaction tx = session.beginTransaction();
 		String query = "from ObjectHistory "
 			+ "where objectClass='" + className + "' "
 			+ " and objectId=" + id + " order by modified desc";
-		List result = session.createQuery(query).list();
-		tx.commit();
-		HibernateUtil.closeSession();
-
+		List<ObjectHistory> result = em.createQuery(query).getResultList();
+	
 		System.err.println("getRevisionHistory(): duration = "
 				+ (System.currentTimeMillis() - startTime));
-
-		ObjectHistory[] ret = new ObjectHistory[result.size()];
-		result.toArray(ret);
-		return ret;
+		return result;
+		
 	}
 	/*
 	 * Save object in audit trail

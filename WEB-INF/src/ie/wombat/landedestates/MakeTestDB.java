@@ -1,5 +1,9 @@
 package ie.wombat.landedestates;
 
+import java.util.List;
+
+import javax.persistence.EntityManager;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -10,10 +14,10 @@ public class MakeTestDB {
 	
 	public static void main (String[] arg) {
 		MakeTestDB test = new MakeTestDB();
-		test.makeTestDb();
+		//test.makeTestDb(em);
 	}
 	
-	public void makeTestDb () {
+	public void makeTestDb (EntityManager em) {
 		
 		Session session = HibernateUtilOld.currentSession();
 		Transaction tx = session.beginTransaction();
@@ -27,10 +31,10 @@ public class MakeTestDB {
 			String familyName = "Test Family " + i;
 			Family family = new Family();
 			family.setName(familyName);
-			session.save(family);
+			em.persist(family);
 		}
 		
-		Family[] families = db.getFamilies(session);
+		List<Family> families = em.createQuery("from Family").getResultList();
 		
 		/*
 		 * Make estate records
@@ -42,9 +46,9 @@ public class MakeTestDB {
 			estate.setName(estateName);
 			for (j = 0; j < 5; j++) {
 				k = (int)(Math.random() * (double)NFAMILY);
-				estate.getFamilies().add(families[k]);
+				estate.getFamilies().add(families.get(k));
 			}
-			session.save(estate);
+			em.persist(estate);
 		}
 		
 		tx.commit();
