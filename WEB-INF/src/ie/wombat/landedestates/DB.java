@@ -25,7 +25,6 @@ import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.queryParser.QueryParser;
-import org.apache.lucene.search.Hits;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.dom4j.DocumentException;
@@ -395,6 +394,7 @@ public class DB {
 		tx.commit();
 		HibernateUtil.closeSession();
 
+		/*
 		try {
 			int id = estate.getId().intValue();
 			IndexReader indexReader = IndexReader.open(indexDir);
@@ -410,6 +410,7 @@ public class DB {
 		} catch (IOException e) {
 			System.err.println(e);
 		}
+		*/
 
 		System.err.println("saveEstate(): time="
 				+ (System.currentTimeMillis() - startTime) + "ms");
@@ -615,9 +616,9 @@ public class DB {
 		
 		long t = -System.currentTimeMillis();
 		
-		IndexWriter writer = new IndexWriter(indexDir.getPath(),
-				new StandardAnalyzer(), createFlag);
-		writer.maxFieldLength = 1000000;
+		//IndexWriter writer = new IndexWriter(indexDir.getPath(),
+		//		new StandardAnalyzer(), createFlag);
+		//writer.maxFieldLength = 1000000;
 
 		
 	
@@ -626,10 +627,10 @@ public class DB {
 		
 		List<Property> houses = hsession.createQuery("from Property").list();
 		for (Property house : houses) {
-			Document doc = makeHouseDocument(house);
-			if (doc != null) {
-				writer.addDocument(doc);
-			}
+			//Document doc = makeHouseDocument(house);
+			//if (doc != null) {
+			//	writer.addDocument(doc);
+			//}
 		}
 		
 		/*
@@ -649,25 +650,25 @@ public class DB {
 		
 		List<ReferenceSource> refSources = hsession.createQuery("from ReferenceSource").list();
 		for (ReferenceSource refSource : refSources) {
-			Document doc = makeReferenceSourceDocument(refSource);
-			if (doc != null) {
-				writer.addDocument(doc);
-			}
+			//Document doc = makeReferenceSourceDocument(refSource);
+			//if (doc != null) {
+			//	writer.addDocument(doc);
+			//}
 		}
 		
 		log.info("Indexing estates...");
 		
 		List<Estate> estates = hsession.createQuery("from Estate").list();
 		for (Estate estate : estates) {
-			Document doc = makeEstateDocument(estate);
-			if (doc != null) {
-				writer.addDocument(doc);
-			}
+			//Document doc = makeEstateDocument(estate);
+			//if (doc != null) {
+			//	writer.addDocument(doc);
+			//}
 		}
 		
 		log.info("Optimizing index...");
-		writer.optimize();
-		writer.close();
+		//writer.optimize();
+		//writer.close();
 		
 		t += System.currentTimeMillis();
 		
@@ -701,7 +702,7 @@ public class DB {
 				}
 			}
 		}
-		
+		/*
 		try {
 			searcher = new IndexSearcher(IndexReader.open(indexDir));
 		} catch (FileNotFoundException e) {
@@ -713,12 +714,14 @@ public class DB {
 			e.printStackTrace();
 			throw new SearchException(e.toString());
 		}
-
+		*/
+		return categoryList;
 		
+		/*
 		Analyzer analyzer = new StopAnalyzer();
 		QueryParser qp = new QueryParser("digest", analyzer);
 		qp.setOperator(QueryParser.DEFAULT_OPERATOR_AND);
-
+		
 		Query query;
 		try {
 			query = qp.parse(q);
@@ -728,7 +731,9 @@ public class DB {
 		}
 
 		log.info("query=" + query);
+		*/
 		
+		/*
 		try {
 			Hits hits = searcher.search(query);
 			
@@ -756,120 +761,17 @@ public class DB {
 		} catch (IOException e) {
 			throw new SearchException("Error searching: " + e.toString());
 		}
+		*/
 	}
 
 	public void exportDb(Writer w) throws IOException {
 		DBExport.export(w);
 	}
 
-	private IndexWriter getIndexWriter () throws IOException {
-		
-		//		 Create index dir if it does not exist.
-		boolean createFlag = false;
-		if (!indexDir.exists()) {
-			log.info("Creating index directory at " + indexDir.getPath());
-			indexDir.mkdirs();
-			createFlag = true;
-		}
 
-		
-		//log.info("Creating index in directory " + indexDir.getPath());
-		IndexWriter indexWriter = new IndexWriter(indexDir.getPath(),
-				new StandardAnalyzer(), createFlag);
-		indexWriter.maxFieldLength = 100000;	
-		return indexWriter;
-	}
+
 	
-	/**
-	 * Create a Lucene Document object from an Estate object.
-	 * 
-	 * @param estate
-	 * @return
-	 */
-	private static Document makeEstateDocument(Estate estate) {
-		
-		if (estate.getName() == null) {
-			log.error ("Estate#" + estate.getId() + " name is null");
-			return null;
-		}
-		
-		Document doc = new Document();
-		doc.add(Field.UnIndexed("id", estate.getLuceneId()));
-		
-		/*
-		for (Family family : estate.getFamilies()) {
-			buf.append (family.getName() + " ");
-		}
-		
-		for (Property prop : estate.getProperties()) {
-			buf.append (prop.getName());
-			buf.append (" ");
-			buf.append (prop.getDescription());
-			buf.append (" ");
-			buf.append (prop.getTownland());
-			buf.append (" ");
-			buf.append (prop.getCounty());
-			buf.append (" ");	
-		}
-		*/
-		
-		/*
-		for (Reference reference : estate.getReferences()) {
-			if (reference.getSource() != null) {
-				buf.append (reference.getSource().getName() + " ");
-			}
-			buf.append (reference.getDescription());
-			buf.append (" ");
-		}
-		*/
-		
-		doc.add(Field.Text("name", estate.getName()));
-		if (estate.getDescription() != null) {
-			doc.add(Field.Text("description", estate.getDescription()));
-		}
-		String digest = estate.getName() + " " + estate.getDescription();
-		doc.add(Field.Text("digest", digest));
-		return doc;
-	}
-
-	private static Document makeHouseDocument(Property house) {
-		
-		if (house.getName() == null) {
-			log.error ("House#" + house.getId() + " name is null");
-			return null;
-		}
-		
-		Document doc = new Document();
-		doc.add(Field.UnIndexed("id", house.getLuceneId()));
-		doc.add(Field.Text("name", house.getName()));
-		if (house.getDescription() != null) {
-			doc.add(Field.Text("description", house.getDescription()));
-		}
-		
-		String digest = house.getName() + " " + house.getDescription(); 
-		doc.add(Field.Text("digest", digest));
-		
-		return doc;
-	}
 	
-	private static Document makeReferenceSourceDocument(ReferenceSource refSource) {
-		
-		if (refSource.getName() == null) {
-			log.error ("ReferenceSource#" + refSource.getId() + " name is null");
-			return null;
-		}
-		Document doc = new Document();
-		doc.add(Field.UnIndexed("id", refSource.getLuceneId()));
-		doc.add(Field.Text("name", refSource.getName()));
-		if (refSource.getDescription() != null) {
-			doc.add(Field.Text("description", refSource.getDescription()));
-		}
-		String digest = refSource.getName() + " " + refSource.getDescription(); 
-		doc.add(Field.Text("digest", digest));
-		
-		return doc;
-	}
-
 	/*
 	 * 
 	 */
