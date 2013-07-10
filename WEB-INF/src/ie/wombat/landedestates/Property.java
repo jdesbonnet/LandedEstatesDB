@@ -10,17 +10,21 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import org.apache.log4j.Logger;
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Indexed;
 
 import ie.wombat.gis.InvalidGridReferenceException;
 import ie.wombat.gis.OSIGridReference;
 import ie.wombat.imagetable.Image;
 
 @Entity
+@Indexed
 public class Property implements Indexable {
 
 	private static Logger log = Logger.getLogger(Property.class);
 	
 	@Id
+	@DocumentId
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	

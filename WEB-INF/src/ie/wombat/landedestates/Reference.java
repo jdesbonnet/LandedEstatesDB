@@ -1,8 +1,12 @@
 package ie.wombat.landedestates;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Indexed;
 
 /**
  * Reference. The Comparable interface sorts by the source name.
@@ -10,9 +14,13 @@ import javax.persistence.Id;
  * @author joe
  *
  */
-public class Reference implements Comparable {
+
+@Entity
+@Indexed
+public class Reference implements Comparable<Reference> {
 
 	@Id
+	@DocumentId
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
@@ -38,7 +46,7 @@ public class Reference implements Comparable {
 	public void setSource(ReferenceSource source) {
 		this.source = source;
 	}
-	public int compareTo(Object o) {
+	public int compareTo(Reference o) {
 		Reference ref = (Reference)o;
 		if (ref.getSource() == null || ref.getSource().getName() == null) {
 			return 0;

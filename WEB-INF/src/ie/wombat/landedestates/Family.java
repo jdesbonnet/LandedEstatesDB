@@ -9,10 +9,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Indexed;
+
 @Entity
+@Indexed
 public class Family implements Indexable {
 	
 	@Id
+	@DocumentId
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
@@ -21,7 +26,7 @@ public class Family implements Indexable {
 	private String description;
 	
 	@OneToMany
-	private Set<Estate> estates = new HashSet<Estate> ();
+	private Set<Estate> estates = new HashSet<Estate>();
 	
 	private Integer projectPhase;
 	

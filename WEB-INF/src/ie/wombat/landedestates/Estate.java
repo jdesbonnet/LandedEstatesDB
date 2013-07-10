@@ -3,28 +3,37 @@ package ie.wombat.landedestates;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
+
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Indexed;
 
 @Entity
+@Indexed
 public class Estate implements Indexable {
 	
 	@Id
+	@DocumentId
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
 	
 	private String name;
+	
 	private String description;
+	
 	private int version; // experimental
+	
+	@Column(name="project_phase")
 	private Integer projectPhase;
 	
 
-	@OneToMany
+	@OneToMany ()
 	private Set<Family> families = new HashSet<Family>();
 	
 	@OneToMany
