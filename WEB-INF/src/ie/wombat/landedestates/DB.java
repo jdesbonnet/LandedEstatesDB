@@ -129,36 +129,30 @@ public class DB {
 		return result;
 	}
 	
-	public List getEstatesByProperty(Property property) {
-		Session session = HibernateUtil.currentSession();
-		Transaction tx = session.beginTransaction();
+	public List<Estate> getEstatesByProperty(EntityManager em, Property property) {
 		String query = "from Estate as e where e.houses.id=" + property.getId();
-		List result = session.createQuery(query).list();
-		tx.commit();
-		HibernateUtil.closeSession();
-
-		System.err.println ("getEstatesByProperty(): returning " + result.size() + " records");
+		List<Estate> result =  em.createQuery(query).getResultList();
 		return result;
 	}
 	
-	public List getEstatesByLetter(Session session, String letter) {
+	public List<Estate> getEstatesByLetter(EntityManager em, String letter) {
 	
 		String query = "from Estate as e where e.name like '"+letter + "%' order by e.name";
-		List result = session.createQuery(query).list();
+		List<Estate> result = em.createQuery(query).getResultList();
 		System.err.println ("getEstatesByLetter(): returning " + result.size() + " records");
 		return result;
 	}
 	
 	
 	
-	public List getEstatesByReferenceSource (Session session, ReferenceSource refSource) {
-		return getEstatesByReferenceSource(session, refSource.getId());
+	public List<Estate> getEstatesByReferenceSource (EntityManager em, ReferenceSource refSource) {
+		return getEstatesByReferenceSource(em, refSource.getId());
 	}
-	public List getEstatesByReferenceSource (Session session, Long refSourceId) {
+	public List<Estate> getEstatesByReferenceSource (EntityManager em, Long refSourceId) {
 		
 		String query = "from Estate as e where e.references.source.id=" 
 			+ refSourceId;
-		List result = session.createQuery(query).list();
+		List<Estate> result = em.createQuery(query).getResultList();
 		
 		System.err.println ("getEstatesByReferenceSource(): returning " 
 				+ result.size() + " records");
@@ -278,94 +272,24 @@ public class DB {
 	}
 	*/
 	
-	public Property[] getProperties (Session session) {
+	public List<Property> getProperties (EntityManager em) {
 		
 		String query = "from Property as p order by p.name ";
-		List<Property> result = session.createQuery(query)
-			.setCacheable(true)
-			.list();
-		
-		Property[] ret = new Property[result.size()];
-		result.toArray(ret);
-		return ret;
-	}
-	
-	public Property[] getPropertiesByLetter (Session session, String letter) {
-		
-		String query = "from Property as p where p.name like ? order by p.name";
-		List<Property> result = session.createQuery(query)
-			.setString(0,letter + "%")
-			.setCacheable(true)
-			.list();
-		Property[] ret = new Property[result.size()];
-		result.toArray(ret);
-		return ret;
-	}
-	
-	
-	public List getByQuery (String query) {
-		Session session = HibernateUtil.currentSession();
-		Transaction tx = session.beginTransaction();
-		//String query = "from Estate where families.id=" + family.getId();
-		List result = session.createQuery(query).list();
-		tx.commit();
-		HibernateUtil.closeSession();
-
-		System.err.println ("getEstatesByFamily(): returning " + result.size() + " records");
+		List<Property> result = em.createQuery(query).getResultList();
 		return result;
 	}
-
-	/*
-	public void saveEstate (HttpSession session, Estate estate) {
-		session.getId();
-		HashMap revisionHash = (HashMap)session.getAttribute("_revhash");
-		Long revId = (Long)revisionHash.get(estate.getId());	
+	
+	public List<Property> getPropertiesByLetter (Session session, String letter) {
+		
+		String query = "from Property as p where p.name like ? order by p.name";
+		List<Property> result = em.createQuery(query)
+			.setParameter(0,letter + "%")
+			.getResultList();
+		return result;
+		
 	}
-	*/
 	
 	
-	public void saveEstate(Estate estate) {
-		long startTime = System.currentTimeMillis();
-		Session session = HibernateUtil.currentSession();
-		Transaction tx = session.beginTransaction();
-
-		session.saveOrUpdate(estate);
-	
-		session.flush();
-		saveObjectRevision(session, estate.getId(), estate.getVersion(), estate);
-		tx.commit();
-		HibernateUtil.closeSession();
-
-		/*
-		try {
-			int id = estate.getId().intValue();
-			IndexReader indexReader = IndexReader.open(indexDir);
-			try {
-				indexReader.delete(estate.getId().intValue());
-			} catch (Exception e) {
-				System.err.println ("error deleting index entry for document " + id + ": " + e);
-			}
-			indexReader.close();
-			IndexWriter indexWriter = getIndexWriter();
-			indexWriter.addDocument(makeEstateDocument(estate));
-			indexWriter.close();
-		} catch (IOException e) {
-			System.err.println(e);
-		}
-		*/
-
-		System.err.println("saveEstate(): time="
-				+ (System.currentTimeMillis() - startTime) + "ms");
-	}
-
-	public void deleteEstate(Estate estate) {
-		Session session = HibernateUtil.currentSession();
-		Transaction tx = session.beginTransaction();
-		session.delete(estate);
-		tx.commit();
-		HibernateUtil.closeSession();
-	}
-
 	public Estate getEstateRevision (Session session, Long estateId, int version) {
 		
 		String query = "from ObjectHistory where objectId=" 
