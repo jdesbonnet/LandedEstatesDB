@@ -3,8 +3,7 @@
 <%@page import="ie.wombat.imagetable.ImageDB"%>
 <%@page import="ie.wombat.imagetable.Image"%>
 <%@include file="_header.jsp"%><%
-	
-if (!user.hasWriteAccess()) {
+	if (!user.hasWriteAccess()) {
 	throw new ServletException ("No write access to this database");
 }
 	//Get all existing Barony objects and put in a hash
@@ -21,10 +20,10 @@ if (!user.hasWriteAccess()) {
 		String baronyName = house.getBarony();
 		Barony barony = baronyHash.get(baronyName);
 		if ( barony == null ) {
-			barony = new Barony();
-			barony.setName(baronyName);
-			baronyHash.put(baronyName, barony);
-			hsession.save(barony);
+	barony = new Barony();
+	barony.setName(baronyName);
+	baronyHash.put(baronyName, barony);
+	hsession.save(barony);
 		}
 		barony.getHouses().add(house);
 	}
@@ -36,33 +35,31 @@ if (!user.hasWriteAccess()) {
 		// Calculate centroid of barony
 		n=0; slat=0; slon=0;
 		for (Property house : b.getHouses()) {
-			if (house.getLatitude()!=null && house.getLongitude() != null) {
-				lat = house.getLatitude();
-				lon = house.getLongitude();
-				if (lat < 51.3 || lat > 55.0 || lon < -10.5 || lon > -6) {
-					out.print("Warning: House#" + house.getId() 
-						+ " outside allowed range lat="
-						+ lat + " lon=" + lon + "<br />");
-				}
-				
-				slat += house.getLatitude();
-				slon += house.getLongitude();
-				n++;
-			}
+	if (house.getLatitude()!=null && house.getLongitude() != null) {
+		lat = house.getLatitude();
+		lon = house.getLongitude();
+		if (lat < 51.3 || lat > 55.0 || lon < -10.5 || lon > -6) {
+			out.print("Warning: House#" + house.getId() 
+				+ " outside allowed range lat="
+				+ lat + " lon=" + lon + "<br />");
+		}
+		
+		slat += house.getLatitude();
+		slon += house.getLongitude();
+		n++;
+	}
 		}
 		slat /= n;
 		slon /= n;
 		if (n > 0) {
-			b.setLatitude(slat);
-			b.setLongitude(slon);
+	b.setLatitude(slat);
+	b.setLongitude(slon);
 		}
 		
 	}
 	
 	
 	tx.commit();
-	HibernateUtil.closeSession();
-	
-
+	HibernateUtilOld.closeSession();
 %>
 all done!

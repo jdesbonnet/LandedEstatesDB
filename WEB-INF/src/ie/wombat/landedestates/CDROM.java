@@ -52,7 +52,7 @@ public class CDROM {
 		}
 
 		
-		Session hsession = HibernateUtil.currentSession();
+		Session hsession = HibernateUtilOld.currentSession();
 		org.hibernate.Transaction tx = hsession.beginTransaction();
 
 		log.info ("Query families");
@@ -185,7 +185,7 @@ public class CDROM {
 		fr.close();
 		
 		tx.commit();
-		HibernateUtil.closeSession();
+		HibernateUtilOld.closeSession();
 		
 	}
 

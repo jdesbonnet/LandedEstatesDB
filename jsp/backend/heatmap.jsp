@@ -54,30 +54,30 @@ private String getRGB(float t) {
 		h = (int) ((r.getNeLatitude() - r.getSwLatitude()) * yscale);
 
 		if (w > 40 || h > 40) {
-			continue;
+	continue;
 		}
 		
 		if ( x < 0) {
-			x = 0;
+	x = 0;
 		}
 		if (y < 0) {
-			y = 0;
+	y = 0;
 		}
 		xe = x + w;
 		if (xe >= N) {
-			xe = N-1;
+	xe = N-1;
 		}
 		ye = y + h;
 		if (ye >= N) {
-			ye = N-1;
+	ye = N-1;
 		}
 		for (j = y; j < ye; j++) {
-			for (i = x; i < xe; i++) {
-				hm[j][i]++;
-				if (hm[j][i]>max) {
-					max = hm[j][i];
-				}
-			}
+	for (i = x; i < xe; i++) {
+		hm[j][i]++;
+		if (hm[j][i]>max) {
+			max = hm[j][i];
+		}
+	}
 		}
 		//out.write ("<rect x1='" + x1 + "' y1='" + y1 + "' width='" + w + "' height='" + h + "' ");
 		//out.write (" fill='none' stroke='black' fill-opacity='0.01' ");
@@ -85,17 +85,17 @@ private String getRGB(float t) {
 	}
 	for (j = 0; j < N; j++) {
 		for (i = 0; i < N; i++) {
-			
-			out.write ("<rect x='" + i*4 + "' y='" + (1000-j*5) + "' width='4' height='5' ");
-			out.write (" stroke='none'  ");
-			out.write (" fill='" + getRGB((float)hm[j][i]/(float)max) + "' ");
-			out.write (" />\n");
+	
+	out.write ("<rect x='" + i*4 + "' y='" + (1000-j*5) + "' width='4' height='5' ");
+	out.write (" stroke='none'  ");
+	out.write (" fill='" + getRGB((float)hm[j][i]/(float)max) + "' ");
+	out.write (" />\n");
 		}
 	}
 %>
 </svg>
-<% 
-//out.write ("max=" + max);
+<%
+	//out.write ("max=" + max);
 	tx.commit();
-	HibernateUtil.closeSession();
+	HibernateUtilOld.closeSession();
 %>

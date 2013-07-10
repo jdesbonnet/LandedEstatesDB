@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 
 
 import org.apache.log4j.Logger;
@@ -80,8 +82,8 @@ public class DB {
 		return instance;
 	}
 
-	public Connection getConnection() {
-		return HibernateUtil.currentSession().connection();
+	public EntityManager getConnection() {
+		return HibernateUtil.getEntityManager();
 	}
 	
 	public File getIndexDir () {
@@ -91,27 +93,6 @@ public class DB {
 		indexDir = d;
 	}
 
-	/**
-	 * @deprecated
-	 * @param session
-	 * @return
-	 */
-	public Family[] getFamilies(Session session) {
-
-		long startTime = System.currentTimeMillis();
-
-		String query = "from Family order by name";
-		List result = session.createQuery(query)
-			.setCacheable(true)
-			.list();
-		
-		System.err.println("getFamilies(): duration = "
-				+ (System.currentTimeMillis() - startTime));
-
-		Family[] ret = new Family[result.size()];
-		result.toArray(ret);
-		return ret;
-	}
 	
 	/**
 	 * Return String array of county names.
@@ -121,68 +102,29 @@ public class DB {
 		return counties;
 	}
 
-	/**
-	 * @deprecated
-	 * @param session
-	 * @param id
-	 * @return
-	 */
-	public Family getFamily (Session session, Long id) {
-		return (Family) session.load(Family.class, id);
-	}
-
-	public List<Family> getFamiliesByLetter(Session session, String letter) {
+	
+	public List<Family> getFamiliesByLetter(EntityManager em, String letter) {
 		long time = -System.currentTimeMillis();
 		String query = "from Family where name like ? order by name";
-		List<Family> result = session
+		List<Family> result = em
 			.createQuery(query)
-			.setString(0, letter+"%")
-			.setCacheable(true)
-			.list();
+			.setParameter(0, letter+"%")
+			//.setCacheable(true)
+			.getResultList();
 		time += System.currentTimeMillis();
 		System.err.println ("getFamiliesByLetter(): returning " 
 				+ result.size() + " records (" + time + "ms)");
 		return result;
 	}
 	
-	
-	public void saveFamily(Session session, Family family) {
-		
-		session.save(family);
-		saveObjectRevision(session, family.getId(), 0, family);
-	}
-	
-
-	/**
-	 * @deprecated
-	 * @param session
-	 * @return
-	 */
-	public Estate[] getEstates(Session session) {
-
-		long startTime = System.currentTimeMillis();
-
-		
-		String query = "from Estate order by name";
-		log.info(query);
-		List<Estate> result = session.createQuery(query)
-			.setCacheable(true)
-			.list();
-		
-		System.err.println("getEstates(): duration = "
-				+ (System.currentTimeMillis() - startTime));
-
-		Estate[] ret = new Estate[result.size()];
-		result.toArray(ret);
-		return ret;
-	}
 
 
-	public List<Estate> getEstatesByFamily(Session session, Family family) {
+
+	public List<Estate> getEstatesByFamily(EntityManager em, Family family) {
 		String query = "from Estate as e "
 			+ " inner join fetch e.families as family"
 			+ " where family.id=" + family.getId();
-		List<Estate> result = session.createQuery(query).list();
+		List<Estate> result = em.createQuery(query).getResultList();
 		System.err.println ("getEstatesByFamily(): returning " + result.size() + " records");
 		return result;
 	}

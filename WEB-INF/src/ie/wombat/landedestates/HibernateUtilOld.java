@@ -15,9 +15,9 @@ import org.hibernate.cfg.Configuration;
  * @author joe
  *  
  */
-public class HibernateUtil {
+public class HibernateUtilOld {
 
-	private static Logger log = Logger.getLogger(HibernateUtil.class);
+	private static Logger log = Logger.getLogger(HibernateUtilOld.class);
 	
 	private static final SessionFactory sessionFactory;
 

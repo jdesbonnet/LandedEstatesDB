@@ -27,11 +27,11 @@ public class RequestListener implements ServletRequestListener  {
 			HttpServletRequest request = (HttpServletRequest) arg0.getServletRequest();
 			String contextPath = request.getContextPath();
 			
-			if (HibernateUtil.isSessionOpen()) {
-				Session hsession = HibernateUtil.currentSession();
+			if (HibernateUtilOld.isSessionOpen()) {
+				Session hsession = HibernateUtilOld.currentSession();
 				Transaction tx = hsession.getTransaction();
 				tx.commit();
-				HibernateUtil.closeSession();
+				HibernateUtilOld.closeSession();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -15,7 +15,7 @@ public class MakeTestDB {
 	
 	public void makeTestDb () {
 		
-		Session session = HibernateUtil.currentSession();
+		Session session = HibernateUtilOld.currentSession();
 		Transaction tx = session.beginTransaction();
 		
 		DB db = DB.getInstance();
@@ -48,7 +48,7 @@ public class MakeTestDB {
 		}
 		
 		tx.commit();
-		HibernateUtil.closeSession();
+		HibernateUtilOld.closeSession();
 		
 	}
 }

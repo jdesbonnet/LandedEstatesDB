@@ -2,8 +2,7 @@
 <%@page import="ie.wombat.imagetable.ImageDB"%>
 <%@page import="ie.wombat.imagetable.Image"%>
 <%@include file="_header.jsp"%><%
-	
-if (!user.hasWriteAccess()) {
+	if (!user.hasWriteAccess()) {
 	throw new ServletException ("No write access to this database");
 }
 
@@ -17,30 +16,30 @@ if (!user.hasWriteAccess()) {
 	}
 	
 	tx.commit();
-	HibernateUtil.closeSession();
+	HibernateUtilOld.closeSession();
 	
 	iter = allImageIds.iterator();
 	
 	while (iter.hasNext()) {
 		
-			hsession = HibernateUtil.currentSession();
-			tx = hsession.beginTransaction();
-			
-			Long id = (Long)iter.next();
-			//Image image = (Image)iter.next();
-			Image image = (Image)hsession.load(imageEntityName,id);
-			
-			out.write ("processing image #" + image.getId()
-					+ image.getCaption()
-					+ "...");
-			out.flush();
-			
-			//tx = hsession.beginTransaction();
-			ImageDB.getInstance(imageEntityName).rescaleImage(hsession, image);
-			tx.commit();
-			HibernateUtil.closeSession();
-			out.write ("done.<br>\n");
-			out.flush();
+	hsession = HibernateUtilOld.currentSession();
+	tx = hsession.beginTransaction();
+	
+	Long id = (Long)iter.next();
+	//Image image = (Image)iter.next();
+	Image image = (Image)hsession.load(imageEntityName,id);
+	
+	out.write ("processing image #" + image.getId()
+			+ image.getCaption()
+			+ "...");
+	out.flush();
+	
+	//tx = hsession.beginTransaction();
+	ImageDB.getInstance(imageEntityName).rescaleImage(hsession, image);
+	tx.commit();
+	HibernateUtilOld.closeSession();
+	out.write ("done.<br>\n");
+	out.flush();
 	}
 %>
 all done!

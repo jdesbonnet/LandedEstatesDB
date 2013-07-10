@@ -37,7 +37,7 @@ public class DBExport {
 	public static void export (Writer w) throws IOException {
 		
 		Document doc = DocumentHelper.createDocument();
-		Session session = HibernateUtil.currentSession();
+		Session session = HibernateUtilOld.currentSession();
 		Session dom4jSession = session.getSession(EntityMode.DOM4J);
 		Transaction tx = session.beginTransaction();
 		String query = "from Estate";
@@ -67,7 +67,7 @@ public class DBExport {
 		
 		XMLEncoder e = new XMLEncoder(out);
 	
-		Session session = HibernateUtil.currentSession();
+		Session session = HibernateUtilOld.currentSession();
 		Transaction tx = session.beginTransaction();
 		
 		writeQuery (session, e, "from Family");
@@ -79,7 +79,7 @@ public class DBExport {
 		e.close();
 		
 		tx.commit();
-		HibernateUtil.closeSession();
+		HibernateUtilOld.closeSession();
 		
 		time += System.currentTimeMillis();
 		
@@ -94,12 +94,12 @@ public class DBExport {
 	}
 	public static String getEstateAsXML (long id) {
 	
-		Session session = HibernateUtil.currentSession();
+		Session session = HibernateUtilOld.currentSession();
 		Session dom4jSession = session.getSession(EntityMode.DOM4J);
 		Transaction tx = dom4jSession.beginTransaction();
 		Element e = (Element)dom4jSession.load(Estate.class, new Long(id));
 		tx.commit();
-		HibernateUtil.closeSession();	
+		HibernateUtilOld.closeSession();	
 		return e.asXML();
 	}
 }
