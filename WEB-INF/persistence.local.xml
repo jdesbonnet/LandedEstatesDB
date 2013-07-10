@@ -1,0 +1,63 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+   version="1.0">
+   
+   <!--  this file is to be copied to ${APP_DIR}/WEB-INF/classes/META-INF/persistence.xml -->
+   
+   <!--  removed transaction-type="JTA" -->
+   <persistence-unit name="ie.wombat.landedestates" >
+   
+		<description>
+            Persistence unit for Landed Estates Database Application
+        </description>
+   
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		 		
+ 		 		 		
+		<properties>
+
+			<!-- The following properties can only be used in a SE environment where no 
+				datasource/JNDI is available: -->		
+			
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+
+        	         	
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/landedestates?CharSet=utf8&amp;useUnicode=true&amp;characterEncoding=UTF-8" />
+            <property name="javax.persistence.jdbc.user" value="root" />
+            <property name="javax.persistence.jdbc.password" value="" />
+                      
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+			<property name="hibernate.connection.zeroDateTimeBehavior" value="convertToNull" />
+
+			<!--  Disable in production -->
+			<!-- 
+            <property name="hibernate.hbm2ddl.auto" value="update" />
+			-->
+			
+ 			<!-- http://blog.hpxn.net/2009/02/05/using-c3p0-and-hibernate-3/ -->
+			<property name="hibernate.connection.provider_class"
+				value="org.hibernate.connection.C3P0ConnectionProvider" /> 
+			<property name="hibernate.c3p0.min_size"
+				value="2"/>
+			<property name="hibernate.c3p0.max_size"
+				value="10"/>
+			<property name="hibernate.c3p0.timeout"
+				value="300"/>
+			<property name="hibernate.c3p0.max_statements"
+				value="50"/>
+			<property name="hibernate.c3p0.idle_test_period"
+				value="3000"/>
+
+			<!-- Hibernate Search -->
+			<property name="hibernate.search.default.directory_provider"
+				value="org.hibernate.search.store.FSDirectoryProvider" />
+			<property name="hibernate.search.indexing_strategy" 
+				value="manual" />
+			<property name="hibernate.search.default.indexBase" 
+				value="/var/tmp/ledb/searchindex" />
+
+		
+		</properties>
+	</persistence-unit>
+</persistence>

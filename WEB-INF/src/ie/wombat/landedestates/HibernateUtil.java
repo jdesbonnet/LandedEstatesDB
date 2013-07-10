@@ -1,60 +1,46 @@
 package ie.wombat.landedestates;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 import org.apache.log4j.Logger;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 
-/*
- * Created on May 22, 2005
- *
- 
- */
-
-/**
- * @author joe
- *  
- */
 public class HibernateUtil {
 
 	private static Logger log = Logger.getLogger(HibernateUtil.class);
-	
-	private static final SessionFactory sessionFactory;
 
-	static {
+	private static EntityManagerFactory emf = Persistence
+			.createEntityManagerFactory("ie.wombat.landedestates");
+	// private static EntityManager entityManager = buildEntityManager();
+	public static final ThreadLocal<EntityManager> entityManager = new ThreadLocal<EntityManager>();
+
+	private static EntityManager buildEntityManager() {
 		try {
-			// Create the SessionFactory
-			sessionFactory = new Configuration().configure()
-					.buildSessionFactory();
+			emf = Persistence.createEntityManagerFactory("ie.wombat.videoedit");
+			EntityManager em = emf.createEntityManager();
+
+			log.debug("Created new EntityManagerFactory " + emf);
+
+			return em;
+
 		} catch (Throwable ex) {
 			// Make sure you log the exception, as it might be swallowed
-			log.error("Initial SessionFactory creation failed.", ex);
-			ex.printStackTrace();
+			System.err.println("Initial SessionFactory creation failed." + ex);
 			throw new ExceptionInInitializerError(ex);
 		}
 	}
 
-	public static final ThreadLocal session = new ThreadLocal();
+	public static EntityManager getEntityManager() {
 
-	public static Session currentSession() {
-		Session s = (Session) session.get();
+		EntityManager em = (EntityManager) entityManager.get();
 		// Open a new Session, if this Thread has none yet
-		if (s == null) {
-			s = sessionFactory.openSession();
-			session.set(s);
+		if (em == null || !em.isOpen()) {
+			em = emf.createEntityManager();
+			// em.getTransaction().begin();
+			entityManager.set(em);
 		}
-		return s;
-	}
 
-	public static void closeSession() {
-		Session s = (Session) session.get();
-		if (s != null)
-			s.close();
-		session.set(null);
+		return em;
 	}
-	
-	public static boolean isSessionOpen () {
-		return ( session.get() != null );
-	}
-	
 }
