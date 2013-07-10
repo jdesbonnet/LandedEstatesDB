@@ -55,7 +55,7 @@
 </servlet-mapping>
 
 <listener>
-<listener-class>ie.wombat.landedestates.RequestListener</listener-class>
+<listener-class>ie.wombat.landedestates.EndOfRequestCleanup</listener-class>
 </listener>
 
 <!--
