@@ -12,6 +12,7 @@ import="java.text.DecimalFormat"
 import="java.sql.Connection"
 import="java.sql.ResultSet"
 import="java.sql.SQLException"
+import="javax.persistence.EntityManager"
 import="ie.wombat.template.*"
 import="ie.wombat.ui.Tab"
 import="ie.wombat.landedestates.*"
@@ -129,6 +130,12 @@ private static Double degPerMLat =  new Double (180 /  (Math.PI * re));
 				+ latlonf.format(prop.getLongitude());
 	}
 %><%
+
+	// Create a transaction
+	EntityManager em = HibernateUtil.getEntityManager();
+	em.getTransaction().begin();
+
+
 	TemplateRegistry templates= TemplateRegistry.getInstance();
   
   	/*
@@ -202,10 +209,6 @@ private static Double degPerMLat =  new Double (180 /  (Math.PI * re));
 	//context.put ("db",db);
 	context.put ("counties",db.getCounties());
 	context.put ("serverName", request.getServerName());
-	
-	org.hibernate.Session hsession = HibernateUtilOld.currentSession();
-	org.hibernate.Transaction tx = hsession.beginTransaction();
-	context.put ("hsession",hsession);
 	
 	Integer phase=null;
 	

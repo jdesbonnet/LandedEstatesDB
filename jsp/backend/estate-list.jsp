@@ -11,14 +11,14 @@
 	if ("_all".equals(letter)) {
 		List<Estate> estates;
 		if (phase == null || phase == 0) {
-			estates = hsession.createQuery("from Estate order by name")
-			.setCacheable(true)
-			.list();
+			estates = em.createQuery("from Estate order by name")
+			//.setCacheable(true)
+			.getResultList();
 		} else {
-			estates = hsession.createQuery("from Estate where projectPhase=:phase order by name")
+			estates = em.createQuery("from Estate where projectPhase=:phase order by name")
 			.setInteger("phase",phase)
-			.setCacheable(true)
-			.list();
+			.//setCacheable(true)
+			.getResultList();
 		}
 		context.put ("estates",estates);
 	}	
