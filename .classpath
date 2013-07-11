@@ -29,5 +29,6 @@
 	<classpathentry kind="lib" path="WEB-INF/lib/ehcache-1.1.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/lucene-core-3.1.0.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/hibernate-jpa-2.0-api-1.0.0.Final.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/hibernate-search-3.4.1.Final.jar"/>
 	<classpathentry kind="output" path="WEB-INF/classes"/>
 </classpath>
