@@ -7,7 +7,5 @@
 		response.sendRedirect("login.jsp?message=auth+fail");
 		return;
 	}
-	session.setAttribute("_user",user);
-	System.err.println ("user=" + user);
 	response.sendRedirect("estate-list.jsp");
 %>
