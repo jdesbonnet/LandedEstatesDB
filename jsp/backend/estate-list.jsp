@@ -12,12 +12,10 @@
 		List<Estate> estates;
 		if (phase == null || phase == 0) {
 			estates = em.createQuery("from Estate order by name")
-			//.setCacheable(true)
 			.getResultList();
 		} else {
 			estates = em.createQuery("from Estate where projectPhase=:phase order by name")
-			.setInteger("phase",phase)
-			.//setCacheable(true)
+			.setParameter("phase",phase)
 			.getResultList();
 		}
 		context.put ("estates",estates);
@@ -27,16 +25,14 @@
 
 		List<Estate> estates;
 		if (phase == null || phase == 0) {
-			estates = hsession.createQuery("from Estate where name like :letter order by name")
-			.setString("letter",letter + "%")
-			.setCacheable(true)
-			.list();
+			estates = em.createQuery("from Estate where name like :letter order by name")
+			.setParameter("letter",letter + "%")
+			.getResultList();
 		} else {
-			estates = hsession.createQuery("from Estate where name like :letter and projectPhase=:phase order by name")
-			.setString("letter",letter + "%")
-			.setInteger("phase",phase)
-			.setCacheable(true)
-			.list();
+			estates = em.createQuery("from Estate where name like :letter and projectPhase=:phase order by name")
+			.setParameter("letter",letter + "%")
+			.setParameter("phase",phase)
+			.getResultList();
 		}
 		context.put ("estates",estates);
 		
