@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Indexed;
@@ -25,6 +26,8 @@ public class Reference implements Comparable<Reference> {
 	private Long id;
 	
 	private String description;
+	
+	@ManyToOne
 	private ReferenceSource source;
 	
 	public String getDescription() {

@@ -1,8 +1,14 @@
 package ie.wombat.landedestates;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class ReferenceCategory {
 
+	@Id
 	private Long id;
+	
 	private String name;
 	public Long getId() {
 		return id;

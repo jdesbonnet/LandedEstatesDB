@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import org.apache.log4j.Logger;
 import org.hibernate.search.annotations.DocumentId;
@@ -44,7 +45,8 @@ public class Property implements Indexable {
 	private int easting;
 	private int northing;
 	
-	@OneToMany
+	//@OneToMany
+	@Transient
 	private Set<Image> images = new HashSet<Image>();
 	
 	private Integer projectPhase;
