@@ -76,6 +76,8 @@
 			<fileset dir="${src.dir}" excludes="**/*.java,**/*.class"/>
 		</copy>
 		<copy file="./WEB-INF/log4j.properties" todir="./WEB-INF/classes" />
+
+<!--
 		<copy file="./WEB-INF/hibernate.${serverType}.properties" tofile="./WEB-INF/classes/hibernate.properties" />
 		<copy file="./WEB-INF/hibernate.${serverType}.cfg.xml" tofile="./WEB-INF/hibernate.cfg.xml" />
 		<copy file="./WEB-INF/hibernate.${serverType}.cfg.xml" tofile="./WEB-INF/classes/hibernate.cfg.xml" />
@@ -84,6 +86,7 @@
 				<include name="*.hbm.xml" />
 			</fileset>
 		</copy>
+-->
 
 		<copy file="./WEB-INF/persistence.${serverType}.xml" tofile="./WEB-INF/classes/META-INF/persistence.xml" />
 		
