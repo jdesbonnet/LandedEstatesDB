@@ -8,13 +8,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Indexed;
 
 @Entity
 @Indexed
+@Table(name="estate")
 public class Estate implements Indexable {
 	
 	@Id
@@ -33,14 +38,18 @@ public class Estate implements Indexable {
 	private Integer projectPhase;
 	
 
-	@OneToMany ()
+	@ManyToMany ()
+	@JoinTable(name="estate_families",
+		joinColumns=@JoinColumn(name="estate_id"),
+		inverseJoinColumns = @JoinColumn(name="family_id")
+	)
 	private Set<Family> families = new HashSet<Family>();
 	
-	@OneToMany
-	private Set<Property> houses = new HashSet<Property>();
+	//@OneToMany
+	//private Set<Property> houses = new HashSet<Property>();
 	
-	@OneToMany
-	private Set<Reference> references = new HashSet<Reference>();
+	//@OneToMany
+	//private Set<Reference> references = new HashSet<Reference>();
 	
 	public Long getId() {
 		return id;
@@ -69,28 +78,6 @@ public class Estate implements Indexable {
 		this.families = families;
 	}
 	
-	
-	public Set<Reference> getReferences() {
-		return references;
-	}
-	public void setReferences(Set<Reference> references) {
-		this.references = references;
-	}
-	
-	public Set<Property> getProperties() {
-		return houses;
-	}
-	/*
-	public void setProperties(Set properties) {
-		this.properties = properties;
-	}
-	*/
-	public Set<Property> getHouses() {
-		return houses;
-	}
-	public void setHouses (Set<Property> houses) {
-		this.houses = houses;
-	}
 	
 	public int getVersion() {
 		return version;
