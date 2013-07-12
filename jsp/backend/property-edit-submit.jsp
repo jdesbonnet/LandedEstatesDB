@@ -2,19 +2,13 @@
 import="ie.wombat.gis.convert.OSILLAConvert"
 %><%@include file="_header.jsp"%><%
 
-if (!user.hasWriteAccess()) {
-	throw new ServletException ("No write access to this database");
-}
-
-
-	Property property;
-	try {
-		Long id = new Long(request.getParameter("id"));
-		property = (Property)hsession.load(Property.class, id);
-	} catch (Exception e) {
-		throw new ServletException (e.toString());
+	if (!user.hasWriteAccess()) {
+		throw new ServletException ("No write access to this database");
 	}
-	
+
+	Long id = new Long(request.getParameter("id"));
+	Property property = (Property)em.find(Property.class, id);
+
 	property.setName(request.getParameter("name"));
 	property.setDescription(request.getParameter("description"));
 	
