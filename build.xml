@@ -20,7 +20,7 @@
 	<property name="archive.dir" value="${dist.dir}/${name}-${version}"/>
 	<property name="warfile" value="${build.dir}/${name}.war" />
 
-	<property name="serverType" value="staging" />
+	<property name="db" value="local" />
 
 	<property name="classpath" value=""/>
 	<selector id="archive.src.selector">
@@ -78,9 +78,9 @@
 		<copy file="./WEB-INF/log4j.properties" todir="./WEB-INF/classes" />
 
 <!--
-		<copy file="./WEB-INF/hibernate.${serverType}.properties" tofile="./WEB-INF/classes/hibernate.properties" />
-		<copy file="./WEB-INF/hibernate.${serverType}.cfg.xml" tofile="./WEB-INF/hibernate.cfg.xml" />
-		<copy file="./WEB-INF/hibernate.${serverType}.cfg.xml" tofile="./WEB-INF/classes/hibernate.cfg.xml" />
+		<copy file="./WEB-INF/hibernate.${db}.properties" tofile="./WEB-INF/classes/hibernate.properties" />
+		<copy file="./WEB-INF/hibernate.${db}.cfg.xml" tofile="./WEB-INF/hibernate.cfg.xml" />
+		<copy file="./WEB-INF/hibernate.${db}.cfg.xml" tofile="./WEB-INF/classes/hibernate.cfg.xml" />
 		<copy todir="./WEB-INF/classes">
 			<fileset dir="./WEB-INF">
 				<include name="*.hbm.xml" />
@@ -88,7 +88,7 @@
 		</copy>
 -->
 
-		<copy file="./WEB-INF/persistence.${serverType}.xml" tofile="./WEB-INF/classes/META-INF/persistence.xml" />
+		<copy file="./WEB-INF/persistence.${db}.xml" tofile="./WEB-INF/classes/META-INF/persistence.xml" />
 		
 		<copy todir="./WEB-INF/classes">
 			<fileset dir="${build.classes}" />
