@@ -3,11 +3,13 @@ package ie.wombat.landedestates;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.apache.log4j.Logger;
@@ -20,6 +22,7 @@ import ie.wombat.imagetable.Image;
 
 @Entity
 @Indexed
+@Table(name="property")
 public class Property implements Indexable {
 
 	private static Logger log = Logger.getLogger(Property.class);
@@ -32,14 +35,24 @@ public class Property implements Indexable {
 	private String name;
 	private String description;
 	private String townland;
+	
+	@Column(name="civil_parish")
 	private String civilParish;
+	
 	private String barony;
 	private String ded;
 	private String plu;
 	private String county;
+	
+	@Column(name="osi_grid_ref")
 	private String gridReference;
+	
+	@Column(name="os_sheet")
 	private String osSheet;
+	
+	@Column(name="discovery_map")
 	private String discoveryMap;
+	
 	private Double latitude;
 	private Double longitude;
 	private int easting;
@@ -49,6 +62,7 @@ public class Property implements Indexable {
 	@Transient
 	private Set<Image> images = new HashSet<Image>();
 	
+	@Column(name="project_phase")
 	private Integer projectPhase;
 	
 	

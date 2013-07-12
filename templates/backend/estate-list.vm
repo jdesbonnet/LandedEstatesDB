@@ -51,7 +51,7 @@
 </td>
 
 <td>
-#foreach ($property in $estate.getProperties())
+#foreach ($property in $estate.getHouses())
 <a href="property-show.jsp?id=$property.getId()&estate_id=$estate.getId()">$property.getName()</a>
 &nbsp; &nbsp;
 #end
