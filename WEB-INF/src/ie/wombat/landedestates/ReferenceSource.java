@@ -1,12 +1,15 @@
 package ie.wombat.landedestates;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="reference_source")
 public class ReferenceSource implements Indexable {
 
 	@Id
@@ -22,8 +25,13 @@ public class ReferenceSource implements Indexable {
 	private ReferenceCategory category;
 	//private int categoryId;
 	
+	@Column(name="contact_person")
 	private String contactPerson;
+	
+	@Column(name="contact_telephone")
 	private String contactTelephone;
+	
+	@Column(name="contact_email")
 	private String contactEmail;
 	
 	private String url;

@@ -1,21 +1,15 @@
 <%@include file="_header.jsp"%><%
 
-	Property property;
-	try {
-		Long id = new Long(request.getParameter("id"));
-		property = (Property)hsession.load(Property.class,id);
-	} catch (Exception e) {
-		out.println ("error: " + e);
-		return;
-	}
+	Long houseId = new Long(request.getParameter("id"));
+	Property house = (Property)em.find(Property.class, houseId);
+	context.put ("property", house);
+
 	context.put ("tabId","houses");
 	
-	String query = "from Estate as e where e.houses.id=" + property.getId();
-	System.err.println (query);
-	List estates = hsession.createQuery(query).list();
+	String query = "from Estate as e where e.houses.id=" + house.getId();
+	List<Property> estates = em.createQuery(query).getResultList();
 	context.put ("estates",estates);
 	
-	context.put ("property", property);
 	
 	templates.merge ("/backend/property-show.vm",context,out);
 %>

@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Indexed;
@@ -18,6 +19,7 @@ import org.hibernate.search.annotations.Indexed;
 
 @Entity
 @Indexed
+@Table(name="reference")
 public class Reference implements Comparable<Reference> {
 
 	@Id

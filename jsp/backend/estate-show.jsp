@@ -11,29 +11,20 @@
 	// Reference to this JSP for access to static methods defined above
 	context.put ("jsp",this);
 	
-	Estate estate;
-	try {
-		Long id = new Long (request.getParameter("id"));
-		estate = (Estate)hsession.load(Estate.class,id);
-	} catch (NumberFormatException e) {
-		throw new ServletException ("invalid id");
-	}
+	Long estateId = new Long(request.getParameter("id"));
+	Estate estate = (Estate)em.find(Estate.class, estateId);
 	context.put ("estate", estate);
 	
 	/*
 	 * Sort out reference categories into a HashMap of Lists
 	 */
 	
-	HashMap referenceCategoryHash = new HashMap();
+	HashMap<String,List<Reference>> referenceCategoryHash = new HashMap<String,List<Reference>>();
 	
-	List problemReferences = new ArrayList();
+	List<Reference> problemReferences = new ArrayList<Reference>();
 	context.put ("problemReferences", problemReferences);
 	
-	Iterator iter = estate.getReferences().iterator();
-	
-	while (iter.hasNext()) {
-		Reference ref = (Reference)iter.next();
-		
+	for (Reference ref : estate.getReferences()) {		
 	
 		ReferenceCategory refCat;
 		if (ref.getSource() == null || ref.getSource().getCategory() == null
@@ -45,9 +36,9 @@
 			refCat = ref.getSource().getCategory();
 		}
 		
-		List list = (List)referenceCategoryHash.get(refCat.getName());
+		List<Reference> list = referenceCategoryHash.get(refCat.getName());
 		if (list == null) {
-			list = new ArrayList();
+			list = new ArrayList<Reference>();
 			referenceCategoryHash.put (refCat.getName(), list);
 		}
 		list.add(ref);
@@ -55,13 +46,18 @@
 	}
 	
 	// Sort the reference lists
-	iter = referenceCategoryHash.keySet().iterator();
+	for (List<Reference> list : referenceCategoryHash.values()) {
+		java.util.Collections.sort(list);
+	}
+	
+	/*
+	Iterator iter = referenceCategoryHash.keySet().iterator();
 	while (iter.hasNext()) {
 		String key = (String)iter.next();
 		List list = (List)referenceCategoryHash.get(key);
 		java.util.Collections.sort(list);
 	}
-	
+	*/
 	context.put ("tabId","estates");
 	
 	context.put ("referenceCategories",referenceCategoryHash);
@@ -69,7 +65,6 @@
 	
 	
 	//context.put ("revisionHistory",db.getRevisionHistory(Estate.class.getName(), estate.getId()));
-	
 	
 	
 	templates.merge ("/backend/estate-show.vm",context,out);
