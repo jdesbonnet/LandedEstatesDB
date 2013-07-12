@@ -47,13 +47,17 @@ public class Estate implements Indexable {
 	
 	@OneToMany
 	@JoinTable(name="estate_properties",
-	joinColumns=@JoinColumn(name="estate_id"),
-	inverseJoinColumns = @JoinColumn(name="property_id")
+		joinColumns=@JoinColumn(name="estate_id"),
+		inverseJoinColumns = @JoinColumn(name="property_id")
 	)
 	private Set<Property> houses = new HashSet<Property>();
 	
-	//@OneToMany
-	//private Set<Reference> references = new HashSet<Reference>();
+	@OneToMany
+	@JoinTable(name="estate_references",
+		joinColumns=@JoinColumn(name="estate_id"),
+		inverseJoinColumns = @JoinColumn(name="reference_id")
+	)
+	private Set<Reference> references = new HashSet<Reference>();
 	
 	public Long getId() {
 		return id;
@@ -82,6 +86,13 @@ public class Estate implements Indexable {
 		this.families = families;
 	}
 	
+	
+	public Set<Reference> getReferences() {
+		return references;
+	}
+	public void setReferences(Set<Reference> references) {
+		this.references = references;
+	}
 	
 	public int getVersion() {
 		return version;
