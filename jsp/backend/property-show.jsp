@@ -6,7 +6,10 @@
 
 	context.put ("tabId","houses");
 	
-	String query = "from Estate as e where e.houses.id=" + house.getId();
+	String query = "from Estate as e "
+			+ " inner join fetch e.houses as house"
+			+ " where house.id=" + house.getId();
+	
 	List<Property> estates = em.createQuery(query).getResultList();
 	context.put ("estates",estates);
 	
