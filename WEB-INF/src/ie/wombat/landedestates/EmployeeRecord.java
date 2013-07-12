@@ -1,14 +1,24 @@
 package ie.wombat.landedestates;
 
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-
+@Entity
+@Table(name="employee_record")
 public class EmployeeRecord implements Indexable {
+	
+	@Id
 	private Long id;
+	
+	//@Column(columnDefinition="text")
+	@Column(length=128000) // portable
 	private String description;
 	
-	private Property house;
+	//@ManyToOne
+	//private Property house;
 	
 	
 	public Long getId() {

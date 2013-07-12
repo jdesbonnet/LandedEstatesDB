@@ -9,10 +9,16 @@
 	context.put ("alphabet",alphabet);
 	
 	if ("_all".equals(letter)) {
-		context.put ("families",db.getFamilies(hsession));
+		context.put ("families",
+				em.createQuery("from Family order by name")
+				.getResultList());
 	}	
 	if (letter != null && letter.length() == 1) {
-		context.put("families",db.getFamiliesByLetter(hsession,letter));
+		context.put("families",
+				em.createQuery("from Family where name like :letter")
+				.setParameter("letter","" + letter + "%")
+				.getResultList()
+				);
 	} 
 	
 	templates.merge ("/backend/family-list.vm",context,out);

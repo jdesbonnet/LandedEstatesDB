@@ -33,8 +33,8 @@ public class Family implements Indexable {
 	
 	@ManyToMany
 	@JoinTable(name="estates_families",
-	joinColumns=@JoinColumn(name="estate_id"),
-	inverseJoinColumns = @JoinColumn(name="family_id")
+	joinColumns=@JoinColumn(name="family_id"),
+	inverseJoinColumns = @JoinColumn(name="estate_id")
 	)
 	private Set<Estate> estates = new HashSet<Estate>();
 	
@@ -81,6 +81,5 @@ public class Family implements Indexable {
 	public String getLuceneId () {
 		return "F"+this.id;
 	}
-	
 	
 }
