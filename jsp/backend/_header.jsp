@@ -18,9 +18,10 @@ import="ie.wombat.ui.Tab"
 import="ie.wombat.landedestates.*"
 import="ie.wombat.imagetable.ImageDB"
 import="ie.wombat.imagetable.Image"
-errorPage="error.jsp"
 %><%request.setCharacterEncoding("utf-8");%>
 <%!
+
+// errorPage="error.jsp"
 
 public static final DecimalFormat latlonf = new DecimalFormat ("###.00000");
 
@@ -135,7 +136,6 @@ private static Double degPerMLat =  new Double (180 /  (Math.PI * re));
 	EntityManager em = HibernateUtil.getEntityManager();
 	em.getTransaction().begin();
 
-
 	TemplateRegistry templates= TemplateRegistry.getInstance();
   
   	/*
@@ -217,15 +217,15 @@ private static Double degPerMLat =  new Double (180 /  (Math.PI * re));
 		String p = request.getParameter("p");
 		// If not specified, see if already set in session
 		if (p == null) {
-	p = (String)session.getAttribute("projectPhase");
+			p = (String)session.getAttribute("projectPhase");
 		}
 		try {
-	phase = new Integer(p);
-	context.put ("phase",phase);
-	// Remember using session attribute
-	session.setAttribute("projectPhase",phase.toString());
+			phase = new Integer(p);
+			context.put ("phase",phase);
+			// Remember using session attribute
+			session.setAttribute("projectPhase",phase.toString());
 		} catch (Exception e) {
-	// ignore
+			// ignore
 		}
 	}
 %>

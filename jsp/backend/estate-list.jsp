@@ -38,9 +38,4 @@
 		
 	} 
 	templates.merge ("/backend/estate-list.vm",context,out);
-	
-	out.flush();
-	
-	time += System.currentTimeMillis();
-	System.err.println ("estate-list.jsp: " + time + "ms");
 %>
