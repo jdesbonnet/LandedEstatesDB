@@ -11,14 +11,12 @@
 	if ("_all".equals(letter)) {
 		List<Property> properties;
 		if (phase == null || phase == 0) {
-			properties = hsession.createQuery("from Property as p order by p.name")
-			.setCacheable(true)
-			.list();
+			properties = em.createQuery("from Property as p order by p.name")
+			.getResultList();
 		} else {
-			properties = hsession.createQuery("from Property as p where p.projectPhase=:phase order by p.name")
-			.setInteger("phase",phase)
-			.setCacheable(true)
-			.list();
+			properties = em.createQuery("from Property as p where p.projectPhase=:phase order by p.name")
+			.setParameter("phase",phase)
+			.getResultList();
 		}
 		context.put ("properties",properties);
 	}	
@@ -26,16 +24,14 @@
 	if (letter != null && letter.length() == 1) {
 		List<Property> properties;
 		if (phase == null || phase == 0) {
-			properties = hsession.createQuery("from Property as p where p.name like :letter order by p.name")
-			.setString("letter",letter + "%")
-			.setCacheable(true)
-			.list();
+			properties = em.createQuery("from Property as p where p.name like :letter order by p.name")
+			.setParameter("letter",letter + "%")
+			.getResultList();
 		} else {
-			properties = hsession.createQuery("from Property as p where p.name like :letter and p.projectPhase=:phase order by p.name")
-			.setString("letter",letter + "%")
-			.setInteger("phase",phase)
-			.setCacheable(true)
-			.list();
+			properties = em.createQuery("from Property as p where p.name like :letter and p.projectPhase=:phase order by p.name")
+			.setParameter("letter",letter + "%")
+			.setParameter("phase",phase)
+			.getResultList();
 		}
 		context.put ("properties",properties);	
 	} 
