@@ -1,22 +1,18 @@
 <%@include file="_header.jsp"%><%
 	
-	Long id = null;
-	try {
-		id = new Long(request.getParameter("id"));
-	} catch (Exception e) {
-	}
+	Long id = new Long(request.getParameter("id"));
 	
-	Family family;
-	if (id == null) {
-		family = new Family();
-	} else {
-		family = (Family)hsession.load(Family.class,id);
-	}
+	Family family = (Family)em.find(Family.class,id);
 	
 	context.put ("tabId","families");
 	context.put ("family", family);
 
-	context.put ("estates",db.getEstatesByFamily(hsession,family));
-		
+	List<Estate> estates = em.createQuery ("from Estate as e "
+			+ " inner join fetch e.families as family"
+			+ " where family.id=:familyId")
+			.setParameter("familyId",family.getId())
+			.getResultList();
+	context.put ("estates",estates);
+
 	templates.merge ("/backend/family-show.vm",context,out);
 %>
