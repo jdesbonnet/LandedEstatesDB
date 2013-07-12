@@ -3,6 +3,7 @@ package ie.wombat.landedestates;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -37,6 +38,7 @@ public class Family implements Indexable {
 	)
 	private Set<Estate> estates = new HashSet<Estate>();
 	
+	@Column(name="project_phase")
 	private Integer projectPhase;
 	
 	public Long getId() {
