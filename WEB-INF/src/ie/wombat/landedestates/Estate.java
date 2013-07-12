@@ -38,15 +38,19 @@ public class Estate implements Indexable {
 	private Integer projectPhase;
 	
 
-	@ManyToMany ()
+	@ManyToMany
 	@JoinTable(name="estate_families",
 		joinColumns=@JoinColumn(name="estate_id"),
 		inverseJoinColumns = @JoinColumn(name="family_id")
 	)
 	private Set<Family> families = new HashSet<Family>();
 	
-	//@OneToMany
-	//private Set<Property> houses = new HashSet<Property>();
+	@OneToMany
+	@JoinTable(name="estate_properties",
+	joinColumns=@JoinColumn(name="estate_id"),
+	inverseJoinColumns = @JoinColumn(name="property_id")
+	)
+	private Set<Property> houses = new HashSet<Property>();
 	
 	//@OneToMany
 	//private Set<Reference> references = new HashSet<Reference>();
@@ -88,12 +92,22 @@ public class Estate implements Indexable {
 	
 	
 	
+	
+	
+	public Set<Property> getHouses() {
+		return houses;
+	}
+	public void setHouses(Set<Property> houses) {
+		this.houses = houses;
+	}
 	public Integer getProjectPhase() {
 		return projectPhase;
 	}
 	public void setProjectPhase(Integer projectPhase) {
 		this.projectPhase = projectPhase;
 	}
+	
+	
 	
 	// TODO: direct comparison of family objects should be possible
 	public boolean hasFamily (Family family) {
