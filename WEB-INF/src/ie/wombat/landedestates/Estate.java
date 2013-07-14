@@ -50,7 +50,7 @@ public class Estate implements Indexable {
 		joinColumns=@JoinColumn(name="estate_id"),
 		inverseJoinColumns = @JoinColumn(name="property_id")
 	)
-	private Set<Property> houses = new HashSet<Property>();
+	private Set<House> houses = new HashSet<House>();
 	
 	@OneToMany
 	@JoinTable(name="estate_references",
@@ -105,10 +105,10 @@ public class Estate implements Indexable {
 	
 	
 	
-	public Set<Property> getHouses() {
+	public Set<House> getHouses() {
 		return houses;
 	}
-	public void setHouses(Set<Property> houses) {
+	public void setHouses(Set<House> houses) {
 		this.houses = houses;
 	}
 	public Integer getProjectPhase() {

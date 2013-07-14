@@ -15,8 +15,8 @@
 
 	// Iterate through all house records and check if there is a corresponding
 	// Barony object. If not then create it.
-	List<Property> allHouses = hsession.createQuery ("from Property").list();
-	for (Property house : allHouses) {
+	List<House> allHouses = hsession.createQuery ("from Property").list();
+	for (House house : allHouses) {
 		String baronyName = house.getBarony();
 		Barony barony = baronyHash.get(baronyName);
 		if ( barony == null ) {
@@ -34,14 +34,14 @@
 	for (Barony b : baronyHash.values()) {
 		// Calculate centroid of barony
 		n=0; slat=0; slon=0;
-		for (Property house : b.getHouses()) {
+		for (House house : b.getHouses()) {
 	if (house.getLatitude()!=null && house.getLongitude() != null) {
 		lat = house.getLatitude();
 		lon = house.getLongitude();
 		if (lat < 51.3 || lat > 55.0 || lon < -10.5 || lon > -6) {
-			out.print("Warning: House#" + house.getId() 
-				+ " outside allowed range lat="
-				+ lat + " lon=" + lon + "<br />");
+	out.print("Warning: House#" + house.getId() 
+		+ " outside allowed range lat="
+		+ lat + " lon=" + lon + "<br />");
 		}
 		
 		slat += house.getLatitude();

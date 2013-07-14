@@ -66,7 +66,7 @@ public class CDROM {
 		.list();
 		
 		log.info ("Query houses");
-		List<Property> houses = hsession.createQuery("from Property")
+		List<House> houses = hsession.createQuery("from Property")
 		.setCacheable(true)
 		.list();
 		
@@ -103,7 +103,7 @@ public class CDROM {
 		 * Create house pages
 		 */
 		log.info ("Creating house pages...");
-		for (Property house : houses) {
+		for (House house : houses) {
 			Context context = makeContext();
 			context.put("title", "House: " + house.getName());
 			context.put("house",house);

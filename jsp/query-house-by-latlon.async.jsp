@@ -1,6 +1,4 @@
-<%@include file="_header.jsp"%><%
-
-	double latMin = Double.parseDouble(request.getParameter("latmin"));
+<%@include file="_header.jsp"%><%double latMin = Double.parseDouble(request.getParameter("latmin"));
 	double latMax = Double.parseDouble(request.getParameter("latmax"));
 	double lonMin = Double.parseDouble(request.getParameter("lonmin"));
 	double lonMax = Double.parseDouble(request.getParameter("lonmax"));
@@ -8,7 +6,7 @@
 	System.err.println ("latmin="+latMin + " lonmin="+lonMin 
 			+ " latmax=" + latMax + " lonmax=" + lonMax);
 	
-	List<Property> houses = hsession.createQuery("from Property where "
+	List<House> houses = hsession.createQuery("from Property where "
 			+ " latitude>=:latMin and latitude<:latMax "
 			+ " and longitude>=:lonMin and longitude<:lonMax "
 			//+ " and projectPhase=1"
@@ -22,7 +20,7 @@
 	out.clear();
 	response.setContentType("text/plain");
 	out.write ("[\n");
-	for (Property house : houses) {
+	for (House house : houses) {
 		out.write ("{id:" + house.getId() + ",");
 		out.write ("lat:" + house.getLatitude() + ",");
 		out.write ("lon:" + house.getLongitude() + ",");
@@ -43,6 +41,4 @@
 	hmr.setSwLongitude(lonMin);
 	hmr.setNeLatitude(latMax);
 	hmr.setNeLongitude(lonMax);
-	hsession.save(hmr);
-	
-%>
+	hsession.save(hmr);%>

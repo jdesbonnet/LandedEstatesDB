@@ -129,7 +129,7 @@ public class DB {
 		return result;
 	}
 	
-	public List<Estate> getEstatesByProperty(EntityManager em, Property property) {
+	public List<Estate> getEstatesByProperty(EntityManager em, House property) {
 		String query = "from Estate as e where e.houses.id=" + property.getId();
 		List<Estate> result =  em.createQuery(query).getResultList();
 		return result;
@@ -168,7 +168,7 @@ public class DB {
 	 * @param radius Radius in meters
 	 * @return
 	 */
-	public Property[] getPropertiesByGridReference (Session hsession, 
+	public House[] getPropertiesByGridReference (Session hsession, 
 			int easting, int northing, int radius) {
 		
 		long time = -System.currentTimeMillis();
@@ -185,7 +185,7 @@ public class DB {
 			+ " order by (p.easting - :xc)*(p.easting - :xc) + (p.northing - :yc) * (p.northing - :yc)"
 		;
 		
-		List<Property> result = hsession.createQuery(query)
+		List<House> result = hsession.createQuery(query)
 		.setInteger("x0",x0)
 		.setInteger("x1",x1)
 		.setInteger("y0",y0)
@@ -199,12 +199,12 @@ public class DB {
 		log.debug ("getPropertiesByGridReference(): returning " 
 				+ result.size() + " records, time " + time + "ms");
 		log.debug ("query=" + query);
-		Property[] ret = new Property[result.size()];
+		House[] ret = new House[result.size()];
 		result.toArray(ret);
 		return ret;	
 	}
 	
-	public List<Property> getHousesInBoundingBox (Session hsession, 
+	public List<House> getHousesInBoundingBox (Session hsession, 
 			double latMin, double latMax, double lonMin, double lonMax) {
 		
 		long time = -System.currentTimeMillis();
@@ -238,7 +238,7 @@ public class DB {
 		System.err.println ("query=" + query);
 		System.err.println ("x0=" + x0 + " y0=" + y0 + " x1=" + x1 + " y1=" + y1);
 		
-		List<Property> result = hsession
+		List<House> result = hsession
 		.createQuery(query)
 		.setInteger("x0",x0)
 		.setInteger("x1",x1)
@@ -272,17 +272,17 @@ public class DB {
 	}
 	*/
 	
-	public List<Property> getProperties (EntityManager em) {
+	public List<House> getProperties (EntityManager em) {
 		
 		String query = "from Property as p order by p.name ";
-		List<Property> result = em.createQuery(query).getResultList();
+		List<House> result = em.createQuery(query).getResultList();
 		return result;
 	}
 	
-	public List<Property> getPropertiesByLetter (EntityManager em, String letter) {
+	public List<House> getPropertiesByLetter (EntityManager em, String letter) {
 		
 		String query = "from Property as p where p.name like ? order by p.name";
-		List<Property> result = em.createQuery(query)
+		List<House> result = em.createQuery(query)
 			.setParameter(0,letter + "%")
 			.getResultList();
 		return result;
@@ -435,8 +435,8 @@ public class DB {
 		
 		log.info("Indexing houses...");
 		
-		List<Property> houses = hsession.createQuery("from Property").list();
-		for (Property house : houses) {
+		List<House> houses = hsession.createQuery("from Property").list();
+		for (House house : houses) {
 			//Document doc = makeHouseDocument(house);
 			//if (doc != null) {
 			//	writer.addDocument(doc);

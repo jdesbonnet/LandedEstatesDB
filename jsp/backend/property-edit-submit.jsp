@@ -1,13 +1,11 @@
 <%@page import="ie.wombat.gis.OSIGridReference"
 import="ie.wombat.gis.convert.OSILLAConvert"
-%><%@include file="_header.jsp"%><%
-
-	if (!user.hasWriteAccess()) {
+%><%@include file="_header.jsp"%><%if (!user.hasWriteAccess()) {
 		throw new ServletException ("No write access to this database");
 	}
 
 	Long id = new Long(request.getParameter("id"));
-	Property property = (Property)em.find(Property.class, id);
+	House property = (House)em.find(House.class, id);
 
 	property.setName(request.getParameter("name"));
 	property.setDescription(request.getParameter("description"));
@@ -46,5 +44,4 @@ import="ie.wombat.gis.convert.OSILLAConvert"
 		property.setGridReference(gridRef);
 	}
 	hsession.save(property);
-	response.sendRedirect ("property-show.jsp?id="+property.getId());
-%>
+	response.sendRedirect ("property-show.jsp?id="+property.getId());%>

@@ -23,9 +23,9 @@ import ie.wombat.imagetable.Image;
 @Entity
 @Indexed
 @Table(name="property")
-public class Property implements Indexable {
+public class House implements Indexable {
 
-	private static Logger log = Logger.getLogger(Property.class);
+	private static Logger log = Logger.getLogger(House.class);
 	
 	@Id
 	@DocumentId

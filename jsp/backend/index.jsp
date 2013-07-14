@@ -1,12 +1,10 @@
-<%@include file="_header.jsp"%><%
-
-	context.put ("tabId","home");
+<%@include file="_header.jsp"%><%context.put ("tabId","home");
 	
 	/*
 	 * All properties with grid reference
 	 */
 	 
-	Property[] properties = db.getPropertiesByGridReference(hsession, 200000,200000,500000);
+	House[] properties = db.getPropertiesByGridReference(hsession, 200000,200000,500000);
 	context.put ("properties", properties);
 		
 	/*
@@ -31,5 +29,4 @@
 	context.put ("cx",new Double(cx));
 	context.put ("cy",new Double(cy));
 	
-	templates.merge ("/index.vm",context,out);
-%>
+	templates.merge ("/index.vm",context,out);%>

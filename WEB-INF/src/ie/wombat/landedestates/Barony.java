@@ -9,7 +9,7 @@ public class Barony {
 	private String name;
 	private Double latitude;
 	private Double longitude;
-	private Set<Property> houses = new HashSet<Property>();
+	private Set<House> houses = new HashSet<House>();
 	private Integer projectPhase;
 	
 	public Integer getProjectPhase() {
@@ -55,10 +55,10 @@ public class Barony {
 	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
-	public Set<Property> getHouses() {
+	public Set<House> getHouses() {
 		return houses;
 	}
-	public void setHouses(Set<Property> houses) {
+	public void setHouses(Set<House> houses) {
 		this.houses = houses;
 	}
 	

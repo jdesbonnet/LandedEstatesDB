@@ -1,8 +1,7 @@
 <%@page import="ie.wombat.gis.OSIGridReference"%>
 <%@page import="ie.wombat.gis.InvalidGridReferenceException"%>
 <%@include file="_header.jsp"%><%
-
-/*
+	/*
  * Generate HTML for popup window (approx 400 x 400) containing map.
  * The map is centered on an existing property record (with a valid grid reference) by
  * passing the id of the house record in 'id'.
@@ -12,10 +11,10 @@
  
 if (request.getParameter("id") != null) {
 
-	Property property;
+	House property;
 	try {
 		Long id = new Long(request.getParameter("id"));
-		property = (Property)hsession.load(Property.class, id);
+		property = (House)hsession.load(House.class, id);
 	} catch (Exception e) {
 		out.println ("error: " + e);
 		return;

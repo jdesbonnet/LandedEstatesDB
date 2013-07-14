@@ -19,9 +19,7 @@ import="ie.wombat.landedestates.*"
 import="ie.wombat.imagetable.ImageDB"
 import="ie.wombat.imagetable.Image"
 %><%request.setCharacterEncoding("utf-8");%>
-<%!
-
-// errorPage="error.jsp"
+<%!// errorPage="error.jsp"
 
 public static final DecimalFormat latlonf = new DecimalFormat ("###.00000");
 
@@ -125,12 +123,11 @@ private static Double degPerMLat =  new Double (180 /  (Math.PI * re));
 		}
 		return buf.toString();
 	}
-	public String formatLatLon (Property prop) {
+	public String formatLatLon (House prop) {
 		return latlonf.format(prop.getLatitude())
 				+ " "
 				+ latlonf.format(prop.getLongitude());
-	}
-%><%
+	}%><%
 
 	// Create a transaction
 	EntityManager em = HibernateUtil.getEntityManager();

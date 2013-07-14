@@ -1,14 +1,12 @@
-<%@include file="_header.jsp"%><%
-
-if (!user.hasWriteAccess()) {
+<%@include file="_header.jsp"%><%if (!user.hasWriteAccess()) {
 	throw new ServletException ("No write access to this database");
 }
 
 
-Property property;
+House property;
 try {
 	Long id = new Long(request.getParameter("property_id"));
-	property = (Property)hsession.load(Property.class,id);
+	property = (House)hsession.load(House.class,id);
 } catch (Exception e) {
 	throw new ServletException(e);
 }
@@ -27,5 +25,4 @@ if (property.getImages().contains(image)) {
 	hsession.delete(image);
 }
 
-	response.sendRedirect("property-edit.jsp?id=" + property.getId());
-%>
+	response.sendRedirect("property-edit.jsp?id=" + property.getId());%>

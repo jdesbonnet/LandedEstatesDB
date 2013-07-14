@@ -1,7 +1,6 @@
 <%@page import="ie.wombat.util.XmlUtil"%>
-<%@page import="ie.wombat.landedestates.Property"%>
+<%@page import="ie.wombat.landedestates.House"%>
 <%@include file="_header.jsp"%><%
-
 	/*
 	 * Query service for Google Maps
 	 */
@@ -16,16 +15,16 @@
 	
 	Iterator iter = hsession.createQuery(hquery).list().iterator();
 	while (iter.hasNext()) {
-		Property p = (Property)iter.next();
+		House p = (House)iter.next();
 		if (p.getName() != null && p.hasGridReference()) {
-			out.println ("<marker ");
-			out.println (" id=\"" + p.getId() + "\"");
-			out.println (" lat=\"" + p.getLatitudeDeg() + "\"");
-			out.println (" lon=\"" + p.getLongitudeDeg() + "\"");
-			out.println (" name=\"" + XmlUtil.makeSafe(p.getName()) + "\"");
-			out.println (" townland=\"" + XmlUtil.makeSafe(p.getTownland()) + "\"");
-			out.println (" gridref=\"" + p.getGridReference() + "\"");
-			out.println ("/>");
+	out.println ("<marker ");
+	out.println (" id=\"" + p.getId() + "\"");
+	out.println (" lat=\"" + p.getLatitudeDeg() + "\"");
+	out.println (" lon=\"" + p.getLongitudeDeg() + "\"");
+	out.println (" name=\"" + XmlUtil.makeSafe(p.getName()) + "\"");
+	out.println (" townland=\"" + XmlUtil.makeSafe(p.getTownland()) + "\"");
+	out.println (" gridref=\"" + p.getGridReference() + "\"");
+	out.println ("/>");
 		}
 	}
 	out.println ("</markers>");

@@ -1,6 +1,4 @@
-<%@include file="_header.jsp"%><%
-
-if (!user.hasWriteAccess()) {
+<%@include file="_header.jsp"%><%if (!user.hasWriteAccess()) {
 	throw new ServletException ("No write access to this database");
 }
 
@@ -16,10 +14,10 @@ if (!user.hasWriteAccess()) {
  
 	System.err.println("LandedEstates: memory after image upload: total=" + rt.totalMemory()
 			+ " free=" + rt.freeMemory());
-	Property property;
+	House property;
 	try {
 		Long propertyId = new Long(params.getProperty("property_id"));
-		property = (Property)hsession.load(Property.class,propertyId);
+		property = (House)hsession.load(House.class,propertyId);
 	} catch (Exception e) {
 			throw new ServletException(e.toString());
 	}
@@ -30,5 +28,4 @@ if (!user.hasWriteAccess()) {
 	
 	hsession.save(property);
 	
-	response.sendRedirect ("property-show.jsp?id=" + property.getId());
-%>
+	response.sendRedirect ("property-show.jsp?id=" + property.getId());%>

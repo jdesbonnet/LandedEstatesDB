@@ -20,9 +20,7 @@ import="ie.wombat.imagetable.ImageDB"
 import="ie.wombat.imagetable.Image"
 errorPage="error.jsp"
 %><%request.setCharacterEncoding("utf-8");%>
-<%!
-
-// Number formatter for Latitude/Longitude (5 places after decimal)
+<%!// Number formatter for Latitude/Longitude (5 places after decimal)
 public static final DecimalFormat latlonf = new DecimalFormat ("###.00000");
 
 // TODO: is this necessary?
@@ -114,17 +112,16 @@ private static Double degPerMLat =  new Double (180 /  (Math.PI * re));
 		}
 		return buf.toString();
 	}
-	public String formatLatLon (Property prop) {
+	public String formatLatLon (House prop) {
 		return latlonf.format(prop.getLatitude())
 				+ "<br />"
 				+ latlonf.format(prop.getLongitude());
 	}
-	public String formatLatLonForUrl (Property prop) {
+	public String formatLatLonForUrl (House prop) {
 		return latlonf.format(prop.getLatitude())
 				+ ","
 				+ latlonf.format(prop.getLongitude());
-	}
-%><%
+	}%><%
 
 	// Create a transaction
 	EntityManager em = HibernateUtil.getEntityManager();

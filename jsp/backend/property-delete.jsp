@@ -1,15 +1,14 @@
 <%@page import="java.util.List"%>
 <%@include file="_header.jsp"%><%
-
-if (!user.hasWriteAccess()) {
+	if (!user.hasWriteAccess()) {
 	throw new ServletException ("No write access to this database");
 }
 
 
-	Property property;
+	House property;
 	try {
 		Long id = new Long (request.getParameter("id"));
-		property = (Property)hsession.load(Property.class,id);
+		property = (House)hsession.load(House.class,id);
 	} catch (Exception e) {
 		throw new ServletException (e.toString());
 	}
@@ -26,8 +25,8 @@ if (!user.hasWriteAccess()) {
 		errmsg.append ("This House record is assoicated with: ");
 		Iterator iter = estates.iterator();
 		while (iter.hasNext()) {
-			Estate estate = (Estate)iter.next();
-			errmsg.append ("Estate #" + estate.getId() + " " + estate.getName() + "; ");
+	Estate estate = (Estate)iter.next();
+	errmsg.append ("Estate #" + estate.getId() + " " + estate.getName() + "; ");
 		}
 		
 		throw new ServletException (errmsg.toString());

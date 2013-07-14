@@ -1,11 +1,9 @@
-<%@include file="_header.jsp"%><%
-
-	double latMin = Double.parseDouble(request.getParameter("latmin"));
+<%@include file="_header.jsp"%><%double latMin = Double.parseDouble(request.getParameter("latmin"));
 	double latMax = Double.parseDouble(request.getParameter("latmax"));
 	double lonMin = Double.parseDouble(request.getParameter("lonmin"));
 	double lonMax = Double.parseDouble(request.getParameter("lonmax"));
 
-	List<Property> houses = db.getHousesInBoundingBox(hsession, latMin,latMax,lonMin,lonMax);
+	List<House> houses = db.getHousesInBoundingBox(hsession, latMin,latMax,lonMin,lonMax);
 	
 	// Filter for phase 1 records
 	/*
@@ -21,7 +19,7 @@
 	out.clear();
 	response.setContentType("text/plain");
 	out.write ("[\n");
-	for (Property house : houses) {
+	for (House house : houses) {
 		out.write ("{id:" + house.getId() + ",");
 		out.write ("lat:" + house.getLatitudeDeg() + ",");
 		out.write ("lon:" + house.getLongitudeDeg() + ",");
@@ -31,5 +29,4 @@
 		}
 		out.write ("name:\"" + escape(house.getName()) + "\"},\n");
 	}
-	out.write ("]\n");
-%>
+	out.write ("]\n");%>

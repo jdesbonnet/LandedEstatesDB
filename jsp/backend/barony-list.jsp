@@ -1,6 +1,4 @@
-<%@include file="_header.jsp"%><%
-
-	long time = -System.currentTimeMillis();
+<%@include file="_header.jsp"%><%long time = -System.currentTimeMillis();
 		
 	context.put ("tabId","estates");
 	
@@ -15,8 +13,8 @@
 	}
 	*/
 
-	List<Property> allHouses = hsession.createQuery ("from Property").list();
-	for (Property house : allHouses) {
+	List<House> allHouses = hsession.createQuery ("from Property").list();
+	for (House house : allHouses) {
 		Barony barony = baronyHash.get(house.getBarony());
 		if ( barony == null ) {
 			barony = new Barony();
@@ -31,7 +29,7 @@
 	double slat,slon;
 	for (Barony b : baronyHash.values()) {
 		n=0; slat=0; slon=0;
-		for (Property house : b.getHouses()) {
+		for (House house : b.getHouses()) {
 			if (house.getLatitude()!=null && house.getLongitude() != null) {
 				slat += house.getLatitude();
 				slon += house.getLongitude();
@@ -56,5 +54,4 @@
 	out.flush();
 	
 	time += System.currentTimeMillis();
-	System.err.println ("barony-list.jsp: " + time + "ms");
-%>
+	System.err.println ("barony-list.jsp: " + time + "ms");%>

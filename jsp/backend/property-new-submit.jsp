@@ -1,6 +1,4 @@
-<%@include file="_header.jsp"%><%
-
-if (!user.hasWriteAccess()) {
+<%@include file="_header.jsp"%><%if (!user.hasWriteAccess()) {
 	throw new ServletException ("No write access to this database");
 }
 
@@ -13,7 +11,7 @@ if (!user.hasWriteAccess()) {
 		throw new ServletException (e.toString());
 	}
 	
-	Property property = new Property();
+	House property = new House();
 	property.setName(request.getParameter("name"));
 	
 	try {
@@ -29,5 +27,4 @@ if (!user.hasWriteAccess()) {
 	
 	response.sendRedirect("property-edit.jsp?id=" 
 	+ property.getId() 
-	+ "&estate_id=" + estate.getId());
-%>
+	+ "&estate_id=" + estate.getId());%>

@@ -1,12 +1,10 @@
-<%@include file="_header.jsp"%><%
-
-if (!user.hasWriteAccess()) {
+<%@include file="_header.jsp"%><%if (!user.hasWriteAccess()) {
 	throw new ServletException ("No write access to this database");
 }
 
 
 	Estate estate;
-	Property property;
+	House property;
 	try {
 		Long estateId = new Long (request.getParameter("estate_id"));
 		estate = (Estate)hsession.load(Estate.class, estateId);
@@ -20,7 +18,7 @@ if (!user.hasWriteAccess()) {
 			propertyId = new Long(request.getParameter("property_id"));
 		}
 		
-		property = (Property)hsession.load(Property.class, propertyId);
+		property = (House)hsession.load(House.class, propertyId);
 	} catch (Exception e) {
 		throw new ServletException (e.toString());
 	}
@@ -28,5 +26,4 @@ if (!user.hasWriteAccess()) {
 	estate.getProperties().add(property);
 	hsession.save(estate);
 	
-	response.sendRedirect("estate-edit.jsp?id=" + estate.getId());
-%>
+	response.sendRedirect("estate-edit.jsp?id=" + estate.getId());%>

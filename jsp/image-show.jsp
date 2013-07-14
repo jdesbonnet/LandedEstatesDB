@@ -1,6 +1,4 @@
-<%@include file="_header.jsp"%><%
-	
-	context.put ("tabId","images");
+<%@include file="_header.jsp"%><%context.put ("tabId","images");
 	
 	
 	Long id = new Long (request.getParameter("id"));
@@ -16,7 +14,7 @@
 	if (list.size() == 0) {
 		throw new ServletException ("associated property for image " + id + " not found");
 	}
-	Property property = (Property)list.get(0);
+	House property = (House)list.get(0);
 	context.put ("property",property);
 	
 	
@@ -35,5 +33,4 @@
 			+ ": " + property.getName());
 	context.put ("pageDescription","Caption: " + image.getCaption() );
 	
-	templates.merge ("/image-show.vm",context,out);
-%>
+	templates.merge ("/image-show.vm",context,out);%>

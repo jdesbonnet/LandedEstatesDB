@@ -1,12 +1,10 @@
-<%@include file="_header.jsp"%><%
-
-	// Required 
+<%@include file="_header.jsp"%><%// Required 
 	// id: (property id)
 	
-	Property property;
+	House property;
 	try {
 		Long id = new Long(request.getParameter("id"));
-		property = (Property)hsession.load(Property.class,id);
+		property = (House)hsession.load(House.class,id);
 		/*
 		if (property.getProjectPhase() != 1) {
 			response.sendRedirect ("not-available.jsp");
@@ -38,5 +36,4 @@
 				);
 	}
 
-	templates.merge ("/property-show.vm",context,out);
-%>
+	templates.merge ("/property-show.vm",context,out);%>
