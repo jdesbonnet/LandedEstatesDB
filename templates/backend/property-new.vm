@@ -2,7 +2,7 @@
 
 <h2>Create new house record belonging to $estate.getName()</h2>
 
-<form action="property-new-submit.jsp" method="POST">
+<form action="house-new-submit.jsp" method="POST">
 <input type="hidden" name="estate_id" 
 value="$estate.getId()" />
 

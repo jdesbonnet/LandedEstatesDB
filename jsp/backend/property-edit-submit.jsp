@@ -43,5 +43,5 @@ import="ie.wombat.gis.convert.OSILLAConvert"
 	} else {
 		property.setGridReference(gridRef);
 	}
-	hsession.save(property);
-	response.sendRedirect ("property-show.jsp?id="+property.getId());%>
+	em.persist(property);
+	response.sendRedirect ("house-show.jsp?id="+property.getId());%>

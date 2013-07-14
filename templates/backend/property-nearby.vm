@@ -1,13 +1,13 @@
 #parse ("/backend/_header.vm")
 
 <h2>Houses near 
-<a href="property-show.jsp?id=$property.getId()">$property.getName()</a>
+<a href="house-show.jsp?id=$property.getId()">$property.getName()</a>
  (search radius $radiusKm km)</h2>
 
 <ul>
 #foreach ($p in $nearbyProperties)
 #if ($p.getId() != $property.getId())
-<li> <a href="property-show.jsp?id=$p.getId()">$p.getName()</a>
+<li> <a href="house-show.jsp?id=$p.getId()">$p.getName()</a>
 $jsp.calcDistanceInKm($property,$p)km</li>
 #end
 #end

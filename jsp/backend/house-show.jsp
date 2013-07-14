@@ -12,4 +12,4 @@
 	context.put ("estates",estates);
 	
 	
-	templates.merge ("/backend/property-show.vm",context,out);%>
+	templates.merge ("/backend/house-show.vm",context,out);%>

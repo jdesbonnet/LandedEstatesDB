@@ -2,7 +2,7 @@
 
 <h2>Add existing house to estate $estate.getName()</h2>
 
-<form action="property-add-existing-submit.jsp" method="POST">
+<form action="house-add-existing-submit.jsp" method="POST">
 <input type="hidden" name="estate_id" 
 value="$estate.getId()" />
 
@@ -20,7 +20,7 @@ value="$estate.getId()" />
 <script src="$YUI/build/autocomplete/autocomplete-min.js"></script>
 
 <script type="text/javascript">
-var queryService = "./property-query.jsp"; 
+var queryService = "./house-query.jsp"; 
 var querySchema=["\n", "\t"];
 var ds = new YAHOO.widget.DS_XHR(queryService, querySchema);  
 ds.responseType = YAHOO.widget.DS_XHR.TYPE_FLAT;

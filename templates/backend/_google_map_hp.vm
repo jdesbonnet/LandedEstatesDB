@@ -77,12 +77,12 @@
       	#end
       	
      
-      	GDownloadUrl("property-gmap-query.jsp", function(data, responseCode) {
+      	GDownloadUrl("house-gmap-query.jsp", function(data, responseCode) {
 		var xml = GXml.parse(data);
 		var markers = xml.documentElement.getElementsByTagName("marker");
 		for (var i = 0; i < markers.length; i++) {
 			
-            var html = "<a href=\"property-show.jsp?id=" 
+            var html = "<a href=\"house-show.jsp?id=" 
             	+ markers[i].getAttribute("id")
             	+ "\">" + markers[i].getAttribute("name") + "</a> "
 				+ " (townland of " 
@@ -102,11 +102,11 @@
  		 }
 		});
 	
-	 	#if ($property) 
- 		// Center property
- 		var html = "<a href=\"property-show.jsp?id=$property.getId()\">House: "
-		+ " $property.getName()</a> (townland of $property.getTownland())<br />"
-		+ " $property.getGridReference()";
+	 	#if ($house) 
+ 		// Center house
+ 		var html = "<a href=\"house-show.jsp?id=$house.getId()\">House: "
+		+ " $house.getName()</a> (townland of $house.getTownland())<br />"
+		+ " $house.getGridReference()";
 		
 		map.addOverlay(marker);
 		#end

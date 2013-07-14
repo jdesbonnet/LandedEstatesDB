@@ -48,7 +48,7 @@ $!estate.getDescription()
 </tr>
 </thead>
 
-#foreach ($property in $estate.getProperties()) 
+#foreach ($house in $estate.getHouses()) 
 <tr valign="top">
 <td>
 
@@ -56,24 +56,24 @@ $!estate.getDescription()
 ## If just one image float to right of cell
 ##
 
-#if ($property.getImages().size() == 1)
-#foreach ($image in $property.getImages())
+#if ($house.getImages().size() == 1)
+#foreach ($image in $house.getImages())
 <img alt="image" src="$contextPath/img/tn/$image.getId()" align="right" />
 #end
 #end
 
-<a href="property-show.jsp?id=$property.getId()">$property.getName()</a>
+<a href="house-show.jsp?id=$house.getId()">$house.getName()</a>
 <br />
 
-$!property.getDescription()
+$!house.getDescription()
 
 ##
-## If more than one property then list after description
+## If more than one house then list after description
 ##
 
-#if ($property.getImages().size() > 1)
+#if ($house.getImages().size() > 1)
 <br />
-#foreach ($image in $property.getImages())
+#foreach ($image in $house.getImages())
 <img alt="image" src="$contextPath/img/tn/$image.getId()" />
 #end
 #end
@@ -81,21 +81,21 @@ $!property.getDescription()
 
 </td>
 
-<td>$!property.getTownland() &nbsp;</td>
-<td>$!property.getCivilParish() &nbsp;</td>
-<td>$!property.getPlu() &nbsp;</td>
-<td>$!property.getDed() &nbsp;</td>
-<td>$!property.getBarony() &nbsp;</td>
-<td>$!property.getCounty() &nbsp;</td>
+<td>$!house.getTownland() &nbsp;</td>
+<td>$!house.getCivilParish() &nbsp;</td>
+<td>$!house.getPlu() &nbsp;</td>
+<td>$!house.getDed() &nbsp;</td>
+<td>$!house.getBarony() &nbsp;</td>
+<td>$!house.getCounty() &nbsp;</td>
 <td>
-#if ($property.hasGridReference())
-<a href="javascript:popupMap('gridref=$property.getGridReference()')">$property.getGridReference()</a>
+#if ($house.hasGridReference())
+<a href="javascript:popupMap('gridref=$house.getGridReference()')">$house.getGridReference()</a>
 #end
-#if ($property.getDiscoveryMap())
-Discovery map #$property.getDiscoveryMap().
+#if ($house.getDiscoveryMap())
+Discovery map #$house.getDiscoveryMap().
 #end
-#if ($property.getOsSheet())
-OS Sheet #$property.getOsSheet().
+#if ($house.getOsSheet())
+OS Sheet #$house.getOsSheet().
 #end
 </td>
 

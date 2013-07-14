@@ -92,7 +92,7 @@ $!property.getBarony()
 <td>$jsp.formatLatLon($property)
 <br>
 [
-<a href="property-kml.jsp?id=$property.getId()">Google Earth</a>
+<a href="house-kml.jsp?id=$property.getId()">Google Earth</a>
 ]
 </td></tr>
 #else
@@ -103,11 +103,11 @@ $!property.getBarony()
 
 <p>
 [
-<a href="property-edit.jsp?id=$property.getId()">edit</a>
+<a href="house-edit.jsp?id=$property.getId()">edit</a>
 ]
 &nbsp;
 [
-<a href="property-nearby.jsp?id=$property.getId()">show nearby</a>
+<a href="house-nearby.jsp?id=$property.getId()">show nearby</a>
 ]
 </p>
 
@@ -119,7 +119,7 @@ $!property.getBarony()
 <div id="xmapContainer" class="googleMapShowProperty"></div>
 <p>
 [
-<a href="property-nearby.jsp?id=$property.getId()">List nearby properties</a>
+<a href="house-nearby.jsp?id=$property.getId()">List nearby properties</a>
 ]
 </p>
 -->
