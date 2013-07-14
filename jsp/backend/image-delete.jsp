@@ -25,4 +25,4 @@ if (property.getImages().contains(image)) {
 	hsession.delete(image);
 }
 
-	response.sendRedirect("property-edit.jsp?id=" + property.getId());%>
+	response.sendRedirect("house-edit.jsp?id=" + property.getId());%>

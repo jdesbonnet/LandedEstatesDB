@@ -48,12 +48,12 @@ if (!user.hasWriteAccess()) {
 	}
 	
 	if (request.getParameter("_submit_new_house") != null) {
-		response.sendRedirect("property-new.jsp?estate_id=" + estate.getId());
+		response.sendRedirect("house-new.jsp?estate_id=" + estate.getId());
 		return;
 	}
 	
 	if (request.getParameter("_submit_existing_house") != null) {
-		response.sendRedirect("property-add-existing.jsp?estate_id=" + estate.getId());
+		response.sendRedirect("house-add-existing.jsp?estate_id=" + estate.getId());
 		return;
 	}
 	

@@ -28,4 +28,4 @@
 	
 	hsession.save(property);
 	
-	response.sendRedirect ("property-show.jsp?id=" + property.getId());%>
+	response.sendRedirect ("house-show.jsp?id=" + property.getId());%>
