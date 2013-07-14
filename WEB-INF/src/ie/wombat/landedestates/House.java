@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -61,6 +63,13 @@ public class House implements Indexable {
 	//@OneToMany
 	@Transient
 	private Set<Image> images = new HashSet<Image>();
+	
+	@OneToMany
+	@JoinTable(name="house_employee_records",
+		joinColumns=@JoinColumn(name="house_id"),
+		inverseJoinColumns = @JoinColumn(name="employee_record_id")
+	)
+	private Set<EmployeeRecord> employeeRecords = new HashSet<EmployeeRecord>();
 	
 	@Column(name="project_phase")
 	private Integer projectPhase;
