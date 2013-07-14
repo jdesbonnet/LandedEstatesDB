@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+    <class name="ie.wombat.landedestates.ReferenceSource" 
+    table="reference_source">
+
+	<cache usage="nonstrict-read-write" />
+
+        <id name="id" column="id" node="@id">
+            <generator class="native"/>
+        </id>
+
+	<property name="name" column="name" />
+	<property name="description" column="description" />
+	
+	<many-to-one name="category" 
+        column="category_id"
+        not-null="false"/>
+        
+        
+	<property name="contactPerson" column="contact_person" />
+	<property name="contactTelephone" column="contact_telephone"/>
+	<property name="contactEmail" column="contact_email" />
+	
+	<property name="url" />
+
+    </class>
+
+</hibernate-mapping>

@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+    <class name="ie.wombat.landedestates.Estate" 
+    table="estate" >
+
+		<cache usage="nonstrict-read-write" />
+	
+        <id name="id" column="id" node="@id">
+            <generator class="native"/>
+        </id>
+        
+
+	
+		<property name="name" />
+		<property name="description" />
+		<property name="version"/>
+		<property name="projectPhase" column="project_phase" />
+
+		<!-- 
+			lazy=false seems to yield better performance 
+			JD 20070517
+		-->
+		
+		<set name="families" table="estate_families" 
+			order-by="family_id" lazy="false" fetch="join">
+			<key column="estate_id"/>
+			<many-to-many
+			column="family_id" 
+			class="ie.wombat.landedestates.Family"/>
+		</set>
+    
+		<set name="references" table="estate_references" 
+			order-by="reference_id" lazy="false" fetch="join">
+			<key column="estate_id"/>
+			<many-to-many 
+			column="reference_id" 
+			class="ie.wombat.landedestates.Reference"/>
+		</set>
+		
+		
+		<set name="houses" table="estate_properties" 
+			order-by="property_id" lazy="false" fetch="join"		>
+			<key column="estate_id"/>
+			<many-to-many 
+			column="property_id" 
+			class="ie.wombat.landedestates.Property"/>
+		</set>
+		
+
+    </class>
+
+</hibernate-mapping>

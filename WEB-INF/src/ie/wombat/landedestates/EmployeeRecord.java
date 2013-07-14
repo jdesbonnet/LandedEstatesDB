@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -32,7 +33,7 @@ public class EmployeeRecord implements Indexable {
 	
 	
 	//@Column(columnDefinition="text")
-	@Column(length=128000) // portable
+	@Column(name="description", length=128000) // portable
 	private String description;
 	
 	//@ManyToOne
@@ -40,11 +41,18 @@ public class EmployeeRecord implements Indexable {
 	
 	
 	@OneToMany
-	@JoinTable(name="employee_record_references",
+	@JoinTable(name="employee_record_to_reference",
 		joinColumns=@JoinColumn(name="employee_record_id"),
 		inverseJoinColumns = @JoinColumn(name="reference_id")
 	)
 	private Set<Reference> references = new HashSet<Reference>();
+	
+	@ManyToMany
+	@JoinTable(name="employee_record_to_tag",
+		joinColumns=@JoinColumn(name="employee_record_id"),
+		inverseJoinColumns = @JoinColumn(name="tag_id")
+	)
+	private Set<Tag> tags = new HashSet<Tag>();
 	
 	public Long getId() {
 		return id;
