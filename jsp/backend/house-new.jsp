@@ -15,5 +15,5 @@ if (!user.hasWriteAccess()) {
 
 	context.put ("tabId","estates");
 	context.put ("estate",estate);
-	templates.merge ("/backend/property-new.vm",context,out);
+	templates.merge ("/backend/house-new.vm",context,out);
 %>

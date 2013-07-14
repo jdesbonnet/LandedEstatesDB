@@ -8,4 +8,4 @@
 	context.put ("tabId","houses");
 	context.put ("property", property);
 	
-	templates.merge ("/backend/property-edit.vm",context,out);%>
+	templates.merge ("/backend/house-edit.vm",context,out);%>

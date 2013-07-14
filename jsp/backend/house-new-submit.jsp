@@ -25,6 +25,6 @@
 	estate.getProperties().add(property);
 	hsession.save(estate);
 	
-	response.sendRedirect("property-edit.jsp?id=" 
+	response.sendRedirect("house-edit.jsp?id=" 
 	+ property.getId() 
 	+ "&estate_id=" + estate.getId());%>

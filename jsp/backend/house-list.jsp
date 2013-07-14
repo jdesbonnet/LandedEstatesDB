@@ -33,7 +33,7 @@
 		}
 		context.put ("properties",properties);	
 	} 
-	templates.merge ("/backend/property-list.vm",context,out);
+	templates.merge ("/backend/house-list.vm",context,out);
 	
 	time += System.currentTimeMillis();
-	System.err.println ("property-list.jsp: " + time + "ms");%>
+	System.err.println ("house-list.jsp: " + time + "ms");%>
