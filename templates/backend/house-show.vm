@@ -24,6 +24,19 @@ src="$contextPath/bc/39/P$house.getId()"
 <tr><td>Property/House name:</td><td colspan="2">$house.getName()</td></tr>
 <tr><td>Description:</td><td colspan="2">$!house.getDescription()</td></tr>
 
+<tr><td>Employee Records:</td>
+<td colspan="2">
+#if ($house.getEmployeeRecords().size()==0)
+no records
+#else
+<ul>
+#foreach ($er in $house.getEmployeeRecords())
+<li> <a href="employee-record-edit.jsp?id=$er.getId()">ER$er.getId()</a> $!er.getDate() $!er.getDescription()</li>
+#end
+</ul>
+#end
+[<a href="employee-record-add.jsp?house_id=$house.getId()">Add employee record</a>]
+</td></tr>
 
 
 <!-- Location info -->

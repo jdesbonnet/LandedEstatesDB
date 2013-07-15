@@ -65,10 +65,7 @@ public class House implements Indexable {
 	private Set<Image> images = new HashSet<Image>();
 	
 	@OneToMany
-	@JoinTable(name="house_employee_records",
-		joinColumns=@JoinColumn(name="house_id"),
-		inverseJoinColumns = @JoinColumn(name="employee_record_id")
-	)
+	@JoinColumn(name="house_id")
 	private Set<EmployeeRecord> employeeRecords = new HashSet<EmployeeRecord>();
 	
 	@Column(name="project_phase")
@@ -274,6 +271,15 @@ public class House implements Indexable {
 	}
 	public void setProjectPhase(Integer projectPhase) {
 		this.projectPhase = projectPhase;
+	}
+	
+	
+	
+	public Set<EmployeeRecord> getEmployeeRecords() {
+		return employeeRecords;
+	}
+	public void setEmployeeRecords(Set<EmployeeRecord> employeeRecords) {
+		this.employeeRecords = employeeRecords;
 	}
 	/**
 	 * Return true of one or more images.

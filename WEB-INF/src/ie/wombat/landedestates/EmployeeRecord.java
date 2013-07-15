@@ -36,8 +36,9 @@ public class EmployeeRecord implements Indexable {
 	@Column(name="description", length=128000) // portable
 	private String description;
 	
-	//@ManyToOne
-	//private Property house;
+	@ManyToOne
+	@JoinColumn(name="house_id")
+	private House house;
 	
 	
 	@OneToMany
@@ -48,7 +49,7 @@ public class EmployeeRecord implements Indexable {
 	private Set<Reference> references = new HashSet<Reference>();
 	
 	@ManyToMany
-	@JoinTable(name="employee_record_to_tag",
+	@JoinTable(name="join_employee_record_to_tag",
 		joinColumns=@JoinColumn(name="employee_record_id"),
 		inverseJoinColumns = @JoinColumn(name="tag_id")
 	)
@@ -71,6 +72,22 @@ public class EmployeeRecord implements Indexable {
 	
 	
 	
+	public Set<Tag> getTags() {
+		return tags;
+	}
+	public void setTags(Set<Tag> tags) {
+		this.tags = tags;
+	}
+	public void addTag (Tag tag) {
+		this.tags.add(tag);
+	}
+	
+	public House getHouse() {
+		return house;
+	}
+	public void setHouse(House house) {
+		this.house = house;
+	}
 	public Date getDate() {
 		return date;
 	}

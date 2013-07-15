@@ -1,0 +1,49 @@
+#parse ("/backend/_header.vm")
+
+<h2>Employee Record
+#if ($employeeRecord)
+(ER$employeeRecord.getId())
+#end
+</h2>
+
+<form action="employee-record-edit-submit.jsp" method="POST">
+<input type="hidden" name="house_id" value="$house.getId()" />
+#if ($employeeRecord)
+<input type="hidden" name="employee_record_id" value="$employeeRecord.getId()" />
+#end
+
+<div>
+<label for="date">Document date (eg 3 Sep 1898)</label>
+<input type="text" size="40" id="date" name="date"
+value="$!employeeRecord.getDate()" />
+</div>
+
+
+<div>
+<label for="field_description">Description</label>
+<textarea id="field_description" name="description"
+rows="10" cols="80"/>$!employeeRecord.getDescription()</textarea>
+</div>
+
+<div>
+<label for="field_tags">Tags</label>
+#if ($employeeRecord.getTags().size()==0)
+no tags
+#end
+<ul>
+#foreach ($tag in $employeeRecord.getTags())
+<li><input type="checkbox" /> $tag.getName()</li>
+#end
+</ul>
+
+<p></p>
+
+<label>New tag</label><input name="new_tag" />
+</div>
+
+<input type="submit" value="Submit" />
+</form>
+
+
+#parse ("/backend/_footer.vm")
+
