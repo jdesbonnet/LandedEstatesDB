@@ -17,7 +17,7 @@
 
 </div>
 
-#if ($properties) 
+#if ($houses) 
 <table border="1" class="listTable">
 <thead>
 <tr>
@@ -29,7 +29,7 @@
 </tr>
 </thead>
 
-#foreach ($p in $properties) 
+#foreach ($p in $houses) 
 <tr>
 <td>$p.getProjectPhase()</td>
 <td>

@@ -168,7 +168,7 @@ public class DB {
 	 * @param radius Radius in meters
 	 * @return
 	 */
-	public House[] getPropertiesByGridReference (Session hsession, 
+	public List<House> getHousesByGridReference (EntityManager em, 
 			int easting, int northing, int radius) {
 		
 		long time = -System.currentTimeMillis();
@@ -185,23 +185,21 @@ public class DB {
 			+ " order by (p.easting - :xc)*(p.easting - :xc) + (p.northing - :yc) * (p.northing - :yc)"
 		;
 		
-		List<House> result = hsession.createQuery(query)
-		.setInteger("x0",x0)
-		.setInteger("x1",x1)
-		.setInteger("y0",y0)
-		.setInteger("y1",y1)
-		.setInteger("xc",easting)
-		.setInteger("yc",northing)
-		.list();
+		List<House> result = em.createQuery(query)
+		.setParameter("x0",x0)
+		.setParameter("x1",x1)
+		.setParameter("y0",y0)
+		.setParameter("y1",y1)
+		.setParameter("xc",easting)
+		.setParameter("yc",northing)
+		.getResultList();
 	
 		time += System.currentTimeMillis();
 		
 		log.debug ("getPropertiesByGridReference(): returning " 
 				+ result.size() + " records, time " + time + "ms");
 		log.debug ("query=" + query);
-		House[] ret = new House[result.size()];
-		result.toArray(ret);
-		return ret;	
+		return result;
 	}
 	
 	public List<House> getHousesInBoundingBox (Session hsession, 

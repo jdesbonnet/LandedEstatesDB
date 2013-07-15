@@ -1,26 +1,26 @@
 <%@include file="_header.jsp"%><%context.put ("tabId","home");
 	
 	/*
-	 * All properties with grid reference
+	 * All houses with grid reference
 	 */
 	 
-	House[] properties = db.getPropertiesByGridReference(hsession, 200000,200000,500000);
-	context.put ("properties", properties);
+	List<House> houses = db.getHousesByGridReference(em, 200000,200000,500000);
+	context.put ("houses", houses);
 		
 	/*
 	 * Calculate centroid 
 	 */
 	double cx=0,cy=0;
 	int nprop = 0;
-	for (int i = 0; i < properties.length; i++) {
-		if (properties[i].getLongitudeDeg() == 0 
-			&& properties[i].getLatitudeDeg() == 0) {
-			System.err.println ("skipping house " + properties[i].getId()
+	for (House house : houses) {
+		if (house.getLongitudeDeg() == 0 
+			&& house.getLatitudeDeg() == 0) {
+			System.err.println ("skipping house " + house.getId()
 			+ " because of 0,0 location");
 			continue;
 		}
-		cx+=properties[i].getLongitudeDeg();
-		cy+=properties[i].getLatitudeDeg();
+		cx+=house.getLongitudeDeg();
+		cy+=house.getLatitudeDeg();
 		nprop++;
 	}
 	cx /= (double)nprop;

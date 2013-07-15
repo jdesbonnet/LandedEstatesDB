@@ -7,31 +7,31 @@
 	context.put ("alphabet",alphabet);
 
 	if ("_all".equals(letter)) {
-		List<House> properties;
+		List<House> houses;
 		if (phase == null || phase == 0) {
-			properties = em.createQuery("from Property as p order by p.name")
+			houses = em.createQuery("from House as h order by h.name")
 			.getResultList();
 		} else {
-			properties = em.createQuery("from Property as p where p.projectPhase=:phase order by p.name")
+			houses = em.createQuery("from House as h where h.projectPhase=:phase order by h.name")
 			.setParameter("phase",phase)
 			.getResultList();
 		}
-		context.put ("properties",properties);
+		context.put ("houses",houses);
 	}	
 	
 	if (letter != null && letter.length() == 1) {
-		List<House> properties;
+		List<House> houses;
 		if (phase == null || phase == 0) {
-			properties = em.createQuery("from Property as p where p.name like :letter order by p.name")
+			houses = em.createQuery("from House as h where h.name like :letter order by h.name")
 			.setParameter("letter",letter + "%")
 			.getResultList();
 		} else {
-			properties = em.createQuery("from Property as p where p.name like :letter and p.projectPhase=:phase order by p.name")
+			houses = em.createQuery("from House as h where h.name like :letter and h.projectPhase=:phase order by h.name")
 			.setParameter("letter",letter + "%")
 			.setParameter("phase",phase)
 			.getResultList();
 		}
-		context.put ("properties",properties);	
+		context.put ("houses",houses);	
 	} 
 	templates.merge ("/backend/house-list.vm",context,out);
 	
