@@ -129,8 +129,8 @@ public class DB {
 		return result;
 	}
 	
-	public List<Estate> getEstatesByProperty(EntityManager em, House property) {
-		String query = "from Estate as e where e.houses.id=" + property.getId();
+	public List<Estate> getEstatesByHouse(EntityManager em, House house) {
+		String query = "from Estate as e where e.houses.id=" + house.getId();
 		List<Estate> result =  em.createQuery(query).getResultList();
 		return result;
 	}
@@ -177,12 +177,12 @@ public class DB {
 		int x1 = easting + radius;
 		int y0 = northing - radius;
 		int y1 = northing + radius;
-		String query = "from Property as p "
+		String query = "from House as p "
 			+ " where "
-			+ " p.gridReference != null"
-			+ " and p.easting > :x0 and p.easting < :x1 "
-			+ " and p.northing > :y0 and p.northing < :y1"
-			+ " order by (p.easting - :xc)*(p.easting - :xc) + (p.northing - :yc) * (p.northing - :yc)"
+			+ " h.gridReference != null"
+			+ " and h.easting > :x0 and h.easting < :x1 "
+			+ " and h.northing > :y0 and h.northing < :y1"
+			+ " order by (h.easting - :xc)*(h.easting - :xc) + (h.northing - :yc) * (h.northing - :yc)"
 		;
 		
 		List<House> result = em.createQuery(query)
@@ -226,11 +226,11 @@ public class DB {
 		if (y1 < 0) y1 = 0;
 		if (y1 > 500000) y1 = 500000;
 		
-		String query = "from Property as p "
+		String query = "from House as h "
 			+ " where "
-			+ " p.gridReference != null"
-			+ " and p.easting > :x0 and p.easting < :x1 "
-			+ " and p.northing > :y0 and p.northing < :y1"
+			+ " h.gridReference != null"
+			+ " and h.easting > :x0 and h.easting < :x1 "
+			+ " and h.northing > :y0 and h.northing < :y1"
 		;
 		
 		System.err.println ("query=" + query);
@@ -272,14 +272,14 @@ public class DB {
 	
 	public List<House> getProperties (EntityManager em) {
 		
-		String query = "from Property as p order by p.name ";
+		String query = "from House as h order by h.name ";
 		List<House> result = em.createQuery(query).getResultList();
 		return result;
 	}
 	
 	public List<House> getPropertiesByLetter (EntityManager em, String letter) {
 		
-		String query = "from Property as p where p.name like ? order by p.name";
+		String query = "from House as h where h.name like ? order by h.name";
 		List<House> result = em.createQuery(query)
 			.setParameter(0,letter + "%")
 			.getResultList();
@@ -411,7 +411,7 @@ public class DB {
 		return null;
 	}
 
-	public void makeIndex(Session hsession) throws IOException {
+	public void makeIndex(EntityManager em) throws IOException {
 		boolean createFlag = true;
 
 		// Create index dir if it does not exist.
@@ -433,7 +433,7 @@ public class DB {
 		
 		log.info("Indexing houses...");
 		
-		List<House> houses = hsession.createQuery("from Property").list();
+		List<House> houses = em.createQuery("from House").getResultList();
 		for (House house : houses) {
 			//Document doc = makeHouseDocument(house);
 			//if (doc != null) {
@@ -456,7 +456,7 @@ public class DB {
 		
 		log.info("Indexing reference sources...");
 		
-		List<ReferenceSource> refSources = hsession.createQuery("from ReferenceSource").list();
+		List<ReferenceSource> refSources = em.createQuery("from ReferenceSource").getResultList();
 		for (ReferenceSource refSource : refSources) {
 			//Document doc = makeReferenceSourceDocument(refSource);
 			//if (doc != null) {
@@ -466,7 +466,7 @@ public class DB {
 		
 		log.info("Indexing estates...");
 		
-		List<Estate> estates = hsession.createQuery("from Estate").list();
+		List<Estate> estates = em.createQuery("from Estate").getResultList();
 		for (Estate estate : estates) {
 			//Document doc = makeEstateDocument(estate);
 			//if (doc != null) {
