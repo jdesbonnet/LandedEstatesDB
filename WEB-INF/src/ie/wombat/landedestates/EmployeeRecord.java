@@ -81,6 +81,9 @@ public class EmployeeRecord implements Indexable {
 	public void addTag (Tag tag) {
 		this.tags.add(tag);
 	}
+	public void removeTag (Tag tag) {
+		this.tags.remove(tag);
+	}
 	
 	public House getHouse() {
 		return house;

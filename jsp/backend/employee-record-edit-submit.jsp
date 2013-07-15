@@ -42,6 +42,15 @@
 		employeeRecord.addTag(tag);
 	}
 	
+	for (String p : request.getParameterMap().keySet()) {
+		if (p.startsWith("delete_tag_")) {
+			Long tagId = new Long(p.substring("delete_tag_".length()));
+			Tag tag = em.find(Tag.class, tagId);
+			employeeRecord.removeTag(tag);
+		}
+	}
+	
+	
 	response.sendRedirect("house-show.jsp?id=" + house.getId());
 	
 %>

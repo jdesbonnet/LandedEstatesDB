@@ -32,7 +32,7 @@ no tags
 #end
 <ul>
 #foreach ($tag in $employeeRecord.getTags())
-<li><input type="checkbox" /> $tag.getName()</li>
+<li><input type="checkbox" name="delete_tag_${tag.id}"/> $tag.getName()</li>
 #end
 </ul>
 
