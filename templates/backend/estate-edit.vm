@@ -77,21 +77,21 @@ value="Add family association" />
 </tr>
 </thead>
 
-#foreach ($property in $estate.getProperties()) 
+#foreach ($house in $estate.getHouses()) 
 <tr>
 <td>
-<a href="property-show.jsp?id=$property.getId()">$property.getName()</a></td>
-<td>$!property.getTownland()</td>
-<td>$!property.getDed()</td>
-<td>$!property.getBarony()</td>
-<td>$!property.getPlu()</td>
-<td>$!property.getCounty()</td>
-<td>$!property.getOsSheet()</td>
-<td>#if ($!property.getImages().size() > 0) 
-yes ($property.getImages().size())
+<a href="house-show.jsp?id=$house.getId()">$house.getName()</a></td>
+<td>$!house.getTownland()</td>
+<td>$!house.getDed()</td>
+<td>$!house.getBarony()</td>
+<td>$!house.getPlu()</td>
+<td>$!house.getCounty()</td>
+<td>$!house.getOsSheet()</td>
+<td>#if ($!house.getImages().size() > 0) 
+yes ($house.getImages().size())
 #else no #end</td>
 <!--
-<td>$!property.getLatitude() $!property.getLongitude()</td>
+<td>$!house.getLatitude() $!house.getLongitude()</td>
 -->
 <td>
 [

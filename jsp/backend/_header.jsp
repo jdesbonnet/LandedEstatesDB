@@ -3,16 +3,19 @@ contentType="text/html; charset=utf-8"
 pageEncoding="utf-8"
 import="java.util.Set"
 import="java.util.List"
+import="java.util.Date"
 import="java.util.ArrayList"
 import="java.util.Iterator"
 import="java.util.HashMap"
 import="java.util.ArrayList"
 import="java.util.Properties"
 import="java.text.DecimalFormat"
+import="java.text.SimpleDateFormat"
 import="java.sql.Connection"
 import="java.sql.ResultSet"
 import="java.sql.SQLException"
 import="javax.persistence.EntityManager"
+import="net.sf.json.util.JSONUtils"
 import="ie.wombat.template.*"
 import="ie.wombat.ui.Tab"
 import="ie.wombat.landedestates.*"
@@ -21,6 +24,9 @@ import="ie.wombat.imagetable.Image"
 %><%request.setCharacterEncoding("utf-8");%><%!// errorPage="error.jsp"
 
 public static final DecimalFormat latlonf = new DecimalFormat ("###.00000");
+
+// Used where complete timestamp is needed (eg debugging info)
+public static SimpleDateFormat timestampDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 // TODO: is this necessary?
 public static String imageEntityName = "Image";
@@ -135,6 +141,53 @@ private static Double degPerMLat =  new Double (180 /  (Math.PI * re));
 				+ latlonf.format(prop.getLongitude());
 	}%><%
 
+	
+	// Debug info block (enclosed to prevent namespace polution)
+	{
+	System.err.println ("\n\n____ Start of Request ____");
+	System.err.println ("Timestamp = "  + timestampDateFormat.format(new Date()));
+	System.err.println ("Remote Host = " + request.getRemoteHost() + "(" + request.getRemoteAddr() + ")");
+	System.err.println ("HTTPMethod = " + request.getMethod() );
+    System.err.println ("ServerName = " + request.getServerName());
+    StringBuffer requestURL = request.getRequestURL();
+    if (request.getQueryString() != null) {
+        requestURL.append("?").append(request.getQueryString());
+    }
+    String completeURL = requestURL.toString();
+    System.err.println ("requestURL = " + completeURL);
+	System.err.println ("requestURLLen = " + completeURL.length());
+    
+    
+    System.err.println ("Headers:");
+    java.util.Enumeration en = request.getHeaderNames();
+    while (en.hasMoreElements()) {
+        String headerName = (String) en.nextElement();
+        System.err.println ("    " + headerName + " = " + request.getHeader(headerName));
+    }
+    
+    System.err.println ("Cookies:");
+    Cookie[] cookies = request.getCookies();
+    if (cookies == null || cookies.length==0) {
+            System.err.println ("    (what??! no cookie!)");
+    }
+    if (cookies != null) {
+    	for (Cookie cookie : cookies) {
+			System.err.println ("    " + cookie.getName() + " = " + cookie.getValue());
+		}
+	}
+    
+    System.err.println ("Parameters:");
+    en = request.getParameterNames();
+    while (en.hasMoreElements()) {
+        String paramName = (String) en.nextElement();
+        System.err.println ("    " + paramName + " = " + request.getParameter(paramName));
+    }
+
+
+    } // end debug info block
+
+    
+    
 	// Create a transaction
 	EntityManager em = HibernateUtil.getEntityManager();
 	em.getTransaction().begin();

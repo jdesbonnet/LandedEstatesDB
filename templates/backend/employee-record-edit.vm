@@ -56,12 +56,28 @@ no tags
 
 <p></p>
 
-<label>New tag</label><input name="new_tag" />
+<label>New tag</label><input id="new_tag" name="new_tag" />
 </div>
 
 <input type="submit" value="Submit" />
 </form>
 
+<script>
+jQuery(function() {
+		jQuery( "#new_tag" ).autocomplete({
+				source: function (request, response) {
+						jQuery.ajax ( {
+								url: "query-tag.async.jsp",
+								data: {q : request.term},
+								dataType: "json",
+								success: function (data) {
+										response(data);
+								}
+						} );
+				}
+		});
+});
+</script>
 
 #parse ("/backend/_footer.vm")
 
