@@ -42,7 +42,7 @@ public class EmployeeRecord implements Indexable {
 	
 	
 	@OneToMany
-	@JoinTable(name="employee_record_to_reference",
+	@JoinTable(name="join_employee_record_to_reference",
 		joinColumns=@JoinColumn(name="employee_record_id"),
 		inverseJoinColumns = @JoinColumn(name="reference_id")
 	)
