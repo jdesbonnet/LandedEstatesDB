@@ -1,18 +1,21 @@
 <%@include file="_header.jsp"%><%
 
 	/**
-	 * Query tags by name for autocomplete widget.
+	 * Query tags by name for jQuery UI autocomplete widget.
+	 * Parameters:
+	 * q : Sub-string query of tag name
+	 *
+	 * Returns:
+	 * JSON serialized array of label,value objects required for jQuery UI autocomplete widget.
 	 */
 	 
 	String q = request.getParameter("q");
 
 	List<Tag> tags = em
 			.createQuery("from Tag where name like :q")
-			.setParameter("q",q + "%")
+			.setParameter("q", "%" + q + "%")
 			.getResultList();
-	
-	System.err.println ("Found " + tags.size() + " records matching query " + q);
-	
+		
 	// Return a JSON array of label/value objects.
 	response.setContentType("application/json");
 	out.write ("[");

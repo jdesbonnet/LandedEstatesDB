@@ -48,15 +48,17 @@ no references
 #if ($employeeRecord.getTags().size()==0)
 no tags
 #end
-<ul>
+<table>
 #foreach ($tag in $employeeRecord.getTags())
-<li><input type="checkbox" name="delete_tag_${tag.id}"/> $tag.getName()</li>
+<tr><td><input type="checkbox" name="delete_tag_${tag.id}"/></td><td>$tag.getName()</td></tr>
 #end
-</ul>
+</table>
+
+<input type="submit" name="_submit_delete_checked_tags" value="Delete checked tags tag" />
 
 <p></p>
 
-<label>New tag</label><input id="new_tag" name="new_tag" />
+<label>Add new tag</label><input id="new_tag" name="new_tag" />
 </div>
 
 <input type="submit" value="Submit" />
@@ -64,18 +66,18 @@ no tags
 
 <script>
 jQuery(function() {
-		jQuery( "#new_tag" ).autocomplete({
-				source: function (request, response) {
-						jQuery.ajax ( {
-								url: "query-tag.async.jsp",
-								data: {q : request.term},
-								dataType: "json",
-								success: function (data) {
-										response(data);
-								}
-						} );
+	jQuery( "#new_tag" ).autocomplete({
+		source: function (request, response) {
+			jQuery.ajax ( {
+				url: "query-tag.async.jsp",
+				data: {q : request.term},
+				dataType: "json",
+				success: function (data) {
+					response(data);
 				}
-		});
+			} );
+		}
+	});
 });
 </script>
 

@@ -50,7 +50,10 @@
 		}
 	}
 	
-	
-	response.sendRedirect("house-show.jsp?id=" + house.getId());
+	if (request.getParameter("_submit_deleted_checked_tags")!=null) {
+		response.sendRedirect("employee-record-edit.jsp?id=" + employeeRecord.getId());
+	} else {
+		response.sendRedirect("house-show.jsp?id=" + house.getId());
+	}
 	
 %>

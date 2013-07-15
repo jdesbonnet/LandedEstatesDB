@@ -1,17 +1,13 @@
 <%@include file="_header.jsp"%><%
 	
-if (!user.hasWriteAccess()) {
-	throw new ServletException ("No write access to this database");
-}
-
-
-	try {
-		Long estateId = new Long (request.getParameter("estate_id"));
-		context.put ("estate", hsession.load(Estate.class, estateId) );
-	} catch (Exception e) {
-		throw new ServletException ("error: no estate_id");
+	if (!user.hasWriteAccess()) {
+		throw new ServletException ("No write access to this database");
 	}
-	
+
+	Long estateId = new Long (request.getParameter("estate_id"));
+	context.put ("estate", em.find(Estate.class, estateId) );
+
+	/*
 	HashMap categoryHash = new HashMap();
 	ArrayList miscList = new ArrayList();
 	categoryHash.put ("_misc_", miscList);
@@ -33,9 +29,10 @@ if (!user.hasWriteAccess()) {
 		}
 		list.add(refSource);
 	}
+	context.put ("categoryHash", categoryHash);
+	*/
 	
 	context.put ("tabId","estates");
-	context.put ("categoryHash", categoryHash);
-	
+
 	templates.merge ("/backend/reference-new.vm",context,out);
 %>

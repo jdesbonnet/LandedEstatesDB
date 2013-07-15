@@ -22,7 +22,6 @@ rows="5" cols="60" wrap="virtual"></textarea>
 <label for="acinput">Reference source:</label>
 <input id="acinput" type="text" name="refsource" size="80" />
 <br clear="both">
-<div id="acc"></div>
 </div>
 
 <br clear="both">
@@ -32,20 +31,22 @@ rows="5" cols="60" wrap="virtual"></textarea>
 
 </form>
 
-<script type="text/javascript" src="$YUI/build/yahoo-dom-event/yahoo-dom-event.js"></script>
-<script type="text/javascript" src="$YUI/build/connection/connection-min.js"></script> 
-<script type="text/javascript" src="$YUI/build/autocomplete/autocomplete-min.js"></script>
-
-
-<script type="text/javascript">
-var queryService = "./refsource-query.jsp"; 
-var querySchema = ["\n", "\t"];
-var ds = new YAHOO.widget.DS_XHR(queryService, querySchema); 
-ds.responseType = YAHOO.widget.DS_XHR.TYPE_FLAT;
-//var ac = new YAHOO.widget.AutoComplete('field_refsource','acc', ds);
-var ac = new YAHOO.widget.AutoComplete('acinput','acc', ds);
-</script> 
-
+<script>
+jQuery(function() {
+	jQuery( "#acinput" ).autocomplete({
+		source: function (request, response) {
+			jQuery.ajax ( {
+				url: "query-refsource.async.jsp",
+				data: {q : request.term},
+				dataType: "json",
+				success: function (data) {
+					response(data);
+				}
+			} );
+		}
+	});
+});
+</script>
 
 #parse ("/backend/_footer.vm")
 
