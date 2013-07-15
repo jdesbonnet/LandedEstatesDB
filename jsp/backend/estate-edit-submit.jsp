@@ -4,23 +4,9 @@ if (!user.hasWriteAccess()) {
 	throw new ServletException ("No write access to this database");
 }
 
-
-	Long id = null;
-	if (request.getParameter("id") != null) {
-		try {
-			id = new Long (request.getParameter("id"));
-		} catch (NumberFormatException e) {
-		}
-	}
+	Long id = new Long (request.getParameter("id"));
+	Estate estate = (Estate)em.find(Estate.class,id);
 	
-	long time = -System.currentTimeMillis();
-	
-	Estate estate;
-	if (id != null) {
-		estate = (Estate)hsession.load(Estate.class,id);
-	} else {
-		estate = new Estate ();
-	}
 
 	/*
 	 * Check for some change before going to the trouble of saving to DB
@@ -31,15 +17,11 @@ if (!user.hasWriteAccess()) {
 		estate.setVersion (estate.getVersion() + 1);
 		estate.setName (request.getParameter("name"));
 		estate.setDescription (request.getParameter("description"));
-		hsession.saveOrUpdate(estate);
 	} 
 	
 	
-	time += System.currentTimeMillis();
-	System.err.println ("time to save estate record=" + time + "ms");
-	
 	/*
-	 * What happens next depends on which save button was pressed
+	 * What happens next depends on which save button was clicked
 	 */
 	
 	if (request.getParameter("_submit_add_family") != null) {

@@ -77,6 +77,12 @@ private static Double degPerMLat =  new Double (180 /  (Math.PI * re));
 				new Tab ("listall", "List all", "house-list.jsp?letter=_all")
 	};
 	
+	private static Tab[] employeeRecordsSubTabs = {
+		new Tab ("az", "A-Z", "employee-record-list.jsp"),
+		new Tab ("listall", "List all", "employee-record-list.jsp?letter=_all")
+	};
+	
+	
 	private static Tab[] refSourcesSubTabs = {
 				new Tab ("newrefsource", "New reference source",
 						"refsource-new.jsp")
@@ -90,6 +96,7 @@ private static Double degPerMLat =  new Double (180 /  (Math.PI * re));
 		new Tab("families","Families","family-list.jsp", familiesSubTabs), 
 		new Tab ("estates","Estates","estate-list.jsp",estatesSubTabs),
 		new Tab ("houses","Houses","house-list.jsp",housesSubTabs	),
+		new Tab ("employeeRecords","Employee Records","employee-record-list.jsp",employeeRecordsSubTabs	),
 		new Tab ("refsources","Reference Sources","refsource-list.jsp", refSourcesSubTabs),
 		new Tab ("images", "Images", "images.jsp"),
 		new Tab ("tools","Tools","tools.jsp")

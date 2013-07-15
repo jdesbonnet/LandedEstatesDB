@@ -26,6 +26,12 @@ rows="10" cols="80"/>$!employeeRecord.getDescription()</textarea>
 </div>
 
 <div>
+<label for="field_references">References</label>
+<input type="submit" value="Add new reference" />
+</div>
+
+
+<div>
 <label for="field_tags">Tags</label>
 #if ($employeeRecord.getTags().size()==0)
 no tags
