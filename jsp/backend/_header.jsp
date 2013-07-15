@@ -18,8 +18,7 @@ import="ie.wombat.ui.Tab"
 import="ie.wombat.landedestates.*"
 import="ie.wombat.imagetable.ImageDB"
 import="ie.wombat.imagetable.Image"
-%><%request.setCharacterEncoding("utf-8");%>
-<%!// errorPage="error.jsp"
+%><%request.setCharacterEncoding("utf-8");%><%!// errorPage="error.jsp"
 
 public static final DecimalFormat latlonf = new DecimalFormat ("###.00000");
 
@@ -154,9 +153,9 @@ private static Double degPerMLat =  new Double (180 /  (Math.PI * re));
     context.put ("contextPath",request.getContextPath());
     context.put ("VERSION",DB.VERSION);
     //context.put ("YUI","/yui");
-    context.put ("YUI","http://yui.yahooapis.com/2.2.2");
-    context.put ("YUIJS","http://yui.yahooapis.com/2.2.0/");
-    context.put ("YUICSS","http://yui.yahooapis.com/2.2.0/");
+    context.put ("YUI","http://yui.yahooapis.com/2.8.2");
+    context.put ("YUIJS","http://yui.yahooapis.com/2.8.2/");
+    context.put ("YUICSS","http://yui.yahooapis.com/2.8.2/");
     context.put ("tabs",tabs);
     
     context.put ("degPerMLon",degPerMLon);
