@@ -2,11 +2,11 @@
 
 #if ($showBarcode)
 <img id="recordIdBarcode" alt="Barcode"
-src="$contextPath/bc/39/P$property.getId()"
+src="$contextPath/bc/39/P$house.getId()"
 />
 #end
 
-<h2>House: $property.getName()</h2>
+<h2>House: $house.getName()</h2>
 
 <table border="1" class="listTable">
 
@@ -21,8 +21,8 @@ src="$contextPath/bc/39/P$property.getId()"
 </td>
 </tr>
 
-<tr><td>Property/House name:</td><td colspan="2">$property.getName()</td></tr>
-<tr><td>Description:</td><td colspan="2">$!property.getDescription()</td></tr>
+<tr><td>Property/House name:</td><td colspan="2">$house.getName()</td></tr>
+<tr><td>Description:</td><td colspan="2">$!house.getDescription()</td></tr>
 
 
 
@@ -30,9 +30,9 @@ src="$contextPath/bc/39/P$property.getId()"
 
 <tr>
 <td>Townland:</td>
-<td>$!property.getTownland()</td>
+<td>$!house.getTownland()</td>
 <td width="550" rowspan="9">
-#if ($property.hasGridReference())
+#if ($house.hasGridReference())
 <div id="mapContainer" style="width:550px; height:300px;"></div>
 #end
 </td>
@@ -41,8 +41,8 @@ src="$contextPath/bc/39/P$property.getId()"
 <tr>
 <td>Civil Parish:</td>
 <td>
-#if ($property.getCivilParish())
-$!property.getCivilParish()
+#if ($house.getCivilParish())
+$!house.getCivilParish()
 #else
 <em>n/a</em>
 #end
@@ -52,8 +52,8 @@ $!property.getCivilParish()
 <tr>
 <td>Poor Law Union:</td>
 <td>
-#if ($property.getPLU())
-$property.getPLU()
+#if ($house.getPLU())
+$house.getPLU()
 #else
 <em>n/a</em>
 #end
@@ -63,8 +63,8 @@ $property.getPLU()
 <tr>
 <td>DED:</td>
 <td>
-#if ($property.getDED())
-$!property.getDED()
+#if ($house.getDED())
+$!house.getDED()
 #else
 <em>n/a</em>
 #end</td>
@@ -72,8 +72,8 @@ $!property.getDED()
 
 <tr><td>Barony:</td>
 <td>
-#if ($property.getBarony())
-$!property.getBarony()
+#if ($house.getBarony())
+$!house.getBarony()
 #else 
 <em>n/a</em>
 #end
@@ -81,18 +81,18 @@ $!property.getBarony()
 </tr>
 
 
-<tr><td>County:</td><td>$!property.getCounty()</td></tr>
-<tr><td>OS Sheet Number:</td><td>$!property.getOsSheet()</td></tr>
-#if ($property.hasGridReference())
+<tr><td>County:</td><td>$!house.getCounty()</td></tr>
+<tr><td>OS Sheet Number:</td><td>$!house.getOsSheet()</td></tr>
+#if ($house.hasGridReference())
 <tr>
 <td>OSI Grid Reference:</td>
-<td><a href="javascript:popupMap('gridref=$property.getGridReference()');">$property.getGridReference()</a></td>
+<td><a href="javascript:popupMap('gridref=$house.getGridReference()');">$house.getGridReference()</a></td>
 </tr>
 <tr><td>Latitude/Longitude:</td>
-<td>$jsp.formatLatLon($property)
+<td>$jsp.formatLatLon($house)
 <br>
 [
-<a href="house-kml.jsp?id=$property.getId()">Google Earth</a>
+<a href="house-kml.jsp?id=$house.getId()">Google Earth</a>
 ]
 </td></tr>
 #else
@@ -103,23 +103,23 @@ $!property.getBarony()
 
 <p>
 [
-<a href="house-edit.jsp?id=$property.getId()">edit</a>
+<a href="house-edit.jsp?id=$house.getId()">edit</a>
 ]
 &nbsp;
 [
-<a href="house-nearby.jsp?id=$property.getId()">show nearby</a>
+<a href="house-nearby.jsp?id=$house.getId()">show nearby</a>
 ]
 </p>
 
 
 
-#if ($property.hasGridReference())
+#if ($house.hasGridReference())
 <!--
 <h3>Map</h3>
 <div id="xmapContainer" class="googleMapShowProperty"></div>
 <p>
 [
-<a href="house-nearby.jsp?id=$property.getId()">List nearby properties</a>
+<a href="house-nearby.jsp?id=$house.getId()">List nearby properties</a>
 ]
 </p>
 -->
@@ -130,7 +130,7 @@ $!property.getBarony()
 <script type="text/javascript" 
 src="http://api.maps.yahoo.com/ajaxymap?v=3.0&appid=$yahooMapKey"></script>
 <script type="text/javascript">
-var myPoint = new YGeoPoint($property.getLatitudeDeg(),$property.getLongitudeDeg());
+var myPoint = new YGeoPoint($house.getLatitudeDeg(),$house.getLongitudeDeg());
 var map = new YMap(document.getElementById('mapContainer'),YAHOO_MAP_REG);
 
 // Add controls
@@ -149,8 +149,8 @@ map.addOverlay(marker);
 
 <h3>Images</h3>
 
-#if ($property.getImages().size() > 0) 
-#foreach ($image in $property.getImages()) 
+#if ($house.getImages().size() > 0) 
+#foreach ($image in $house.getImages()) 
 <div class="imageAndCaption">
 <a href="image-show.jsp?id=$image.getId()"><img 
 src="$contextPath/img/im/${image.getId()}.jpg" /></a>
@@ -163,9 +163,9 @@ $image.getCaption()
 <em>no images</em>
 #end
 
-#if ($property.hasGridReference())
-#set ($cx=$property.getLongitudeDeg())
-#set ($cy=$property.getLatitudeDeg())
+#if ($house.hasGridReference())
+#set ($cx=$house.getLongitudeDeg())
+#set ($cy=$house.getLatitudeDeg())
 ##parse ("/backend/_google_map.vm")
 #end
 

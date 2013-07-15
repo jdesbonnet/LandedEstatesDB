@@ -1,7 +1,7 @@
 <%@include file="_header.jsp"%><%Long houseId = new Long(request.getParameter("id"));
-	House house = (House)em.find(House.class, houseId);
-	context.put ("property", house);
 
+	House house = (House)em.find(House.class, houseId);
+	context.put ("house", house);
 	context.put ("tabId","houses");
 	
 	String query = "from Estate as e "
