@@ -1,0 +1,68 @@
+#parse ("/backend/_header.vm")
+
+#if ($reference)
+<h2>Edit reference for Employee Record ${employeeRecord.id}</h2>
+#else
+<h2>Create new reference for Employee Record ${employeeRecord.id}</h2>
+#end
+
+<form action="employee-record-reference-edit-submit.jsp" method="POST">
+
+<input type="hidden" name="employee_record_id" value="${employeeRecord.id}" />
+#if ($reference)
+<input type="hidden" name="reference_id" value="${reference.id}" />
+#end
+
+<div>
+<label for="field_description">Reference description</label>
+#if ($reference)
+<textarea id="field_description" name="description"
+rows="5" cols="60" wrap="virtual">${reference.description}</textarea>
+#else
+<textarea id="field_description" name="description"
+rows="5" cols="60" wrap="virtual"></textarea>
+#end
+</div>
+
+<div>
+<label>Reference source:</label>
+<input id="refsource_id" type="hidden" name="refsource_id" value="$!{reference.source.id}" />
+<input id="refsource_q" type="text" name="refsource" size="80" value="$!{reference.source.name}" />
+</div>
+
+<br clear="both">
+
+#if ($reference)
+<input type="submit" name="_submit_exit" value="Save" />
+#else
+<input type="submit" name="_sufbmit_another" value="Save &amp; add new reference" />
+<input type="submit" name="_submit_exit" value="Save &amp; return to employee record"  />
+#end
+
+</form>
+
+<script>
+jQuery(function() {
+	jQuery( "#refsource_q" ).autocomplete({
+		source: function (request, response) {
+			jQuery.ajax ( {
+				url: "query-refsource.async.jsp",
+				data: {q : request.term},
+				dataType: "json",
+				success: function (data) {
+					response(data);
+				}
+			} );
+		},
+		select: function (event, ui) {
+			console.log(ui);
+			jQuery("#refsource_id").val(ui.item.value);
+			jQuery("#refsource_q").val(ui.item.label);
+			return false;
+		}
+	});
+});
+</script>
+
+#parse ("/backend/_footer.vm")
+

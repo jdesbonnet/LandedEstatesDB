@@ -1,19 +1,31 @@
 <%@include file="_header.jsp"%><%
 
 	context.put ("tabId","employeeRecords");
-		
+	
+	List<EmployeeRecord> list; 
 	if (request.getParameter("tag")!=null) {
-		 List<EmployeeRecord> list = em.createQuery("from EmployeeRecord as er "
+		String tagName = request.getParameter("tag");
+		list = em.createQuery("from EmployeeRecord as er "
 					+ " inner join fetch er.tags as tag where tag.name=:tagName")
-					.setParameter("tagName",request.getParameter("tag"))
+					.setParameter("tagName",tagName)
 					.getResultList();
-		 context.put("employeeRecords",list);
+		 context.put ("heading", "Employee Records filtered by tag '" + tagName + "'");
+	} else if (request.getParameter("tag_id") != null) {
+		Long tagId = new Long(request.getParameter("tag_id"));
+		Tag tag = em.find(Tag.class, tagId);
+		 list = em.createQuery("from EmployeeRecord as er "
+					+ " inner join fetch er.tags as tag where tag.id=:tagId")
+					.setParameter("tagId",tag.getId())
+					.getResultList();
+		 context.put ("heading", "Employee Records filtered by tag '" + tag.getName() + "'");
 	} else {
-		List<EmployeeRecord> list = em
+		list = em
 			.createQuery("from EmployeeRecord as er order by er.id")
 			.getResultList();
-		context.put ("employeeRecords",list);
 	}	
 	
+	 context.put("employeeRecords",list);
+
+	 
 	templates.merge ("/backend/employee-record-list.vm",context,out);
 %>

@@ -1,0 +1,16 @@
+#parse ("/backend/_header.vm")
+
+<form action="employee-record-tag-edit-submit.jsp" method="POST">
+
+<input type="hidden" name="tag_id" value="$tag.id" />
+
+<div>
+<label>Name</label>
+<input type="text" name="name" value="$!tag.name" />
+</div>
+
+<input type="submit" value="Save" />
+</form>
+
+
+#parse ("/backend/_footer.vm")

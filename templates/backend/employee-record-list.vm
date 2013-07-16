@@ -1,5 +1,10 @@
 #parse ("/backend/_header.vm")
 
+#if ($heading)
+<h2>$heading</h2>
+#else
+##<h2>Employee Records</h2>
+#end 
 
 #if ($employeeRecords) 
 <table border="1" class="listTable">

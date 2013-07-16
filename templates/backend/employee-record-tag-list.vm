@@ -17,7 +17,7 @@
 <td>${tag.name}</td>
 
 <td>
-<a href="employee-record-tag-edit.jsp?id=${er.id}">edit</a></td>
+<a href="employee-record-tag-edit.jsp?tag_id=${tag.id}">edit</a></td>
 </tr>
 #end
 </table>

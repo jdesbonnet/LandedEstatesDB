@@ -1,4 +1,6 @@
-<%@include file="_header.jsp"%><%if (!user.hasWriteAccess()) {
+<%@include file="_header.jsp"%><%
+
+	if (!user.hasWriteAccess()) {
 		throw new ServletException ("No write access to this database");
 	}
 	
@@ -7,6 +9,5 @@
 		
 	context.put ("tabId","employeeRecords");
 	context.put ("employeeRecord", employeeRecord );
-	context.put ("house", employeeRecord.getHouse() );
 	
 	templates.merge ("/backend/employee-record-edit.vm",context,out);%>

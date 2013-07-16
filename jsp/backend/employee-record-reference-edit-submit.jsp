@@ -11,10 +11,19 @@
 	ReferenceSource refSource = (ReferenceSource)em.find(ReferenceSource.class, refSourceId);
 	
 	// Create and persist new reference object
-	Reference ref = new Reference();
+	Reference ref;
+	
+	if (request.getParameter("reference_id")==null) {
+		ref = new Reference();
+		em.persist(ref);
+	} else {
+		Long referenceId = new Long(request.getParameter("reference_id"));
+		ref = em.find(Reference.class,referenceId);
+	}
+	
 	ref.setDescription(request.getParameter("description"));
 	ref.setSource(refSource);
-	em.persist(ref);
+
 	
 	// Add it to employee record
 	employeeRecord.getReferences().add(ref);

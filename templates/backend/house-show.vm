@@ -33,9 +33,9 @@ no records
 <thead>
 <tr>
 <th>ID</th>
-<th>Date</th>
+<th>Document Date</th>
 <th>Description</th>
-<th>References</th>
+<th># References</th>
 <th>Tags</th>
 </tr>
 </thead>
@@ -47,11 +47,17 @@ no records
 #if ($er.date)
 <td>$dateFormat.format($er.date)</td>
 #else
-<td></td>
+<td>(none)</td>
 #end
 <td>$!er.getDescription()</td>
-<td></td>
-<td></td>
+<td>$er.references.size()</td>
+<td>
+<ul>
+#foreach ($tag in $er.tags)
+<li><a href="employee-record-list.jsp?tag_id=$tag.id">$tag.name</a></li>
+#end
+</ul>
+</td>
 </tr>
 #end
 </tbody>
