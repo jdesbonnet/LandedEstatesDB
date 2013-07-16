@@ -31,16 +31,36 @@ rows="10" cols="80"/>$!employeeRecord.getDescription()</textarea>
 #if ($employeeRecord.getReferences().size()==0)
 no references
 #else
-<ul>
+<table class="listTable">
+<thead>
+<tr>
+<th></th>
+<th>ID</th>
+<th>Description</th>
+<th>Source</th>
+<th>Source type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
 #foreach ($ref in $employeeRecord.getReferences())
-<li> $ref</li>
+<tr>
+<td><input type="checkbox" name="ref_${ref.id}" /></td>
+<td>${ref.id}</td>
+<td>${ref.description}</td>
+<td>$ref.source.name</td>
+<td>$ref.source.category.name</td>
+<td><a href="employee-record-reference-edit.jsp?employee_record_id=${employeeRecord.id}&reference_id=${ref.id}">edit</a></td>
+</tr>
 #end
-</ul>
+</tbody>
+</table>
 #end
 
 <p></p>
-
 <input type="submit" name="_submit_new_reference" value="Add new reference" />
+<input type="submit" name="_submit_delete_references" value="Delete checked references" />
+
 </div>
 
 
@@ -49,13 +69,13 @@ no references
 #if ($employeeRecord.getTags().size()==0)
 no tags
 #end
-<table>
+<table >
 #foreach ($tag in $employeeRecord.getTags())
 <tr><td><input type="checkbox" name="delete_tag_${tag.id}"/></td><td>$tag.getName()</td></tr>
 #end
 </table>
 
-<input type="submit" name="_submit_delete_checked_tags" value="Delete checked tags tag" />
+<input type="submit" name="_submit_delete_checked_tags" value="Remove checked tags" />
 
 <p></p>
 

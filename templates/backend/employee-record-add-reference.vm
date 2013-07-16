@@ -1,0 +1,52 @@
+#parse ("/backend/_header.vm")
+
+<h2>Create new reference for Employee Record ${employeeRecord.id}</h2>
+
+<form action="employee-record-add-reference-submit.jsp" method="POST">
+
+<input type="hidden" name="employee_record_id" value="${employeeRecord.id}" />
+
+<div>
+<label for="field_description">Reference description</label>
+<textarea id="field_description" name="description"
+rows="5" cols="60" wrap="virtual"></textarea>
+</div>
+
+<div>
+<label for="acinput">Reference source:</label>
+<input id="refsource_id" type="hidden" name="refsource_id" />
+<input id="refsource_q" type="text" name="refsource" size="80" />
+</div>
+
+<br clear="both">
+
+<input type="submit" value="Save &amp; add new reference" />
+<input type="submit" name="_submit_exit" value="Save &amp; return to employee record"  />
+
+</form>
+
+<script>
+jQuery(function() {
+	jQuery( "#refsource_q" ).autocomplete({
+		source: function (request, response) {
+			jQuery.ajax ( {
+				url: "query-refsource.async.jsp",
+				data: {q : request.term},
+				dataType: "json",
+				success: function (data) {
+					response(data);
+				}
+			} );
+		},
+		select: function (event, ui) {
+			console.log(ui);
+			jQuery("#refsource_id").val(ui.item.value);
+			jQuery("#refsource_q").val(ui.item.label);
+			return false;
+		}
+	});
+});
+</script>
+
+#parse ("/backend/_footer.vm")
+

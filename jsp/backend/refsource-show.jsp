@@ -1,34 +1,18 @@
-<%@page import="java.util.Map"%>
 <%@include file="_header.jsp"%><%
 	
-	Long id = null;
-	if (request.getParameter("id") != null) {
-		try {
-			id = new Long(request.getParameter("id"));
-		} catch (NumberFormatException e) {
-		}
-	}
-	
-	ReferenceSource source;
-	if (id != null) {
-		source = (ReferenceSource) hsession.load(
-				ReferenceSource.class, id);
-	} else {
-		source = new ReferenceSource ();
-	}
-
-	System.err.println ("source=" + source);
+	Long sourceId = new Long(request.getParameter("id"));
+	ReferenceSource source = em.find(ReferenceSource.class,sourceId);
 	
 	context.put ("source", source);
-	context.put ("categories", hsession.createQuery("from ReferenceCategory").list());
+	context.put ("categories", em.createQuery("from ReferenceCategory order by name").getResultList());
 	
 	
-	List<Estate> hitList = hsession
+	List<Estate> hitList = em
 	.createQuery("select distinct estate from Estate as estate "
 	+ " join estate.references as reference "
-	+ " where reference.source.id= ? ")
-	.setLong(0,id)
-	.list();
+	+ " where reference.source.id= :sourceId ")
+	.setParameter("sourceId",sourceId)
+	.getResultList();
 
 	
 	context.put ("tabId","refsources");

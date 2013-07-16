@@ -86,7 +86,9 @@ private static Double degPerMLat =  new Double (180 /  (Math.PI * re));
 	};
 	
 	private static Tab[] employeeRecordsSubTabs = {
-		new Tab ("listall", "List all", "employee-record-list.jsp?letter=_all")
+		new Tab ("listall", "List all employee records", "employee-record-list.jsp?letter=_all"),
+		new Tab ("listtags", "List tags", "tag-list.jsp"),
+		new Tab ("export", "Export employee records","employee-record-export.jsp")
 	};
 	
 	

@@ -18,18 +18,19 @@
 <tr>
 <td><a href="employee-record-edit.jsp?id=${er.id}">${er.id}</a></td>
 <td><a href="house-show.jsp?id=${er.house.id}">${er.house.name}</a></td>
+
 <td>${er.description}</td>
 
 <td><ul>
-#foreach ($tag in $er.tags)
-<li>${tag.name}</li>
+#foreach ($ref in $er.references)
+<li> ${ref.name} </li>
 #end
 </ul>
 </td>
 
 <td><ul>
-#foreach ($ref in $er.getReferences)
-<li>${ref.name}</li>
+#foreach ($tag in $er.tags)
+<li>${tag.name}</li>
 #end
 </ul>
 </td>
