@@ -26,6 +26,17 @@
 	
 	employeeRecord.setDescription(request.getParameter("description"));
 	
+	// Look for references to delete
+	for (String p : request.getParameterMap().keySet()) {
+		if (p.startsWith("delete_ref_")) {
+			Long refId = new Long(p.substring("delete_ref_".length()));
+			Reference ref = em.find(Reference.class, refId);
+			employeeRecord.getReferences().remove(ref);
+			em.remove(ref);
+		}
+	}
+	
+	
 	try {
 		Long tagId = new Long(request.getParameter("new_tag_id"));
 		Tag tag = em.find(Tag.class,tagId);
@@ -54,8 +65,8 @@
 	
 	// Look for tags to remove
 	for (String p : request.getParameterMap().keySet()) {
-		if (p.startsWith("delete_tag_")) {
-			Long tagId = new Long(p.substring("delete_tag_".length()));
+		if (p.startsWith("remove_tag_")) {
+			Long tagId = new Long(p.substring("remove_tag_".length()));
 			Tag tag = em.find(Tag.class, tagId);
 			employeeRecord.removeTag(tag);
 		}

@@ -45,7 +45,7 @@ no references
 <tbody>
 #foreach ($ref in $employeeRecord.getReferences())
 <tr>
-<td><input type="checkbox" name="ref_${ref.id}" /></td>
+<td><input type="checkbox" name="delete_ref_${ref.id}" /></td>
 <td>${ref.id}</td>
 <td>${ref.description}</td>
 <td>$ref.source.name</td>
@@ -71,7 +71,7 @@ no tags
 #end
 <table >
 #foreach ($tag in $employeeRecord.getTags())
-<tr><td><input type="checkbox" name="delete_tag_${tag.id}"/></td><td>$tag.getName()</td></tr>
+<tr><td><input type="checkbox" name="remove_tag_${tag.id}"/></td><td>$tag.getName()</td></tr>
 #end
 </table>
 
