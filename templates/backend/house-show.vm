@@ -44,7 +44,11 @@ no records
 #foreach ($er in $house.getEmployeeRecords())
 <tr>
 <td><a href="employee-record-edit.jsp?id=$er.getId()">$er.getId()</a></td>
-<td>$dateFormat.format($er.getDate())</td>
+#if ($er.date)
+<td>$dateFormat.format($er.date)</td>
+#else
+<td></td>
+#end
 <td>$!er.getDescription()</td>
 <td></td>
 <td></td>
