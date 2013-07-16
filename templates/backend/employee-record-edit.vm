@@ -1,9 +1,9 @@
 #parse ("/backend/_header.vm")
 
 #if ($employeeRecord)
-<h2>Edit Employee Record</h2>
+<h2>Edit Employee Record for ${house.name}</h2>
 #else
-<h2>New Employee Record</h2>
+<h2>New Employee Record for ${house.name}</h2>
 #end
 
 <form action="employee-record-edit-submit.jsp" method="POST">
@@ -19,6 +19,9 @@
 <div><label>Employee Record ID</label>${employeeRecord.id}</div>
 #end
 
+<div><label>House</label>
+<a href="house-show.jsp?id=${house.id}">${house.name}</a> (H${house.id})
+</div>
 
 <div>
 <label for="date">Document date (dd MMM yyyy, eg 3 Sep 1898)</label>

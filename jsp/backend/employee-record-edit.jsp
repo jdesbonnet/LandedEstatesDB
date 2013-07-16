@@ -9,5 +9,6 @@
 		
 	context.put ("tabId","employeeRecords");
 	context.put ("employeeRecord", employeeRecord );
-	
+	context.put ("house", employeeRecord.getHouse() );
+
 	templates.merge ("/backend/employee-record-edit.vm",context,out);%>
