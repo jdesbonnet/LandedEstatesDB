@@ -25,7 +25,7 @@
 
 <td><ul>
 #foreach ($ref in $er.references)
-<li> ${ref.name} </li>
+<li> ${ref.description} </li>
 #end
 </ul>
 </td>

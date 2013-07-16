@@ -45,9 +45,13 @@
 	try {
 		Long tagId = new Long(request.getParameter("new_tag_id"));
 		Tag tag = em.find(Tag.class,tagId);
-		employeeRecord.addTag(tag);
+		employeeRecord.getTags().add(tag);
 	} catch (Exception e) {
-		// ignore
+		String tagName = request.getParameter("new_tag");
+		Tag tag = new Tag();
+		tag.setName(tagName);
+		em.persist(tag);
+		employeeRecord.getTags().add(tag);
 	}
 	
 	/*

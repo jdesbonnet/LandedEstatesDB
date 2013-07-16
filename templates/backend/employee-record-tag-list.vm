@@ -1,0 +1,26 @@
+#parse ("/backend/_header.vm")
+
+
+<table border="1" class="listTable">
+<thead>
+<tr>
+<th>ID</td>
+<th>Name</th>
+<th style="width:80px;">Actions</th>
+</tr>
+</thead>
+
+#foreach ($tag in $tags) 
+<tr>
+<td><a href="employee-record-tag-edit.jsp?id=${tag.id}">${tag.id}</a></td>
+
+<td>${tag.name}</td>
+
+<td>
+<a href="employee-record-tag-edit.jsp?id=${er.id}">edit</a></td>
+</tr>
+#end
+</table>
+
+
+#parse ("/backend/_footer.vm")
