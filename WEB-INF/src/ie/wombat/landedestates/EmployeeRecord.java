@@ -14,6 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 import org.hibernate.search.annotations.DocumentId;
@@ -46,6 +47,7 @@ public class EmployeeRecord implements Indexable {
 		joinColumns=@JoinColumn(name="employee_record_id"),
 		inverseJoinColumns = @JoinColumn(name="reference_id")
 	)
+	@OrderBy("id")
 	private Set<Reference> references = new HashSet<Reference>();
 	
 	@ManyToMany
@@ -53,6 +55,7 @@ public class EmployeeRecord implements Indexable {
 		joinColumns=@JoinColumn(name="employee_record_id"),
 		inverseJoinColumns = @JoinColumn(name="tag_id")
 	)
+	@OrderBy("name")
 	private Set<Tag> tags = new HashSet<Tag>();
 	
 	public Long getId() {
