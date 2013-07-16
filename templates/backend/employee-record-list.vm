@@ -32,7 +32,7 @@
 
 <td><ul>
 #foreach ($tag in $er.tags)
-<li>${tag.name}</li>
+<li><a href="employee-record-list.jsp?tag=${tag.name}">${tag.name}</a></li>
 #end
 </ul>
 </td>

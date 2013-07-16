@@ -1,25 +1,19 @@
 <%@include file="_header.jsp"%><%
 
 	context.put ("tabId","employeeRecords");
-	
-	String letter = request.getParameter("letter");
-	context.put ("letter",letter);
-	context.put ("alphabet",alphabet);
-
-	if ( letter==null || "_all".equals(letter) ) {
-		List<EmployeeRecord> employeeRecords = em
+		
+	if (request.getParameter("tag")!=null) {
+		 List<EmployeeRecord> list = em.createQuery("from EmployeeRecord as er "
+					+ " inner join fetch er.tags as tag where tag.name=:tagName")
+					.setParameter("tagName",request.getParameter("tag"))
+					.getResultList();
+		 context.put("employeeRecords",list);
+	} else {
+		List<EmployeeRecord> list = em
 			.createQuery("from EmployeeRecord as er order by er.id")
 			.getResultList();
-		context.put ("employeeRecords",employeeRecords);
+		context.put ("employeeRecords",list);
 	}	
-	
-	if (letter != null && letter.length() == 1) {
-		List<EmployeeRecord> employeeRecords = em
-				.createQuery("from EmployeeRecord as er where er.name like :letter order by er.id")
-				.setParameter("letter",letter + "%")
-				.getResultList();
-		context.put ("employeeRecords",employeeRecords);
-	}
 	
 	templates.merge ("/backend/employee-record-list.vm",context,out);
 %>
