@@ -17,7 +17,7 @@ public class HibernateUtil {
 
 	private static EntityManager buildEntityManager() {
 		try {
-			emf = Persistence.createEntityManagerFactory("ie.wombat.videoedit");
+			emf = Persistence.createEntityManagerFactory("ie.wombat.landedestates");
 			EntityManager em = emf.createEntityManager();
 
 			log.debug("Created new EntityManagerFactory " + emf);
