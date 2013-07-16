@@ -48,10 +48,12 @@
 		employeeRecord.getTags().add(tag);
 	} catch (Exception e) {
 		String tagName = request.getParameter("new_tag");
-		Tag tag = new Tag();
-		tag.setName(tagName);
-		em.persist(tag);
-		employeeRecord.getTags().add(tag);
+		if (tagName != null && tagName.trim().length()>0) {
+			Tag tag = new Tag();
+			tag.setName(tagName);
+			em.persist(tag);
+			employeeRecord.getTags().add(tag);
+		}
 	}
 	
 	/*
