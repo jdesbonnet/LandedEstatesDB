@@ -28,6 +28,8 @@ public static final DecimalFormat latlonf = new DecimalFormat ("###.00000");
 // Used where complete timestamp is needed (eg debugging info)
 public static SimpleDateFormat timestampDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
+public static SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
+
 // TODO: is this necessary?
 public static String imageEntityName = "Image";
 
@@ -84,7 +86,6 @@ private static Double degPerMLat =  new Double (180 /  (Math.PI * re));
 	};
 	
 	private static Tab[] employeeRecordsSubTabs = {
-		new Tab ("az", "A-Z", "employee-record-list.jsp"),
 		new Tab ("listall", "List all", "employee-record-list.jsp?letter=_all")
 	};
 	
@@ -220,6 +221,8 @@ private static Double degPerMLat =  new Double (180 /  (Math.PI * re));
     
     context.put ("degPerMLon",degPerMLon);
     context.put ("degPerMLat",degPerMLat);
+    
+    context.put ("dateFormat", dateFormat);
     
 
     //context.put ("yahooMapKey","YahooDemo");

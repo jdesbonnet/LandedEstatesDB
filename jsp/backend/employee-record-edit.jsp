@@ -5,7 +5,7 @@
 	Long employeeRecordId = new Long(request.getParameter("id"));
 	EmployeeRecord employeeRecord = (EmployeeRecord)em.find(EmployeeRecord.class, employeeRecordId);
 		
-	context.put ("tabId","houses");
+	context.put ("tabId","employeeRecords");
 	context.put ("employeeRecord", employeeRecord );
 	context.put ("house", employeeRecord.getHouse() );
 	

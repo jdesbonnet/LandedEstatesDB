@@ -1,21 +1,5 @@
 #parse ("/backend/_header.vm")
 
-<div class="a-z">
-|&nbsp;
-#foreach ($l in $alphabet)
-	#if ($l == $letter)
-	<b>$l</b>
-	#else
-	<a href="employee-record-list.jsp?letter=$l&p=$!phase">$l</a>
-	#end
-	&nbsp;|&nbsp;
-#end
-
-<br />
-
-<a href="employee-record-list.jsp?letter=_all&p=$!phase">List all employee records</a>
-
-</div>
 
 #if ($employeeRecords) 
 <table border="1" class="listTable">
@@ -32,12 +16,12 @@
 
 #foreach ($er in $employeeRecords) 
 <tr>
-<td>${er.id}</td>
+<td><a href="employee-record-edit.jsp?id=${er.id}">${er.id}</a></td>
 <td><a href="house-show.jsp?id=${er.house.id}">${er.house.name}</a></td>
 <td>${er.description}</td>
 
 <td><ul>
-#foreach ($tag in $er.getTags)
+#foreach ($tag in $er.tags)
 <li>${tag.name}</li>
 #end
 </ul>

@@ -26,6 +26,15 @@
 	
 	employeeRecord.setDescription(request.getParameter("description"));
 	
+	try {
+		Long tagId = new Long(request.getParameter("new_tag_id"));
+		Tag tag = em.find(Tag.class,tagId);
+		employeeRecord.addTag(tag);
+	} catch (Exception e) {
+		// ignore
+	}
+	
+	/*
 	String newTag = request.getParameter("new_tag");
 	List<Tag> tags = em.createQuery("from Tag where name=:tagName")
 			.setParameter("tagName", newTag)
@@ -41,7 +50,9 @@
 		em.persist(tag);
 		employeeRecord.addTag(tag);
 	}
+	*/
 	
+	// Look for tags to remove
 	for (String p : request.getParameterMap().keySet()) {
 		if (p.startsWith("delete_tag_")) {
 			Long tagId = new Long(p.substring("delete_tag_".length()));
@@ -50,10 +61,10 @@
 		}
 	}
 	
-	if (request.getParameter("_submit_deleted_checked_tags")!=null) {
-		response.sendRedirect("employee-record-edit.jsp?id=" + employeeRecord.getId());
-	} else {
+	if (request.getParameter("_submit_save")!=null) {
 		response.sendRedirect("house-show.jsp?id=" + house.getId());
+	} else {
+		response.sendRedirect("employee-record-edit.jsp?id=" + employeeRecord.getId());
 	}
 	
 %>

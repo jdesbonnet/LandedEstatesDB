@@ -1,10 +1,6 @@
 #parse ("/backend/_header.vm")
 
-<h2>Employee Record
-#if ($employeeRecord)
-(ER$employeeRecord.getId())
-#end
-</h2>
+<h2>Edit Employee Record</h2>
 
 <form action="employee-record-edit-submit.jsp" method="POST">
 <input type="hidden" name="house_id" value="$house.getId()" />
@@ -13,9 +9,14 @@
 #end
 
 <div>
-<label for="date">Document date (eg 3 Sep 1898)</label>
+<label>Employee Record ID</label>
+${employeeRecord.id}
+</div>
+
+<div>
+<label for="date">Document date (dd MMM yyyy, eg 3 Sep 1898)</label>
 <input type="text" size="40" id="date" name="date"
-value="$!employeeRecord.getDate()" />
+value="$dateFormat.format($employeeRecord.getDate())" />
 </div>
 
 
@@ -58,10 +59,12 @@ no tags
 
 <p></p>
 
-<label>Add new tag</label><input id="new_tag" name="new_tag" />
+<label>Add new tag</label>
+<input id="new_tag" name="new_tag" />
+<input id="new_tag_id" type="hidden" name="new_tag_id" /> <input type="submit" name="_submit_add_tag" value="Add tag" />
 </div>
 
-<input type="submit" value="Submit" />
+<input type="submit" name="_submit_save" value="Save" />
 </form>
 
 <script>
@@ -76,6 +79,12 @@ jQuery(function() {
 					response(data);
 				}
 			} );
+		},
+		select: function (event, ui) {
+			console.log(ui);
+			jQuery("#new_tag_id").val(ui.item.value);
+			jQuery("#new_tag").val(ui.item.label);
+			return false;
 		}
 	});
 });
