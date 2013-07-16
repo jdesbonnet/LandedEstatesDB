@@ -120,9 +120,9 @@ public class CDROM {
 				HttpClient client = new HttpClient();
 				GetMethod get = new GetMethod(imageURL);
 				client.executeMethod(get);
-				FileOutputStream mapOut = new FileOutputStream (mapFile);
-				mapOut.write(get.getResponseBody());
-				mapOut.close();
+				//FileOutputStream mapOut = new FileOutputStream (mapFile);
+				//mapOut.write(get.getResponseBody());
+				//mapOut.close();
 			}
 		}
 
@@ -179,10 +179,10 @@ public class CDROM {
 		/*
 		 * Write Windows autorun.inf
 		 */
-		File autoRunFile = new File(cdromDir, "autorun.inf");
-		FileWriter fr = new FileWriter(autoRunFile);
-		fr.write("[AUTORUN]\nShellExecute=index.htm\n");
-		fr.close();
+		//File autoRunFile = new File(cdromDir, "autorun.inf");
+		//FileWriter fr = new FileWriter(autoRunFile);
+		//fr.write("[AUTORUN]\nShellExecute=index.htm\n");
+		//fr.close();
 		
 		tx.commit();
 		HibernateUtilOld.closeSession();
@@ -193,10 +193,10 @@ public class CDROM {
 			throws IOException {
 		TemplateRegistry templates = TemplateRegistry.getInstance();
 		try {
-			FileWriter fr = new FileWriter(file);
-			fr.write(templates.mergeToString(template, context));
-			fr.close();
-		} catch (AppException e) {
+			//FileWriter fr = new FileWriter(file);
+			//fr.write(templates.mergeToString(template, context));
+			//fr.close();
+		} catch (Exception e) {
 			throw new IOException(e.toString());
 		}
 	}
