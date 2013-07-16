@@ -1,7 +1,7 @@
 #parse ("/backend/_header.vm")
 
 #if ($employeeRecord)
-<h2>Edit Employee Record for ${house.name}</h2>
+<h2>Edit Employee Record ${employeeRecord.id} (${house.name})</h2>
 #else
 <h2>New Employee Record for ${house.name}</h2>
 #end
@@ -11,7 +11,7 @@
 <input type="hidden" name="house_id" value="${employeeRecord.house.id}" />
 
 #if ($employeeRecord)
-<input type="hidden" name="employee_record_id" value="$employeeRecord.getId()" />
+<input type="hidden" name="employee_record_id" value="${employeeRecord.id}" />
 #end
 
 

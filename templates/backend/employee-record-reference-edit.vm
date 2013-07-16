@@ -3,7 +3,7 @@
 #if ($reference)
 <h2>Edit reference for Employee Record ${employeeRecord.id}</h2>
 #else
-<h2>Create new reference for Employee Record ${employeeRecord.id}</h2>
+<h2>Create new reference for Employee Record ${employeeRecord.id} (${employeeRecord.house.name})</h2>
 #end
 
 <form action="employee-record-reference-edit-submit.jsp" method="POST">

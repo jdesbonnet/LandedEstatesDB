@@ -10,4 +10,4 @@
 	context.put ("tabId","employeeRecords");
 	context.put ("employeeRecord", employeeRecord );
 	
-	templates.merge ("/backend/employee-record-add-reference.vm",context,out);%>
+	templates.merge ("/backend/employee-record-reference-edit.vm",context,out);%>

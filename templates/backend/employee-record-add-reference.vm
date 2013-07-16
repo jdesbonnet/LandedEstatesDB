@@ -1,5 +1,7 @@
 #parse ("/backend/_header.vm")
 
+<h2>OBSOLETE</h2>
+
 <h2>Create new reference for Employee Record ${employeeRecord.id}</h2>
 
 <form action="employee-record-add-reference-submit.jsp" method="POST">

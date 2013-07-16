@@ -32,7 +32,7 @@
 	if (request.getParameter("_submit_exit")!=null) {
 		response.sendRedirect("employee-record-edit.jsp?id=" + employeeRecord.getId());
 	} else {
-		response.sendRedirect("employee-record-add-reference.jsp?id=" + employeeRecord.getId());
+		response.sendRedirect("employee-record-reference-add.jsp?id=" + employeeRecord.getId());
 	}
 
 %>
