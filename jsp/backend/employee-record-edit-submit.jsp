@@ -1,10 +1,15 @@
-<%@include file="_header.jsp"%><%if (!user.hasWriteAccess()) {
+<%@include file="_header.jsp"%><%
+
+	if (!user.hasWriteAccess()) {
 		throw new ServletException ("No write access to this database");
 	}
 
+	// house_id is mandatory
 	Long houseId = new Long(request.getParameter("house_id"));
 	House house = (House)em.find(House.class, houseId);
 	
+	// employee_record_id is present if editing an existing record. If absent
+	// then create a new record.
 	EmployeeRecord employeeRecord;
 	if (request.getParameter("employee_record_id") == null) {
 		employeeRecord = new EmployeeRecord();
@@ -15,7 +20,7 @@
 		employeeRecord = em.find(EmployeeRecord.class, employeeRecordId);
 	}
 	
-	// Attempt to parse date and if successful set it
+	// Attempt to parse date and if successful set it. Else silently ignore.
 	try {
 		java.text.SimpleDateFormat erdf = new java.text.SimpleDateFormat("dd MMM yyyy");
 		java.util.Date d = erdf.parse(request.getParameter("date"));

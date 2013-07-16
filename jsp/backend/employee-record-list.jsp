@@ -6,7 +6,7 @@
 	context.put ("letter",letter);
 	context.put ("alphabet",alphabet);
 
-	if ("_all".equals(letter)) {
+	if ( letter==null || "_all".equals(letter) ) {
 		List<EmployeeRecord> employeeRecords = em
 			.createQuery("from EmployeeRecord as er order by er.id")
 			.getResultList();

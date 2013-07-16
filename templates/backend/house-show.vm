@@ -29,11 +29,29 @@ src="$contextPath/bc/39/P$house.getId()"
 #if ($house.getEmployeeRecords().size()==0)
 no records
 #else
-<ul>
+<table class="listTable">
+<thead>
+<tr>
+<th>ID</th>
+<th>Date</th>
+<th>Description</th>
+<th>References</th>
+<th>Tags</th>
+</tr>
+</thead>
+
+<tbody>
 #foreach ($er in $house.getEmployeeRecords())
-<li> <a href="employee-record-edit.jsp?id=$er.getId()">ER$er.getId()</a> $!er.getDate() $!er.getDescription()</li>
+<tr>
+<td><a href="employee-record-edit.jsp?id=$er.getId()">$er.getId()</a></td>
+<td>$dateFormat.format($er.getDate())</td>
+<td>$!er.getDescription()</td>
+<td></td>
+<td></td>
+</tr>
 #end
-</ul>
+</tbody>
+</table>
 #end
 [<a href="employee-record-add.jsp?house_id=$house.getId()">Add employee record</a>]
 </td></tr>
