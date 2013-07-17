@@ -46,6 +46,10 @@ public class EmployeeRecord implements Indexable {
 	@JoinColumn(name="house_id")
 	private House house;
 	
+	@ManyToOne
+	@JoinColumn(name="estate_id")
+	private Estate estate;
+	
 	
 	@OneToMany
 	@JoinTable(name="join_employee_record_to_reference",
@@ -98,6 +102,14 @@ public class EmployeeRecord implements Indexable {
 	}
 	public void setHouse(House house) {
 		this.house = house;
+	}
+	
+	
+	public Estate getEstate() {
+		return estate;
+	}
+	public void setEstate(Estate estate) {
+		this.estate = estate;
 	}
 	public Date getDate() {
 		return date;
