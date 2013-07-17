@@ -1,5 +1,6 @@
 #parse ("/backend/_header.vm")
 
+<h2>Tags</h2>
 
 <table border="1" class="listTable">
 <thead>
@@ -12,7 +13,7 @@
 
 #foreach ($tag in $tags) 
 <tr>
-<td><a href="employee-record-tag-edit.jsp?id=${tag.id}">${tag.id}</a></td>
+<td><a href="employee-record-tag-edit.jsp?tag_id=${tag.id}">${tag.id}</a></td>
 
 <td>${tag.name}</td>
 
