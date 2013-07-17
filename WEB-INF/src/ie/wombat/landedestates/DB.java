@@ -42,7 +42,7 @@ public class DB {
 
 	//public static final String VERSION = "1.2.4 28 Sep 2009";
 	//public static final String VERSION = "1.2.5b3 13 Dec 2010";
-	public static final String VERSION = "1.3.1, July 2013";
+	public static final String VERSION = "1.3.2, July 2013";
 
 	
 	public static final int DEFAULT_NEARBY_RADIUS = 10000;
