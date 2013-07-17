@@ -1,5 +1,6 @@
 package ie.wombat.landedestates;
 
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,6 +19,9 @@ import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Store;
 
 @Entity
 @Table(name="employee_record")
@@ -35,6 +39,7 @@ public class EmployeeRecord implements Indexable {
 	
 	//@Column(columnDefinition="text")
 	@Column(name="description", length=128000) // portable
+	@Field(index = Index.TOKENIZED, store = Store.NO)
 	private String description;
 	
 	@ManyToOne
