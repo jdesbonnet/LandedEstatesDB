@@ -26,7 +26,9 @@
 <td>${er.description}</td>
 
 <td><a href="estate-show.jsp?id=${er.estate.id}">${er.estate.name}</a>
+#if ($er.estate.primaryHouse)
 ($er.estate.primaryHouse.name)
+#end
 </td>
 
 

@@ -125,7 +125,7 @@ no records
 </tr>
 </thead>
 <tbody>
-#foreach ($er in $house.getEmployeeRecords())
+#foreach ($er in $estate.employeeRecords)
 <tr>
 <td><a href="employee-record-edit.jsp?id=$er.getId()">$er.getId()</a></td>
 #if ($er.date)
