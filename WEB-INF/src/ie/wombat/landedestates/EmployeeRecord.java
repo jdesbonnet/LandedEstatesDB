@@ -42,6 +42,8 @@ public class EmployeeRecord implements Indexable {
 	@Field(index = Index.TOKENIZED, store = Store.NO)
 	private String description;
 	
+	
+	// House is not needed. Left here for the moment.
 	@ManyToOne
 	@JoinColumn(name="house_id")
 	private House house;
@@ -49,7 +51,6 @@ public class EmployeeRecord implements Indexable {
 	@ManyToOne
 	@JoinColumn(name="estate_id")
 	private Estate estate;
-	
 	
 	@OneToMany
 	@JoinTable(name="join_employee_record_to_reference",

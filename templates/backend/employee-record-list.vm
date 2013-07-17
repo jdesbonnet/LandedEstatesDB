@@ -25,7 +25,9 @@
 
 <td>${er.description}</td>
 
-<td><a href="house-show.jsp?id=${er.house.id}">${er.house.name}</a></td>
+<td><a href="estate-show.jsp?id=${er.estate.id}">${er.estate.name}</a>
+($er.estate.primaryHouse.name)
+</td>
 
 
 <td><ul>
