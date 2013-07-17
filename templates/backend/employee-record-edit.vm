@@ -8,7 +8,7 @@
 
 <form action="employee-record-edit-submit.jsp" method="POST">
 
-<input type="hidden" name="house_id" value="${employeeRecord.house.id}" />
+<input type="hidden" name="house_id" value="${house.id}" />
 
 #if ($employeeRecord)
 <input type="hidden" name="employee_record_id" value="${employeeRecord.id}" />

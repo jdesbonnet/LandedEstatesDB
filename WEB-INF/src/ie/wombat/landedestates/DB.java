@@ -490,7 +490,7 @@ public class DB {
 	 * @return List of Estate and Property (house) objects
 	 * @throws IOException
 	 */
-	public List<Object> search(Session hsession, String q) throws SearchException {
+	public List<Object> search(EntityManager em, String q) throws SearchException {
 		IndexSearcher searcher;
 
 		if (!indexDir.exists() || !indexDir.isDirectory()) {
@@ -503,7 +503,7 @@ public class DB {
 			Long id = new Long(q.substring(1));
 			if (q.startsWith("E")) {
 				try {
-					Estate estate = (Estate)hsession.get(Estate.class,id);
+					Estate estate = em.find(Estate.class,id);
 					estate.getName(); // make sure it's loaded
 				} catch (ObjectNotFoundException e) {
 					return new ArrayList<Object>(0);

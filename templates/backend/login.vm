@@ -7,7 +7,7 @@
 
 <body>
 
-<h1>Landed Estates Database</h1>
+<h1>Landed Estates / Employee Records Database</h1>
 
 <form id="loginBox" action="login-submit.jsp" method="POST" >
 
