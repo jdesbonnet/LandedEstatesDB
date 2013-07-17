@@ -1,12 +1,11 @@
 #parse ("/backend/_header.vm")
 
-<h2>Search Results: Estates</h2>
+<h2>Search Results</h2>
 
+Results: $results.size()
 <ul>
-#foreach ($estate in $results) 
-<li>
-<a href="estate-show.jsp?id=$estate.getId()">$estate.getName()</a> -
-$estate.getDescription()
+#foreach ($r in $results) 
+<li>$r
 </li>
 #end
 </ul>
