@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -51,6 +52,12 @@ public class Estate implements Indexable {
 		inverseJoinColumns = @JoinColumn(name="property_id")
 	)
 	private Set<House> houses = new HashSet<House>();
+	
+	
+	@ManyToOne
+	@JoinColumn(name="primary_house_id")
+	private House primaryHouse;
+	
 	
 	@OneToMany
 	@JoinTable(name="estate_references",
