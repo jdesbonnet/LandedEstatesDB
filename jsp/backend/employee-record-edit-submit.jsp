@@ -4,16 +4,16 @@
 		throw new ServletException ("No write access to this database");
 	}
 
-	// house_id is mandatory
-	Long houseId = new Long(request.getParameter("house_id"));
-	House house = (House)em.find(House.class, houseId);
+	// estate_id is mandatory
+	Long estateId = new Long(request.getParameter("estate_id"));
+	Estate estate = em.find(Estate.class, estateId);
 	
 	// employee_record_id is present if editing an existing record. If absent
 	// then create a new record.
 	EmployeeRecord employeeRecord;
 	if (request.getParameter("employee_record_id") == null) {
 		employeeRecord = new EmployeeRecord();
-		employeeRecord.setHouse(house);
+		employeeRecord.setEstate(estate);
 		em.persist(employeeRecord);
 	} else {
 		Long employeeRecordId = new Long(request.getParameter("employee_record_id"));
@@ -84,7 +84,7 @@
 	}
 	
 	if (request.getParameter("_submit_save")!=null) {
-		response.sendRedirect("house-show.jsp?id=" + house.getId());
+		response.sendRedirect("estate-show.jsp?id=" + estate.getId());
 	} else if (request.getParameter("_submit_new_reference")!=null) {
 		response.sendRedirect("employee-record-reference-add.jsp?id=" + employeeRecord.getId());
 	} else {

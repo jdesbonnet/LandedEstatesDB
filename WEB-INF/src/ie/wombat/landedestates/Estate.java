@@ -58,6 +58,10 @@ public class Estate implements Indexable {
 	@JoinColumn(name="primary_house_id")
 	private House primaryHouse;
 	
+	@OneToMany
+	@JoinColumn(name="estate_id")
+	private Set<EmployeeRecord> employeeRecords = new HashSet<EmployeeRecord>();
+	
 	
 	@OneToMany
 	@JoinTable(name="estate_references",
@@ -126,6 +130,19 @@ public class Estate implements Indexable {
 	}
 	
 	
+	
+	public House getPrimaryHouse() {
+		return primaryHouse;
+	}
+	public void setPrimaryHouse(House primaryHouse) {
+		this.primaryHouse = primaryHouse;
+	}
+	public Set<EmployeeRecord> getEmployeeRecords() {
+		return employeeRecords;
+	}
+	public void setEmployeeRecords(Set<EmployeeRecord> employeeRecords) {
+		this.employeeRecords = employeeRecords;
+	}
 	
 	// TODO: direct comparison of family objects should be possible
 	public boolean hasFamily (Family family) {

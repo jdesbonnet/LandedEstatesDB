@@ -1,14 +1,14 @@
 #parse ("/backend/_header.vm")
 
 #if ($employeeRecord)
-<h2>Edit Employee Record ${employeeRecord.id} (${house.name})</h2>
+<h2>Edit Employee Record ${employeeRecord.id} (${estate.name})</h2>
 #else
-<h2>New Employee Record for ${house.name}</h2>
+<h2>New Employee Record for ${estate.name}</h2>
 #end
 
 <form action="employee-record-edit-submit.jsp" method="POST">
 
-<input type="hidden" name="house_id" value="${house.id}" />
+<input type="hidden" name="estate_id" value="${estate.id}" />
 
 #if ($employeeRecord)
 <input type="hidden" name="employee_record_id" value="${employeeRecord.id}" />
@@ -19,8 +19,8 @@
 <div><label>Employee Record ID</label>${employeeRecord.id}</div>
 #end
 
-<div><label>House</label>
-<a href="house-show.jsp?id=${house.id}">${house.name}</a> (H${house.id})
+<div><label>Estate</label>
+<a href="estate-show.jsp?id=${estate.id}">${estate.name}</a> (E${estate.id})
 </div>
 
 <div>
@@ -43,7 +43,7 @@ rows="10" cols="80"/>$!employeeRecord.getDescription()</textarea>
 
 <div>
 <label for="field_references">References</label>
-#if ($employeeRecord.getReferences().size()==0)
+#if ($employeeRecord.references.size()==0)
 no references
 #else
 <table class="listTable">
@@ -58,7 +58,7 @@ no references
 </tr>
 </thead>
 <tbody>
-#foreach ($ref in $employeeRecord.getReferences())
+#foreach ($ref in $employeeRecord.references)
 <tr>
 <td><input type="checkbox" name="delete_ref_${ref.id}" /></td>
 <td>${ref.id}</td>
