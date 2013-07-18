@@ -5,7 +5,7 @@ if (!user.hasWriteAccess()) {
 }
 
 
-db.makeIndex(hsession);
+db.makeIndex(em);
 
 %>
 done.
