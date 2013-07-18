@@ -16,7 +16,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.Store;
 
 @Entity
 @Indexed
@@ -28,9 +31,10 @@ public class Estate implements Indexable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-	
+	@Field(index = Index.TOKENIZED, store = Store.NO)
 	private String name;
 	
+	@Field(index = Index.TOKENIZED, store = Store.NO)
 	private String description;
 	
 	private int version; // experimental

@@ -21,10 +21,12 @@ import javax.persistence.Table;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.Store;
 
 @Entity
 @Table(name="employee_record")
+@Indexed
 public class EmployeeRecord implements Indexable {
 	
 	@Id	
@@ -46,6 +48,7 @@ public class EmployeeRecord implements Indexable {
 	// House is not needed. Left here for the moment.
 	@ManyToOne
 	@JoinColumn(name="house_id")
+	@Deprecated
 	private House house;
 	
 	@ManyToOne

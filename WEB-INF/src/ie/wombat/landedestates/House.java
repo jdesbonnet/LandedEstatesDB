@@ -16,7 +16,10 @@ import javax.persistence.Transient;
 
 import org.apache.log4j.Logger;
 import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.Store;
 
 import ie.wombat.gis.InvalidGridReferenceException;
 import ie.wombat.gis.OSIGridReference;
@@ -34,8 +37,12 @@ public class House implements Indexable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
+	@Field(index = Index.TOKENIZED, store = Store.NO)
 	private String name;
+	
+	@Field(index = Index.TOKENIZED, store = Store.NO)
 	private String description;
+	
 	private String townland;
 	
 	@Column(name="civil_parish")

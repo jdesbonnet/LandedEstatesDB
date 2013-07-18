@@ -37,6 +37,8 @@ import org.hibernate.ObjectNotFoundException;
 import org.hibernate.ReplicationMode;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.search.jpa.FullTextEntityManager;
+import org.hibernate.search.jpa.Search;
 
 public class DB {
 
@@ -414,73 +416,22 @@ public class DB {
 	public void makeIndex(EntityManager em) throws IOException {
 		boolean createFlag = true;
 
-		// Create index dir if it does not exist.
-		if (!indexDir.exists()) {
-			log.info("Creating index directory at " + indexDir.getPath());
-			indexDir.mkdirs();
-		}
-
-		log.info("Creating index in directory " + indexDir.getPath());
-		
-		long t = -System.currentTimeMillis();
-		
-		//IndexWriter writer = new IndexWriter(indexDir.getPath(),
-		//		new StandardAnalyzer(), createFlag);
-		//writer.maxFieldLength = 1000000;
+		FullTextEntityManager fullTextEm = Search.getFullTextEntityManager(em);
 
 		
-	
+		// TODO: can we get this list automatically?
+		String[] entites = { "Estate", "House", "Family", "EmployeeRecord"};
 		
-		log.info("Indexing houses...");
-		
-		List<House> houses = em.createQuery("from House").getResultList();
-		for (House house : houses) {
-			//Document doc = makeHouseDocument(house);
-			//if (doc != null) {
-			//	writer.addDocument(doc);
-			//}
-		}
-		
-		/*
-		List<Object[]>houses = hsession.createQuery("select id,name,description from Property").list();
-		for (Object[] row : houses) {
-			Long id = (Long)row[0];
-			String name = (String)row[1];
-			String description = (String)row[2];
-			Document doc = makeHouseDocument(id, name, description);
-			if (doc != null) {
-				writer.addDocument(doc);
+		for (String entityName : entites) {
+			List<Object> objects = em.createQuery("from " + entityName).getResultList();
+			for (Object o : objects) {
+				System.err.println("indexing " + o);
+				fullTextEm.index(o);
 			}
 		}
-		*/
 		
-		log.info("Indexing reference sources...");
+		//fullTextEm.getTransaction().commit();
 		
-		List<ReferenceSource> refSources = em.createQuery("from ReferenceSource").getResultList();
-		for (ReferenceSource refSource : refSources) {
-			//Document doc = makeReferenceSourceDocument(refSource);
-			//if (doc != null) {
-			//	writer.addDocument(doc);
-			//}
-		}
-		
-		log.info("Indexing estates...");
-		
-		List<Estate> estates = em.createQuery("from Estate").getResultList();
-		for (Estate estate : estates) {
-			//Document doc = makeEstateDocument(estate);
-			//if (doc != null) {
-			//	writer.addDocument(doc);
-			//}
-		}
-		
-		log.info("Optimizing index...");
-		//writer.optimize();
-		//writer.close();
-		
-		t += System.currentTimeMillis();
-		
-		log.info("Time to create index: " + t + "ms");
 	}
 
 	/**
