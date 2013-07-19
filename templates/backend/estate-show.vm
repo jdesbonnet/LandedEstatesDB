@@ -31,8 +31,8 @@ $!estate.getDescription()
 
 <h3>Houses</h3>
 
-#if ($estate.getProperties().size() == 0) 
-<em>none</em>
+#if ($estate.houses.size() == 0) 
+<em>no houses</em>
 #else
 <table class="listTable">
 <thead>
@@ -48,7 +48,7 @@ $!estate.getDescription()
 </tr>
 </thead>
 
-#foreach ($house in $estate.getHouses()) 
+#foreach ($house in $estate.houses) 
 <tr valign="top">
 <td>
 
@@ -103,6 +103,53 @@ OS Sheet #$house.getOsSheet().
 #end
 </table>
 #end
+
+## End list of houses
+
+
+##
+## Employee Records
+##
+<h3>Employee Records</h3>
+#if ($estate.employeeRecords.size()==0)
+no records
+#else
+<table class="listTable">
+<thead>
+<tr>
+<th>ID</th>
+<th>Document Date</th>
+<th>Description</th>
+<th># References</th>
+<th>Tags</th>
+</tr>
+</thead>
+<tbody>
+#foreach ($er in $estate.employeeRecords)
+<tr>
+<td><a href="employee-record-edit.jsp?id=$er.getId()">$er.getId()</a></td>
+#if ($er.date)
+<td>$dateFormat.format($er.date)</td>
+#else
+<td>(none)</td>
+#end
+<td>$!er.getDescription()</td>
+<td>$er.references.size()</td>
+<td>
+<ul>
+#foreach ($tag in $er.tags)
+<li><a href="employee-record-list.jsp?tag_id=$tag.id">$tag.name</a></li>
+#end
+</ul>
+</td>
+</tr>
+#end
+</tbody>
+</table>
+#end
+[<a href="employee-record-add.jsp?estate_id=${estate.id}">Add employee record</a>]
+## End list of Employee Records
+
 
 
 #if ($estate.getReferences().size() == 0)

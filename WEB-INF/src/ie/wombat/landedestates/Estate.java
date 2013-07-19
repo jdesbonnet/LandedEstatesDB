@@ -11,11 +11,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.Store;
 
 @Entity
 @Indexed
@@ -27,9 +31,10 @@ public class Estate implements Indexable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-	
+	@Field(index = Index.TOKENIZED, store = Store.NO)
 	private String name;
 	
+	@Field(index = Index.TOKENIZED, store = Store.NO)
 	private String description;
 	
 	private int version; // experimental
@@ -51,6 +56,16 @@ public class Estate implements Indexable {
 		inverseJoinColumns = @JoinColumn(name="property_id")
 	)
 	private Set<House> houses = new HashSet<House>();
+	
+	
+	@ManyToOne
+	@JoinColumn(name="primary_house_id")
+	private House primaryHouse;
+	
+	@OneToMany
+	@JoinColumn(name="estate_id")
+	private Set<EmployeeRecord> employeeRecords = new HashSet<EmployeeRecord>();
+	
 	
 	@OneToMany
 	@JoinTable(name="estate_references",
@@ -119,6 +134,19 @@ public class Estate implements Indexable {
 	}
 	
 	
+	
+	public House getPrimaryHouse() {
+		return primaryHouse;
+	}
+	public void setPrimaryHouse(House primaryHouse) {
+		this.primaryHouse = primaryHouse;
+	}
+	public Set<EmployeeRecord> getEmployeeRecords() {
+		return employeeRecords;
+	}
+	public void setEmployeeRecords(Set<EmployeeRecord> employeeRecords) {
+		this.employeeRecords = employeeRecords;
+	}
 	
 	// TODO: direct comparison of family objects should be possible
 	public boolean hasFamily (Family family) {

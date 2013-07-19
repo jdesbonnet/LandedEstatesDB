@@ -6,14 +6,14 @@
 <%@include file="_header.jsp"%><%
 	String q = request.getParameter("q");
 
-	final String[] fields = new String[]{"name","tags"}; // search on these fields
+	final String[] fields = new String[]{"description"}; // search on these fields
 	FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(em);
 	MultiFieldQueryParser parser = new MultiFieldQueryParser(
 		Version.LUCENE_31, 
 		fields, 
 		new StandardAnalyzer(Version.LUCENE_31) 
-		);
-//parser.setDefaultOperator(QueryParser.AND_OPERATOR); // overrides the default OR_OPERATOR, so that all words in the search are required
+	);
+	
 	org.apache.lucene.search.Query query = parser.parse(q);
 
 	context.put ("results",fullTextEntityManager.createFullTextQuery(query).getResultList());
