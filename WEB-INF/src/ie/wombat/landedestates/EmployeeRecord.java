@@ -38,6 +38,9 @@ public class EmployeeRecord implements Indexable {
 	@Column(name="document_date")
 	private Date date;
 	
+	@Column(name="date_expr")
+	private String dateExpression;
+	
 	
 	//@Column(columnDefinition="text")
 	@Column(name="description", length=128000) // portable
@@ -120,6 +123,14 @@ public class EmployeeRecord implements Indexable {
 	}
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	
+	
+	public String getDateExpression() {
+		return dateExpression;
+	}
+	public void setDateExpression(String dateExpression) {
+		this.dateExpression = dateExpression;
 	}
 	public Set<Reference> getReferences() {
 		return references;

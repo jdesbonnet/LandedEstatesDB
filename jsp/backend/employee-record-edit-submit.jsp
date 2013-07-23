@@ -21,6 +21,7 @@
 	}
 	
 	// Attempt to parse date and if successful set it. Else silently ignore.
+	/*
 	try {
 		java.text.SimpleDateFormat erdf = new java.text.SimpleDateFormat("dd MMM yyyy");
 		java.util.Date d = erdf.parse(request.getParameter("date"));
@@ -28,6 +29,8 @@
 	} catch (Exception e) {
 		// ignore
 	}
+	*/
+	employeeRecord.setDateExpression(request.getParameter("date_expr"));
 	
 	employeeRecord.setDescription(request.getParameter("description"));
 	

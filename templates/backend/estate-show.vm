@@ -103,7 +103,6 @@ OS Sheet #$house.getOsSheet().
 #end
 </table>
 #end
-
 ## End list of houses
 
 
@@ -128,8 +127,8 @@ no records
 #foreach ($er in $estate.employeeRecords)
 <tr>
 <td><a href="employee-record-edit.jsp?id=$er.getId()">$er.getId()</a></td>
-#if ($er.date)
-<td>$dateFormat.format($er.date)</td>
+#if ($er.dateExpression)
+<td>$er.dateExpression</td>
 #else
 <td>(none)</td>
 #end

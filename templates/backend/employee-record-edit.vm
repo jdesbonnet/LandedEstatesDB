@@ -24,13 +24,11 @@
 </div>
 
 <div>
-<label for="date">Document date (dd MMM yyyy, eg 3 Sep 1898)</label>
-<input type="text" size="40" id="date" name="date"
-#if ($employeeRecord.date)
-value="$dateFormat.format($employeeRecord.getDate())"
-#else
-value=""
-#end 
+<label for="date_expr">Document date <a href="#" title="Dates are in format 'dd MMM yyyy' or 'MMM yyyy' where dd is the day of month, MMM is 
+first 3 letters of the month in English, and yyyy is the 4 digit year. Date ranges are also allowed by using the '-' (minus) character as a separator. Example:
+'3 Aug 1901 - 18 Aug 1901' or 'Jul 1890 - Sep 1891' ">?</a></label>
+<input type="text" size="40" id="date_expr" name="date_expr"
+value="$!employeeRecord.dateExpression"
 />
 </div>
 
@@ -122,6 +120,9 @@ jQuery(function() {
 			return false;
 		}
 	});
+	
+	jQuery( document ).tooltip();
+	
 });
 </script>
 

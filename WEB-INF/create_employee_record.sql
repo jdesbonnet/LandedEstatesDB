@@ -4,6 +4,7 @@ CREATE TABLE `employee_record` (
   `document_date` date DEFAULT NULL,
   `estate_id` int(11) DEFAULT NULL,
   `house_id` int(11) DEFAULT NULL,
+  `date_expr` varchar(128)
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
