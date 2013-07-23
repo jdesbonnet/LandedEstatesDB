@@ -17,6 +17,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
@@ -27,6 +30,7 @@ import org.hibernate.search.annotations.Store;
 @Entity
 @Table(name="employee_record")
 @Indexed
+@XmlRootElement
 public class EmployeeRecord implements Indexable {
 	
 	@Id	
@@ -72,6 +76,7 @@ public class EmployeeRecord implements Indexable {
 		inverseJoinColumns = @JoinColumn(name="tag_id")
 	)
 	@OrderBy("name")
+	@XmlTransient
 	private Set<Tag> tags = new HashSet<Tag>();
 	
 	public Long getId() {
@@ -104,6 +109,7 @@ public class EmployeeRecord implements Indexable {
 		this.tags.remove(tag);
 	}
 	
+	@XmlTransient
 	public House getHouse() {
 		return house;
 	}
@@ -111,7 +117,7 @@ public class EmployeeRecord implements Indexable {
 		this.house = house;
 	}
 	
-	
+	//@XmlTransient
 	public Estate getEstate() {
 		return estate;
 	}

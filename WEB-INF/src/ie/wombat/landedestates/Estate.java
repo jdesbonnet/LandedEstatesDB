@@ -14,6 +14,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
@@ -24,6 +26,7 @@ import org.hibernate.search.annotations.Store;
 @Entity
 @Indexed
 @Table(name="estate")
+@XmlRootElement
 public class Estate implements Indexable {
 	
 	@Id
@@ -119,7 +122,7 @@ public class Estate implements Indexable {
 	
 	
 	
-	
+	@XmlTransient
 	public Set<House> getHouses() {
 		return houses;
 	}
@@ -134,13 +137,15 @@ public class Estate implements Indexable {
 	}
 	
 	
-	
+	//@XmlTransient
 	public House getPrimaryHouse() {
 		return primaryHouse;
 	}
 	public void setPrimaryHouse(House primaryHouse) {
 		this.primaryHouse = primaryHouse;
 	}
+	
+	@XmlTransient
 	public Set<EmployeeRecord> getEmployeeRecords() {
 		return employeeRecords;
 	}

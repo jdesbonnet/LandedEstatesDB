@@ -13,6 +13,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
@@ -23,6 +25,7 @@ import org.hibernate.search.annotations.Store;
 @Entity
 @Indexed
 @Table(name="family")
+@XmlRootElement
 public class Family implements Indexable {
 	
 	@Id
@@ -72,6 +75,8 @@ public class Family implements Indexable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	@XmlTransient
 	public Set<Estate> getEstates() {
 		return estates;
 	}

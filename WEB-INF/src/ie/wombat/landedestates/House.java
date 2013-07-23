@@ -13,6 +13,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import org.apache.log4j.Logger;
 import org.hibernate.search.annotations.DocumentId;
@@ -28,6 +30,7 @@ import ie.wombat.imagetable.Image;
 @Entity
 @Indexed
 @Table(name="property")
+@XmlRootElement
 public class House implements Indexable {
 
 	private static Logger log = Logger.getLogger(House.class);
@@ -266,6 +269,8 @@ public class House implements Indexable {
 			//this.longitude=0.0;
 		}
 	}
+	
+	@XmlTransient
 	public Set<Image> getImages() {
 		return images;
 	}

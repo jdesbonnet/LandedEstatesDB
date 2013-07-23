@@ -1,3 +1,5 @@
+<%@page import="javax.xml.bind.Marshaller"%>
+<%@page import="javax.xml.bind.JAXBContext"%>
 <%@include file="_header.jsp"%><%
 
 	if (!user.hasWriteAccess()) {
@@ -85,6 +87,11 @@
 			employeeRecord.removeTag(tag);
 		}
 	}
+	
+	JAXBContext jaxbContext = JAXBContext.newInstance(EmployeeRecord.class);
+	Marshaller marshaller = jaxbContext.createMarshaller();
+	marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+	marshaller.marshal(employeeRecord, System.err);
 	
 	if (request.getParameter("_submit_save")!=null) {
 		response.sendRedirect("estate-show.jsp?id=" + estate.getId());
