@@ -41,34 +41,10 @@ rows="10" cols="80"/>$!employeeRecord.getDescription()</textarea>
 
 <div>
 <label for="field_references">References</label>
-#if ($employeeRecord.references.size()==0)
-no references
-#else
-<table class="listTable">
-<thead>
-<tr>
-<th></th>
-<th>ID</th>
-<th>Description</th>
-<th>Source</th>
-<th>Source type</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-#foreach ($ref in $employeeRecord.references)
-<tr>
-<td><input type="checkbox" name="delete_ref_${ref.id}" /></td>
-<td>${ref.id}</td>
-<td>${ref.description}</td>
-<td>$ref.source.name</td>
-<td>$ref.source.category.name</td>
-<td><a href="employee-record-reference-edit.jsp?employee_record_id=${employeeRecord.id}&reference_id=${ref.id}">edit</a></td>
-</tr>
-#end
-</tbody>
-</table>
-#end
+
+#set ($editable=true)
+#employee_record_reference_table ($employeeRecord $editable)
+
 
 <p></p>
 <input type="submit" name="_submit_new_reference" value="Add new reference" />

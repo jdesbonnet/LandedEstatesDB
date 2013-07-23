@@ -32,11 +32,8 @@
 </td>
 
 
-<td><ul>
-#foreach ($ref in $er.references)
-<li> ${ref.description} </li>
-#end
-</ul>
+<td>
+#parse("/backend/_employee_record_reference_table.vm")
 </td>
 
 <td><ul>

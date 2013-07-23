@@ -1,0 +1,42 @@
+
+
+#macro( employee_record_reference_table $er $editable )
+#if ($er.references.size()==0)
+no references
+#else
+<table class="listTable">
+<thead>
+<tr>
+#if ($editable)
+<th></th>
+#end
+<th>ID</th>
+<th>Description</th>
+<th>Source</th>
+<th>Source type</th>
+#if ($editable)
+<th></th>
+#end
+</tr>
+</thead>
+<tbody>
+#foreach ($ref in $er.references)
+<tr>
+#if ($editable)
+<td><input type="checkbox" name="delete_ref_${ref.id}" /></td>
+#end
+<td>${ref.id}</td>
+<td>${ref.description}</td>
+<td>${ref.source.name}</td>
+<td>${ref.source.category.name}</td>
+#if ($editable)
+<td><a href="employee-record-reference-edit.jsp?employee_record_id=${er.id}&reference_id=${ref.id}">edit</a></td>
+#end
+</tr>
+#end
+</tbody>
+</table>
+#end
+
+#end
+##end macro
