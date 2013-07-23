@@ -23,7 +23,7 @@
 <tr>
 <td><a href="employee-record-edit.jsp?id=${er.id}">${er.id}</a></td>
 
-<td>${er.description}</td>
+<td>$formatUtils.formatText($er.description)</td>
 
 <td><a href="estate-show.jsp?id=${er.estate.id}">${er.estate.name}</a>
 #if ($er.estate.primaryHouse)

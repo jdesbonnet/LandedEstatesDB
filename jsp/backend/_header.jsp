@@ -228,6 +228,8 @@ private static Double degPerMLat =  new Double (180 /  (Math.PI * re));
     
     context.put ("dateFormat", dateFormat);
     
+    context.put ("formatUtils", new FormatUtils());
+    
 
     //context.put ("yahooMapKey","YahooDemo");
     
