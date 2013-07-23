@@ -1,4 +1,5 @@
 #parse ("/backend/_header.vm")
+#parse ("/backend/_employee_record_reference_table.vm")
 
 #if ($heading)
 <h2>$heading</h2>
@@ -33,7 +34,8 @@
 
 
 <td>
-#parse("/backend/_employee_record_reference_table.vm")
+#set ($editable=false)
+#employee_record_reference_table ($er $editable)
 </td>
 
 <td><ul>
