@@ -22,23 +22,23 @@
 
 #foreach ($er in $employeeRecords) 
 <tr>
-<td><a href="employee-record-edit.jsp?id=${er.id}">${er.id}</a></td>
+<td valign="top"><a href="employee-record-edit.jsp?id=${er.id}">${er.id}</a></td>
 
-<td>$formatUtils.formatText($er.description)</td>
+<td valign="top">$formatUtils.formatText($er.description)</td>
 
-<td><a href="estate-show.jsp?id=${er.estate.id}">${er.estate.name}</a>
+<td valign="top"><a href="estate-show.jsp?id=${er.estate.id}">${er.estate.name}</a>
 #if ($er.estate.primaryHouse)
 ($er.estate.primaryHouse.name)
 #end
 </td>
 
 
-<td>
+<td valign="top">
 #set ($editable=false)
 #employee_record_reference_table ($er $editable)
 </td>
 
-<td>
+<td valign="top">
 <ul class="tagList">
 #foreach ($tag in $er.tags)
 <li><a href="employee-record-list.jsp?tag=${tag.name}">${tag.name}</a></li>
@@ -47,10 +47,9 @@
 </td>
 
 
-<td>
+<td valign="top">
 <a href="employee-record-edit.jsp?id=${er.id}">edit</a> |
 <a href="audit-list.jsp?class_name=${er.class.name}&entity_id=${er.id}">audit</a>
-
 </td>
 
 </tr>
