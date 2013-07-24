@@ -5,7 +5,13 @@
 Results: $results.size()
 <ul>
 #foreach ($r in $results) 
-<li>$r
+<li>
+#if ($r.class=="ie.wombat.landedestates.EmployeeRecord")
+ER$r.id 
+ $r.description
+#else 
+$r
+#end
 </li>
 #end
 </ul>

@@ -24,7 +24,7 @@ public class AuditUtil {
 		String xml = w.toString();
 		
 		AuditRecord auditRecord = new AuditRecord();
-		auditRecord.setClassName(a.getClass().toString());
+		auditRecord.setClassName(a.getClass().getName());
 		auditRecord.setEntityId(a.getId());
 		auditRecord.setUser(user);
 		auditRecord.setEntityXml(xml);

@@ -1,0 +1,27 @@
+#parse ("/backend/_header.vm")
+
+<h2>Audit records</h2>
+
+<table border="1" class="listTable">
+<thead>
+<tr>
+<th>Audit Record ID <a href="#" title="Click to show XML representation of entity">?</a></td>
+<th>Timestamp</th>
+<th>Class Name</th>
+<th>Entity ID</th>
+<th>User</th>
+</tr>
+</thead>
+
+#foreach ($ar in $auditRecords) 
+<tr>
+<td><a href="audit-record-show.jsp?id=${ar.id}">${ar.id}</a></td>
+<td>$formatUtils.formatTimestamp($ar.timestamp)</td>
+<td>$formatUtils.formatClassName($ar.className)</td>
+<td>$ar.entityId</td>
+<td>$ar.user.id</td>
+</tr>
+#end
+</table>
+
+#parse ("/backend/_footer.vm")

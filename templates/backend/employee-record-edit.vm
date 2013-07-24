@@ -76,6 +76,11 @@ no tags
 <input type="submit" name="_submit_save" value="Save" />
 </form>
 
+<p>
+<a href="audit-list.jsp?class_name=${employeeRecord.class.name}&entity_id=${employeeRecord.id}">Audit trail</a>
+</p>
+
+
 <script>
 jQuery(function() {
 	jQuery( "#new_tag" ).autocomplete({
