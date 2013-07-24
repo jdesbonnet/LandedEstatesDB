@@ -12,8 +12,8 @@ no references
 #end
 <th>ID</th>
 <th>Description</th>
-<th>Source</th>
-<th>Source type</th>
+##<th>Source</th>
+##<th>Source type</th>
 #if ($editable)
 <th></th>
 #end
@@ -26,9 +26,12 @@ no references
 <td><input type="checkbox" name="delete_ref_${ref.id}" /></td>
 #end
 <td>${ref.id}</td>
-<td>${ref.description}</td>
-<td>${ref.source.name}</td>
-<td>${ref.source.category.name}</td>
+
+##<td>${ref.description}</td>
+##<td>${ref.source.name}</td>
+##<td>${ref.source.category.name}</td>
+<td>${ref.description} <span class="source">Source: ${ref.source.name} (${ref.source.category.name})</span></td>
+
 #if ($editable)
 <td><a href="employee-record-reference-edit.jsp?employee_record_id=${er.id}&reference_id=${ref.id}">edit</a></td>
 #end
