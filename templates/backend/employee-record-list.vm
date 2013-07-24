@@ -38,7 +38,8 @@
 #employee_record_reference_table ($er $editable)
 </td>
 
-<td><ul>
+<td>
+<ul class="tagList">
 #foreach ($tag in $er.tags)
 <li><a href="employee-record-list.jsp?tag=${tag.name}">${tag.name}</a></li>
 #end
