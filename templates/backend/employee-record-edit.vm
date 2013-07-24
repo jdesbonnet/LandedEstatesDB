@@ -77,7 +77,7 @@ no tags
 </form>
 
 <p>
-<a href="audit-list.jsp?class_name=${employeeRecord.class.name}&entity_id=${employeeRecord.id}">Audit trail</a>
+<a href="audit-list.jsp?class_name=${employeeRecord.class.name}&entity_id=${employeeRecord.id}">View audit trail</a>
 </p>
 
 

@@ -48,8 +48,9 @@
 
 
 <td valign="top">
-<a href="employee-record-edit.jsp?id=${er.id}">edit</a> |
-<a href="audit-list.jsp?class_name=${er.class.name}&entity_id=${er.id}">audit</a>
+<a href="employee-record-edit.jsp?id=${er.id}">edit</a> 
+##|
+##<a href="audit-list.jsp?class_name=${er.class.name}&entity_id=${er.id}">audit</a>
 </td>
 
 </tr>
