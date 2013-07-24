@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,10 +29,11 @@ import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.Store;
 
 @Entity
+@EntityListeners(EntityListener.class)
 @Table(name="employee_record")
 @Indexed
 @XmlRootElement
-public class EmployeeRecord implements Indexable {
+public class EmployeeRecord implements Indexable,Auditable {
 	
 	@Id	
 	@GeneratedValue(strategy=GenerationType.AUTO)
