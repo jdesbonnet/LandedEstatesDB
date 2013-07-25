@@ -1,0 +1,14 @@
+#macro( search_result_item $r )
+#set ($resultClass=$r.getClass().getName())
+#if ($resultClass=="ie.wombat.landedestates.House")
+<a href="house-show.jsp?id=$r.id">H${r.id}</a> $r.name $r.description
+#elseif ($resultClass=="ie.wombat.landedestates.EmployeeRecord")
+<a href="employee-record-edit.jsp?id=$r.id">ER${r.id}</a> $r.description
+#elseif ($resultClass=="ie.wombat.landedestates.Estate")
+<a href="estate-show.jsp?id=$r.id">E${r.id}</a> $r.name $r.description
+#else
+$resultClass $r.id
+#end
+
+#end
+##end macro
