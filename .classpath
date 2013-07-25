@@ -24,7 +24,6 @@
 	<classpathentry kind="var" path="TOMCAT_HOME/lib/annotations-api.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/hibernate-3.6.4.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/ehcache-1.1.jar"/>
-	<classpathentry kind="lib" path="WEB-INF/lib/lucene-core-3.1.0.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/hibernate-jpa-2.0-api-1.0.0.Final.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/hibernate-search-3.4.1.Final.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/json-lib-2.1-jdk15.jar"/>
@@ -33,5 +32,7 @@
 	<classpathentry kind="lib" path="WEB-INF/lib/appengine-endpoints.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/appengine-jsr107cache-1.8.1.1.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/velocity-1.7.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/lucene-core-3.6.2.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/lucene-highlighter-3.6.2.jar"/>
 	<classpathentry kind="output" path="WEB-INF/classes"/>
 </classpath>
