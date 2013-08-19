@@ -14,6 +14,6 @@ if (!user.hasWriteAccess()) {
 		// ignore
 	}
 	
-	db.saveEstate (estate);
+	em.persist(estate);
 	response.sendRedirect("estate-edit.jsp?id=" + estate.getId());
 %>

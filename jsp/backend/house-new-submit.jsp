@@ -6,7 +6,7 @@
 	Estate estate;
 	try {
 		Long estateId = new Long (request.getParameter("estate_id"));
-		estate = (Estate)hsession.load(Estate.class, estateId);
+		estate = (Estate)em.find(Estate.class, estateId);
 	} catch (Exception e) {
 		throw new ServletException (e.toString());
 	}
@@ -20,10 +20,9 @@
 		// ignore
 	}
 	
-	hsession.save(property);
+	em.persist(property);
 	
-	estate.getProperties().add(property);
-	hsession.save(estate);
+	estate.getHouses().add(property);
 	
 	response.sendRedirect("house-edit.jsp?id=" 
 	+ property.getId() 
