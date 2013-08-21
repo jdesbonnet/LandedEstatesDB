@@ -1,11 +1,15 @@
 #parse ("/_nuig_ot_header.vm")
 
-<h2>CONNACHT AND MUNSTER LANDED ESTATES DATABASE</h2>
+<h2>EMPLOYEE RECORDS DATABASE</h2>
 
 <table class="twoColLayout">
 <tr valign="top">
 
 <td width="50%" class="col1">
+
+<p>
+Intro material here...
+</p>
 
 <p>
 The Connacht and Munster Landed Estates project, funded by the 
@@ -59,11 +63,14 @@ The project can be contacted via email:
 <a href="$contextPath/jsp/property-show.jsp?id=1615">Finavarra House</a> (Co. Clare)
 </div>
 
+#if ($FALSE)
 <a href="$contextPath/jsp/map.jsp"><img 
 src="$contextPath/assets/map.small.jpg" /></a>
 <div class="caption">
 <a href="$contextPath/jsp/map.jsp">Interactive Map of Houses and Estates</a>
 </div>
+#end
+
 </td>
 
 </tr>

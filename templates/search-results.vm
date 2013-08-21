@@ -2,6 +2,8 @@
 
 <h2>Search Results: Estates</h2>
 
+<p>Found $results.size() records.</p>
+
 <ul class="bulletList">
 #foreach ($result in $results) 
 	#if ($result.getLuceneId().startsWith("E"))

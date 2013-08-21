@@ -10,13 +10,13 @@
 
 	if ("_all".equals(letter)) {
 		//context.put ("estates",hsession.createQuery("from Estate where projectPhase=1 order by name").list());
-		context.put ("estates",hsession.createQuery("from Estate order by name").list());
+		context.put ("estates",em.createQuery("from Estate order by name").getResultList());
 	}	
 	if (letter != null && letter.length() == 1) {
 		//context.put ("estates",hsession.createQuery("from Estate where name like :letter and projectPhase=1 order by name")
-		context.put ("estates",hsession.createQuery("from Estate where name like :letter order by name")
-				.setString("letter", letter + "%")
-				.list());
+		context.put ("estates",em.createQuery("from Estate where name like :letter order by name")
+				.setParameter("letter", letter + "%")
+				.getResultList());
 		
 	} 
 	templates.merge ("/estate-list.vm",context,out);

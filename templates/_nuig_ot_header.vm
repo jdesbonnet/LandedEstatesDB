@@ -6,7 +6,7 @@
 #if ($pageTitle)
 <title>$pageTitle</title>
 #else
-<title>Landed Estates Database</title>
+<title>Employee Records Database</title>
 #end
 <!-- Meta Tags -->
 
@@ -62,7 +62,7 @@ will be impaired because of this.
 	<div id="breadcrumb">
 		<div id="searcharea"><img alt="You are here" class="breadcrumbimage" src="http://www.nuigalway.ie/images/breadcrumb_youarehere.png" /></div>
 		<div id="breadcrumbwide"><span class="verdanabold"><a title="Landed Estates Database" 
-		href="http://www.landedestates.ie/">Landed Estates Database</a></span><span class="breadcrumbimage"><img alt="NUI Galway Home" src="http://www.nuigalway.ie/images/arrows/research_breadcrumb.png"/></span></div>
+		href="http://www.landedestates.ie/">Employee Records Database</a></span><span class="breadcrumbimage"><img alt="NUI Galway Home" src="http://www.nuigalway.ie/images/arrows/research_breadcrumb.png"/></span></div>
 	</div>
 	<!-- END BREADCRUMB -->
 
@@ -82,12 +82,14 @@ will be impaired because of this.
 				<li><span id="link0" class="youarehere"></span><a title="Home Page" href="index.jsp">Home Page</a></li>
 				<li><span id="link1" class="youarehere"></span><a title="Help" href="help.jsp">More Information</a>
 				<li><span id="link1" class="youarehere"></span><a title="Estates" href="estate-list.jsp">Estates A-Z</a></li>
-				<li><span id="link1" class="youarehere"></span><a title="Families" href="family-list.jsp">Families A-Z</a></li>
-				<li><span id="link1" class="youarehere"></span><a title="Houses" href="property-list.jsp">Houses A-Z</a></li>
+				<li><span id="link1" class="youarehere"></span><a title="Record Tags" href="tag-list.jsp">Record Tags</a></li>
+				
+				##<li><span id="link1" class="youarehere"></span><a title="Families" href="family-list.jsp">Families A-Z</a></li>
+				##<li><span id="link1" class="youarehere"></span><a title="Houses" href="property-list.jsp">Houses A-Z</a></li>
 				<li><span id="link1" class="youarehere"></span><a title="Reference Sources" href="refsource-list.jsp">Reference Sources</a></li>
-				<li><span id="link1" class="youarehere"></span><a title="Images" href="images.jsp">Images</a></li>
-				<li><span id="link1" class="youarehere"></span><a title="Map" href="map.jsp">Map</a></li>
-				<li><span id="link1" class="youarehere"></span><a title="Images" href="property-list.jsp">Search</a>
+				##<li><span id="link1" class="youarehere"></span><a title="Images" href="images.jsp">Images</a></li>
+				##<li><span id="link1" class="youarehere"></span><a title="Map" href="map.jsp">Map</a></li>
+				##<li><span id="link1" class="youarehere"></span><a title="Images" href="property-list.jsp">Search</a>
 				<form action="search.jsp" method="GET">
 			<input id="f_q" type="text" name="q" value="$!q" />
 			<input type="submit" value="Go" />

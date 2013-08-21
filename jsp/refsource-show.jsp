@@ -13,7 +13,7 @@
 	
 	ReferenceSource source;
 	if (id != null) {
-		source = (ReferenceSource) hsession.load(
+		source = (ReferenceSource)em.find(
 				ReferenceSource.class, id);
 	} else {
 		source = new ReferenceSource ();
@@ -21,17 +21,18 @@
 
 	
 	context.put ("source", source);
-	context.put ("categories", hsession.createQuery("from ReferenceCategory").list());
+	context.put ("categories", em.createQuery("from ReferenceCategory").getResultList());
 	
-	List<Estate> hitList = hsession
+	
+	List<Estate> hitList = em
 		.createQuery("select distinct estate from Estate as estate "
 		+ " join estate.references as reference "
-		+ " where reference.source.id= ? "
-		//+ " and  estate.projectPhase=1 "
+		+ " where reference.source.id= :refSourceId "
 		)
-		.setLong(0,id)
-		.list();
-
+		.setParameter("refSourceId",id)
+		.getResultList();
+	
+	//List<Estate>hitList = new ArrayList<Estate>();
 	
 	t += System.currentTimeMillis();
 	

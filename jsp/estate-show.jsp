@@ -17,13 +17,7 @@
 	Estate estate;
 	try {
 		Long id = new Long (request.getParameter("id"));
-		estate = (Estate)hsession.load(Estate.class,id);
-		/*
-		if (estate.getProjectPhase() != 1 ) {
-			response.sendRedirect ("not-available.jsp");
-			return;
-		}
-		*/
+		estate = (Estate)em.find(Estate.class,id);
 	} catch (NumberFormatException e) {
 		throw new ServletException ("invalid id");
 	}
