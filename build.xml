@@ -113,6 +113,7 @@
 			<lib dir="./WEB-INF/lib" />
 			<classes dir="./WEB-INF/classes" />
 			<fileset file="./LICENSE.txt" />
+			<fileset dir="." includes="css/**"/>
 			<fileset dir="." includes="assets/**"/>
 			<fileset dir="." includes="jsp/**"/>
 			<fileset dir="." includes="templates/**"/>
