@@ -32,10 +32,12 @@
 </thead>
 
 #foreach ($estate in $estates) 
+#if ($estate.employeeRecords.size()>0)
 <tr>
 <td>
 <a href="estate-show.jsp?id=$estate.getId()">$estate.getName()</a>
 &nbsp;
+$estate.employeeRecords.size()
 </td>
 
 <td>
@@ -57,13 +59,19 @@
 &nbsp; 
 </td>
 
-
 </tr>
+
 #end
+##End test for employee records
+
+#end
+##End table row loop
+
 </table>
 
 
 #end
+##End test for records
 
 
 #parse ("/_nuig_ot_footer.vm")
