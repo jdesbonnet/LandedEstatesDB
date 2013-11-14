@@ -10,13 +10,13 @@
 	if (id == null) {
 		family = new Family();
 	} else {
-		family = (Family)hsession.load(Family.class,id);
+		family = (Family)em.find(Family.class,id);
 	}
 	
 	context.put ("tabId","families");
 	context.put ("family", family);
 
-	context.put ("estates",db.getEstatesByFamily(hsession,family));
+	context.put ("estates",DB.getInstance().getEstatesByFamily(em,family));
 
 	context.put ("pageTitle", family.getName());
 	
