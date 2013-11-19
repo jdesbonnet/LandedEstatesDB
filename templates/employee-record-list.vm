@@ -1,0 +1,59 @@
+##parse ("/backend/_header.vm")
+##parse ("/backend/_employee_record_reference_table.vm")
+#parse ("/_nuig_ot_header.vm")
+
+
+#if ($heading)
+<h2>$heading</h2>
+#else
+##<h2>Employee Records</h2>
+#end 
+
+#if ($employeeRecords) 
+<table border="1" class="listTable">
+<thead>
+<tr>
+<th>ID</td>
+<th>Description</th>
+<th>Estate</th>
+<th>References</th>
+<th>Tags</th>
+</tr>
+</thead>
+
+#foreach ($er in $employeeRecords) 
+<tr>
+<td valign="top">${er.id}</td>
+
+<td valign="top">$formatUtils.formatText($er.description)</td>
+
+<td valign="top"><a href="estate-show.jsp?id=${er.estate.id}">${er.estate.name}</a>
+#if ($er.estate.primaryHouse)
+($er.estate.primaryHouse.name)
+#end
+</td>
+
+
+<td valign="top">
+#set ($editable=false)
+#employee_record_reference_table ($er $editable)
+</td>
+
+<td valign="top">
+<ul class="tagList">
+#foreach ($tag in $er.tags)
+<li><a href="employee-record-list.jsp?tag=${tag.name}">${tag.name}</a></li>
+#end
+</ul>
+</td>
+
+
+</tr>
+#end
+</table>
+
+#else
+no records
+#end
+
+#parse ("/_nuig_ot_footer.vm")
