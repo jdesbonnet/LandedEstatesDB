@@ -1,0 +1,22 @@
+#parse ("/_nuig_ot_header.vm")
+
+<h1>Record Tags</h1>
+
+<ul>
+#foreach ($tag in $tags)
+<li> <a href="employee-record-list.jsp?tag_id=${tag.id}">$tag.name</a> (<span class="tagCount" id="tagCount_${tag.id}">...</span>)</li>
+#end
+</ul>
+
+<script>
+jQuery(".tagCount").each (function (index) {
+	var id = jQuery(this).attr("id").substring(9);
+	jQuery.get("tag-record-count.async.jsp?tag_id="+id, function(data) {
+		console.log("id=" + data.id + " count="+data.count);
+  		jQuery("#tagCount_" + data.id).html(data.count);
+	});
+	
+});
+</script>
+
+#parse ("/_nuig_ot_footer.vm")

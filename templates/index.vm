@@ -1,6 +1,94 @@
 #parse ("/_nuig_ot_header.vm")
 
-<h2>EMPLOYEE RECORDS DATABASE</h2>
+<h2>$PROJECT_TITLE</h2>
+
+#if ($PROJECT_ID="ERDB")
+<table class="twoColLayout">
+<tr valign="top">
+
+<td width="50%" class="col1">
+
+<p>
+Welcome to the landed estates employee records database. The research for this database 
+was undertaken as part of Connacht and Munster Landed Estates project, funded by the Irish 
+Research Council and the Programme for Research in Third Level Institutions. The original landed 
+estates database, which provides information on estates, houses, families and much more is 
+available to peruse at www.landedestates.ie. This employee records database is an extension of 
+www.landedestates.ie and should be used in consultation with the latter for best results.</p>
+
+<p>
+The aim of this database is to assist researchers working on the labour, social and economic 
+history of rural Connacht and west Ulster from c. 1700-1914. It provides a guide to sources for the 
+study of the lives and environments of domestic servants, tradesmen, labourers, and other classes 
+of workers in the eight counties of Galway, Leitrim, Mayo, Roscommon, Sligo, Derry, Donegal 
+and Tyrone. The database is searchable and can be browsed by county and estate name. It is also 
+possible to browse the records by keywords and themes. Click on “browse by topic” to see a list of 
+search tags.</p>
+
+<p>
+Users should be aware that the information presented herein is based on research carried out in 
+three major institutional repositories:
+
+<ul>
+<li> The National Library of Ireland
+<li> The Public Record Office of Northern Ireland
+<li> Special Collections of the James Hardiman Library at NUI Galway
+</ul>
+
+<p>
+Therefore, relevant sources in the National Archives of Ireland, various local archives, locations 
+outside Ireland, and many other places are not included. 
+<p>
+
+<p>
+The project was hosted by the Moore Institute for the Humanities and Social Sciences at the 
+National University of Ireland, Galway.
+</p>
+
+
+<p>
+Project Principal: Dr John Cunningham
+</p>
+
+<p>
+Researcher: Dr Adrian Grant
+</p>
+
+<p>
+Technical Adviser: Mr Joe Desbonnet
+</p>
+
+<p>
+Archival Adviser: Ms Marie Boran
+</p>
+
+</td>
+
+<td width="50%" class="col2" align="center">
+
+<img src="$contextPath/assets/erdb1.small.jpg" /><br />
+<div class="caption">
+Employment record for Mary Sheedy, 1 August 1913. (LE12, Taylor Shawe papers, Special 
+Collections, James Hardiman Library, NUIG).
+</div>
+
+<img src="$contextPath/assets/erdb2.small.jpg" />
+<div class="caption">
+Payments received for conacre, October-November 1881. (LE8/16, Kirwan Castlehackett 
+Papers, Special Collections, James Hardiman Library, NUIG).
+</div>
+
+#if ($FALSE)
+<a href="$contextPath/jsp/map.jsp"><img 
+src="$contextPath/assets/map.small.jpg" /></a>
+<div class="caption">
+<a href="$contextPath/jsp/map.jsp">Interactive Map of Houses and Estates</a>
+</div>
+#end
+
+</td></tr></table> ## End intro text for ERDB
+
+#elseif ($PROJECT_ID="LEDB")
 
 <table class="twoColLayout">
 <tr valign="top">
@@ -71,10 +159,8 @@ src="$contextPath/assets/map.small.jpg" /></a>
 </div>
 #end
 
-</td>
-
-</tr>
-</table>
+</td></tr></table> ## End intro text for LEDB
+#end
 
 
 #parse ("/_nuig_ot_footer.vm")

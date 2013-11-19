@@ -1,6 +1,8 @@
 package ie.wombat.landedestates;
 
 
+import java.io.File;
+
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
@@ -24,6 +26,9 @@ public class AppContextStart implements ServletContextListener{
 	public void contextInitialized(ServletContextEvent event) {
 		System.err.println ("********** LEDB STARTING **********");
 		BasicConfigurator.configure();
+		
+		File appRoot = new File(event.getServletContext().getRealPath("/"));
+		Configuration.init(appRoot);
 	}
 
 }

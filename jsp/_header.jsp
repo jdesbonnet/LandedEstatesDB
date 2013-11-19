@@ -147,7 +147,9 @@ private static Double degPerMLat =  new Double (180 /  (Math.PI * re));
     context.put ("jsp", this); // So that we can use methods eg escape()
     context.put ("contextPath",request.getContextPath());
     context.put ("VERSION",DB.VERSION);
-    //context.put ("YUI","/yui");
+    context.put ("PROJECT_ID",Configuration.getConfiguration("PROJECT_ID"));
+    context.put ("PROJECT_TITLE",Configuration.getConfiguration("PROJECT_TITLE"));
+    context.put ("PROJECT",Configuration.getConfiguration("PROJECT_TITLE"));
     context.put ("YUI","http://yui.yahooapis.com/2.9.0/build");
     
     // Key applied for http://test.galway.net:8080/LandedEstates/jsp/ on 18 Nov 2007.
@@ -167,6 +169,9 @@ private static Double degPerMLat =  new Double (180 /  (Math.PI * re));
     // associated with http://www.landedestates.ie
     context.put ("yahooMapKey","hbSnbuLV34EvP5X5NQJl3amxv0K36Qf4hHdBT0R238gGPvNM3CW568rwtl1L_FqEbg--");
     
+    context.put ("formatUtils", new FormatUtils());
+
+    
     /*
      * Set jspfile to name of JSP script file
      */
@@ -177,13 +182,13 @@ private static Double degPerMLat =  new Double (180 /  (Math.PI * re));
     	context.put ("jspfile", p[p.length-1]);
     }
       
-	DB db = DB.getInstance();
+	//DB db = DB.getInstance();
 	
 	
 	context.put ("q", request.getParameter("q"));
 	
 	context.put ("jsp",this);
-	context.put ("counties",db.getCounties());
+	//context.put ("counties",db.getCounties());
 	context.put ("serverName", request.getServerName());
 	
 	context.put ("rootLevel","..");

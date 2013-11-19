@@ -1,0 +1,21 @@
+#parse ("/backend/_header.vm")
+
+<form action="employee-record-tag-delete-submit.jsp" method="POST">
+
+<input type="hidden" name="tag_id" value="$tag.id" />
+
+<p>
+Tag Name: $tag.name used in $employeeRecords.size() records:
+</p>
+
+<ul>
+#foreach ($er in $employeeRecords)
+<li> <a href="employee-record-edit.jsp?id=$er.id">ER#$er.id $er.estate.name</a>
+#end
+</ul>
+
+<input type="submit" value="Delete" />
+</form>
+
+
+#parse ("/backend/_footer.vm")

@@ -6,7 +6,7 @@
 #if ($pageTitle)
 <title>$pageTitle</title>
 #else
-<title>Employee Records Database</title>
+<title>$PROJECT_TITLE</title>
 #end
 <!-- Meta Tags -->
 
@@ -27,6 +27,14 @@
 <link type="text/css" rel="stylesheet" href="$YUI/reset-fonts-grids/reset-fonts-grids.css" />
 <link type="text/css" rel="stylesheet" href="$rootLevel/css/style.css" title="Default" />
 <link type="text/css" rel="stylesheet" href="$rootLevel/css/main.css" title="Default" />
+
+
+<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+
+<script src="http://code.jquery.com/jquery-1.9.1.js" ></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+
 </head>
 
 <body>
@@ -61,8 +69,8 @@ will be impaired because of this.
 	<!-- BREADCRUMB -->
 	<div id="breadcrumb">
 		<div id="searcharea"><img alt="You are here" class="breadcrumbimage" src="http://www.nuigalway.ie/images/breadcrumb_youarehere.png" /></div>
-		<div id="breadcrumbwide"><span class="verdanabold"><a title="Landed Estates Database" 
-		href="http://www.landedestates.ie/">Employee Records Database</a></span><span class="breadcrumbimage"><img alt="NUI Galway Home" src="http://www.nuigalway.ie/images/arrows/research_breadcrumb.png"/></span></div>
+		<div id="breadcrumbwide"><span class="verdanabold"><a title="$PROJECT_TITLE" 
+		href="http://www.landedestates.ie/">$PROJECT_TITLE</a></span><span class="breadcrumbimage"><img alt="NUI Galway Home" src="http://www.nuigalway.ie/images/arrows/research_breadcrumb.png"/></span></div>
 	</div>
 	<!-- END BREADCRUMB -->
 
@@ -77,19 +85,26 @@ will be impaired because of this.
 			
 			<!-- /includes/sidenav.inc -->
 			<li id="navhome"><a accesskey="1" tabindex="3" title="NUI Galway Home Page [access key '1']" href="http://www.nuigalway.ie/">NUI Galway Home</a></li>
-			<li class="activeLI"><span class="active"></span><a title="Landed Estates" href="/">Landed Estates Database&nbsp;&rsaquo;&rsaquo;</a>
+			<li class="activeLI"><span class="active"></span><a title="Landed Estates" href="/">$PROJECT_TITLE &nbsp;&rsaquo;&rsaquo;</a>
 			<ul id="snSubMenu">
 				<li><span id="link0" class="youarehere"></span><a title="Home Page" href="index.jsp">Home Page</a></li>
 				<li><span id="link1" class="youarehere"></span><a title="Help" href="help.jsp">More Information</a>
 				<li><span id="link1" class="youarehere"></span><a title="Estates" href="estate-list.jsp">Estates A-Z</a></li>
 				<li><span id="link1" class="youarehere"></span><a title="Record Tags" href="tag-list.jsp">Record Tags</a></li>
 				
-				##<li><span id="link1" class="youarehere"></span><a title="Families" href="family-list.jsp">Families A-Z</a></li>
-				##<li><span id="link1" class="youarehere"></span><a title="Houses" href="property-list.jsp">Houses A-Z</a></li>
+				#if ($PROJECT_ID=="LEDB")
+				<li><span id="link1" class="youarehere"></span><a title="Families" href="family-list.jsp">Families A-Z</a></li>
+				<li><span id="link1" class="youarehere"></span><a title="Houses" href="property-list.jsp">Houses A-Z</a></li>
+				#end
+				
 				<li><span id="link1" class="youarehere"></span><a title="Reference Sources" href="refsource-list.jsp">Reference Sources</a></li>
-				##<li><span id="link1" class="youarehere"></span><a title="Images" href="images.jsp">Images</a></li>
-				##<li><span id="link1" class="youarehere"></span><a title="Map" href="map.jsp">Map</a></li>
-				##<li><span id="link1" class="youarehere"></span><a title="Images" href="property-list.jsp">Search</a>
+				
+				#if ($PROJECT_ID=="LEDB")
+				<li><span id="link1" class="youarehere"></span><a title="Images" href="images.jsp">Images</a></li>
+				<li><span id="link1" class="youarehere"></span><a title="Map" href="map.jsp">Map</a></li>
+				<li><span id="link1" class="youarehere"></span><a title="Images" href="property-list.jsp">Search</a>
+				#end
+				
 				<form action="search.jsp" method="GET">
 			<input id="f_q" type="text" name="q" value="$!q" />
 			<input type="submit" value="Go" />
