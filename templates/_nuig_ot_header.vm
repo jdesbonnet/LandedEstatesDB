@@ -92,6 +92,15 @@ will be impaired because of this.
 				<li><span id="link1" class="youarehere"></span><a title="Estates" href="estate-list.jsp">Estates A-Z</a></li>
 				<li><span id="link1" class="youarehere"></span><a title="Record Tags" href="tag-list.jsp">Record Tags</a></li>
 				
+							
+				## ERDB county tags
+				#if ($PROJECT_ID=="ERDB")
+				#foreach ($county in ["Derry","Donegal","Galway","Leitrim","Mayo","Roscommon","Sligo","Tyrone"])
+				<li><span id="link0" class="youarehere"></span><a title="County $county" href="employee-record-list.jsp?tag=County%20$county">County $county</a></li>
+				#end
+				#end
+				
+				
 				#if ($PROJECT_ID=="LEDB")
 				<li><span id="link1" class="youarehere"></span><a title="Families" href="family-list.jsp">Families A-Z</a></li>
 				<li><span id="link1" class="youarehere"></span><a title="Houses" href="property-list.jsp">Houses A-Z</a></li>
