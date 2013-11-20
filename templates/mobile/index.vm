@@ -1,0 +1,13 @@
+#parse ("/mobile/_header.vm")
+
+<ul>
+<li> <a href="f_index.html">Family names index</a></li>
+<li> <a href="e_index.html">Estate index</a></li>
+<li> <a href="h_index.html">House index</a></li>
+
+<li> <a href="a_index.html">Full database index</a></li>
+</ul>
+
+
+#parse ("/mobile/_footer.vm")
+

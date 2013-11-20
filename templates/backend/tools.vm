@@ -5,7 +5,7 @@
 <li> <a href="export.jsp">Export database to XML</a></li>
 <li> <a href="tools-dbbackup.jsp">Backup database</a></li>
 <li> <a href="tool-reindex.jsp">Rebuild search index</a></li>
-<li> <a href="cdrom-make.jsp">Make CD-ROM</a></li>
+<li> <a href="tool-cdrom-make.jsp">Make CD-ROM</a></li>
 
 </ul>
 

@@ -1,0 +1,144 @@
+#parse ("/mobile/_header.vm")
+
+<h1>Estate: $estate.getName()</h1>
+
+<h3>Associated Families</h3>
+
+<ul class="bulletList">
+#foreach ($family in $estate.getFamilies())
+<li> <a href="f${family.getId()}.html">$family.getName()</a> 
+#if ($family.getTitle() && $family.getTitle().length() > 0)
+<em>($family.getTitle())</em>
+#end
+</li>
+#end
+</ul>
+
+#if ($estate.getFamilies().size() == 0)
+<em>none</em>
+#end
+
+
+<h3>Description</h3>
+$!estate.getDescription()
+
+
+<h3>Houses</h3>
+
+#if ($estate.getProperties().size() == 0) 
+<em>none</em>
+#else
+<table class="listTable">
+<thead>
+<tr>
+<th width="300">House Name / Description</th>
+<th>Townland</th>
+<th>Civil Parish</th>
+<th>PLU</th>
+<th>DED</th>
+<th>Barony</th>
+<th>County</th>
+<th>OS Grid Reference / Map</th>
+</tr>
+</thead>
+
+#foreach ($house in $estate.getHouses()) 
+<tr valign="top">
+<td>
+
+##
+## If just one image float to right of cell
+##
+
+#if ($house.getImages().size() == 1)
+#foreach ($image in $house.getImages())
+<img alt="image" src="$contextPath/img/tn/$image.getId()" align="right" />
+#end
+#end
+
+<a href="h${house.id}.htm">$house.name</a>
+<br />
+
+$!house.description
+
+##
+## If more than one property then list after description
+##
+
+#if ($house.images.size() > 1)
+<br />
+#foreach ($image in $house.images)
+<img alt="image" src="$contextPath/img/tn/$image.getId()" />
+#end
+#end
+
+
+</td>
+
+<td>$!house.townland &nbsp;</td>
+<td>$!house.civilParish &nbsp;</td>
+<td>$!house.PLU &nbsp;</td>
+<td>$!house.DED &nbsp;</td>
+<td>$!house.barony &nbsp;</td>
+<td>$!house.county &nbsp;</td>
+<td>
+#if ($house.hasGridReference())
+<a href="javascript:popupMap('gridref=$house.getGridReference()')">$house.getGridReference()</a>
+#end
+#if ($house.getDiscoveryMap())
+Discovery map #$house.getDiscoveryMap().
+#end
+#if ($house.getOsSheet())
+OS Sheet #$house.getOsSheet().
+#end
+</td>
+
+</tr>
+#end
+</table>
+#end
+
+
+#if ($estate.getReferences().size() == 0)
+<em>none</em>
+#end
+
+
+#foreach ($referenceCategoryName in $referenceCategories.keySet())
+<h3>$referenceCategoryName</h3>
+<ul class="bulletList">
+#foreach ($reference in $referenceCategories.get($referenceCategoryName))
+<li> <a href="rs${reference.getSource().getId()}.html">$jsp.markingsToHtml($reference.getSource().getName())</a>: 
+$jsp.markingsToHtml($reference.getDescription()) </li>
+#end
+</ul>
+#end
+
+#if ($problemReferences.size() > 0)
+<div class="warning">
+<h3>problematic references</h3>
+<ul class="bulletList">
+#foreach ($ref in $problemReferences)
+	<li> Reference record# $ref.getId(),
+	source=
+	#if ($ref.getSource() ) 
+		$ref.getSource().getName(): 
+	#else 
+		<span class="errorMessage">No reference source set</span>
+	#end
+	
+	description=
+	#if ($ref.getDescription())
+		$ref.getDescription()
+	#else
+		<span class="errorMessage">No reference description</span>
+	#end
+	
+	</li>
+#end
+</ul>
+Please edit this Estate record and correct issues highlighted above.
+</div>
+#end
+
+#parse ("/mobile/_footer.vm")

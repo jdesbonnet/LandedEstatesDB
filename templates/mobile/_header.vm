@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+<title>$title</title>
+
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="style.css" />
+
+</head>
+
+<body>
+
+
+<!-- Based on jQuery Mobile Demo code -->
+
+<div data-role="page" class="type-home">
+
+	<div data-role="header">
+		<h1>Landed Estates Employee Records: $title</h1>
+	</div><!-- /header -->
+	
+	<div data-role="content">
+
+	<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b">
+	<li data-role="list-divider">Indices</li>
+	<li><a href="f_index.html">Family index</a></li>
+	<li><a href="e_index.html">Estate index</a></li>
+	<li><a href="h_index.html">House index</a></li>
+	<li><a href="a_index.html">Full index</a></li>
+	</ul>

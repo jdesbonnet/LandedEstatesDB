@@ -1,0 +1,16 @@
+#parse ("/mobile/_header.vm")
+
+<h2>House index</h2>
+
+<ul>
+#foreach ($house in $houses)
+<li> <a href="h${house.id}.html">$house.name</a>
+#if ($house.description)
+- $house.description
+#end
+</li>
+#end
+</ul>
+
+#parse ("/mobile/_footer.vm")
+

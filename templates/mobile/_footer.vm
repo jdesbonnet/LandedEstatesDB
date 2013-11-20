@@ -1,0 +1,12 @@
+
+	</div><!--  end data-role=content -->
+
+	<div data-role="footer" class="footer-docs" data-theme="c">
+            <p class="jqm-version"></p>
+			<p>$PROJECT_TITLE, $PROJECT_VERSION. Built at $buildTimestamp.</p>
+	</div>
+
+</div><!--  end data-role=page -->
+
+</body>
+</html>

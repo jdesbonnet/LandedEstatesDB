@@ -1,30 +1,28 @@
 package ie.wombat.landedestates;
 
-import ie.wombat.framework.AppException;
 import ie.wombat.template.Context;
 import ie.wombat.template.TemplateRegistry;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.transaction.Transaction;
+import javax.persistence.EntityManager;
 
 
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.methods.GetMethod;
+//import org.apache.commons.httpclient.HttpClient;
+//import org.apache.commons.httpclient.methods.GetMethod;
+
 import org.apache.log4j.Logger;
-import org.hibernate.Session;
 
 public class CDROM {
 	
 	private static final Logger log = Logger.getLogger (CDROM.class);
 	
-	public static final String HTML_FILE_SUFFIX = ".htm";
+	public static final String HTML_FILE_SUFFIX = ".html";
 	public static final String MAP_BASE_URL="http://localhost:8080/OpenJumpServer/image?project=irelandmap&scale=500.0&w=400&h=400";
 	
 
@@ -43,7 +41,6 @@ public class CDROM {
 
 	public void makeCdRom() throws IOException {
 
-		//TemplateRegistry templates = TemplateRegistry.getInstance();
 
 		File cdromDir = new File("/var/tmp/lecdrom");
 
@@ -51,30 +48,24 @@ public class CDROM {
 			cdromDir.mkdir();
 		}
 
-		
-		Session hsession = HibernateUtilOld.currentSession();
-		org.hibernate.Transaction tx = hsession.beginTransaction();
-
+				
+		// Create a transaction
+		EntityManager em = HibernateUtil.getEntityManager();
+				
 		log.info ("Query families");
-		List<Family> families = hsession.createQuery("from Family")
-		.setCacheable(true)
-		.list();
+		List<Family> families = em.createQuery("from Family").getResultList();
 		
 		log.info ("Query estates");
-		List<Estate> estates = hsession.createQuery("from Estate")
-		.setCacheable(true)
-		.list();
+		List<Estate> estates = em.createQuery("from Estate").getResultList();
 		
 		log.info ("Query houses");
-		List<House> houses = hsession.createQuery("from Property")
-		.setCacheable(true)
-		.list();
+		List<House> houses = em.createQuery("from House").getResultList();
 		
 		
 		//Context context = makeContext();
 		
 		/*
-		 * Create Famlily pages
+		 * Create Family pages
 		 */
 		log.info ("Creating family pages...");
 		for (Family family : families) {
@@ -107,11 +98,11 @@ public class CDROM {
 			Context context = makeContext();
 			context.put("title", "House: " + house.getName());
 			context.put("house",house);
-			context.put("property",house);
-			File propertyFile = new File(cdromDir, "h" + house.getId()
+			File houseFile = new File(cdromDir, "h" + house.getId()
 					+ HTML_FILE_SUFFIX);
-			mergeToFile("/cdrom/property.vm", context, propertyFile);
+			mergeToFile("/cdrom/property.vm", context, houseFile);
 			
+			/*
 			if (house.hasGridReference()) {
 				File mapFile = new File (cdromDir, "map" + house.getId() + ".png");
 				String imageURL = MAP_BASE_URL
@@ -124,6 +115,7 @@ public class CDROM {
 				//mapOut.write(get.getResponseBody());
 				//mapOut.close();
 			}
+			*/
 		}
 
 		{
@@ -183,19 +175,121 @@ public class CDROM {
 		//FileWriter fr = new FileWriter(autoRunFile);
 		//fr.write("[AUTORUN]\nShellExecute=index.htm\n");
 		//fr.close();
-		
-		tx.commit();
-		HibernateUtilOld.closeSession();
+				
 		
 	}
 
+	public void makeMobile() throws IOException {
+
+
+		File targetDir = new File("/var/tmp/lemobile");
+
+		if (!targetDir.exists()) {
+			targetDir.mkdir();
+		}
+
+				
+		// Create a transaction
+		EntityManager em = HibernateUtil.getEntityManager();
+				
+		log.info ("Query families");
+		List<Family> families = em.createQuery("from Family").getResultList();
+		
+		log.info ("Query estates");
+		List<Estate> estates = em.createQuery("from Estate").getResultList();
+		
+		log.info ("Query houses");
+		List<House> houses = em.createQuery("from House").getResultList();
+		
+		
+		//Context context = makeContext();
+		
+		/*
+		 * Create Family pages
+		 */
+		log.info ("Creating family pages...");
+		for (Family family : families) {
+			File familyFile = new File(targetDir, "f" + family.getId()
+					+ HTML_FILE_SUFFIX);
+			Context context = makeContext();
+			context.put("title", "Family: " + family.getName());
+			context.put("family", family);
+			mergeToFile("/mobile/family.vm", context, familyFile);
+		}
+
+		/*
+		 * Create Estate pages
+		 */
+		log.info ("Creating estate pages...");
+		for (Estate estate : estates) {
+			File estateFile = new File(targetDir, "e" + estate.getId()
+					+ HTML_FILE_SUFFIX);
+			Context context = makeContext();
+			context.put("title", "Estate: " + estate.getName());
+			context.put("estate", estate);
+			mergeToFile("/mobile/estate.vm", context, estateFile);
+		}
+
+		/*
+		 * Create house pages
+		 */
+		log.info ("Creating house pages...");
+		for (House house : houses) {
+			Context context = makeContext();
+			context.put("title", "House: " + house.getName());
+			context.put("house",house);
+			File houseFile = new File(targetDir, "h" + house.getId()
+					+ HTML_FILE_SUFFIX);
+			mergeToFile("/mobile/house.vm", context, houseFile);
+		}
+
+		{
+		Context context = makeContext();
+		context.put("estates", estates);
+		context.put("families", families);
+		context.put("houses", houses);
+
+		/*
+		 * Make Family index
+		 */
+		File familyIndexFile = new File(targetDir, "f_index.html");
+		mergeToFile("/mobile/f_index.vm", context, familyIndexFile);
+
+		/*
+		 * Make Estate index
+		 */
+		File estateIndexFile = new File(targetDir, "e_index.html");
+		mergeToFile("/mobile/e_index.vm", context, estateIndexFile);
+
+		/*
+		 * Make House index
+		 */
+		File houseIndexFile = new File(targetDir, "h_index.html");
+		mergeToFile("/mobile/h_index.vm", context, houseIndexFile);
+
+		/*
+		 * Make full index
+		 */
+		File fullIndexFile = new File(targetDir, "a_index.html");
+		mergeToFile("/mobile/full_index.vm", context, fullIndexFile);
+
+		/*
+		 * Make home page
+		 */
+		File indexFile = new File(targetDir, "index.html");
+		mergeToFile("/cdrom/index.vm", context, indexFile);
+		}
+		
+		
+	}
+	
 	private void mergeToFile(String template, Context context, File file)
 			throws IOException {
 		TemplateRegistry templates = TemplateRegistry.getInstance();
 		try {
-			//FileWriter fr = new FileWriter(file);
-			//fr.write(templates.mergeToString(template, context));
-			//fr.close();
+			FileWriter fw = new FileWriter(file);
+			fw.write(templates.mergeToString(template, context));
+			fw.close();
 		} catch (Exception e) {
 			throw new IOException(e.toString());
 		}

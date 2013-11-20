@@ -1,0 +1,163 @@
+#parse ("/mobile/_header.vm")
+
+<h2>House: $house.getName()</h2>
+
+<table border="1" class="listTable">
+
+<tr valign="top">
+<td width="150">Estate(s):</td>
+<td colspan="2">
+<ul class="noBullet">
+#foreach ($estate in $estates)
+<li> <a href="e${estate.id}.html">$estate.name</a></li>
+#end
+</ul>
+</td>
+</tr>
+
+<tr><td>Property/House name:</td><td colspan="2">$house.name</td></tr>
+<tr><td>Description:</td><td colspan="2">$!house.description</td></tr>
+
+
+
+<!-- Location info -->
+
+<tr>
+<td>Townland:</td>
+<td>$!house.townland</td>
+<td width="550" rowspan="9">
+#if ($house.hasGridReference())
+<div id="mapContainer" style="width:550px; height:300px;"></div>
+#end
+</td>
+</tr>
+
+<tr>
+<td>Civil Parish:</td>
+<td>
+#if ($house.civilParish)
+$!house.civilParish
+#else
+<em>n/a</em>
+#end
+</td>
+</tr>
+
+<tr>
+<td>Poor Law Union:</td>
+<td>
+#if ($house.PLU)
+$house.PLU
+#else
+<em>n/a</em>
+#end
+</td>
+</tr>
+
+<tr>
+<td>DED:</td>
+<td>
+#if ($house.DED)
+$!house.DED
+#else
+<em>n/a</em>
+#end</td>
+</tr>
+
+<tr><td>Barony:</td>
+<td>
+#if ($house.barony)
+$!house.barony
+#else 
+<em>n/a</em>
+#end
+</td>
+</tr>
+
+
+<tr><td>County:</td><td>$!house.county</td></tr>
+<tr><td>OS Sheet Number:</td><td>$!house.osSheet</td></tr>
+#if ($house.hasGridReference())
+<tr>
+<td>OSI Grid Reference:</td>
+<td><a href="javascript:popupMap('gridref=$house.getGridReference()');">$house.gridReference</a></td>
+</tr>
+<tr><td>Latitude/Longitude:</td>
+<td>$jsp.formatLatLon($house)
+<br>
+[
+<a href="property-kml.jsp?id=$house.id">Google Earth</a>
+]
+</td></tr>
+#else
+<tr><td>OSI Grid Reference:</td><td><em>n/a</em></td></tr>
+<tr><td>Latitude/Longitude:</td><td><em>n/a</em></td></tr>
+#end
+</table>
+
+<p>
+[
+<a href="property-edit.jsp?id=$house.id">edit</a>
+]
+</p>
+</td>
+
+
+
+#if ($house.hasGridReference())
+<!--
+<h3>Map</h3>
+<div id="xmapContainer" class="googleMapShowProperty"></div>
+<p>
+[
+<a href="property-nearby.jsp?id=$house.id">List nearby properties</a>
+]
+</p>
+-->
+
+
+
+
+<script type="text/javascript" 
+src="http://api.maps.yahoo.com/ajaxymap?v=3.0&appid=$yahooMapKey"></script>
+<script type="text/javascript">
+var myPoint = new YGeoPoint($house.getLatitudeDeg(),$house.getLongitudeDeg());
+var map = new YMap(document.getElementById('mapContainer'),YAHOO_MAP_REG);
+
+// Add controls
+map.addPanControl(); 
+map.addZoomLong(); 
+map.addTypeControl();
+
+map.drawZoomAndCenter(myPoint, 3);
+var marker = new YMarker(myPoint);
+marker.addLabel("X");
+map.addOverlay(marker);
+</script>
+
+#end
+
+
+<h3>Images</h3>
+
+#if ($house.getImages().size() > 0) 
+#foreach ($image in $house.getImages()) 
+<div class="imageAndCaption">
+<a href="image-show.jsp?id=$image.id"><img 
+src="$contextPath/img/im/${image.id}.jpg" /></a>
+<br />
+$image.getCaption()
+</div>
+#end
+</ul>
+#else
+<em>no images</em>
+#end
+
+#if ($house.hasGridReference())
+#set ($cx=$house.longitudeDeg)
+#set ($cy=$house.latitudeDeg)
+##parse ("/backend/_google_map.vm")
+#end
+
+#parse ("/mobile/_footer.vm")

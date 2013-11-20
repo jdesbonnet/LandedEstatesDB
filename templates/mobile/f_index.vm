@@ -1,0 +1,16 @@
+#parse ("/mobile/_header.vm")
+
+<h2>Family names index</h2>
+
+<ul>
+#foreach ($family in $families)
+<li> <a href="f${family.getId()}.html">$family.getName()</a>
+#if ($family.getDescription())
+- $family.getDescription()
+#end
+</li>
+#end
+</ul>
+
+#parse ("/mobile/_footer.vm")
+
