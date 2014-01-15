@@ -2,7 +2,7 @@
 
 <h2>$PROJECT_TITLE</h2>
 
-#if ($PROJECT_ID="ERDB")
+#if ($PROJECT_ID=="ERDB")
 <table class="twoColLayout">
 <tr valign="top">
 
@@ -88,7 +88,7 @@ src="$contextPath/assets/map.small.jpg" /></a>
 
 </td></tr></table> ## End intro text for ERDB
 
-#elseif ($PROJECT_ID="LEDB")
+#elseif ($PROJECT_ID=="LEDB")
 
 <table class="twoColLayout">
 <tr valign="top">
