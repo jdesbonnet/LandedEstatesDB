@@ -25,15 +25,18 @@
 
 
 #foreach ($family in $families)
-<dt><a href="family-show.jsp?id=$family.getId()">$family.getName()
-#if ($family.getTitle() && $family.getTitle().length() > 0)
-<em>($!family.getTitle())</em>
+<dt><a href="family-show.jsp?id=${family.id}">$!{family.name}
+#if ($family.title && $family.title.length() > 0)
+<em>( $!family.title )</em>
 #end
 </a></dt>
 
 <dd>
-$!family.getDescription() 
+$!{family.description}
 
+estates=$family.estates
+
+#if ($FALSE)
 #set ($familyEstates = $family.getEstates())
 #if ($familyEstates.size() > 0)
 	Estates: <ul>
@@ -41,6 +44,7 @@ $!family.getDescription()
 	<li> <a href="estate-show.jsp?id=$estate.getId()">$estate.getName()</a></li>
 	#end
 	</ul>
+#end
 #end
 
 #end

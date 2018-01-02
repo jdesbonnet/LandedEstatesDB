@@ -22,11 +22,6 @@
 </servlet>
 
 <servlet>
-<servlet-name>BarcodeServlet</servlet-name>
-<servlet-class>ie.wombat.landedestates.BarcodeServlet</servlet-class>
-</servlet>
-
-<servlet>
 <servlet-name>ImageServlet</servlet-name>
 <servlet-class>ie.wombat.imagetable.ImageServlet</servlet-class>
 <init-param>
@@ -44,11 +39,6 @@
 <servlet-mapping>
 <servlet-name>BackupServlet</servlet-name>
 <url-pattern>/backup/*</url-pattern>
-</servlet-mapping>
-
-<servlet-mapping>
-<servlet-name>BarcodeServlet</servlet-name>
-<url-pattern>/bc/*</url-pattern>
 </servlet-mapping>
 
 <servlet-mapping>

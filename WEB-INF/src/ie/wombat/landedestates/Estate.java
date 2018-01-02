@@ -14,6 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -45,13 +46,14 @@ public class Estate implements Indexable {
 	@Column(name="project_phase")
 	private Integer projectPhase;
 	
-
+	
 	@ManyToMany
 	@JoinTable(name="estate_families",
 		joinColumns=@JoinColumn(name="estate_id"),
 		inverseJoinColumns = @JoinColumn(name="family_id")
 	)
 	private Set<Family> families = new HashSet<Family>();
+	
 	
 	@OneToMany
 	@JoinTable(name="estate_properties",
@@ -60,15 +62,17 @@ public class Estate implements Indexable {
 	)
 	private Set<House> houses = new HashSet<House>();
 	
-	
+	/*
 	@ManyToOne
 	@JoinColumn(name="primary_house_id")
 	private House primaryHouse;
+	*/
 	
+	/*
 	@OneToMany
 	@JoinColumn(name="estate_id")
 	private Set<EmployeeRecord> employeeRecords = new HashSet<EmployeeRecord>();
-	
+	*/
 	
 	@OneToMany
 	@JoinTable(name="estate_references",
@@ -138,13 +142,16 @@ public class Estate implements Indexable {
 	
 	
 	//@XmlTransient
+	/*
 	public House getPrimaryHouse() {
 		return primaryHouse;
 	}
 	public void setPrimaryHouse(House primaryHouse) {
 		this.primaryHouse = primaryHouse;
 	}
+	*/
 	
+	/*
 	@XmlTransient
 	public Set<EmployeeRecord> getEmployeeRecords() {
 		return employeeRecords;
@@ -152,6 +159,7 @@ public class Estate implements Indexable {
 	public void setEmployeeRecords(Set<EmployeeRecord> employeeRecords) {
 		this.employeeRecords = employeeRecords;
 	}
+	*/
 	
 	// TODO: direct comparison of family objects should be possible
 	public boolean hasFamily (Family family) {

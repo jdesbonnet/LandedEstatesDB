@@ -9,19 +9,19 @@
 	context.put ("alphabet",alphabet);
 	
 	if ("_all".equals(letter)) {
-		context.put ("families",hsession
+		context.put ("families",em
 				//.createQuery("from Family where projectPhase=1 order by name")
 				.createQuery("from Family order by name")
-				.setCacheable(true)
-				.list());
+				//.setCacheable(true)
+				.getResultList());
 	}	
 	if (letter != null && letter.length() == 1) {
-		context.put("families",hsession
+		context.put("families",em
 				//.createQuery("from Family where projectPhase=1 and name like :letter order by name")
 				.createQuery("from Family where name like :letter order by name")
-				.setString ("letter",letter+"%")
-				.setCacheable(true)
-				.list());
+				.setParameter ("letter",letter+"%")
+				//.setCacheable(true)
+				.getResultList());
 	} 
 	
 	templates.merge ("/family-list.vm",context,out);

@@ -41,11 +41,11 @@ public class Family implements Indexable {
 	@Field(index = Index.TOKENIZED, store = Store.NO)
 	private String description;
 	
-	@ManyToMany
-	@JoinTable(name="estate_families",
-	joinColumns=@JoinColumn(name="family_id"),
-	inverseJoinColumns = @JoinColumn(name="estate_id")
-	)
+	@ManyToMany(mappedBy="families")
+	//@JoinTable(name="estate_families",
+	//joinColumns=@JoinColumn(name="family_id")
+	//inverseJoinColumns = @JoinColumn(name="estate_id")
+	//)
 	private Set<Estate> estates = new HashSet<Estate>();
 	
 	@Column(name="project_phase")
