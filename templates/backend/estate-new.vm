@@ -13,7 +13,8 @@ value="$!estate.getName()" />
 <label for="project_phase">Project Phase</label>
 <select id="project_phase" name="project_phase">
 <option value="1">Phase 1: Connaught</option>
-<option value="2" selected="yes">Phase 2: Munster</option>
+<option value="2">Phase 2: Munster</option>
+<option value="3" selected="yes">Phase 3: Leinster</option>
 </select>
 </div>
 
