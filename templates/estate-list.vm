@@ -50,8 +50,8 @@
 </td>
 
 <td>
-#foreach ($property in $estate.getProperties())
-<a href="property-show.jsp?id=$property.getId()&estate_id=$estate.getId()">$property.getName()</a>
+#foreach ($house in $estate.getHouses())
+<a href="property-show.jsp?id=${house.id}&estate_id=${estate.id}">${house.name}</a>
 &nbsp; &nbsp;
 #end
 &nbsp; 

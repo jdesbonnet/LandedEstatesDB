@@ -26,7 +26,7 @@ $!estate.getDescription()
 
 <h3>Houses</h3>
 
-#if ($estate.getProperties().size() == 0) 
+#if ($estate.getHouses().size() == 0) 
 <em>none</em>
 #else
 <table class="listTable">
@@ -43,7 +43,7 @@ $!estate.getDescription()
 </tr>
 </thead>
 
-#foreach ($property in $estate.getProperties()) 
+#foreach ($property in $estate.houses) 
 <tr valign="top">
 <td>
 

@@ -1,37 +1,31 @@
+<%@page import="java.util.HashSet"%>
 <%@include file="_header.jsp"%><%// Required 
-	// id: (property id)
 	
-	House property;
-	try {
-		Long id = new Long(request.getParameter("id"));
-		property = (House)hsession.load(House.class,id);
-		/*
-		if (property.getProjectPhase() != 1) {
-			response.sendRedirect ("not-available.jsp");
-			return;
-		}
-		*/
-		
-	} catch (Exception e) {
-		out.println ("error: " + e);
-		return;
-	}
+	Long houseId = new Long(request.getParameter("id"));
+	House house = em.find(House.class, houseId);
+	context.put ("property", house);
+	
 	context.put ("tabId","houses");
 	
-	String query = "from Estate as e where e.houses.id=" + property.getId();
-
-	List<Estate> estates = hsession.createQuery(query).list();
+	Set<House> houses = new HashSet<>();
+	houses.add(house);
+	
+	// Select Estate records that have this house a member
+	//SELECT a FROM A a JOIN a.b b WHERE b.name = :name is working
+	List<Estate> estates = em
+			.createQuery("SELECT e FROM Estate AS e JOIN e.houses h where h = :house")
+			.setParameter("house",house)
+			.getResultList();
 	context.put ("estates",estates);
 	
-	context.put ("property", property);
 	
-	context.put ("pageTitle", property.getName());
+	context.put ("pageTitle", house.getName());
 	
-	if (property.hasGridReference()) {
+	if (house.hasGridReference()) {
 		context.put ("onLoadFunction","drawHouseMap("
-				+ property.getLatitudeDeg()
+				+ house.getLatitudeDeg()
 				+ ","
-				+ property.getLongitudeDeg()
+				+ house.getLongitudeDeg()
 				+ ")"
 				);
 	}
