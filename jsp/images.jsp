@@ -2,7 +2,8 @@
 	
 	context.put ("tabId","images");
 	
-	List images = hsession.createQuery("from " + imageEntityName).list();
+	List<Image> images = em.createQuery("from " + imageEntityName)
+			.getResultList();
 	
 	if ("true".equals(request.getParameter("captions"))) {
 		context.put ("showCaptions","true");

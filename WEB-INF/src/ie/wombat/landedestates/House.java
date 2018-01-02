@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -70,8 +71,11 @@ public class House implements Indexable {
 	private int easting;
 	private int northing;
 	
-	//@OneToMany
-	@Transient
+	@ManyToMany
+	@JoinTable(
+		name="property_images",
+		joinColumns=@JoinColumn(name="property_id", referencedColumnName="id"),
+		inverseJoinColumns=@JoinColumn(name="image_id", referencedColumnName="id"))
 	private Set<Image> images = new HashSet<Image>();
 	
 	@OneToMany

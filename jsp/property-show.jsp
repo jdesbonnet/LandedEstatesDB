@@ -11,9 +11,8 @@
 	houses.add(house);
 	
 	// Select Estate records that have this house a member
-	//SELECT a FROM A a JOIN a.b b WHERE b.name = :name is working
 	List<Estate> estates = em
-			.createQuery("SELECT e FROM Estate AS e JOIN e.houses h where h = :house")
+			.createQuery("SELECT e FROM Estate AS e JOIN e.houses AS h where h = :house")
 			.setParameter("house",house)
 			.getResultList();
 	context.put ("estates",estates);
