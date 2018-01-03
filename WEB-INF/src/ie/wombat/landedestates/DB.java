@@ -487,14 +487,13 @@ public class DB {
 	}
 
 	public void makeIndex(EntityManager em) throws IOException {
-		boolean createFlag = true;
 
 		FullTextEntityManager fullTextEm = Search.getFullTextEntityManager(em);
 
-		
 		// TODO: can we get this list automatically?
-		String[] entites = { "Estate", "House", "Family", "EmployeeRecord"};
-		
+		//String[] entites = { "Estate", "House", "Family", "EmployeeRecord"};
+		String[] entites = { "Estate", "House", "Family"};
+
 		for (String entityName : entites) {
 			List<Object> objects = em.createQuery("from " + entityName).getResultList();
 			for (Object o : objects) {
@@ -502,9 +501,7 @@ public class DB {
 				fullTextEm.index(o);
 			}
 		}
-		
-		//fullTextEm.getTransaction().commit();
-		
+				
 	}
 
 	/**

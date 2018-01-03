@@ -26,6 +26,8 @@
 				<a class="dropdown-item" href="change-list.jsp">Recent changes</a>
 				<a class="dropdown-item" href="export.jsp">Export database to XML</a>
 				<a class="dropdown-item" href="tools-dbbackup.jsp">Backup database</a>
+				<a class="dropdown-item" href="tool-reindex.jsp">Reindex search</a>
+				
 			</div>
 		</li>
 	</ul>

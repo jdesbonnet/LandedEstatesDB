@@ -1,4 +1,3 @@
-#parse ("/backend/_header.vm")
 #parse ("/backend/_search_result_item.vm")
 
 <h2>Search Results for '$q'</h2>
@@ -16,5 +15,3 @@
 #if ($nResults == 0) 
 no results for search term '$q'
 #end
-
-#parse ("/backend/_footer.vm")

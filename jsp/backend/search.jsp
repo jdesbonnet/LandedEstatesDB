@@ -27,5 +27,6 @@
 	
 	
 	context.put ("results",fullTextEntityManager.createFullTextQuery(query).getResultList());
-	templates.merge ("/backend/search-results.vm",context,out);
+	context.put ("pageId","./search-results");
+	templates.merge ("/backend/master.vm",context,out);
 %>

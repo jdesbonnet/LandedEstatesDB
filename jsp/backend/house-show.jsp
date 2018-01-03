@@ -1,15 +1,19 @@
-<%@include file="_header.jsp"%><%Long houseId = new Long(request.getParameter("id"));
+<%@include file="_header.jsp"%><%
 
+	Long houseId = new Long(request.getParameter("id"));
 	House house = (House)em.find(House.class, houseId);
+	
 	context.put ("house", house);
-	context.put ("tabId","houses");
 	
-	String query = "from Estate as e "
-			+ " inner join fetch e.houses as house"
-			+ " where house.id=" + house.getId();
+	String query = "from Estate AS e "
+			+ " JOIN e.houses as h"
+			+ " WHERE h = :house";
 	
-	List<House> estates = em.createQuery(query).getResultList();
+	List<House> estates = em.createQuery(query)
+			.setParameter("house",house)
+			.getResultList();
 	context.put ("estates",estates);
 	
 	
-	templates.merge ("/backend/house-show.vm",context,out);%>
+	context.put("pageId","./house-show");
+	templates.merge ("/backend/master.vm",context,out);%>
