@@ -9,6 +9,8 @@ $VERSION
 
 </div><!-- end DIV#doc -->
 
+
+
 <script type="text/javascript">
 function reloadPageWithNewPhase (newPhase) {
 	var loc = document.location;

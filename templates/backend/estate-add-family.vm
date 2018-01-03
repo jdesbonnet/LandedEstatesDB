@@ -1,13 +1,15 @@
 #parse ("/backend/_header.vm")
 
-<h2>Add family to estate $estate.getName()</h2>
+## Update to use https://twitter.github.io/typeahead.js/examples/
+
+<h2>Add family to estate ${estate.name}</h2>
 
 <form action="estate-add-family-submit.jsp" method="POST">
-<input type="hidden" name="estate_id" value="$estate.getId()" />
+<input type="hidden"  name="estate_id" value="${estate.id}" />
 
 <div id="acdiv">
-<label for="acinput">Family to add:</label>
-<input id="acinput" type="text" name="family" size="32" />
+<label for="acinput" >Family to add:</label>
+<input id="acinput" class="typeahead" type="text" name="family" size="32" />
 
 <br clear="both" />
 
@@ -16,14 +18,14 @@
 </div>
 
 
-<input type="submit" value="Add" />
-<input type="submit" name="_submit_cancel" value="Cancel" />
+<input type="submit" class="xform-control" value="Add" />
+<input type="submit" class="xform-control" name="_submit_cancel" value="Cancel" />
 </form>
 
+#if ($FALSE)
 <script type="text/javascript" src="$YUI/build/yahoo-dom-event/yahoo-dom-event.js"></script>
 <script type="text/javascript" src="$YUI/build/connection/connection-min.js"></script> 
 <script type="text/javascript" src="$YUI/build/autocomplete/autocomplete-min.js"></script>
-
 <script type="text/javascript">
 var queryService = "./family-query.jsp"; 
 var querySchema = ["\n", "\t"];
@@ -31,6 +33,53 @@ var ds = new YAHOO.widget.DS_XHR(queryService, querySchema);
 ds.responseType = YAHOO.widget.DS_XHR.TYPE_FLAT; 
 var ac = new YAHOO.widget.AutoComplete('acinput','acc', ds);
 </script>
+#end
 
+<script>
+
+var substringMatcher = function(strs) {
+  return function findMatches(q, cb) {
+    var matches, substringRegex;
+
+    // an array that will be populated with substring matches
+    matches = [];
+
+    // regex used to determine if a string contains the substring `q`
+    substrRegex = new RegExp(q, 'i');
+
+    // iterate through the pool of strings and for any string that
+    // contains the substring `q`, add it to the `matches` array
+    $.each(strs, function(i, str) {
+      if (substrRegex.test(str)) {
+        matches.push(str);
+      }
+    });
+
+    cb(matches);
+  };
+};
+var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
+  'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii',
+  'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
+  'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
+  'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
+  'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
+  'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
+  'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
+  'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+];
+
+jQuery(function(){
+	jQuery('#acinput').typeahead({
+		minLength: 1,
+		highlight: true
+	},
+	{
+		name: 'states',
+		source: substringMatcher(states)
+	});
+});
+
+</script>
 
 #parse ("/backend/_footer.vm")
