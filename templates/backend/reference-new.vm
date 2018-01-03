@@ -1,52 +1,24 @@
-#parse ("/backend/_header.vm")
-
-<h2>Create new reference for estate $estate.getName()</h2>
+$breadcrumbs.add("Estates","estate-list.jsp").add($estate.name).add("Add reference")
 
 <form action="reference-new-submit.jsp" method="POST">
 
-<input type="hidden" name="estate_id"
-value="$estate.getId()" />
+<input type="hidden" name="estate_id" value="${estate.id}" />
 
-<div>
+<div class="form-group">
 <label for="field_description">Reference description</label>
-
-##<input type="text" size="40" id="name" name="description"
-##value="" />
-
-<textarea id="field_description" name="description"
+<textarea id="field_description" name="description" class="form-control"
 rows="5" cols="60" wrap="virtual"></textarea>
-
 </div>
 
-<div id="acdiv">
+<div class="form-group">
 <label for="acinput">Reference source:</label>
 <input id="acinput" type="text" name="refsource" size="80" />
-<br clear="both">
+</div>
 </div>
 
-<br clear="both">
-
-<input type="submit" value="Save &amp; add new reference" />
-<input type="submit" name="_submit_exit" value="Save &amp; return to estate record"  />
+<div class="form-group">
+<input type="submit" class="btn btn-primary" value="Save &amp; add new reference" />
+<input type="submit" class="btn btn-primary" name="_submit_exit" value="Save &amp; return to estate record"  />
+</div>
 
 </form>
-
-<script>
-jQuery(function() {
-	jQuery( "#acinput" ).autocomplete({
-		source: function (request, response) {
-			jQuery.ajax ( {
-				url: "query-refsource.async.jsp",
-				data: {q : request.term},
-				dataType: "json",
-				success: function (data) {
-					response(data);
-				}
-			} );
-		}
-	});
-});
-</script>
-
-#parse ("/backend/_footer.vm")
-

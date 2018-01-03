@@ -1,16 +1,11 @@
 $breadcrumbs.add("Estates","estate-list.jsp").add($estate.name)
 
-#if ($showBarcode)
-<img id="recordIdBarcode" alt="Barcode"
-src="$contextPath/bc/39/E$estate.getId()"
-/>
-#end
 
 <h3>Associated Families</h3>
 
 <ul class="bulletList">
-#foreach ($family in $estate.getFamilies())
-<li> <a href="family-show.jsp?id=$family.getId()">$family.getName()</a> 
+#foreach ($family in $estate.families)
+<li> <a href="family-show.jsp?id=$family.id">$family.name</a> 
 #if ($family.title && $family.title.length() > 0)
 <em>(${family.title})</em>
 #end
@@ -18,19 +13,23 @@ src="$contextPath/bc/39/E$estate.getId()"
 #end
 </ul>
 
-#if ($estate.getFamilies().size() == 0)
+#if ($estate.families.size() == 0)
 <em>none</em>
 #end
 
 
 <h3>Description</h3>
-$!estate.getDescription()
+$!estate.description
+#if (! $estate.description || $estate.description.length()==0)
+<em>none</em>
+#end
+
 
 
 <h3>Houses</h3>
 
 #if ($estate.houses.size() == 0) 
-<em>no houses</em>
+<em>none</em>
 #else
 <table class="listTable">
 <thead>
@@ -46,6 +45,7 @@ $!estate.getDescription()
 </tr>
 </thead>
 
+<tbody>
 #foreach ($house in $estate.houses) 
 <tr valign="top">
 <td>
@@ -60,19 +60,19 @@ $!estate.getDescription()
 #end
 #end
 
-<a href="house-show.jsp?id=$house.getId()">$house.getName()</a>
+<a href="house-show.jsp?id=${house.id}">${house.name}</a>
 <br />
 
-$!house.getDescription()
+$!house.description
 
 ##
 ## If more than one house then list after description
 ##
 
-#if ($house.getImages().size() > 1)
+#if ($house.images.size() > 1)
 <br />
-#foreach ($image in $house.getImages())
-<img alt="image" src="$contextPath/img/tn/$image.getId()" />
+#foreach ($image in $house.images)
+<img alt="image" src="$contextPath/img/tn/${image.id}" />
 #end
 #end
 
@@ -85,20 +85,22 @@ $!house.getDescription()
 <td>$!house.getDed() &nbsp;</td>
 <td>$!house.getBarony() &nbsp;</td>
 <td>$!house.getCounty() &nbsp;</td>
+
 <td>
 #if ($house.hasGridReference())
-<a href="javascript:popupMap('gridref=$house.getGridReference()')">$house.getGridReference()</a>
+<a href="javascript:popupMap('gridref=${house.gridReference}')">${house.gridReference}</a>
 #end
-#if ($house.getDiscoveryMap())
-Discovery map #$house.getDiscoveryMap().
+#if ($house.discoveryMap)
+Discovery map #${house.discoveryMap}.
 #end
-#if ($house.getOsSheet())
-OS Sheet #$house.getOsSheet().
+#if ($house.osSheet)
+OS Sheet #${house.osSheet}.
 #end
 </td>
 
 </tr>
 #end
+</tbody>
 </table>
 #end
 ## End list of houses
@@ -108,50 +110,9 @@ OS Sheet #$house.getOsSheet().
 ## Employee Records
 ##
 #parse ("/backend/_employee_record_reference_table.vm")
-##set ($editable=false)
-<h3>Employee Records</h3>
-
-#if ($estate.employeeRecords.size()==0)
-	no records
-#else
-
-<table class="listTable">
-<thead>
-<tr>
-<th>ID</th>
-<th>Document Date</th>
-<th>Description</th>
-<th># References</th>
-<th>Tags</th>
-</tr>
-</thead>
-<tbody>
-#foreach ($er in $estate.employeeRecords)
-<tr>
-<td><a href="employee-record-edit.jsp?id=$er.getId()">$er.getId()</a></td>
-#if ($er.dateExpression)
-<td>$er.dateExpression</td>
-#else
-<td>(none)</td>
-#end
-<td>$!er.getDescription()</td>
-<td>
-#employee_record_reference_table ($er $editable)
-</td>
-<td>
-<ul>
-#foreach ($tag in $er.tags)
-<li><a href="employee-record-list.jsp?tag_id=$tag.id">$tag.name</a></li>
-#end
-</ul>
-</td>
-</tr>
-#end
-</tbody>
-</table>
-
-#end
-[<a href="employee-record-add.jsp?estate_id=${estate.id}">Add employee record</a>]
+<h3>Historical Employee Records</h3>
+#parse("_employee_record_table.vm")
+<a class="btn btn-primary btn-sm" href="employee-record-add.jsp?estate_id=${estate.id}">Add employee record</a>
 ## End list of Employee Records
 
 
@@ -161,14 +122,20 @@ OS Sheet #$house.getOsSheet().
 #end
 
 
-#foreach ($referenceCategoryName in $referenceCategoryNames)
-<h3>$referenceCategoryName</h3>
+#foreach ($refCatName in $referenceCategoryNames)
+<h3>$refCatName</h3>
 <ul class="bulletList">
-#foreach ($reference in $referenceCategories.get($referenceCategoryName))
+#foreach ($reference in $referenceCategories.get($refCatName))
 <li> <a href="refsource-show.jsp?id=$reference.source.id">$jsp.markingsToHtml(${reference.source.name})</a>: 
 $jsp.markingsToHtml($reference.description) </li>
 #end
 </ul>
+
+
+#if ($referenceCategories.get($referenceCategoryName).size()==0)
+<em>none</em>
+#end
+
 #end
 
 #if ($problemReferences.size() > 0)

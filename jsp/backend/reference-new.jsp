@@ -33,6 +33,8 @@
 	*/
 	
 	context.put ("tabId","estates");
+	
+	context.put ("pageId","./reference-new");
 
-	templates.merge ("/backend/reference-new.vm",context,out);
+	templates.merge ("/backend/master.vm",context,out);
 %>

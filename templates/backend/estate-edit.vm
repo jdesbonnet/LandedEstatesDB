@@ -1,4 +1,4 @@
-$breadcrumbs.add("Estates","estate-list.jsp").add("$estate.name")
+$breadcrumbs.add("Estates","estate-list.jsp").add("$estate.name","estate-show.jsp?id=$estate.id").add("edit")
 
 <form name="editform" action="estate-edit-submit.jsp" method="POST">
 <input type="hidden" name="id" 
@@ -20,7 +20,9 @@ rows="5" cols="80"/>$!{estate.description}</textarea>
 <br />
 </div>
 
-
+##
+## Families
+##
 <div class="form-group">
 <label for="families">Associated families</label>
 <table class="stdTable">
@@ -45,15 +47,15 @@ onClick="return confirm('Are you sure you want to remove family from estate reco
 </tr>
 #end
 </tbody>
-
 </table>
-
 <input type="submit" class="btn btn-primary btn-sm" name="_submit_add_family"
 value="Add family association" />
-
 </div>
 
 
+##
+## Houses
+##
 <div class="form-group">
 <label for="properties">Houses</label>
 <table class="stdTable">
@@ -91,11 +93,10 @@ no
 </td>
 
 <td>
-[
 <a href="property-remove.jsp?id=${property.id}&estate_id=${estate.id}"
+class="btn btn-primary btn-sm"
 onClick="return confirm('Are you sure you want to remove this house?');"
->delete</a>
-]
+>remove association</a>
 </td>
 
 </tr>
@@ -109,11 +110,23 @@ value="Add new house record" />
 <input type="submit" class="btn btn-primary btn-sm" name="_submit_existing_house"
 value="Associate existing house record" />
 
-
 </div>
 
 
+##
+## Employee Records
+##
+<div class="form-group">
+<label for="properties">Historical Employee Records</label>
+#parse ("/backend/_employee_record_reference_table.vm")
+#parse("_employee_record_table.vm")
+<a class="btn btn-primary btn-sm" href="employee-record-add.jsp?estate_id=${estate.id}">Add employee record</a>
+</div>
 
+
+##
+## References
+##
 <div class="form-group">
 <label for="references">References</label>
 <table class="stdTable">
@@ -127,42 +140,36 @@ value="Associate existing house record" />
 </thead>
 
 <tbody>
-#foreach ($reference in $estate.getReferences()) 
+#foreach ($reference in $estate.references) 
 <tr>
 <td>
-#if (! $reference.getDescription()) 
-<span class="errorMessage">!!! No reference description !!!</span>
+#if (! $reference.description) 
+<div class="alert alert-danger">!!! No reference description !!!</div>
 #else 
-$reference.getDescription()
+$reference.description
 #end
 
 </td>
 
 <td> 
-#if (! $reference.getSource())
-<span class="errorMessage">!!! No reference source !!!</span>
+#if (! $reference.source)
+<div class="alert alert-danger">!!! No reference source !!!</div>
 #else
-$reference.getSource().getName()
-#if ($reference.getSource().getCategory())
-($reference.getSource().getCategory().getName())
+$reference.source.name
+#if ($reference.source.category)
+($reference.source.category.name)
 #end
 #end
 </td>
+
 <td>
-[
-<a href="reference-edit.jsp?id=$reference.getId()&estate_id=$estate.getId()">edit</a>
-]
-
-&nbsp;
-&nbsp;
-&nbsp;
-
-[
-<a href="estate-remove-reference.jsp?estate_id=$estate.getId()&reference_id=$reference.getId()"
+<div class="btn-group">
+<a class="btn btn-primary btn-sm" href="reference-edit.jsp?id=${reference.id}()&estate_id=${estate.id}">edit</a>
+<a class="btn btn-danger btn-sm" href="estate-remove-reference.jsp?estate_id=${estate.id}&reference_id=${reference.id}"
 onClick="return confirm ('Are you sure you want to delete reference?');">delete</a>
-]
-
+</div>
 </td>
+
 </tr>
 #end
 </tbody>
@@ -171,7 +178,7 @@ onClick="return confirm ('Are you sure you want to delete reference?');">delete<
 
 
 <input type="submit" class="btn btn-primary btn-sm" name="_submit_new_reference"
-value="Add new reference" />
+value="Add reference" />
 
 
 </div>

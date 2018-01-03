@@ -1,0 +1,41 @@
+##
+## Requires $estate
+##
+#if (!$estate.employeeRecords || $estate.employeeRecords.size()==0)
+<div><em>none</em></div>
+#else
+<table class="stdTable">
+<thead>
+<tr>
+<th>ID</th>
+<th>Document Date</th>
+<th>Description</th>
+<th># References</th>
+<th>Tags</th>
+</tr>
+</thead>
+<tbody>
+#foreach ($er in $estate.employeeRecords)
+<tr>
+<td><a href="employee-record-edit.jsp?id=$er.getId()">$er.getId()</a></td>
+#if ($er.dateExpression)
+<td>$er.dateExpression</td>
+#else
+<td>(none)</td>
+#end
+<td>$!{er.description}</td>
+<td>
+#employee_record_reference_table ($er $editable)
+</td>
+<td>
+<ul>
+#foreach ($tag in $er.tags)
+<li><a href="employee-record-list.jsp?tag_id=$tag.id">$tag.name</a></li>
+#end
+</ul>
+</td>
+</tr>
+#end
+</tbody>
+</table>
+#end

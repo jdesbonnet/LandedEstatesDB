@@ -24,6 +24,7 @@
 	List<Reference> problemReferences = new ArrayList<Reference>();
 	context.put ("problemReferences", problemReferences);
 	
+	// Group references by reference category
 	for (Reference ref : estate.getReferences()) {		
 	
 		ReferenceCategory refCat;
@@ -50,15 +51,6 @@
 		java.util.Collections.sort(list);
 	}
 	
-	/*
-	Iterator iter = referenceCategoryHash.keySet().iterator();
-	while (iter.hasNext()) {
-		String key = (String)iter.next();
-		List list = (List)referenceCategoryHash.get(key);
-		java.util.Collections.sort(list);
-	}
-	*/
-	context.put ("tabId","estates");
 	
 	context.put ("referenceCategories",referenceCategoryHash);
 	context.put ("referenceCategoryNames", referenceCategoryNames);
