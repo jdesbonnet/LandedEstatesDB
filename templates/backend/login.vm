@@ -1,32 +1,47 @@
-<html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
 
-<head>
-<title>Landed estates database backend</title>
-<link rel="stylesheet" type="text/css" href="$contextPath/css/style.css" />
-</head>
+    <title>Landed Estates Database Administration</title>
 
-<body>
+#include("_inc_header.vm")
+    
+  </head>
 
-<h1>Landed Estates / Employee Records Database</h1>
+  <body>
+
+#parse("_nav_header.vm")
+
+    <main role="main" class="container">
+    <div class="row">
+    <div class="col-md-12">
+
 
 <form id="loginBox" action="login-submit.jsp" method="POST" >
 
-<table>
-<tr>
-<td>Username:</td>
-<td><input type="text" size="20" name="username"  /></td>
-</tr>
+<div class="form-group">
+<label>Username:</label>
+<input type="text" class="form-control" size="20" name="username"  />
+</div>
 
-<tr>
-<td>Password:</td>
-<td><input type="text" size="20" name="password"  /></td>
-</tr>
-
-</table>
+<div class="form-group">
+<label>Password:</label>
+<input type="password" class="form-control" size="20" name="password" />
+</div>
 
 
-<input type="submit" value="Login" />
+<input type="submit" class="btn btn-primary" value="Login" />
 </form>
 
 
-#parse ("/backend/_footer.vm")
+	</div>
+	</div>
+    </main><!-- /.container -->
+#parse ("_inc_footer.vm")
+  </body>
+</html>

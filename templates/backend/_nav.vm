@@ -9,20 +9,21 @@
 			<a class="nav-link" href="family-list.jsp">Families</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" href="family-list.jsp">Houses</a>
+			<a class="nav-link" href="house-list.jsp">Houses</a>
 		</li>
-		<li class="nav-item">
-			<a class="nav-link" href="images.jsp">Images</a>
+
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Extra</a>
+			<div class="dropdown-menu" aria-labelledby="dropdown01">
+				<a class="dropdown-item" href="refsource-list.jsp">Reference Sources</a>
+				<a class="dropdown-item" href="images.jsp">Images</a>
+				
+			</div>
 		</li>
-		<li class="nav-item">
-			<a class="nav-link" href="refsource-list.jsp">Reference Sources</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link" href="refsource-list.jsp">Employee Records</a>
-		</li>
+		
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tools</a>
-			<div class="dropdown-menu" aria-labelledby="dropdown01">
+			<div class="dropdown-menu" aria-labelledby="dropdown02">
 				<a class="dropdown-item" href="change-list.jsp">Recent changes</a>
 				<a class="dropdown-item" href="export.jsp">Export database to XML</a>
 				<a class="dropdown-item" href="tools-dbbackup.jsp">Backup database</a>

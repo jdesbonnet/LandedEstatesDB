@@ -1,13 +1,9 @@
-#parse ("/backend/_header.vm")
-
-<table border="1" class="listTable">
+<table class="stdTable">
 <thead>
 <tr>
 <th>name</th>
 <th>category</th>
-<th>contact person</th>
-<th>contact telephone</th>
-<th>contact email</th>
+<th>contact details</th>
 <th>actions</th>
 </tr>
 </thead>
@@ -23,18 +19,32 @@ $source.getName()
 #end
 </a>
 </td>
-<td>$!source.getCategory().getName()</td>
-<td>$!source.getContactPerson() &nbsp;</td>
-<td>$!source.getContactTelephone() &nbsp;</td>
-<td>$!source.getContactEmail() &nbsp;</td>
+
+<td>$!{source.category.name}</td>
+
 <td>
-[
-<a href="refsource-delete.jsp?id=$source.getId()"
+#if ($source.contactPerson && $source.contactPerson.length()>0)
+Person: $!{source.contactPerson}<br />
+#end
+
+#if ($source.contactTelephone && $source.contactTelephone.length()>0)
+Tel: $!{source.contactTelephone}<br />
+#end
+
+#if ($source.contactEmail && $source.contactEmail.length()>0)
+Email: $!{source.contactEmail}<br />
+#end
+
+#if ($source.contactWeb && $source.contactWeb.length()>0)
+Web:  $!{source.contactWeb}<br />
+#end
+
+</td>
+
+<td>
+<a class="btn btn-sm btn-danger" href="refsource-delete.jsp?id=$source.getId()"
 onClick="return confirm('Are you sure you want to delete reference source?');">delete</a>
-]
 </td>
 </tr>
 #end
 </table>
-	
-#parse ("/backend/_footer.vm")
