@@ -1,3 +1,9 @@
+1 Jan 2017: 1.4.0
+  * Update to admin/backend UI
+  * Changes to facilitate Phase 3
+  * Update Map UI (remove obsolte Yahoo map, use clustering)
+  * Updates to JPA library
+
 25 Nov 2010: 1.2.5b1
   * Update maps to use Google Maps (API v3). Using Yahoo maps up to this point.
 

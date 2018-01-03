@@ -11,6 +11,7 @@
 
 	context.put ("tabId","estates");
 	context.put ("estate",estate);
-		
-	templates.merge ("/backend/estate-add-family.vm",context,out);
+
+	context.put("pageId","./estate-add-family");
+	templates.merge ("/backend/master.vm",context,out);
 %>

@@ -1,4 +1,3 @@
-#parse ("/backend/_header.vm")
 
 #if ($estate.getId())
 <h2>Edit estate record: $estate.getName()</h2>
@@ -11,25 +10,25 @@
 value="$!estate.getId()" />
 
 
-<div>
-<input type="submit" value="Save" />
+<div class="form-group">
+<input type="submit" class="btn btn-default" value="Save" />
 </div>
 
-<div>
+<div class="form-group">
 <label for="name">Estate name</label>
-<input type="text" size="40" id="name" name="name"
-value="$!estate.getName()" />
+<input type="text" class="form-control" size="40" id="name" name="name"
+value="$!{estate.name}" />
 </div>
 
-<div>
+<div class="form-group">
 <label for="name">Estate description</label>
-<textarea name="description"
-rows="5" cols="80"/>$!estate.getDescription()</textarea>
+<textarea class="form-control" name="description"
+rows="5" cols="80"/>$!{estate.description}</textarea>
 <br />
 </div>
 
 
-<div>
+<div class="form-group">
 <label for="families">Associated families</label>
 <table border="1" class="listTable">
 <thead>
@@ -54,13 +53,13 @@ onClick="return confirm('Are you sure you want to remove family from estate reco
 #end
 </table>
 
-<input type="submit" name="_submit_add_family"
+<input type="submit" class="btn btn-default" name="_submit_add_family"
 value="Add family association" />
 
 </div>
 
 
-<div>
+<div class="form-group">
 <label for="properties">Houses</label>
 <table border="1" class="listTable">
 <thead>
@@ -105,10 +104,10 @@ onClick="return confirm('Are you sure you want to remove this house?');"
 #end
 </table>
 
-<input type="submit" name="_submit_new_house"
+<input type="submit" class="btn btn-default" name="_submit_new_house"
 value="Add new house" />
 
-<input type="submit" name="_submit_existing_house"
+<input type="submit" class="btn btn-default" name="_submit_existing_house"
 value="Add existing house record" />
 
 
@@ -116,7 +115,7 @@ value="Add existing house record" />
 
 
 
-<div>
+<div class="form-group">
 <label for="references">References</label>
 <table border="1" class="listTable">
 
@@ -168,16 +167,8 @@ onClick="return confirm ('Are you sure you want to delete reference?');">delete<
 #end
 </table>
 
-<!--
-<button type="submit" name="_submit_new_reference"
-onClick="forms.editform.submit();">
-<img alt="add icon" title="Add family to estate"
-src="$contextPath/gr/add.png" width="16" height="16" />
-Add new reference
-</button>
--->
 
-<input type="submit" name="_submit_new_reference"
+<input type="submit" class="btn btn-default" name="_submit_new_reference"
 value="Add new reference" />
 
 
@@ -185,9 +176,6 @@ value="Add new reference" />
 
 
 
-<input type="submit" value="Save" />
+<input type="submit" class="btn btn-primary" value="Save" />
 </form>
-
-
-#parse ("/backend/_footer.vm")
 

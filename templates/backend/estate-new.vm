@@ -1,17 +1,16 @@
-#parse ("/backend/_header.vm")
 
 <form action="estate-new-submit.jsp" method="POST">
 
 
-<div>
+<div class="form-group">
 <label for="name">New estate name</label>
-<input type="text" size="40" id="name" name="name"
+<input type="text" class="form-control" size="40" id="name" name="name"
 value="$!estate.getName()" />
 </div>
 
-<div>
+<div class="form-group">
 <label for="project_phase">Project Phase</label>
-<select id="project_phase" name="project_phase">
+<select id="project_phase" class="form-control" name="project_phase">
 <option value="1">Phase 1: Connaught</option>
 <option value="2">Phase 2: Munster</option>
 <option value="3" selected="yes">Phase 3: Leinster</option>
@@ -19,10 +18,8 @@ value="$!estate.getName()" />
 </div>
 
 
-<input type="submit" value="Next &gt;" />
+<input class="btn btn-default" type="submit" value="Next &gt;" />
 
 </form>
 
-
-#parse ("/backend/_footer.vm")
 
