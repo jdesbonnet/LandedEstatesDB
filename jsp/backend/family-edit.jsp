@@ -14,10 +14,10 @@
 		}
 	}
 	
-	Family family;
-	if (id != null) {
-		family = (Family)hsession.load(Family.class,id);
-	} else {
+	Long familyId = new Long(request.getParameter("id"));
+	Family family = (Family)em.find(Family.class,id);
+	
+	if (family == null) {
 		family = new Family ();
 	}
 
@@ -28,5 +28,6 @@
 		context.put ("next",referer);
 	}
 	
-	templates.merge ("/backend/family-edit.vm",context,out);
+	context.put("pageId","./family-edit");
+	templates.merge ("/backend/master.vm",context,out);
 %>

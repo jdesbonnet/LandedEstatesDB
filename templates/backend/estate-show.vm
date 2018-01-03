@@ -1,4 +1,3 @@
-#parse ("/backend/_header.vm")
 
 <h1>Estate: $estate.getName()</h1>
 
@@ -205,6 +204,4 @@ Please edit this Estate record and correct issues highlighted above.
 <a href="estate-edit.jsp?id=$estate.getId()">edit</a>
 ]
 </p>
-
-#parse ("/backend/_footer.vm")
 

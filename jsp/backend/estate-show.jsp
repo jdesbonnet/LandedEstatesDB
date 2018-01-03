@@ -66,6 +66,6 @@
 	
 	//context.put ("revisionHistory",db.getRevisionHistory(Estate.class.getName(), estate.getId()));
 	
-	
-	templates.merge ("/backend/estate-show.vm",context,out);
+	context.put("pageId","./estate-show");
+	templates.merge ("/backend/master.vm",context,out);
 %>

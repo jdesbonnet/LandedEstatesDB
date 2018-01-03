@@ -14,5 +14,6 @@
 			.getResultList();
 	context.put ("estates",estates);
 
-	templates.merge ("/backend/family-show.vm",context,out);
+	context.put("pageId","./family-show");
+	templates.merge ("/backend/master.vm",context,out);
 %>
