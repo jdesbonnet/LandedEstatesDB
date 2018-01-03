@@ -18,7 +18,7 @@ value="$!estate.getName()" />
 </div>
 
 
-<input class="btn btn-default" type="submit" value="Next &gt;" />
+<input class="btn btn-primary" type="submit" value="Next &gt;" />
 
 </form>
 

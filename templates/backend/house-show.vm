@@ -1,13 +1,7 @@
+$breadcrumbs.add("Houses","house-list.jsp").add($house.name)
 
-#if ($showBarcode)
-<img id="recordIdBarcode" alt="Barcode"
-src="$contextPath/bc/39/P$house.getId()"
-/>
-#end
 
-<h2>House: $house.getName()</h2>
-
-<table border="1" class="listTable">
+<table class="stdTable">
 
 <tr valign="top">
 <td width="150">Estate(s):</td>

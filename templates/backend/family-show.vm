@@ -1,11 +1,6 @@
+$breadcrumbs.add("Families","family-list.jsp").add($family.nameAndTitle)
 
-<h2>Family: $family.getName()
-#if ($family.getTitle() && $family.getTitle().length()>0 )
-<em>($family.getTitle())</em>
-#end
-</h2>
-
-<table border="1" class="listTable">
+<table class="stdTable">
 
 <tr>
 <td width="150">Family name:</td>

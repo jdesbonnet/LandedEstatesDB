@@ -1,3 +1,4 @@
+<%@page import="ie.wombat.landedestates.ui.BreadcrumbTrail"%>
 <%@page 
 contentType="text/html; charset=utf-8"
 pageEncoding="utf-8"
@@ -270,4 +271,8 @@ private static Double degPerMLat =  new Double (180 /  (Math.PI * re));
 			// ignore
 		}
 	}
+	
+	BreadcrumbTrail breadcrumbs = new BreadcrumbTrail();
+	breadcrumbs.add("Home", "index.jsp");
+	context.put("breadcrumbs", breadcrumbs);
 %>

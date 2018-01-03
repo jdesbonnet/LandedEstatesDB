@@ -1,5 +1,4 @@
-
-<h1>Estate: ${estate.name}</h1>
+$breadcrumbs.add("Estates","estate-list.jsp").add($estate.name)
 
 #if ($showBarcode)
 <img id="recordIdBarcode" alt="Barcode"

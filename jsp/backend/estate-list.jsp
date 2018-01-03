@@ -1,9 +1,7 @@
 <%@include file="_header.jsp"%><%
 
 	long time = -System.currentTimeMillis();
-		
-	context.put ("tabId","estates");
-	
+			
 	String letter = request.getParameter("letter");
 	context.put ("letter",letter);
 	context.put ("alphabet",alphabet);
