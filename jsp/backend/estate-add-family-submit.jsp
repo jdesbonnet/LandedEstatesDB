@@ -15,54 +15,22 @@ if (!user.hasWriteAccess()) {
 		response.sendRedirect ("estate-edit.jsp?id="+estateIdStr);
 		return;
 	}
+	
+	Long estateId = new Long(request.getParameter("estate_id"));
+	Estate estate = (Estate)em.find(Estate.class,estateId);
 
-	// Make sure a family was specified
-	if (request.getParameter("family").trim().length() == 0) {
-		response.sendRedirect ("estate-edit.jsp?id="+estateIdStr);
-		return;
-	}
-	
-	
-	Estate estate = null;
-	try {
-		Long estateId = new Long(request.getParameter("estate_id"));
-		estate = (Estate)hsession.load(Estate.class,estateId);
-	} catch (Exception e) {
-	}
 	if (estate == null) {
 		throw new ServletException ("no estate_id or estate not found");
 	}
 	
+	Long familyId = new Long(request.getParameter("family_id"));
+	Family family = (Family)em.find(Family.class,familyId);
 
-	
-	
-	
-	Family family = null;
-	
-	/*
-	try {
-		Long familyId = new Long(request.getParameter("family_id"));
-		family = (Family)hsession.load(Family.class,familyId);
-	} catch (Exception e) {
-	}
 	if (family == null) {
 		throw new ServletException ("no family_id or family not found");
 	}
-	*/
-	
-	Long familyId = DB.getIdFromAutoCompleteField(request.getParameter("family"));
-	if (familyId == null) {
-		throw new ServletException ("Invalid family. Expected a family record number in square brackets.");
-	}
-	try {
-		family = (Family)hsession.load(Family.class,familyId);
-		estate.getFamilies().add(family);
-	} catch (Exception e) {
-		throw new ServletException (e.toString());
-	}
-	
-	
-	hsession.save(estate);
+
+	estate.getFamilies().add(family);
 	
 	response.sendRedirect ("estate-edit.jsp?id="+estate.getId());
 %>

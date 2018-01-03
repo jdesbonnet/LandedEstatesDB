@@ -4,11 +4,13 @@
 <h2>Add family to estate ${estate.name}</h2>
 
 <form action="estate-add-family-submit.jsp" method="POST">
-<input type="hidden"  name="estate_id" value="${estate.id}" />
+
+<input type="hidden" name="estate_id" value="${estate.id}" />
 
 <div>
 <label for="acinput" >Family to add:</label>
 <input id="acinput" class="typeahead" type="text" name="family" size="32" />
+<input type="hidden" name="family_id" value="" />
 </div>
 
 
@@ -21,25 +23,33 @@
 jQuery(function(){
 	jQuery('#acinput').typeahead(null,
 	{
-		afterSelect: function(val) { this.$element.val(""); },
+		afterSelect: function(val) {
+			alert(val);
+			console.log("val="+val);
+			this.$element.val(""); 
+		},
+		display: 'name',
 		source: function(query,process) {
-		console.log("process="+process);
-		// TODO: async false is deprecated
-		var result = null;
-		jQuery.ajax({
-			url: "family-query.jsp?q="+query,
-			type: "get",
-			dataType: "html",
-			async: false,
-			success: function(data) {
-				result = data;
-			} 
-		});
-		console.log(result);
-		console.log(JSON.parse(result));
-		//return  JSON.parse(result);
-		process(JSON.parse(result));
-	}
+			console.log("process="+process);
+			// TODO: async false is deprecated
+			var result = null;
+			jQuery.ajax({
+				url: "family-query.jsp?q="+query,
+				type: "get",
+				dataType: "html",
+				async: false,
+				success: function(data) {
+					result = data;
+				} 
+			});
+			console.log(result);
+			console.log(JSON.parse(result));
+			process(JSON.parse(result));
+			//return  JSON.parse(result);
+		}
+	});
+	jQuery("#acinput").bind('typeahead:select', function(ev, suggestion) {
+		jQuery("input[name='family_id']").val(suggestion.id);
 	});
 });
 
