@@ -5,6 +5,9 @@
 .tableborder {
         border: 1px solid #b36930;
 }
+
+
+/*
 h1 {
         border: 0px;
         background-color: transparent;
@@ -19,6 +22,8 @@ h3, h4, h5, h6 {
         background-color: transparent;
         color: #b36930;
 }
+*/
+
 /* end research.css */
 
 
@@ -221,6 +226,25 @@ TABLE.listTable TD, TABLE.listTable TH {
 padding: 3px;
 border: 1px solid #ccc;
 }
+
+
+TABLE.stdTable {
+	margin: 10px 0px 10px 0px;
+	width: 100%;
+	border-collapse: collapse;
+}
+TABLE.stdTable THEAD TR {
+	background-color: #eee;
+}
+TABLE.stdTable THEAD TH {
+	font-weight: bold;
+	text-align: center;
+}
+TABLE.stdTable TD, TABLE.stdTable TH {
+	padding: 4px;
+	border: 1px solid #ddd;
+}
+
 
 div.imageAndCaption { margin: 5px 0px; width:auto; text-align:center;}
 div.imageAndCaption img {display:block;  border: 1px solid #eee; padding: 5px;}
