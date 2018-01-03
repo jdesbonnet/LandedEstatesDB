@@ -8,6 +8,8 @@
 		context.put ("showCaptions","true");
 	}
 	
+	
 	context.put ("images",images);
-	templates.merge ("/backend/images.vm",context,out);
+	context.put("pageId","./images");
+	templates.merge ("/backend/master.vm",context,out);
 %>

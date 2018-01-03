@@ -3,15 +3,41 @@ package ie.wombat.landedestates;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.Table;
+
+import org.hibernate.search.annotations.DocumentId;
+
+@Entity
+@Table(name="object_history")
 public class ObjectHistory implements Auditable {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
+	
 	private int version;
+	
+	@Column(name="last_modified")
 	private Date modified = Calendar.getInstance().getTime();
+	
 	private int uid;
+	
+	@Column(name="object_id")
 	private Long objectId;
+	
+	@Column(name="object_class")
 	private String objectClass;
+	
+	@Lob
+	@Column(name="object_xml")
 	private String objectXML;
+	
 	
 	public Long getId() {
 		return id;

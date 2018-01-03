@@ -1,5 +1,3 @@
-#parse ("/backend/_header.vm")
-
 <h2>Recent changes</h2>
 
 <table border="1">
@@ -55,4 +53,3 @@ $change.getUid()
 </tr>
 #end
 </table>
-#parse ("/backend/_footer.vm")
