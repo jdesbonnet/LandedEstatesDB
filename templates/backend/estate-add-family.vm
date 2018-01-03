@@ -6,14 +6,9 @@
 <form action="estate-add-family-submit.jsp" method="POST">
 <input type="hidden"  name="estate_id" value="${estate.id}" />
 
-<div id="acdiv">
+<div>
 <label for="acinput" >Family to add:</label>
 <input id="acinput" class="typeahead" type="text" name="family" size="32" />
-
-<br clear="both" />
-
-<div id="acc"></div>
-
 </div>
 
 
@@ -23,46 +18,28 @@
 
 <script>
 
-var substringMatcher = function(strs) {
-  return function findMatches(q, cb) {
-    var matches, substringRegex;
-
-    // an array that will be populated with substring matches
-    matches = [];
-
-    // regex used to determine if a string contains the substring `q`
-    substrRegex = new RegExp(q, 'i');
-
-    // iterate through the pool of strings and for any string that
-    // contains the substring `q`, add it to the `matches` array
-    $.each(strs, function(i, str) {
-      if (substrRegex.test(str)) {
-        matches.push(str);
-      }
-    });
-
-    cb(matches);
-  };
-};
-var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
-  'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii',
-  'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
-  'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
-  'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
-  'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
-  'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
-  'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
-  'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
-];
-
 jQuery(function(){
-	jQuery('#acinput').typeahead({
-		minLength: 1,
-		highlight: true
-	},
+	jQuery('#acinput').typeahead(null,
 	{
-		name: 'states',
-		source: substringMatcher(states)
+		afterSelect: function(val) { this.$element.val(""); },
+		source: function(query,process) {
+		console.log("process="+process);
+		// TODO: async false is deprecated
+		var result = null;
+		jQuery.ajax({
+			url: "family-query.jsp?q="+query,
+			type: "get",
+			dataType: "html",
+			async: false,
+			success: function(data) {
+				result = data;
+			} 
+		});
+		console.log(result);
+		console.log(JSON.parse(result));
+		//return  JSON.parse(result);
+		process(JSON.parse(result));
+	}
 	});
 });
 
