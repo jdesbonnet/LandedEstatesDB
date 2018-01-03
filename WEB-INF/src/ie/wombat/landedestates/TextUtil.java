@@ -30,20 +30,10 @@ public class TextUtil {
 				i++;
 				continue;
 			}
-			/*
-			if (ca[i] == '\n' && ca[i+1] == '\n') {
-				buf.append ("<p>");
-				i++;
-				continue;
-			}
-			if (ca[i] == '\r' && ca[i+1] == '\n'
-				&& ca[i+2] == '\r' && ca[i+3] == '\n') {
-				buf.append ("<p>");
-				i+= 3;
-				continue;
-			}
-			*/
 			buf.append(ca[i]);
+		}
+		if (italicsFlag) {
+			buf.append("</i>");
 		}
 
 		return buf.toString();

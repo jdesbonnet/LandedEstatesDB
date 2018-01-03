@@ -9,5 +9,5 @@
 	
 	context.put ("tabId","employeeRecords");
 	context.put ("estate", estate);
-	
-	templates.merge ("/backend/employee-record-edit.vm",context,out);%>
+	context.put ("pageId", "./employee-record-add");
+	templates.merge ("/backend/master.vm",context,out);%>

@@ -1,4 +1,3 @@
-#parse ("/backend/_header.vm")
 
 #if ($showBarcode)
 <img id="recordIdBarcode" alt="Barcode"
@@ -15,15 +14,16 @@ src="$contextPath/bc/39/P$house.getId()"
 <td colspan="2">
 <ul class="noBullet">
 #foreach ($estate in $estates)
-<li> <a href="estate-show.jsp?id=$estate.getId()">$estate.getName()</a></li>
+<li> <a href="estate-show.jsp?id=${estate.id}">${estate.name}</a></li>
 #end
 </ul>
 </td>
 </tr>
 
-<tr><td>Property/House name:</td><td colspan="2">$house.getName()</td></tr>
-<tr><td>Description:</td><td colspan="2">$!house.getDescription()</td></tr>
+<tr><td>Property/House name:</td><td colspan="2">${house.name}</td></tr>
+<tr><td>Description:</td><td colspan="2">$!{house.description}</td></tr>
 
+#if ($FALSE)
 <tr><td>Employee Records:</td>
 <td colspan="2">
 #if ($house.getEmployeeRecords().size()==0)
@@ -58,6 +58,9 @@ no records
 #end
 </ul>
 </td>
+#end
+
+
 </tr>
 #end
 </tbody>
@@ -209,6 +212,4 @@ $image.getCaption()
 #set ($cy=$house.getLatitudeDeg())
 ##parse ("/backend/_google_map.vm")
 #end
-
-#parse ("/backend/_footer.vm")
 

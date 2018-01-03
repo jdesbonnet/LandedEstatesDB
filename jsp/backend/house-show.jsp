@@ -5,15 +5,16 @@
 	
 	context.put ("house", house);
 	
-	String query = "from Estate AS e "
+	// What estate or estates does this house belong to?
+	String query = "SELECT e from Estate AS e "
 			+ " JOIN e.houses as h"
 			+ " WHERE h = :house";
-	
-	List<House> estates = em.createQuery(query)
+	List<Estate> estates = em.createQuery(query)
 			.setParameter("house",house)
 			.getResultList();
 	context.put ("estates",estates);
 	
 	
 	context.put("pageId","./house-show");
-	templates.merge ("/backend/master.vm",context,out);%>
+	templates.merge ("/backend/master.vm",context,out);
+%>

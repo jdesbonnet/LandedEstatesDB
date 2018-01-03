@@ -1,5 +1,5 @@
 
-<h1>Estate: $estate.getName()</h1>
+<h1>Estate: ${estate.name}</h1>
 
 #if ($showBarcode)
 <img id="recordIdBarcode" alt="Barcode"
@@ -12,8 +12,8 @@ src="$contextPath/bc/39/E$estate.getId()"
 <ul class="bulletList">
 #foreach ($family in $estate.getFamilies())
 <li> <a href="family-show.jsp?id=$family.getId()">$family.getName()</a> 
-#if ($family.getTitle() && $family.getTitle().length() > 0)
-<em>($family.getTitle())</em>
+#if ($family.title && $family.title.length() > 0)
+<em>(${family.title})</em>
 #end
 </li>
 #end
@@ -166,8 +166,8 @@ OS Sheet #$house.getOsSheet().
 <h3>$referenceCategoryName</h3>
 <ul class="bulletList">
 #foreach ($reference in $referenceCategories.get($referenceCategoryName))
-<li> <a href="refsource-show.jsp?id=$reference.getSource().getId()">$jsp.markingsToHtml($reference.getSource().getName())</a>: 
-$jsp.markingsToHtml($reference.getDescription()) </li>
+<li> <a href="refsource-show.jsp?id=$reference.source.id">$jsp.markingsToHtml(${reference.source.name})</a>: 
+$jsp.markingsToHtml($reference.description) </li>
 #end
 </ul>
 #end
@@ -199,9 +199,6 @@ Please edit this Estate record and correct issues highlighted above.
 </div>
 #end
 
-<p>
-[
-<a href="estate-edit.jsp?id=$estate.getId()">edit</a>
-]
-</p>
+
+<a class="btn btn-primary" href="estate-edit.jsp?id=$estate.getId()">Edit</a>
 
