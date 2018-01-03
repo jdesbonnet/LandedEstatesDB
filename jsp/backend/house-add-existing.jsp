@@ -1,19 +1,13 @@
 <%@include file="_header.jsp"%><%
 
-if (!user.hasWriteAccess()) {
-	throw new ServletException ("No write access to this database");
-}
-
-
-	Estate estate;
-	try {
-		Long estateId = new Long (request.getParameter("estate_id"));
-		estate = (Estate)hsession.load(Estate.class, estateId);
-	} catch (Exception e) {
-		throw new ServletException ("error parsing estate_id: " +e);
+	if (!user.hasWriteAccess()) {
+		throw new ServletException ("No write access to this database");
 	}
 
-	context.put ("tabId","estates");
+	Long estateId = new Long (request.getParameter("estate_id"));
+	Estate estate = (Estate)em.find(Estate.class, estateId);
+
 	context.put ("estate",estate);
-	templates.merge ("/backend/house-add-existing.vm",context,out);
+	context.put ("pageId", "./house-add-existing");
+	templates.merge ("/backend/master.vm",context,out);
 %>

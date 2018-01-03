@@ -1,18 +1,11 @@
-
-#if ($estate.getId())
-<h2>Edit estate record: $estate.getName()</h2>
-#else 
-<h2>Create new estate record</h2>
-#end
+$breadcrumbs.add("Estates","estate-list.jsp").add("$estate.name")
 
 <form name="editform" action="estate-edit-submit.jsp" method="POST">
 <input type="hidden" name="id" 
 value="$!estate.getId()" />
 
 
-<div class="form-group">
-<input type="submit" class="btn btn-default" value="Save" />
-</div>
+
 
 <div class="form-group">
 <label for="name">Estate name</label>
@@ -30,30 +23,32 @@ rows="5" cols="80"/>$!{estate.description}</textarea>
 
 <div class="form-group">
 <label for="families">Associated families</label>
-<table border="1" class="listTable">
+<table class="stdTable">
 <thead>
 <tr>
-<th>family name</td>
-<th>title</th>
+<th>family name / title</td>
 <th>actions</th>
 </tr>
 </thead>
 
+<tbody>
 #foreach ($family in $estate.getFamilies())
 <tr>
-<td>$family.getName()</td>
-<td>$!family.getTitle()</td>
+<td>${family.nameAndTitle}</td>
 <td>
-[
-<a href="estate-remove-family.jsp?estate_id=$estate.getId()&family_id=$family.getId()"
-onClick="return confirm('Are you sure you want to remove family from estate record?');">delete</a>
-]
+
+<a class="btn btn-primary btn-sm" 
+href="estate-remove-family.jsp?estate_id=$estate.getId()&family_id=$family.getId()"
+onClick="return confirm('Are you sure you want to remove family from estate record?');">remove association</a>
+
 </td>
 </tr>
 #end
+</tbody>
+
 </table>
 
-<input type="submit" class="btn btn-default" name="_submit_add_family"
+<input type="submit" class="btn btn-primary btn-sm" name="_submit_add_family"
 value="Add family association" />
 
 </div>
@@ -61,7 +56,7 @@ value="Add family association" />
 
 <div class="form-group">
 <label for="properties">Houses</label>
-<table border="1" class="listTable">
+<table class="stdTable">
 <thead>
 <tr>
 <th>house</th>
@@ -76,25 +71,28 @@ value="Add family association" />
 </tr>
 </thead>
 
-#foreach ($house in $estate.getHouses()) 
+<tbody>
+#foreach ($house in $estate.houses) 
 <tr>
 <td>
-<a href="house-show.jsp?id=$house.getId()">$house.getName()</a></td>
-<td>$!house.getTownland()</td>
-<td>$!house.getDed()</td>
-<td>$!house.getBarony()</td>
-<td>$!house.getPlu()</td>
-<td>$!house.getCounty()</td>
-<td>$!house.getOsSheet()</td>
-<td>#if ($!house.getImages().size() > 0) 
-yes ($house.getImages().size())
-#else no #end</td>
-<!--
-<td>$!house.getLatitude() $!house.getLongitude()</td>
--->
+<a href="house-show.jsp?id=${house.id}">${house.name}</a></td>
+<td>$!{house.townland}</td>
+<td>$!{house.ded}</td>
+<td>$!{house.barony}</td>
+<td>$!{house.plu}</td>
+<td>$!{house.county}</td>
+<td>$!{house.osSheet}</td>
+<td>
+#if ($!house.images.size() > 0) 
+yes ($house.images.size())
+#else 
+no 
+#end
+</td>
+
 <td>
 [
-<a href="property-remove.jsp?id=$property.getId()&estate_id=$estate.getId()"
+<a href="property-remove.jsp?id=${property.id}&estate_id=${estate.id}"
 onClick="return confirm('Are you sure you want to remove this house?');"
 >delete</a>
 ]
@@ -102,13 +100,14 @@ onClick="return confirm('Are you sure you want to remove this house?');"
 
 </tr>
 #end
+</tbody>
 </table>
 
-<input type="submit" class="btn btn-default" name="_submit_new_house"
-value="Add new house" />
+<input type="submit" class="btn btn-primary btn-sm" name="_submit_new_house"
+value="Add new house record" />
 
-<input type="submit" class="btn btn-default" name="_submit_existing_house"
-value="Add existing house record" />
+<input type="submit" class="btn btn-primary btn-sm" name="_submit_existing_house"
+value="Associate existing house record" />
 
 
 </div>
@@ -117,7 +116,7 @@ value="Add existing house record" />
 
 <div class="form-group">
 <label for="references">References</label>
-<table border="1" class="listTable">
+<table class="stdTable">
 
 <thead>
 <tr>
@@ -127,6 +126,7 @@ value="Add existing house record" />
 </tr>
 </thead>
 
+<tbody>
 #foreach ($reference in $estate.getReferences()) 
 <tr>
 <td>
@@ -165,10 +165,12 @@ onClick="return confirm ('Are you sure you want to delete reference?');">delete<
 </td>
 </tr>
 #end
+</tbody>
+
 </table>
 
 
-<input type="submit" class="btn btn-default" name="_submit_new_reference"
+<input type="submit" class="btn btn-primary btn-sm" name="_submit_new_reference"
 value="Add new reference" />
 
 

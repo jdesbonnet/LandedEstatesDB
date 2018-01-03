@@ -1,3 +1,4 @@
+$breadcrumbs.add("Estates","estate-list.jsp").add("New")
 
 <form action="estate-new-submit.jsp" method="POST">
 
