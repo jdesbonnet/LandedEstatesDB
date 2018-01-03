@@ -14,7 +14,7 @@ $breadcrumbs.add("Houses","house-list.jsp").add($house.name)
 </td>
 </tr>
 
-<tr><td>Property/House name:</td><td colspan="2">${house.name}</td></tr>
+<tr><td>House name:</td><td colspan="2">${house.name}</td></tr>
 <tr><td>Description:</td><td colspan="2">$!{house.description}</td></tr>
 
 #if ($FALSE)

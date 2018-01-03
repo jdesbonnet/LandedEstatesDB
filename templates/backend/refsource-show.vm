@@ -1,17 +1,25 @@
-#parse ("/backend/_header.vm")
+$breadcrumbs.add("Reference Sources","refsource-list.jsp").add($source.name)
 
-<h2>Reference source: $source.getName()</h2>
-
-
-
-<table>
+<table class="stdTable">
 <tr><td>Category: </td><td>$source.getCategory().getName() </td></tr>
 <tr valign="top"><td>Description: </td><td>$!source.getDescription()</td></tr>
 
-<td>Contact person:</td> <td>$!source.getContactPerson() </td></tr>
-<td>Telephone:</td> <td> $!source.getContactTelephone()</td></tr>
-<td>Email:</td><td>$!source.getContactEmail()</td></tr>
+<tr><td>Contact person:</td> <td>$!{source.contactPerson}</td></tr>
+<tr><td>Telephone:</td> <td> $!{source.getContactTelephone}</td></tr>
+<tr><td>Email:</td><td>$!{source.contactEmail}</td></tr>
+<tr><td>Web:</td><td>$!{source.contactWeb}</td></tr>
+
 </table>
+
+
+<div class="form-group">
+<a class="btn btn-primary" href="refsource-edit.jsp?id=${source.id}" >Edit</a>
+<a class="btn btn-danger" href="refsource-delete.jsp?id=$source.getId()"
+onClick="return confirm('Are you sure you want to delete reference source?');">Delete</a>
+
+</div>
+
+
 
 <h2>Estate records citing this source</h2>
 
@@ -49,9 +57,4 @@ $family.getName()
 </ul>
 
 
-<p>
-<a href="refsource-edit.jsp?id=$source.getId()">[Edit Reference Source Record]</a>
-</p>
 
-
-#parse ("/backend/_footer.vm")

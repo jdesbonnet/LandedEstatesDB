@@ -1,3 +1,5 @@
+$breadcrumbs.add("Images","images.jsp")
+
 <p>
 #if ($showCaptions) 
 <a href="?captions=false">[No captions]</a>

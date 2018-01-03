@@ -1,13 +1,15 @@
+$breadcrumbs.add("Reference Sources","refsource-list.jsp")
+
 <table class="stdTable">
 <thead>
 <tr>
 <th>name</th>
-<th>category</th>
-<th>contact details</th>
-<th>actions</th>
+<th width="30%">category</th>
+##<th>contact details</th>
 </tr>
 </thead>
 
+<tbody>
 #foreach ($source in $referenceSources)
 <tr>
 <td>
@@ -22,6 +24,7 @@ $source.getName()
 
 <td>$!{source.category.name}</td>
 
+#if ($FALSE)
 <td>
 #if ($source.contactPerson && $source.contactPerson.length()>0)
 Person: $!{source.contactPerson}<br />
@@ -38,13 +41,12 @@ Email: $!{source.contactEmail}<br />
 #if ($source.contactWeb && $source.contactWeb.length()>0)
 Web:  $!{source.contactWeb}<br />
 #end
-
 </td>
+#end
 
-<td>
-<a class="btn btn-sm btn-danger" href="refsource-delete.jsp?id=$source.getId()"
-onClick="return confirm('Are you sure you want to delete reference source?');">delete</a>
-</td>
+
 </tr>
 #end
+</tbody>
+
 </table>

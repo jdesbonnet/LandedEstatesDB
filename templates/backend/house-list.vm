@@ -1,3 +1,5 @@
+$breadcrumbs.add("Houses","house-list.jsp")
+
 <div class="a-z">
 |&nbsp;
 #foreach ($l in $alphabet)

@@ -19,5 +19,6 @@
 	
 	context.put ("records", hitList);
 	
-	templates.merge ("/backend/refsource-show.vm",context,out);
+	context.put ("pageId","./refsource-show");
+	templates.merge ("/backend/master.vm",context,out);
 %>
