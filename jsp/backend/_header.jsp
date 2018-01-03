@@ -35,12 +35,14 @@ public static String imageEntityName = "Image";
 
 private static String[] alphabet = { "A","B","C","D","E","F","G","H","I","J","K","L","M",
 "N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
+
+/*
 private static final double re = 6378100;
 // degrees longitude per meter (near Ireland)
 private static Double degPerMLon =  new Double (180 /  (Math.PI * re * Math.cos(53.5 * Math.PI/180)));
 // degrees latitude per meter (near Ireland)
 private static Double degPerMLat =  new Double (180 /  (Math.PI * re));
-
+*/
 	private static Tab[] familiesSubTabs = {
 				new Tab ("az", "A-Z", "family-list.jsp"),
 				new Tab ("listall", "List all", "family-list.jsp?letter=_all"),
@@ -198,43 +200,18 @@ private static Double degPerMLat =  new Double (180 /  (Math.PI * re));
 	em.getTransaction().begin();
 
 	TemplateRegistry templates= TemplateRegistry.getInstance();
-  
-  	/*
-	 * Initialize our own templating wrapper
-	 */
-	if (! templates.isInitialized()) {
-		
-		try {
-	templates.init(
-		getServletContext().getRealPath("/templates"));
-		} catch (ie.wombat.framework.AppException e) {
-	throw new ServletException(e.toString());
-		}
-	}
 	
-  
-    Context context = new Context(request,response);
-    context.put ("jsp", this); // So that we can use methods eg escape()
-    context.put ("contextPath",request.getContextPath());
-    context.put ("VERSION",DB.VERSION);
-    //context.put ("YUI","/yui");
-    context.put ("YUI","http://yui.yahooapis.com/2.8.2");
-    context.put ("YUIJS","http://yui.yahooapis.com/2.8.2/");
-    context.put ("YUICSS","http://yui.yahooapis.com/2.8.2/");
-    context.put ("tabs",tabs);
-    
-    context.put ("degPerMLon",degPerMLon);
-    context.put ("degPerMLat",degPerMLat);
-    
-    context.put ("dateFormat", dateFormat);
-    
-    context.put ("formatUtils", new FormatUtils());
-    
+	Context context = new Context(request,response);
+	context.put ("jsp", this); // So that we can use methods eg escape()
+	context.put ("contextPath",request.getContextPath());
 
-    //context.put ("yahooMapKey","YahooDemo");
-    
-    // new key obtained for http://landedestates.nuigalway.ie 8 Sep 2009.
-    context.put ("yahooMapKey","KozUJ.TV34Hl5WEiVy2GxjMUXdYHUbjXGWjn63ZXBD5LyAmoAKvcalQwmzbWdeOTGw--");
+	DB.getInstance().initTemplateContext(context);
+
+
+	// Yahoo stuff obsolete
+	//context.put ("yahooMapKey","YahooDemo");
+	// new key obtained for http://landedestates.nuigalway.ie 8 Sep 2009.
+	context.put ("yahooMapKey","KozUJ.TV34Hl5WEiVy2GxjMUXdYHUbjXGWjn63ZXBD5LyAmoAKvcalQwmzbWdeOTGw--");
 
     
     /*

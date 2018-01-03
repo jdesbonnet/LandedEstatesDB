@@ -8,7 +8,9 @@ import javax.servlet.ServletContextListener;
 
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
-import org.apache.velocity.app.Velocity;
+
+import ie.wombat.template.TemplateException;
+import ie.wombat.template.TemplateRegistry;
 
 /**
  * Responsible for initializing the app. contextInitialized() is called first 
@@ -31,20 +33,15 @@ public class AppContextStart implements ServletContextListener{
 		File appRoot = new File(event.getServletContext().getRealPath("/"));
 		Configuration.init(appRoot);
 		
-		/*
-		 try
-		 {
-		     Velocity.setProperty(Velocity.ENCODING_DEFAULT,"UTF-8");
-		     Velocity.setProperty("runtime.log.logsystem.class", "org.apache.velocity.runtime.log.NullLogSystem");
-		     // Allow relative paths in VM include/parse directives
-		     Velocity.setProperty("eventhandler.include.class", "org.apache.velocity.app.event.implement.IncludeRelativePath");
-		     Velocity.init();
-		 }
-		 catch (Exception e)
-		 {
-		     e.printStackTrace();
-		 }
-		 */
+		File  templateRoot = new File(appRoot,"templates");
+		try {
+			TemplateRegistry.getInstance().init(templateRoot.getPath());
+		} catch (TemplateException e) {
+			System.err.println("error initializing templates at " 
+					+ templateRoot.getPath());
+			e.printStackTrace();
+		}
+		
 	}
 
 }

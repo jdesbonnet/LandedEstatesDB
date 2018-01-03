@@ -1,4 +1,3 @@
-#parse ("/backend/_header.vm")
 
 <div class="a-z">
 |&nbsp;
@@ -78,6 +77,3 @@ Add new estate record</a>
 
 
 #end
-
-
-#parse ("/backend/_footer.vm")

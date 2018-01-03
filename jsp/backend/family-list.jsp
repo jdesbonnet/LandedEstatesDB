@@ -1,8 +1,4 @@
 <%@include file="_header.jsp"%><%
-
-	long time = -System.currentTimeMillis();
-
-	context.put ("tabId","families");
 	
 	String letter = request.getParameter("letter");
 	context.put ("letter",letter);
@@ -21,8 +17,6 @@
 				);
 	} 
 	
-	templates.merge ("/backend/family-list.vm",context,out);
-	
-	time += System.currentTimeMillis();
-	System.err.println ("family-list.jsp: " + time + "ms");
+	context.put("pageId","./family-list");
+	templates.merge ("/backend/master.vm",context,out);
 %>

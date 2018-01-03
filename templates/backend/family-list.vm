@@ -1,4 +1,4 @@
-#parse ("/backend/_header.vm")
+##parse ("/backend/_header.vm")
 
 <div class="a-z">
 |&nbsp;
@@ -61,4 +61,4 @@ onClick="return confirm('Are you sure you want to delete family name?');"
 
 #end
 
-#parse ("/backend/_footer.vm")
+##parse ("/backend/_footer.vm")

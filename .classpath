@@ -4,7 +4,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="WEB-INF/src"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/asm.jar"/>
-	<classpathentry kind="lib" path="WEB-INF/lib/template.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/wombat-gis.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/barcode4j-fop-ext-0.20.5-complete.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/wombat-ui.jar"/>

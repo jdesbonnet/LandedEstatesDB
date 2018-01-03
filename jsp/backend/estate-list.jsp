@@ -37,5 +37,10 @@
 		context.put ("estates",estates);
 		
 	} 
-	templates.merge ("/backend/estate-list.vm",context,out);
+	
+	context.put("pageId","./estate-list");
+	
+	//templates.merge ("/backend/estate-list.vm",context,out);
+	templates.merge ("/backend/master.vm",context,out);
+
 %>

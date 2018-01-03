@@ -1,6 +1,8 @@
 package ie.wombat.landedestates;
 
 import ie.wombat.gis.convert.OSILLAConvert;
+import ie.wombat.template.Context;
+import ie.wombat.ui.Tab;
 
 import java.beans.XMLEncoder;
 import java.io.File;
@@ -8,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Writer;
 import java.sql.Connection;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -57,7 +60,16 @@ public class DB {
 
 	// TODO: remove hard coding of index location
 	private static File indexDir = new File(DEFAULT_INDEX_DIR);
+	
+	public static SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
 
+	// Earth radius  in m
+	private static final double earthRadius = 6378100;
+
+	private static Double degPerMLon =  new Double (180 /  (Math.PI * earthRadius * Math.cos(53.5 * Math.PI/180)));
+	// degrees latitude per meter (near Ireland)
+	private static Double degPerMLat =  new Double (180 /  (Math.PI * earthRadius));
+	
 	static final String[] counties = { 
 		
 			/* Phase 1 counties */
@@ -75,6 +87,66 @@ public class DB {
 			*/
 
 	};
+
+	private static Tab[] familiesSubTabs = {
+			new Tab ("az", "A-Z", "family-list.jsp"),
+			new Tab ("listall", "List all", "family-list.jsp?letter=_all"),
+			/*
+			new Tab ("a","A", "families.jsp?letter=A"),
+			new Tab ("b","B", "families.jsp?letter=B"),
+			new Tab ("c","C", "families.jsp?letter=C"),
+			new Tab ("d","D", "families.jsp?letter=D"),
+			new Tab ("e","E", "families.jsp?letter=E"),
+			new Tab ("f","F", "families.jsp?letter=F"),
+			new Tab ("g","G", "families.jsp?letter=G"),
+			new Tab ("h","H", "families.jsp?letter=H"),
+			new Tab ("i","I", "families.jsp?letter=I"),
+			new Tab ("j","J", "families.jsp?letter=J"),
+			new Tab ("k","K", "families.jsp?letter=K"),
+			new Tab ("l","L", "families.jsp?letter=L"),
+			new Tab ("m","M", "families.jsp?letter=M"),
+			new Tab ("n","N", "families.jsp?letter=N"),
+			new Tab ("o","O", "families.jsp?letter=O"),
+			new Tab ("p","P", "families.jsp?letter=P"),
+			new Tab ("q","Q", "families.jsp?letter=Q"),
+			new Tab ("r","R", "families.jsp?letter=R"),
+			new Tab ("s","S", "families.jsp?letter=S"),
+			new Tab ("t","T", "families.jsp?letter=T"),
+			new Tab ("u","U", "families.jsp?letter=U"),
+			new Tab ("v","V", "families.jsp?letter=V"),
+			new Tab ("w","W", "families.jsp?letter=W"),
+			new Tab ("x","XYZ", "families.jsp?letter=XYZ"),
+			*/
+			new Tab ("newfamily","New family", "family-edit.jsp")
+	};
+	
+	private static Tab[] estatesSubTabs = { new Tab("az", "A-Z", "estate-list.jsp"),
+			new Tab("listall", "List all", "estate-list.jsp?letter=_all"),
+			new Tab("newestate", "New estate", "estate-new.jsp"), };
+
+	private static Tab[] housesSubTabs = { new Tab("az", "A-Z", "house-list.jsp"),
+			new Tab("listall", "List all", "house-list.jsp?letter=_all") };
+
+	private static Tab[] employeeRecordsSubTabs = {
+			// new Tab ("new", "New record",
+			// "employee-record-add.jsp?letter=_all"),
+			new Tab("listall", "List all employee records", "employee-record-list.jsp?letter=_all"),
+			new Tab("listtags", "List tags", "employee-record-tag-list.jsp"),
+			new Tab("export", "Export employee records", "employee-record-export.jsp"),
+			new Tab("help", "Help", "help.jsp?topic=EmployeeRecord&tab=employeeRecords") };
+
+	private static Tab[] refSourcesSubTabs = { new Tab("newrefsource", "New reference source", "refsource-new.jsp") };
+
+	private static Tab[] tabs = { 
+			new Tab("home","Map","index.jsp"),
+			new Tab("families","Families","family-list.jsp", familiesSubTabs), 
+			new Tab ("estates","Estates","estate-list.jsp",estatesSubTabs),
+			new Tab ("houses","Houses","house-list.jsp",housesSubTabs	),
+			new Tab ("employeeRecords","Employee Records","employee-record-list.jsp",employeeRecordsSubTabs	),
+			new Tab ("refsources","Reference Sources","refsource-list.jsp", refSourcesSubTabs),
+			new Tab ("images", "Images", "images.jsp"),
+			new Tab ("tools","Tools","tools.jsp")
+		};
 	
 	private List categoryList;
 
@@ -634,6 +706,26 @@ public class DB {
 		}
 		return null;
 
+	}
+	
+	public void initTemplateContext(Context context) {
+		context.put("VERSION", DB.VERSION);
+		
+		// Obsolute YUI
+		context.put("YUI", "http://yui.yahooapis.com/2.8.2");
+		context.put("YUIJS", "http://yui.yahooapis.com/2.8.2/");
+		context.put("YUICSS", "http://yui.yahooapis.com/2.8.2/");
+		
+		context.put("formatUtils", new FormatUtils());
+		context.put ("tabs",tabs);
+		
+		context.put ("dateFormat",dateFormat);
+		
+		// Longitude degrees per meter 
+		context.put ("degPerMLon",degPerMLon);
+		
+		// Latitude degrees per meter
+		context.put ("degPerMLat",degPerMLat);
 	}
 	
 }
