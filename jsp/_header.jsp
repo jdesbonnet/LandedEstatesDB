@@ -135,53 +135,51 @@ private static Double degPerMLat =  new Double (180 /  (Math.PI * re));
 	if (! templates.isInitialized()) {
 		
 		try {
-	templates.init(
-		getServletContext().getRealPath("/templates"));
-		} catch (ie.wombat.framework.AppException e) {
-	throw new ServletException(e.toString());
+			templates.init(
+			getServletContext().getRealPath("/templates"));
+		} catch (ie.wombat.template.TemplateException e) {
+			throw new ServletException(e.toString());
 		}
 	}
 	
-  
-    Context context = new Context(request,response);
-    context.put ("jsp", this); // So that we can use methods eg escape()
-    context.put ("contextPath",request.getContextPath());
-    context.put ("VERSION",DB.VERSION);
-    context.put ("PROJECT_ID",Configuration.getConfiguration("PROJECT_ID"));
-    context.put ("PROJECT_TITLE",Configuration.getConfiguration("PROJECT_TITLE"));
-    context.put ("PROJECT",Configuration.getConfiguration("PROJECT_TITLE"));
-    context.put ("YUI","http://yui.yahooapis.com/2.9.0/build");
+
+	Context context = new Context(request,response);
+	context.put ("jsp", this); // So that we can use methods eg escape()
+	context.put ("contextPath",request.getContextPath());
+	context.put ("VERSION",DB.VERSION);
+	context.put ("PROJECT_ID",Configuration.getConfiguration("PROJECT_ID"));
+	context.put ("PROJECT_TITLE",Configuration.getConfiguration("PROJECT_TITLE"));
+	context.put ("PROJECT",Configuration.getConfiguration("PROJECT_TITLE"));
+	context.put ("YUI","http://yui.yahooapis.com/2.9.0/build");
     
     // Key applied for http://test.galway.net:8080/LandedEstates/jsp/ on 18 Nov 2007.
 	//context.put ("yahooMapKey", "dlLBEf7V34EfycUAzlDjDCBvEQGMcz.EgWqDhh3yKNtuXjDTbpALgidyvpFtnecmCw--");
 	
     // new key obtained for http://landedestates.nuigalway.ie 8 Sep 2009.
-    context.put ("yahooMapKey","KozUJ.TV34Hl5WEiVy2GxjMUXdYHUbjXGWjn63ZXBD5LyAmoAKvcalQwmzbWdeOTGw--");
+	context.put ("yahooMapKey","KozUJ.TV34Hl5WEiVy2GxjMUXdYHUbjXGWjn63ZXBD5LyAmoAKvcalQwmzbWdeOTGw--");
 
-    
-    context.put ("tabs",tabs);
-    
-    context.put ("degPerMLon",degPerMLon);
-    context.put ("degPerMLat",degPerMLat);
-    
+	context.put ("tabs",tabs);
 
-    // Key registered with Yahoo, 28 Jan 2008 and 
-    // associated with http://www.landedestates.ie
-    context.put ("yahooMapKey","hbSnbuLV34EvP5X5NQJl3amxv0K36Qf4hHdBT0R238gGPvNM3CW568rwtl1L_FqEbg--");
-    
-    context.put ("formatUtils", new FormatUtils());
+	context.put ("degPerMLon",degPerMLon);
+	context.put ("degPerMLat",degPerMLat);
 
-    
-    /*
-     * Set jspfile to name of JSP script file
-     */
-    String jspFile;
-    {
-    	String[] p = request.getRequestURI().split("/");
-    	jspFile = p[p.length-1];
-    	context.put ("jspfile", p[p.length-1]);
-    }
-      
+
+	// Key registered with Yahoo, 28 Jan 2008 and 
+	// associated with http://www.landedestates.ie
+	context.put ("yahooMapKey","hbSnbuLV34EvP5X5NQJl3amxv0K36Qf4hHdBT0R238gGPvNM3CW568rwtl1L_FqEbg--");
+
+	context.put ("formatUtils", new FormatUtils());
+
+	/*
+	* Set jspfile to name of JSP script file
+	*/
+	String jspFile;
+	{
+		String[] p = request.getRequestURI().split("/");
+		jspFile = p[p.length-1];
+		context.put ("jspfile", p[p.length-1]);
+	}
+	
 	//DB db = DB.getInstance();
 	
 	
