@@ -7,7 +7,7 @@
 <%@include file="_header.jsp"%><%
 	String q = request.getParameter("q");
 
-	final String[] fields = new String[]{"description"}; // search on these fields
+	final String[] fields = new String[]{"name","description"}; // search on these fields
 	FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(em);
 	Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_31);
 	MultiFieldQueryParser parser = new MultiFieldQueryParser(

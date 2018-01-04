@@ -7,7 +7,7 @@ ${r.description}
 #elseif ($resultClass=="ie.wombat.landedestates.EmployeeRecord")
 (<a href="employee-record-edit.jsp?id=$r.id">ER${r.id}</a>)
 ${r.description} 
-#elseif ($resultClass=="ie.wombat.landedestates.Estate")
+#elseif ($resultClass.startsWith("ie.wombat.landedestates.Estate"))
 <b>${r.name}</b> 
 (<a href="estate-show.jsp?id=$r.id">E${r.id}</a>) 
 ${r.description}

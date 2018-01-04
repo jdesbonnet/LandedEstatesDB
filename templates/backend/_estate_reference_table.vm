@@ -1,0 +1,55 @@
+##
+## requires $estate
+##
+
+#if (!$estate.references || $estate.references.size()==0)
+<div><em>none</em></div>
+#else
+
+<table class="stdTable">
+
+<thead>
+<tr>
+<th>reference</th>
+<th>source</th>
+<th>actions</th>
+</tr>
+</thead>
+
+<tbody>
+#foreach ($reference in $estate.references) 
+<tr>
+<td>
+#if (! $reference.description) 
+<div class="alert alert-danger">!!! No reference description !!!</div>
+#else 
+$reference.description
+#end
+
+</td>
+
+<td> 
+#if (! $reference.source)
+<div class="alert alert-danger">!!! No reference source !!!</div>
+#else
+$reference.source.name
+#if ($reference.source.category)
+($reference.source.category.name)
+#end
+#end
+</td>
+
+<td>
+<div class="btn-group">
+<a class="btn btn-primary btn-sm" href="reference-edit.jsp?id=${reference.id}()&estate_id=${estate.id}">edit</a>
+<a class="btn btn-danger btn-sm" href="estate-remove-reference.jsp?estate_id=${estate.id}&reference_id=${reference.id}"
+onClick="return confirm ('Are you sure you want to delete reference?');">delete</a>
+</div>
+</td>
+
+</tr>
+#end
+</tbody>
+
+</table>
+#end

@@ -109,32 +109,25 @@ OS Sheet #${house.osSheet}.
 ##
 ## Employee Records
 ##
-#parse ("/backend/_employee_record_reference_table.vm")
+##parse ("/backend/_employee_record_reference_table.vm")
 <h3>Historical Employee Records</h3>
 #parse("_employee_record_table.vm")
-<a class="btn btn-primary btn-sm" href="employee-record-add.jsp?estate_id=${estate.id}">Add employee record</a>
 ## End list of Employee Records
-
-
-
-#if ($estate.getReferences().size() == 0)
-<em>none</em>
-#end
 
 
 #foreach ($refCatName in $referenceCategoryNames)
 <h3>$refCatName</h3>
+#if (! $referenceCategories.get($refCatName).size())
+<em>none</em>
+#else
 <ul class="bulletList">
 #foreach ($reference in $referenceCategories.get($refCatName))
 <li> <a href="refsource-show.jsp?id=$reference.source.id">$jsp.markingsToHtml(${reference.source.name})</a>: 
 $jsp.markingsToHtml($reference.description) </li>
 #end
 </ul>
-
-
-#if ($referenceCategories.get($referenceCategoryName).size()==0)
-<em>none</em>
 #end
+
 
 #end
 
@@ -152,10 +145,10 @@ $jsp.markingsToHtml($reference.description) </li>
 	#end
 	
 	description=
-	#if ($ref.getDescription())
-		$ref.getDescription()
+	#if ($ref.description)
+		$ref.description
 	#else
-		<span class="errorMessage">No reference description</span>
+		<div class="alert alert-info">No reference description</div>
 	#end
 	
 	</li>
@@ -165,6 +158,7 @@ Please edit this Estate record and correct issues highlighted above.
 </div>
 #end
 
+<br />
 
 <a class="btn btn-primary" href="estate-edit.jsp?id=$estate.getId()">Edit</a>
 

@@ -496,8 +496,8 @@ public class DB {
 
 		for (String entityName : entites) {
 			List<Object> objects = em.createQuery("from " + entityName).getResultList();
+			System.err.println("Found " + objects.size() + " objects of type " +entityName + " to index.");
 			for (Object o : objects) {
-				System.err.println("indexing " + o);
 				fullTextEm.index(o);
 			}
 		}

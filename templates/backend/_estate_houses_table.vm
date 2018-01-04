@@ -1,0 +1,53 @@
+##
+## requires $estate
+##
+
+#if ($!estate.houses || $estate.houses.size()==0)
+<div><em>none</em></div>
+#else
+<table class="stdTable">
+<thead>
+<tr>
+<th>house</th>
+<th>townland</th>
+<th>DED</th>
+<th>barony</th>
+<th>PLU</th>
+<th>county</th>
+<th>OS Sheet</th>
+<th>Images</th>
+<th>actions</th>
+</tr>
+</thead>
+
+<tbody>
+#foreach ($house in $estate.houses) 
+<tr>
+<td>
+<a href="house-show.jsp?id=${house.id}">${house.name}</a></td>
+<td>$!{house.townland}</td>
+<td>$!{house.ded}</td>
+<td>$!{house.barony}</td>
+<td>$!{house.plu}</td>
+<td>$!{house.county}</td>
+<td>$!{house.osSheet}</td>
+<td>
+#if ($!house.images.size() > 0) 
+yes ($house.images.size())
+#else 
+no 
+#end
+</td>
+
+<td>
+<a href="property-remove.jsp?id=${property.id}&estate_id=${estate.id}"
+class="btn btn-primary btn-sm"
+onClick="return confirm('Are you sure you want to remove this house?');"
+>remove association</a>
+</td>
+
+</tr>
+#end
+</tbody>
+</table>
+#end
