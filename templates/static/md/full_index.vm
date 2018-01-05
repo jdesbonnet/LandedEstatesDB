@@ -1,0 +1,41 @@
+#parse ("/cdrom/_header.vm")
+
+<h2>Full database index</h2>
+
+<h3>Estates index</h3>
+
+<ul>
+#foreach ($estate in $estates)
+<li> <a href="e${estate.getId()}.htm">$estate.getName()</a>
+#if ($estate.getDescription())
+- $estate.getDescription()
+#end
+</li>
+#end
+</ul>
+
+<h3>Family names index</h3>
+
+<ul>
+#foreach ($family in $families)
+<li> <a href="f${family.getId()}.htm">$family.getName()</a></li>
+#end
+</ul>
+
+
+
+<h3>Property index</h3>
+
+<ul>
+#foreach ($property in $properties)
+<li> <a href="p${property.getId()}.htm">$property.getName()</a>
+#if ($property.getDescription())
+- $property.getDescription()
+#end
+</li>
+#end
+</ul>
+
+
+#parse ("/cdrom/_footer.vm")
+

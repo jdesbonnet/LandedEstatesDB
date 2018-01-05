@@ -1,0 +1,13 @@
+#parse ("_header.vm")
+
+# Estates index
+
+#foreach ($estate in $estates)
+ * [${estate.name}](./e${estate.id}.md)
+#if ($estate.description)
+– $estate.description
+#end
+#end
+
+#parse ("_footer.vm")
+

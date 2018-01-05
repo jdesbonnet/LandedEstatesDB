@@ -173,7 +173,7 @@ public  class Image {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	ImageData getImageData() {
+	public ImageData getImageData() {
 		return imageData;
 	}
 	public void setImageData(ImageData imageData) {
@@ -185,7 +185,7 @@ public  class Image {
 	public void setIntermediateHeight(int intermediateHeight) {
 		this.intermediateHeight = intermediateHeight;
 	}
-	ImageData getIntermediateImageData() {
+	public ImageData getIntermediateImageData() {
 		return intermediateImageData;
 	}
 	public void setIntermediateImageData(ImageData intermediateImageData) {
@@ -213,7 +213,7 @@ public  class Image {
 	public void setThumbnailHeight(int thumbnailHeight) {
 		this.thumbnailHeight = thumbnailHeight;
 	}
-	ImageData getThumbnailImageData() {
+	public ImageData getThumbnailImageData() {
 		return thumbnailImageData;
 	}
 	public void setThumbnailImageData(ImageData thumbnailImageData) {

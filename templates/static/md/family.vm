@@ -1,0 +1,21 @@
+#parse ("/cdrom/_header.vm")
+
+<h2>Family: $family.nameAndTitle</h2>
+
+${family.description}
+
+<h3>Estates</h3>
+
+#foreach ($estate in $family.estates) 
+ * [${estate.name}](./e${estate.id}.md)
+#if ($estate.description)
+– ${estate.description}
+#end
+#end
+
+#if ($estates.size() == 0) 
+<em>no estate records found</em>
+#end
+
+#parse ("/static/md/_footer.vm")
+

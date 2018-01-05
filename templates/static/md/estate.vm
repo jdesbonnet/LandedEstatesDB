@@ -1,0 +1,24 @@
+#parse ("_header.vm")
+
+<h2>Estate: ${estate.name}</h2>
+
+<h3>Associated Families</h3>
+
+#foreach ($family in $estate.families)
+ * [${family.nameAndTitle}](./f${family.id}.md)
+#end
+
+#if ($estate.families.size() == 0)
+<em>none</em>
+#end
+
+$!estate.getDescription()
+
+
+<h3>Houses</h3>
+
+#foreach ($house in $estate.houses)
+ * [${house.name}](./h${house.id}.md)
+#end
+
+#parse ("/static/md/_footer.vm")

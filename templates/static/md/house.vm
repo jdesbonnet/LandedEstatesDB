@@ -1,0 +1,12 @@
+#parse ("/static/md/_header.vm")
+
+<h2>House: $house.name</h2>
+
+
+#foreach ($estate in $house.estates)
+ * [${estate.name}](./e${estate.id}.md)
+#end
+
+$!{house.description}
+
+#parse ("/static/md/_footer.vm")
