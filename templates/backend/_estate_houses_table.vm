@@ -1,22 +1,27 @@
 ##
-## requires $estate
+## Parameters:
+## $estate
+## $showActionsColumn ("true"|"false") optional
 ##
 
-#if ($!estate.houses || $estate.houses.size()==0)
+#if (! $estate.houses || $estate.houses.size()==0)
 <div><em>none</em></div>
 #else
 <table class="stdTable">
 <thead>
 <tr>
-<th>house</th>
-<th>townland</th>
+<th>House</th>
+<th>Townland</th>
+<th>Civil Parish</th>
 <th>DED</th>
-<th>barony</th>
+<th>Barony</th>
 <th>PLU</th>
-<th>county</th>
+<th>County</th>
 <th>OS Sheet</th>
 <th>Images</th>
+#if ($showActionsColumn=="true")
 <th>actions</th>
+#end
 </tr>
 </thead>
 
@@ -26,11 +31,28 @@
 <td>
 <a href="house-show.jsp?id=${house.id}">${house.name}</a></td>
 <td>$!{house.townland}</td>
+<td>$!house.civilParish</td>
 <td>$!{house.ded}</td>
 <td>$!{house.barony}</td>
 <td>$!{house.plu}</td>
 <td>$!{house.county}</td>
-<td>$!{house.osSheet}</td>
+
+##<td>$!{house.osSheet}</td>
+
+
+<td>
+#if ($house.hasGridReference())
+<a href="javascript:popupMap('gridref=${house.gridReference}')">${house.gridReference}</a>
+#end
+#if ($house.discoveryMap)
+Discovery map #${house.discoveryMap}.
+#end
+#if ($house.osSheet)
+OS Sheet #${house.osSheet}.
+#end
+</td>
+
+
 <td>
 #if ($!house.images.size() > 0) 
 yes ($house.images.size())
@@ -39,12 +61,14 @@ no
 #end
 </td>
 
+#if ($showActionsColumn=="true")
 <td>
 <a href="property-remove.jsp?id=${property.id}&estate_id=${estate.id}"
 class="btn btn-primary btn-sm"
 onClick="return confirm('Are you sure you want to remove this house?');"
 >remove association</a>
 </td>
+#end
 
 </tr>
 #end

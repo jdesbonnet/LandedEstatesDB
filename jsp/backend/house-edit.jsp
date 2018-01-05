@@ -1,11 +1,11 @@
-<%@include file="_header.jsp"%><%if (!user.hasWriteAccess()) {
+<%@include file="_header.jsp"%><%
+	if (!user.hasWriteAccess()) {
 		throw new ServletException ("No write access to this database");
 	}
 
 	Long id = new Long(request.getParameter("id"));
-	House property = (House)em.find(House.class, id);
-	
-	context.put ("tabId","houses");
-	context.put ("property", property);
-	
-	templates.merge ("/backend/house-edit.vm",context,out);%>
+	House house = (House)em.find(House.class, id);
+	context.put ("house", house);
+	context.put ("pageId","./house-edit");
+	templates.merge ("/backend/master.vm",context,out);
+%>

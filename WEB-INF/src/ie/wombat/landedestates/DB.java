@@ -252,7 +252,8 @@ public class DB {
 		int x1 = easting + radius;
 		int y0 = northing - radius;
 		int y1 = northing + radius;
-		String query = "from House as p "
+		
+		String query = "from House as h "
 			+ " where "
 			+ " h.gridReference != null"
 			+ " and h.easting > :x0 and h.easting < :x1 "
@@ -651,7 +652,7 @@ public class DB {
 			oh.setObjectClass(o.getClass().getName());
 			oh.setVersion(version);
 		}
-		oh.setModified(new Date(System.currentTimeMillis()));
+		oh.setModified(new Date());
 		
 		Session dom4jSession = session.getSession(EntityMode.DOM4J);
 		Element e = (Element) dom4jSession.load(o.getClass(), id);	

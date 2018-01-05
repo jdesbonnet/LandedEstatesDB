@@ -1,5 +1,11 @@
 $breadcrumbs.add("Houses","house-list.jsp").add($house.name)
 
+<a class="btn btn-primary pull-right" href="house-edit.jsp?id=$house.id">edit</a>
+
+
+#if ($PROJECT_ID=="ERDB")
+[<a href="employee-record-add.jsp?house_id=$house.getId()">Add employee record</a>]
+#end
 
 <table class="stdTable">
 
@@ -17,51 +23,18 @@ $breadcrumbs.add("Houses","house-list.jsp").add($house.name)
 <tr><td>House name:</td><td colspan="2">${house.name}</td></tr>
 <tr><td>Description:</td><td colspan="2">$!{house.description}</td></tr>
 
-#if ($FALSE)
+#if($PROJECT_ID=="ERDB")
 <tr><td>Employee Records:</td>
 <td colspan="2">
-#if ($house.getEmployeeRecords().size()==0)
-no records
+#if ($house.employeeRecords.size()==0)
+	<em>no records</em>
 #else
-<table class="listTable">
-<thead>
-<tr>
-<th>ID</th>
-<th>Document Date</th>
-<th>Description</th>
-<th># References</th>
-<th>Tags</th>
-</tr>
-</thead>
-
-<tbody>
-#foreach ($er in $house.getEmployeeRecords())
-<tr>
-<td><a href="employee-record-edit.jsp?id=$er.getId()">$er.getId()</a></td>
-#if ($er.date)
-<td>$dateFormat.format($er.date)</td>
-#else
-<td>(none)</td>
+	#set($estate=$house)
+	#parse("_employee_record_table.vm")
 #end
-<td>$!er.getDescription()</td>
-<td>$er.references.size()</td>
-<td>
-<ul>
-#foreach ($tag in $er.tags)
-<li><a href="employee-record-list.jsp?tag_id=$tag.id">$tag.name</a></li>
-#end
-</ul>
 </td>
-#end
-
-
 </tr>
 #end
-</tbody>
-</table>
-#end
-[<a href="employee-record-add.jsp?house_id=$house.getId()">Add employee record</a>]
-</td></tr>
 
 
 <!-- Location info -->
@@ -149,40 +122,6 @@ $!house.getBarony()
 ]
 </p>
 
-
-
-#if ($house.hasGridReference())
-<!--
-<h3>Map</h3>
-<div id="xmapContainer" class="googleMapShowProperty"></div>
-<p>
-[
-<a href="house-nearby.jsp?id=$house.getId()">List nearby properties</a>
-]
-</p>
--->
-
-
-
-
-<script type="text/javascript" 
-src="http://api.maps.yahoo.com/ajaxymap?v=3.0&appid=$yahooMapKey"></script>
-<script type="text/javascript">
-var myPoint = new YGeoPoint($house.getLatitudeDeg(),$house.getLongitudeDeg());
-var map = new YMap(document.getElementById('mapContainer'),YAHOO_MAP_REG);
-
-// Add controls
-map.addPanControl(); 
-map.addZoomLong(); 
-map.addTypeControl();
-
-map.drawZoomAndCenter(myPoint, 3);
-var marker = new YMarker(myPoint);
-marker.addLabel("X");
-map.addOverlay(marker);
-</script>
-
-#end
 
 
 <h3>Images</h3>

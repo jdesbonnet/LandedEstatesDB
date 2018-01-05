@@ -55,6 +55,9 @@
 	context.put ("referenceCategories",referenceCategoryHash);
 	context.put ("referenceCategoryNames", referenceCategoryNames);
 	
+	context.put ("revisionHistory" , db.getRevisionHistory(em, 
+			estate.getClass().getName(), 
+			estateId));
 	
 	//context.put ("revisionHistory",db.getRevisionHistory(Estate.class.getName(), estate.getId()));
 	

@@ -1,27 +1,25 @@
-#parse ("/backend/_header.vm")
-
 <h2>Houses near 
-<a href="property-show.jsp?id=$property.getId()">$property.getName()</a>
+<a href="house-show.jsp?id=$house.id">${property.name}</a>
  (search radius $radiusKm km)</h2>
 
 <div id="mapContainer"></div>
 
 <ul class="bulletList">
-#foreach ($p in $properties)
-#if ($p.getId() != $property.getId())
-<li> <a href="property-show.jsp?id=$p.getId()">$p.getName()</a>
-$jsp.calcDistanceInKm($property,$p)km</li>
+#foreach ($h in $houses)
+#if ($h.id != $house.id)
+<li> <a href="house-show.jsp?id=$h.id">${h.name}</a>
+$jsp.calcDistanceInKm($house,$h)km</li>
 #end
 #end
 </ul>
 
-#if ($nearbyProperties.size() == 0) 
+#if ($nearbyHouses.size() == 0) 
 <em>none</em>
 #end
 
 <form>
-<input type="hidden" name="id" value="$property.getId()" />
-<input type="hidden" name="estate_id" value="$estate.getId()" />
+<input type="hidden" name="id" value="${house.id}" />
+<input type="hidden" name="estate_id" value="${estate.id}" />
 Re-query with search radius <input type="text" name="r_km"
 size="8"
 value="$radiusKm" />
@@ -29,16 +27,10 @@ value="$radiusKm" />
 </form>
 
 
-
-#set ($cx = $property.getLongitudeDeg())
-#set ($cy = $property.getLatitudeDeg())
+#set ($cx = $house.longitudeDeg)
+#set ($cy = $house.latitudeDeg)
 #set ($zoom = 6)
 
 #if ($useGoogleMap)
 #parse ("/backend/_google_map.vm")
-#else
-#parse ("/backend/_yahoo_map.vm")
 #end
-
-#parse ("/backend/_footer.vm")
-

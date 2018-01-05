@@ -6,7 +6,7 @@ if (!user.hasWriteAccess()) {
 
 
 	Long id = new Long(request.getParameter("id"));
-	Image image = (Image)hsession.load(imageEntityName, id);
+	Image image = (Image)em.find(imageEntityName, id);
 	context.put ("image",image);
 	context.put ("next", request.getHeader("Referer"));
 	

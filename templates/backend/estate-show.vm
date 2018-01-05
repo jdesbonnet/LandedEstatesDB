@@ -1,7 +1,8 @@
-$breadcrumbs.add("Estates","estate-list.jsp").add($estate.name)
+$breadcrumbs.add("Estates","estate-list.jsp").add("${estate.name} (phase${estate.projectPhase})")
 
+<a class="btn btn-primary pull-right" href="estate-edit.jsp?id=${estate.id}">Edit</a>
 
-<h3>Associated Families</h3>
+<h2>Associated Families</h2>
 
 <ul class="bulletList">
 #foreach ($family in $estate.families)
@@ -18,102 +19,39 @@ $breadcrumbs.add("Estates","estate-list.jsp").add($estate.name)
 #end
 
 
-<h3>Description</h3>
+<h2>Description</h2>
 $!estate.description
 #if (! $estate.description || $estate.description.length()==0)
 <em>none</em>
 #end
 
 
-
-<h3>Houses</h3>
-
-#if ($estate.houses.size() == 0) 
-<em>none</em>
-#else
-<table class="listTable">
-<thead>
-<tr>
-<th width="300">House Name / Description</th>
-<th>Townland</th>
-<th>Civil Parish</th>
-<th>PLU</th>
-<th>DED</th>
-<th>Barony</th>
-<th>County</th>
-<th>OS Grid Reference / Map</th>
-</tr>
-</thead>
-
-<tbody>
-#foreach ($house in $estate.houses) 
-<tr valign="top">
-<td>
-
 ##
-## If just one image float to right of cell
-##
-
-#if ($house.getImages().size() == 1)
-#foreach ($image in $house.getImages())
-<img alt="image" src="$contextPath/img/tn/$image.getId()" align="right" />
-#end
-#end
-
-<a href="house-show.jsp?id=${house.id}">${house.name}</a>
-<br />
-
-$!house.description
-
-##
-## If more than one house then list after description
-##
-
-#if ($house.images.size() > 1)
-<br />
-#foreach ($image in $house.images)
-<img alt="image" src="$contextPath/img/tn/${image.id}" />
-#end
-#end
-
-
-</td>
-
-<td>$!house.getTownland() &nbsp;</td>
-<td>$!house.getCivilParish() &nbsp;</td>
-<td>$!house.getPlu() &nbsp;</td>
-<td>$!house.getDed() &nbsp;</td>
-<td>$!house.getBarony() &nbsp;</td>
-<td>$!house.getCounty() &nbsp;</td>
-
-<td>
-#if ($house.hasGridReference())
-<a href="javascript:popupMap('gridref=${house.gridReference}')">${house.gridReference}</a>
-#end
-#if ($house.discoveryMap)
-Discovery map #${house.discoveryMap}.
-#end
-#if ($house.osSheet)
-OS Sheet #${house.osSheet}.
-#end
-</td>
-
-</tr>
-#end
-</tbody>
-</table>
-#end
-## End list of houses
+## Houses
+## 
+<h2>Houses</h2>
+#set($showActionsColumn="false")
+#parse ("_estate_houses_table.vm")
+## End list of House records
 
 
 ##
 ## Employee Records
 ##
-##parse ("/backend/_employee_record_reference_table.vm")
-<h3>Historical Employee Records</h3>
+#if ($PROJECT_ID=="ERDB")
+<h2>Historical Employee Records</h2>
 #parse("_employee_record_table.vm")
+<hr>
+#parse ("/backend/_employee_record_reference_table.vm")
+<hr>
+#end
 ## End list of Employee Records
 
+##
+## References
+##
+
+<h2>References</h2>
 
 #foreach ($refCatName in $referenceCategoryNames)
 <h3>$refCatName</h3>
@@ -127,12 +65,10 @@ $jsp.markingsToHtml($reference.description) </li>
 #end
 </ul>
 #end
-
-
 #end
 
 #if ($problemReferences.size() > 0)
-<div class="warning">
+<div class="alert alert-danger">
 <h3>problematic references</h3>
 <ul class="bulletList">
 #foreach ($ref in $problemReferences)

@@ -1,8 +1,8 @@
 <%@include file="_header.jsp"%><%
 	
-if (!user.hasWriteAccess()) {
-	throw new ServletException ("No write access to this database");
-}
+	if (!user.hasWriteAccess()) {
+		throw new ServletException ("No write access to this database");
+	}
 
 	Long id = new Long (request.getParameter("id"));
 	Estate estate = (Estate)em.find(Estate.class,id);
@@ -19,6 +19,8 @@ if (!user.hasWriteAccess()) {
 		estate.setDescription (request.getParameter("description"));
 	} 
 	
+	Integer projectPhase = new Integer(request.getParameter("project_phase"));
+	estate.setProjectPhase(projectPhase);
 	
 	/*
 	 * What happens next depends on which save button was clicked

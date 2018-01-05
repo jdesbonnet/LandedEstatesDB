@@ -1,0 +1,18 @@
+$breadcrumbs.add("Timeline")
+
+#foreach ($year in $years)
+<h2>$year</h2>
+<ul>
+#foreach ($o in $yearMap.get($year))
+	<li> 
+	#if ($o.class.name.endsWith("House")) 
+	<a href="house-show.jsp?id=$o.id">$o.name</a>
+	#end
+	#if ($o.class.name.endsWith("Estate"))
+	<a href="estate-show.jsp?id=$o.id">$o.name</a>
+	#end
+	
+	</li>
+#end
+</ul>
+#end

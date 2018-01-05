@@ -14,6 +14,9 @@
 			.getResultList();
 	context.put ("estates",estates);
 	
+	context.put ("revisionHistory" , db.getRevisionHistory(em, 
+			house.getClass().getName(), 
+			houseId));
 	
 	context.put("pageId","./house-show");
 	templates.merge ("/backend/master.vm",context,out);

@@ -1,0 +1,41 @@
+<%@page import="java.util.Collections"%>
+<%@include file="_header.jsp"%><%
+
+if (!user.hasWriteAccess()) {
+	throw new ServletException ("No write access to this database");
+}
+
+HashMap<String,List<Object>> yearMap = new HashMap<>();
+
+List<House> houses = em.createQuery("from House").getResultList();
+for (House house : houses) {
+	Set<String> years = TimelineAnalysis.parseTextForDate(house.getDescription());
+	for (String year : years) {
+		if (!yearMap.containsKey(year)) {
+			yearMap.put(year,new ArrayList<>());
+		}
+		yearMap.get(year).add(house);
+	}
+}
+
+List<Estate> estates = em.createQuery("from Estate").getResultList();
+for (Estate estate : estates) {
+	Set<String> years = TimelineAnalysis.parseTextForDate(estate.getDescription());
+	for (String year : years) {
+		if (!yearMap.containsKey(year)) {
+			yearMap.put(year,new ArrayList<>());
+		}
+		yearMap.get(year).add(estate);
+	}
+}
+
+List<String> years = new ArrayList<>(yearMap.keySet());
+Collections.sort(years);
+context.put("years",years);
+context.put("yearMap",yearMap);
+context.put("pageId", "./timeline");
+templates.merge ("/backend/master.vm",context,out);
+
+
+%>
+done.

@@ -1,4 +1,6 @@
-<%@include file="_header.jsp"%><%!public static int calcDistanceInKm (House p0, House p1) {
+<%@include file="_header.jsp"%><%!
+
+	public static int calcDistanceInKm (House p0, House p1) {
 		int dx = p1.getEasting() - p0.getEasting();
 		int dy = p1.getNorthing() - p0.getNorthing();
 		int d2 = dx*dx + dy*dy;
@@ -6,7 +8,7 @@
 	}%><%House property;
 	try {
 		Long id = new Long(request.getParameter("id"));
-		property = (House)hsession.load(House.class,id);
+		property = (House)em.find(House.class,id);
 	} catch (Exception e) {
 		out.println ("error: " + e);
 		return;
@@ -30,7 +32,7 @@
 	if (property.hasGridReference()) {
 		int easting = property.getEasting();
 		int northing = property.getNorthing();
-		context.put ("properties", db.getPropertiesByGridReference(hsession, easting,northing,(int)radius));
+		context.put ("houses", db.getHousesByGridReference(em, easting,northing,(int)radius));
 	}
 	
 	// reference to this JSP for utility methods defined above

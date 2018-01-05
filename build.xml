@@ -65,8 +65,8 @@
 			debug="${debug}" 
 			deprecation="${deprecation}" 
 			optimize="${optimize}"
-			source="1.6"
-			target="1.6">
+			source="1.7"
+			target="1.7">
 			<classpath refid="base.classpath"/>
 			<!--
 			<compilerarg value="-Xlint" />

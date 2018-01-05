@@ -1,3 +1,7 @@
+## Styling:
+## use nav class bg-dark | bg-primary | bg-info ... etc
+##
+
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
     
       <a class="navbar-brand" href="#" style="padding:0;margin:0;line-height:0.5em">
