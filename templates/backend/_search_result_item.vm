@@ -11,6 +11,10 @@ ${r.description}
 <b>${r.name}</b> 
 (<a href="estate-show.jsp?id=$r.id">E${r.id}</a>) 
 ${r.description}
+#elseif ($resultClass.startsWith("ie.wombat.landedestates.Family"))
+<b>${r.name}</b> 
+(<a href="family-show.jsp?id=$r.id">F${r.id}</a>) 
+${r.description}
 #else
 ? $resultClass $r.id
 #end

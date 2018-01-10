@@ -6,6 +6,7 @@
 <%@page import="org.hibernate.search.jpa.Search"%>
 <%@include file="_header.jsp"%><%
 	String q = request.getParameter("q");
+	context.put("q",XSSClean.clean(q));
 
 	final String[] fields = new String[]{"name","description"}; // search on these fields
 	FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(em);

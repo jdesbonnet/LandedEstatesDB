@@ -22,7 +22,7 @@ $breadcrumbs.add("Estates","estate-list.jsp")
 
 
 #if ($estates) 
-<table border="1" class="listTable">
+<table border="1" class="stdTable">
 <thead>
 <tr>
 <th>Phase</th>
@@ -53,11 +53,10 @@ $breadcrumbs.add("Estates","estate-list.jsp")
 </td>
 
 <td>
-#foreach ($property in $estate.houses)
-<a href="property-show.jsp?id=${property.id}&estate_id=${estate.id}">${property.name}</a>
+#foreach ($house in $estate.houses)
+<a href="house-show.jsp?id=${house.id}&estate_id=${estate.id}">${house.name}</a>
 &nbsp; &nbsp;
 #end
-&nbsp; 
 </td>
 
 

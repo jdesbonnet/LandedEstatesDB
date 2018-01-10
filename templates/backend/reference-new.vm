@@ -17,8 +17,8 @@ rows="5" cols="60" wrap="virtual"></textarea>
 </div>
 
 <div class="form-group">
-<input type="submit" class="btn btn-primary" value="Save &amp; add new reference" />
-<input type="submit" class="btn btn-primary" name="_submit_exit" value="Save &amp; return to estate record"  />
+<input type="submit" class="btn btn-primary" value="Save and continue to add references" />
+<input type="submit" class="btn btn-primary" name="_submit_exit" value="Save and return to estate record"  />
 </div>
 
 </form>

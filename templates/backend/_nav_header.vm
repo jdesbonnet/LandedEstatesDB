@@ -1,22 +1,23 @@
+## 
+## Navbar at top of UI
 ## Styling:
 ## use nav class bg-dark | bg-primary | bg-info ... etc
 ##
 
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-    
-      <a class="navbar-brand" href="#" style="padding:0;margin:0;line-height:0.5em">
-      <img  width="128" src="/LandedEstatesDB/assets/nuig_logo_2017.png"/><br />
-      <span style="font-size:8pt;">Landed Estates Database</span>
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+	<a class="navbar-brand" href="#" style="padding:0;margin:0;line-height:0.5em">
+	<img  width="128" src="/LandedEstatesDB/assets/nuig_logo_2017.png"/><br />
+	<span style="font-size:8pt;">Landed Estates Database</span>
+	</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
 
-      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-#parse("/backend/_nav.vm")
-        <form class="form-inline my-2 my-lg-0" method="GET" action="search.jsp">
-          <input class="form-control mr-sm-2" name="q" type="text" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><b class="fa fa-search"></b></button>
-        </form>
-      </div>
-    </nav>
+	<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+		#parse("/backend/_nav.vm")
+		<form class="form-inline my-2 my-lg-0" method="GET" action="search.jsp">
+			<input class="form-control mr-sm-2" name="q" type="text" placeholder="Search" value="$!{q}" aria-label="Search">
+			<button class="btn btn-outline-success my-2 my-sm-0" type="submit"><b class="fa fa-search"></b></button>
+		</form>
+	</div>
+</nav>

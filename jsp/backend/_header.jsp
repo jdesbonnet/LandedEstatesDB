@@ -246,7 +246,7 @@ private static Double degPerMLat =  new Double (180 /  (Math.PI * re));
 	DB db = DB.getInstance();
 	
 	
-	context.put ("q", request.getParameter("q"));
+	//context.put ("q", XSSClean.clean(getParameter("q")));
 	
 	context.put ("jsp",this);
 	//context.put ("db",db);

@@ -4,32 +4,24 @@
 		throw new ServletException ("No write access to this database");
 	}
 
+	Long estateId = new Long(request.getParameter("estate_id"));
 
-	String estateIdStr = request.getParameter("estate_id");
-	if (estateIdStr == null) {
-			throw new ServletException ("no estate_id");
-	}
-	
 	if (request.getParameter("_submit_cancel") != null) {
-			response.sendRedirect ("estate-show.jsp?id="+estateIdStr);
+			response.sendRedirect ("estate-show.jsp?id="+estateId);
 			return;
 	}
 	
 	
-	Estate estate;
-	try {
-		Long estateId = new Long (request.getParameter("estate_id"));
-		estate = (Estate)em.find(Estate.class, estateId);
-	} catch (Exception e) {
-		throw new ServletException (e.toString());
-	}
+
+	Estate estate = (Estate)em.find(Estate.class, estateId);
+
 	
-	String referenceDescription = request.getParameter("description");
+	String referenceDescription = XSSClean.clean(request.getParameter("description"));
 	
-	if (referenceDescription != null && referenceDescription.length()>0) {
+	if (referenceDescription != null && referenceDescription.trim().length()>0) {
 	
 		Reference reference = new Reference ();
-		reference.setDescription (request.getParameter("description"));
+		reference.setDescription (referenceDescription);
 		
 		Long refSourceId = DB.getIdFromAutoCompleteField(request.getParameter("refsource"));
 		ReferenceSource refSource = (ReferenceSource)em.find(ReferenceSource.class, refSourceId);
@@ -37,7 +29,7 @@
 		
 		em.persist (reference);
 		estate.getReferences().add(reference);
-		em.persist (estate);
+		//em.persist (estate);
 	}
 	
 	/*

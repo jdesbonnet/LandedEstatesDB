@@ -36,20 +36,20 @@ rows="5" cols="80"/>$!{estate.description}</textarea>
 <table class="stdTable">
 <thead>
 <tr>
-<th>family name / title</td>
+<th>Family name / Title</td>
 <th width="10%"></th>
 </tr>
 </thead>
 
 <tbody>
-#foreach ($family in $estate.getFamilies())
+#foreach ($family in $estate.families)
 <tr>
 <td>${family.nameAndTitle}</td>
 <td>
 
 <a class="btn btn-primary btn-sm" 
-href="estate-remove-family.jsp?estate_id=$estate.getId()&family_id=$family.getId()"
-onClick="return confirm('Are you sure you want to remove family from estate record?');">remove association</a>
+href="estate-remove-family.jsp?estate_id=${estate.id}&family_id=${family.id}"
+onClick="return confirm('Are you sure you want to remove family association from estate record?');">remove association</a>
 
 </td>
 </tr>

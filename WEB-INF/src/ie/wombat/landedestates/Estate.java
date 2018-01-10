@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -50,6 +51,7 @@ public class Estate implements Indexable {
 		joinColumns=@JoinColumn(name="estate_id"),
 		inverseJoinColumns = @JoinColumn(name="family_id")
 	)
+	@OrderBy("name")
 	private Set<Family> families = new HashSet<Family>();
 	
 	
