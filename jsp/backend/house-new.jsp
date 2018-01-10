@@ -8,5 +8,6 @@
 	Estate estate = (Estate)em.find(Estate.class,estateId);
 	
 	context.put ("estate",estate);
-	templates.merge ("/backend/house-new.vm",context,out);
+	context.put ("pageId","./house-new");
+	templates.merge ("/backend/master.vm",context,out);
 %>

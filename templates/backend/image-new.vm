@@ -1,29 +1,26 @@
-#parse ("/backend/_header.vm")
-
-<h2>Add new image to house $property.getName()</h2>
+$breadcrumbs.add("Houses","house-list.jsp").add($house.name,"house-edit.jsp?id=$house.id").add("add image")
 
 <form action="image-new-submit.jsp" 
 enctype="multipart/form-data" method="POST">
 
-<input type="hidden" name="property_id" value="$propertyId" />
+<input type="hidden" name="house_id" value="${house.id}" />
 
-<div>
+<div class="form-group">
 <label for="file1">Image File</label>
-
-File from hard disk:
-<input type="file" name="file1" id="file1"/>
+<input type="file" name="file1" id="file1" class="form-control"/>
 or URL of image from the web:
-<input type="text" 
-id="field_url" name="url"
-size="40" />
+<input type="text" class="form-control"
+id="field_url" name="url" />
 </div>
 
-<div>
+<div class="form-group">
 <label for="field_caption">Caption</label>
-<textarea name="caption" id="field_caption" 
-rows="8" cols="80"/></textarea>
+<textarea name="caption" id="field_caption" class="form-control"
+rows="5" cols="80"/></textarea>
 </div>
 
-<input type="submit" value="Upload File" />
+<div class="form-group">
+<input type="submit" class="btn btn-primary" value="Upload File" />
+</div>
+
 </form>
-#parse ("/backend/_footer.vm")
