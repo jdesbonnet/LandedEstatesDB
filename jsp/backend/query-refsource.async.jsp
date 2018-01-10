@@ -16,13 +16,13 @@
 		} else {
 			out.write (",");
 		}
-		out.write ("{\"label\":");
+		out.write ("{\"name\":");
 		String label = refSource.getName();
 		if (refSource.getCategory() != null) {
 			label += " (" + refSource.getCategory().getName() + ")";
 		}
 		out.write(JSONUtils.quote(label));
-		out.write (",\"value\":");
+		out.write (",\"id\":");
 		out.write (refSource.getId().toString());
 		out.write ("}\n");
 	}

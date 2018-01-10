@@ -1,4 +1,4 @@
-$breadcrumbs.add("Estates","estate-list.jsp").add($estate.name).add("Add reference")
+$breadcrumbs.add("Estates","estate-list.jsp").add($estate.name,"estate-show.jsp?id=${estate.id}").add("Add reference")
 
 <form action="reference-new-submit.jsp" method="POST">
 
@@ -11,14 +11,52 @@ rows="5" cols="60" wrap="virtual"></textarea>
 </div>
 
 <div class="form-group">
-<label for="acinput">Reference source:</label>
-<input id="acinput" type="text" name="refsource" size="80" />
+<label for="refsource">Reference source:</label>
+<input id="refsource" class="form-control typeahead" type="text" size="80" />
+<input type="hidden" name="refsource_id" />
 </div>
 </div>
 
 <div class="form-group">
-<input type="submit" class="btn btn-primary" value="Save and continue to add references" />
+<input type="submit" class="btn btn-primary" name="_submit_continue" value="Save and continue to add references" />
 <input type="submit" class="btn btn-primary" name="_submit_exit" value="Save and return to estate record"  />
 </div>
 
 </form>
+
+<script>
+
+jQuery(function(){
+	jQuery('#refsource').typeahead(null,
+	{
+		afterSelect: function(val) {
+			alert(val);
+			console.log("val="+val);
+			this.$element.val(""); 
+		},
+		display: 'name',
+		source: function(query,process) {
+			console.log("process="+process);
+			// TODO: async false is deprecated
+			var result = null;
+			jQuery.ajax({
+				url: "query-refsource.async.jsp?q="+query,
+				type: "get",
+				dataType: "html",
+				async: false,
+				success: function(data) {
+					result = data;
+				} 
+			});
+			console.log(result);
+			console.log(JSON.parse(result));
+			process(JSON.parse(result));
+		}
+	});
+	jQuery("#refsource").bind('typeahead:select', function(ev, suggestion) {	
+		jQuery("input[name='refsource_id']").val(suggestion.id);
+	});
+});
+
+</script>
+

@@ -18,5 +18,5 @@
 
 	estate.getFamilies().remove(family);
 	
-	response.sendRedirect ("estate-edit.jsp?id="+estate.getId());
+	response.sendRedirect ("estate-edit.jsp?id="+estate.getId()+"#families");
 %>

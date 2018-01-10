@@ -23,7 +23,7 @@
 		Reference reference = new Reference ();
 		reference.setDescription (referenceDescription);
 		
-		Long refSourceId = DB.getIdFromAutoCompleteField(request.getParameter("refsource"));
+		Long refSourceId = new Long(request.getParameter("refsource_id"));
 		ReferenceSource refSource = (ReferenceSource)em.find(ReferenceSource.class, refSourceId);
 		reference.setSource(refSource);
 		
@@ -37,7 +37,7 @@
 	 * the other to estate-show.jsp
 	 */
 	if (request.getParameter("_submit_exit") != null) {
-		response.sendRedirect("estate-show.jsp?id=" + estate.getId());
+		response.sendRedirect("estate-show.jsp?id=" + estate.getId() + "#references");
 	} else {
 		response.sendRedirect("reference-new.jsp?estate_id=" + estate.getId());
 	}

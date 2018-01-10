@@ -2,6 +2,10 @@ $breadcrumbs.add("Estates","estate-list.jsp").add("${estate.name} (phase${estate
 
 <a class="btn btn-primary pull-right" href="estate-edit.jsp?id=${estate.id}">Edit</a>
 
+##
+## Families
+##
+<a name="families"></a>
 <h2>Associated Families</h2>
 
 <ul class="bulletList">
@@ -28,7 +32,8 @@ $!estate.description
 
 ##
 ## Houses
-## 
+##
+<a name="houses"></a>
 <h2>Houses</h2>
 #set($showActionsColumn="false")
 #parse ("_estate_houses_table.vm")
@@ -50,7 +55,7 @@ $!estate.description
 ##
 ## References
 ##
-
+<a name="references"></a>
 <h2>References</h2>
 
 #foreach ($refCatName in $referenceCategoryNames)

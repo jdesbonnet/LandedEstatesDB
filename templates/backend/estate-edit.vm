@@ -31,6 +31,7 @@ rows="5" cols="80"/>$!{estate.description}</textarea>
 ##
 ## Family associations
 ##
+<a name="families"></a>
 <div class="form-group">
 <label for="families">Associated families</label>
 <table class="stdTable">
@@ -64,6 +65,7 @@ value="Add family association" />
 ##
 ## Houses
 ##
+<a name="houses"></a>
 <div class="form-group">
 <label for="properties">Houses</label>
 #parse ("_estate_houses_table.vm")
@@ -90,6 +92,7 @@ value="Associate existing house" />
 ##
 ## References
 ##
+<a name="references"></a>
 <div class="form-group">
 <label for="references">References</label>
 #parse ("_estate_reference_table.vm")
