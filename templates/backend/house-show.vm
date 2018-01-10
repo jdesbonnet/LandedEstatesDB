@@ -123,16 +123,16 @@ $!house.getBarony()
 </p>
 
 
-
+<a name="images"></a>
 <h3>Images</h3>
 
-#if ($house.getImages().size() > 0) 
-#foreach ($image in $house.getImages()) 
+#if ($house.images.size() > 0) 
+#foreach ($image in $house.images) 
 <div class="imageAndCaption">
-<a href="image-show.jsp?id=$image.getId()"><img 
-src="$contextPath/img/im/${image.getId()}.jpg" /></a>
+<a href="image-show.jsp?id=${image.id}"><img 
+src="$contextPath/img/im/${image.id}.jpg" /></a>
 <br />
-$image.getCaption()
+${image.caption}
 </div>
 #end
 </ul>
@@ -141,8 +141,8 @@ $image.getCaption()
 #end
 
 #if ($house.hasGridReference())
-#set ($cx=$house.getLongitudeDeg())
-#set ($cy=$house.getLatitudeDeg())
+#set ($cx=$house.longitudeDeg)
+#set ($cy=$house.latitudeDeg)
 ##parse ("/backend/_google_map.vm")
 #end
 

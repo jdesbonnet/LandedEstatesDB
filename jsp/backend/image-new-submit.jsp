@@ -1,6 +1,8 @@
-<%@include file="_header.jsp"%><%if (!user.hasWriteAccess()) {
-	throw new ServletException ("No write access to this database");
-}
+<%@include file="_header.jsp"%><%
+
+	if (!user.hasWriteAccess()) {
+		throw new ServletException ("No write access to this database");
+	}
 
 
 	// How much memory available prior to upload?
@@ -8,24 +10,18 @@
 	Runtime rt = Runtime.getRuntime();
 	System.err.println("LandedEstates: memory prior to upload: total=" + rt.totalMemory()
 		+ " free=" + rt.freeMemory());
+	
+	Long houseId = new Long(request.getParameter("house_id"));
+	House house = em.find(House.class,houseId);
 
-	Properties params = new Properties();
-  	Image[] images = ie.wombat.imagetable.ImageDB.getInstance(imageEntityName).handleImageUpload (hsession, request, params);	
- 
+	List<Image> images = ImageDB.getInstance("Image").handleImageUpload (em, request);	
+
 	System.err.println("LandedEstates: memory after image upload: total=" + rt.totalMemory()
 			+ " free=" + rt.freeMemory());
-	House property;
-	try {
-		Long propertyId = new Long(params.getProperty("property_id"));
-		property = (House)hsession.load(House.class,propertyId);
-	} catch (Exception e) {
-			throw new ServletException(e.toString());
+
+	for (Image image : images) {
+		house.getImages().add(image);
 	}
 	
-	for (int i = 0; i < images.length; i++) {
-			property.getImages().add(images[i]);
-	}
-	
-	hsession.save(property);
-	
-	response.sendRedirect ("house-show.jsp?id=" + property.getId());%>
+	response.sendRedirect ("house-show.jsp?id=" + house.getId() + "#images");
+%>
