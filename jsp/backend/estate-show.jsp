@@ -62,5 +62,6 @@
 	//context.put ("revisionHistory",db.getRevisionHistory(Estate.class.getName(), estate.getId()));
 	
 	context.put("pageId","./estate-show");
+	context.put("showSideCol","true");
 	templates.merge ("/backend/master.vm",context,out);
 %>

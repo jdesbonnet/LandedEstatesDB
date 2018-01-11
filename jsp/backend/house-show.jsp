@@ -19,5 +19,6 @@
 			houseId));
 	
 	context.put("pageId","./house-show");
+	context.put("showSideCol","true");
 	templates.merge ("/backend/master.vm",context,out);
 %>

@@ -5,28 +5,33 @@ $breadcrumbs.add("Houses","house-list.jsp").add($house.name)
 position: absolute; top: 0; right: 0; bottom: 0; left: 0;}
 </style>
 
-<a class="btn btn-primary pull-right" href="house-edit.jsp?id=$house.id">edit</a>
 
+<b>${house.name}</b> 
 
-#if ($PROJECT_ID=="ERDB")
-[<a href="employee-record-add.jsp?house_id=$house.getId()">Add employee record</a>]
+(estates 
+#foreach ($estate in $estates)
+<a class="badge badge-primary" href="estate-show.jsp?id=${estate.id}">${estate.name}</a>
 #end
+)
+
+$!{house.description}
+
 
 <table class="stdTable">
 
+#if($FALSE)
+<tr><td>House name:</td><td colspan="2">${house.name}</td></tr>
 <tr valign="top">
 <td width="150">Estate(s):</td>
 <td colspan="2">
-<ul class="noBullet">
 #foreach ($estate in $estates)
-<li> <a href="estate-show.jsp?id=${estate.id}">${estate.name}</a></li>
+<a class="badge badge-primary" href="estate-show.jsp?id=${estate.id}">${estate.name}</a>
 #end
-</ul>
 </td>
 </tr>
-
-<tr><td>House name:</td><td colspan="2">${house.name}</td></tr>
 <tr><td>Description:</td><td colspan="2">$!{house.description}</td></tr>
+#end
+
 
 #if($PROJECT_ID=="ERDB")
 <tr><td>Employee Records:</td>

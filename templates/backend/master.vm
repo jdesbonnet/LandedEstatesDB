@@ -18,21 +18,27 @@
 #parse("_nav_header.vm")
 
 
-    <main role="main" class="container-fluid">
-    <div class="row">
-    <div class="col-md-9">
-
-#if ($pageId.startsWith("./"))
+	<main role="main" class="container-fluid">
+	<div class="row">
+	
+	##
+	## Main content column
+	##
+	<div class="col-md-9">
 	#set($templateFileName=$pageId+".vm")
-#else
-	#set($templateFileName="/_"+$pageId+".vm")
-#end
-#parse ($templateFileName)
-
+	#parse ($templateFileName)
 	</div>
 	
+	##
+	## Right-side column
+	##
 	<div class="col-md-3">
-	#if ($revisionHistory || $revisionHistory.size() > 0 )
+	#if ($showSideCol)
+	#set($sideFileName=$pageId+".side.vm")
+	#parse($sideFileName)
+	#end
+	
+	#if ($revisionHistory && $revisionHistory.size() > 0 )
 	<h3>Revision History</h3>
 	#foreach ($o in $revisionHistory)
 	<li> $o.modified</li>

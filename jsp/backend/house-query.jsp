@@ -2,27 +2,27 @@
 	 * Query service for autocomplete field
 	 */
 	 
-	String query = request.getParameter("query").trim();
-	String hquery = "from Property where name like ? order by name";
+	String query = request.getParameter("q").trim();
 	
-	response.setContentType("text/plain");
-	out.clear();
+	List<House> houses = em
+			.createQuery("from House where name like :name order by name")
+			.setParameter("name",query+"%")
+			.getResultList();
+
+	out.write ("[\n");
 	
-	Iterator iter = hsession.createQuery(hquery)
-					.setString(0,query+"%")
-					.list().iterator();
-	while (iter.hasNext()) {
-		House p = (House)iter.next();
-		if (p.getName() != null) {
-			String name = p.getName().trim();
-			if (name.length() == 0) {
-				out.write ("(no name)");
-			} else {
-				out.write (name);
-			}
+	boolean first = true;
+	for (House house : houses) {
+		if (first) {
+			first=false;
+		} else {
+			out.write(",");
 		}
-		//out.write (p.getName());
-		out.write (" [");
-		out.write (p.getId().toString());
-		out.write ("]\n");
-	}%>
+		out.write("{\"id\":" + house.getId());
+		out.write(",\"name\":" + JSONUtils.quote(house.getName()));
+		out.write("}");
+	}
+
+	out.write ("]\n");
+	
+	%>

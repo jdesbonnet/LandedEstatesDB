@@ -70,10 +70,10 @@ value="Add family association" />
 <label for="properties">Houses</label>
 #parse ("_estate_houses_table.vm")
 <input type="submit" class="btn btn-primary btn-sm" name="_submit_new_house"
-value="Add house record" />
+value="Add new house record" />
 
 <input type="submit" class="btn btn-primary btn-sm" name="_submit_existing_house"
-value="Associate existing house" />
+value="Associate existing house record" />
 
 </div>
 

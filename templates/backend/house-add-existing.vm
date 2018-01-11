@@ -1,15 +1,54 @@
-$breadcrumbs.add("Estates","estate-list.jsp").add("$estate.name","estate-edit.jsp?estate_id=$estate.id").add("associate house")
+$breadcrumbs.add("Estates","estate-list.jsp").add("$estate.name","estate-edit.jsp?id=$estate.id").add("associate house")
 
 <form action="house-add-existing-submit.jsp" method="POST">
-<input type="hidden" name="estate_id" 
-value="$estate.getId()" />
-
+<input type="hidden" name="estate_id" value="${estate.id}" />
 
 <div class="form-group">
 <label for="acinput">House:</label>
-<input id="acinput" class="form-control" type="text" name="property" size="80" />
+<input id="acinput" class="form-control" type="text" name="property" />
+<input type="hidden" name="house_id" />
 </div>
 
 
-<input type="submit" class="btn btn-primary" value="Add house" />
+<input type="submit" class="btn btn-primary" value="Associate house" />
+<input type="submit" name="_cancel" class="btn btn-danger" value="Cancel" />
+
 </form>
+
+
+<script>
+
+jQuery(function(){
+	jQuery('#acinput').typeahead(null,
+	{
+		afterSelect: function(val) {
+			alert(val);
+			console.log("val="+val);
+			this.$element.val(""); 
+		},
+		display: 'name',
+		source: function(query,process) {
+			console.log("process="+process);
+			// TODO: async false is deprecated
+			var result = null;
+			jQuery.ajax({
+				url: "house-query.jsp?q="+query,
+				type: "get",
+				dataType: "html",
+				async: false,
+				success: function(data) {
+					result = data;
+				} 
+			});
+			console.log(result);
+			console.log(JSON.parse(result));
+			process(JSON.parse(result));
+			//return  JSON.parse(result);
+		}
+	});
+	jQuery("#acinput").bind('typeahead:select', function(ev, suggestion) {
+		jQuery("input[name='house_id']").val(suggestion.id);
+	});
+});
+
+</script>

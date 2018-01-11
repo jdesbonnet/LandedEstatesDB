@@ -1,4 +1,4 @@
-$breadcrumbs.add("Houses","house-list.jsp").add($house.name,"house-edit.jsp?id=$house.id").add("add image")
+$breadcrumbs.add("Houses","house-list.jsp").add($house.name,"house-show.jsp?id=$house.id").add("add image")
 
 <form action="image-new-submit.jsp" 
 enctype="multipart/form-data" method="POST">

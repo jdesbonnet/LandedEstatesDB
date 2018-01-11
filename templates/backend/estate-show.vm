@@ -1,10 +1,18 @@
 $breadcrumbs.add("Estates","estate-list.jsp").add("${estate.name} (phase${estate.projectPhase})")
 
-<a class="btn btn-primary pull-right" href="estate-edit.jsp?id=${estate.id}">Edit</a>
+<b>${estate.name}</b> (families 
+#foreach ($family in $estate.families)
+<a class="badge badge-success" href="family-show.jsp?id=$family.id">$family.name</a> 
+#end
+).
+
+$!{estate.description}
+
 
 ##
 ## Families
 ##
+#if($FALSE)
 <a name="families"></a>
 <h2>Associated Families</h2>
 
@@ -27,6 +35,7 @@ $breadcrumbs.add("Estates","estate-list.jsp").add("${estate.name} (phase${estate
 $!estate.description
 #if (! $estate.description || $estate.description.length()==0)
 <em>none</em>
+#end
 #end
 
 
