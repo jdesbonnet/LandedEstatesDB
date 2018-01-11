@@ -15,6 +15,8 @@
 	reference.setSource(source);
 
 	reference.setDescription (request.getParameter("description"));
+	
+	db.index(em,reference);
 
 	response.sendRedirect("estate-edit.jsp?id=" + estate.getId());
 %>

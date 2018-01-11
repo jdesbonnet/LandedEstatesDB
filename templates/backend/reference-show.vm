@@ -1,0 +1,6 @@
+
+Reference to <a class="badge badge-primary"
+href="estate-show.jsp?id=${estate.id}">${estate.name}</a>.
+Source: <a href="refsource-show.jsp?id=${reference.source.id}">
+$!{reference.source.name}</a>: 
+$!{reference.description}

@@ -48,5 +48,9 @@
 		return;
 	}
 	
+
+	estate.setLastModifiedBy(user);
+	db.index(em,estate);
+	
 	response.sendRedirect("estate-show.jsp?id=" + estate.getId());
 %>

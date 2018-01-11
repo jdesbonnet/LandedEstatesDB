@@ -5,23 +5,23 @@ import="ie.wombat.gis.convert.OSILLAConvert"
 	}
 
 	Long id = new Long(request.getParameter("id"));
-	House property = (House)em.find(House.class, id);
+	House house = (House)em.find(House.class, id);
 
 	
 	// TODO: XSS clean all these inputs
 	
-	property.setName(request.getParameter("name"));
-	property.setDescription(request.getParameter("description"));
+	house.setName(request.getParameter("name"));
+	house.setDescription(request.getParameter("description"));
 	
-	property.setTownland(request.getParameter("townland"));
-	property.setCivilParish(request.getParameter("civil_parish"));
-	property.setDed(request.getParameter("ded"));
-	property.setPlu(request.getParameter("plu"));
-	property.setBarony(request.getParameter("barony"));
-	property.setCounty(request.getParameter("county"));
+	house.setTownland(request.getParameter("townland"));
+	house.setCivilParish(request.getParameter("civil_parish"));
+	house.setDed(request.getParameter("ded"));
+	house.setPlu(request.getParameter("plu"));
+	house.setBarony(request.getParameter("barony"));
+	house.setCounty(request.getParameter("county"));
 	
-	property.setOsSheet(request.getParameter("os_sheet"));
-	property.setDiscoveryMap(request.getParameter("discovery_map"));
+	house.setOsSheet(request.getParameter("os_sheet"));
+	house.setDiscoveryMap(request.getParameter("discovery_map"));
 	
 	String gridRef = request.getParameter("grid_ref").trim();
 	
@@ -38,13 +38,16 @@ import="ie.wombat.gis.convert.OSILLAConvert"
 				OSILLAConvert cvt = new OSILLAConvert ();
 				double[] ngr = cvt.lla2ng(lat * Math.PI/180,lon * Math.PI/180,0);
 				OSIGridReference gr = new OSIGridReference ((int)ngr[0],(int)ngr[1]);
-				property.setGridReference(gr.getGridReference(OSIGridReference.FORMAT_XEEENNN));
+				house.setGridReference(gr.getGridReference(OSIGridReference.FORMAT_XEEENNN));
 			} catch (NumberFormatException e) {
 				// ignore
 			}
 		}
 	} else {
-		property.setGridReference(gridRef);
+		house.setGridReference(gridRef);
 	}
-	em.persist(property);
-	response.sendRedirect ("house-show.jsp?id="+property.getId());%>
+	em.persist(house);
+	
+	db.index(em,house);
+	
+	response.sendRedirect ("house-show.jsp?id="+house.getId());%>

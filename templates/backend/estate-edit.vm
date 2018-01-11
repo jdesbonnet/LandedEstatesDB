@@ -78,15 +78,18 @@ value="Associate existing house record" />
 </div>
 
 
+
 ##
 ## Employee Records
 ##
+#if($PROJECT_ID=="ERDB")
 <div class="form-group">
 <label for="properties">Historical Employee Records</label>
 #parse ("/backend/_employee_record_reference_table.vm")
 #parse("_employee_record_table.vm")
 <a class="btn btn-primary btn-sm" href="employee-record-add.jsp?estate_id=${estate.id}">Add employee record</a>
 </div>
+#end
 
 
 ##

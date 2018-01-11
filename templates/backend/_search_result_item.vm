@@ -9,11 +9,15 @@ ${r.description}
 ${r.description} 
 #elseif ($resultClass.startsWith("ie.wombat.landedestates.Estate"))
 <b>${r.name}</b> 
-(<a href="estate-show.jsp?id=$r.id">E${r.id}</a>) 
+(<a href="estate-show.jsp?id=${r.id}">E${r.id}</a>) 
 ${r.description}
 #elseif ($resultClass.startsWith("ie.wombat.landedestates.Family"))
 <b>${r.name}</b> 
-(<a href="family-show.jsp?id=$r.id">F${r.id}</a>) 
+(<a href="family-show.jsp?id=${r.id}">F${r.id}</a>) 
+${r.description}
+#elseif ($resultClass.startsWith("ie.wombat.landedestates.Reference"))
+<a href="reference-show.jsp?id=${r.id}">R${r.id}</a>
+${r.source.name}
 ${r.description}
 #else
 ? $resultClass $r.id

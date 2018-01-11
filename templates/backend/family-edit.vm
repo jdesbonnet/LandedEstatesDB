@@ -24,7 +24,7 @@ value="$!{family.title}" />
 <div class="form-group">
 <label for="name">Description</label>
 <textarea name="description" class="form-control"
-rows="10" cols="80"/>$!{family.description}</textarea>
+rows="5" cols="80"/>$!{family.description}</textarea>
 </div>
 
 <input type="submit" class="btn btn-primary" value="Submit" />

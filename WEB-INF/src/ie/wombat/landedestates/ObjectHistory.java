@@ -26,7 +26,8 @@ public class ObjectHistory implements Auditable {
 	@Column(name="last_modified")
 	private Date modified = Calendar.getInstance().getTime();
 	
-	private int uid;
+	@Column(name="user_id")
+	private Long userId;
 	
 	@Column(name="object_id")
 	private Long objectId;
@@ -37,6 +38,10 @@ public class ObjectHistory implements Auditable {
 	@Lob
 	@Column(name="object_xml")
 	private String objectXML;
+	
+	@Lob
+	@Column(name="object_json")
+	private String objectJson;
 	
 	
 	public Long getId() {
@@ -57,11 +62,11 @@ public class ObjectHistory implements Auditable {
 	public void setVersion(int version) {
 		this.version = version;
 	}
-	public void setUid (int uid) {
-		this.uid = uid;
+	public void setUserId (Long uid) {
+		this.userId = uid;
 	}
-	public int getUid () {
-		return this.uid;
+	public Long getUserId () {
+		return this.userId;
 	}
 	public void setObjectId (Long objId) {
 		this.objectId = objId;
@@ -80,6 +85,12 @@ public class ObjectHistory implements Auditable {
 	}
 	public void setObjectXML(String xml) {
 		this.objectXML = xml;
+	}
+	public String getObjectJson() {
+		return objectJson;
+	}
+	public void setObjectJson(String objectJson) {
+		this.objectJson = objectJson;
 	}
 	
 }

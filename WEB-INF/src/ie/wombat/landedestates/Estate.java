@@ -1,5 +1,6 @@
 package ie.wombat.landedestates;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,12 +12,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
@@ -27,7 +31,8 @@ import org.hibernate.search.annotations.Store;
 @Indexed
 @Table(name="estate")
 @XmlRootElement
-public class Estate implements Indexable {
+public class Estate implements Indexable, RevisionTracked {
+	
 	
 	@Id
 	@DocumentId
@@ -40,10 +45,19 @@ public class Estate implements Indexable {
 	@Field(index = Index.TOKENIZED, store = Store.NO)
 	private String description;
 	
-	private int version; // experimental
+	private Integer version;
 	
 	@Column(name="project_phase")
 	private Integer projectPhase;
+	
+	@Column(name="last_modified")
+	private Date lastModified;
+	
+	@ManyToOne
+	@NotFound(action = NotFoundAction.IGNORE)
+	@JoinColumn(name="last_modified_by")
+	private User lastModifiedBy;
+	
 	
 	
 	@ManyToMany
@@ -116,9 +130,6 @@ public class Estate implements Indexable {
 		this.references = references;
 	}
 	
-	public int getVersion() {
-		return version;
-	}
 	public void setVersion(int version) {
 		this.version = version;
 	}
@@ -174,4 +185,24 @@ public class Estate implements Indexable {
 	public String getLuceneId () {
 		return "E" + this.id;
 	}
+	public Integer getVersion() {
+		return version;
+	}
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
+	public Date getLastModified() {
+		return lastModified;
+	}
+	public void setLastModified(Date lastModified) {
+		this.lastModified = lastModified;
+	}
+	public User getLastModifiedBy() {
+		return lastModifiedBy;
+	}
+	public void setLastModifiedBy(User lastModifiedBy) {
+		this.lastModifiedBy = lastModifiedBy;
+	}
+
+	
 }

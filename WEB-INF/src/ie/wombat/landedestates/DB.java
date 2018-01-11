@@ -6,10 +6,8 @@ import ie.wombat.ui.Tab;
 
 import java.beans.XMLEncoder;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Writer;
-import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -42,6 +40,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.Search;
+
+import com.google.gson.Gson;
 
 public class DB {
 
@@ -400,69 +400,6 @@ public class DB {
 
 	}
 
-	public void saveReference(Session session, Reference reference) {
-		session.save(reference);	
-		saveObjectRevision(session, reference.getId(), 0, reference);
-	}
-
-	
-
-	public ReferenceSource[] getReferenceSources(Session session) {
-		String query = "from ReferenceSource order by name";
-		List result = session.createQuery(query).list();
-		ReferenceSource[] ret = new ReferenceSource[result.size()];
-		result.toArray(ret);
-		return ret;
-	}
-	
-	public ReferenceCategory[] getReferenceCategories(Session session) {
-
-		if (this.categoryList == null) {
-		
-			String query = "from ReferenceCategory ";
-			List result = session.createQuery(query).list();
-			this.categoryList = result;
-		}
-
-		ReferenceCategory[] ret = new ReferenceCategory[this.categoryList
-				.size()];
-		this.categoryList.toArray(ret);
-		return ret;
-
-	}
-	
-	public ReferenceCategory getReferenceCategory(EntityManager em, Long id) {
-		return (ReferenceCategory) em.find(ReferenceCategory.class, id);
-	}
-	
-
-	public void deleteReferenceSource(Session session, ReferenceSource source) {
-		
-		session.delete(source);
-	
-	}
-
-	public void deleteReferenceSource(Session session, Long id) {
-		ReferenceSource source = (ReferenceSource) session.load(
-			ReferenceSource.class, id);
-		session.delete(source);
-	}
-	
-
-
-	/*
-	public void removePropertyFromEstate (Long estateId, Long propertyId) {
-		Session session = HibernateUtil.currentSession();
-		Transaction tx = session.beginTransaction();
-		Property property = (Property) session.load(Property.class, propertyId);
-		Estate estate = (Estate) session.load(Estate.class, estateId);
-		estate.getProperties().remove(property);
-		tx.commit();
-		HibernateUtil.closeSession();
-
-	}
-	*/
-
 	/**
 	 * Return User object corresponding to username and password, or 
 	 * null if no matching username/password exists.
@@ -487,17 +424,26 @@ public class DB {
 		return null;
 	}
 
+	/**
+	 * Reindexes entire database.
+	 * 
+	 * @param em
+	 * @throws IOException
+	 */
 	public void makeIndex(EntityManager em) throws IOException {
 
 		FullTextEntityManager fullTextEm = Search.getFullTextEntityManager(em);
 
+		// These are the entities we ant indexed
 		// TODO: can we get this list automatically?
 		//String[] entites = { "Estate", "House", "Family", "EmployeeRecord"};
-		String[] entites = { "Estate", "House", "Family"};
+		String[] entites = { "Estate", "House", "Family","Reference"};
 
 		for (String entityName : entites) {
-			List<Object> objects = em.createQuery("from " + entityName).getResultList();
-			System.err.println("Found " + objects.size() + " objects of type " +entityName + " to index.");
+			List<Object> objects = em
+					.createQuery("from " + entityName)
+					.getResultList();
+			log.info("Found " + objects.size() + " objects of type " +entityName + " to index.");
 			for (Object o : objects) {
 				fullTextEm.index(o);
 			}
@@ -505,6 +451,11 @@ public class DB {
 				
 	}
 
+	/**
+	 * Reindex an single entity object
+	 * @param em
+	 * @param o
+	 */
 	public void index(EntityManager em, Object o) {
 		FullTextEntityManager fullTextEm = Search.getFullTextEntityManager(em);
 		fullTextEm.index(o);
@@ -625,53 +576,47 @@ public class DB {
 	}
 
 	public List<ObjectHistory> getRevisionHistory(EntityManager em, String className, Long id) {
-		long startTime = System.currentTimeMillis();
-
-		String query = "from ObjectHistory "
-			+ "where objectClass='" + className + "' "
-			+ " and objectId=" + id + " order by modified desc";
-		List<ObjectHistory> result = em.createQuery(query).getResultList();
-	
-		System.err.println("getRevisionHistory(): duration = "
-				+ (System.currentTimeMillis() - startTime));
+		@SuppressWarnings("unchecked")
+		List<ObjectHistory> result = em
+				.createQuery("from ObjectHistory "
+				+ " where objectClass=:objectClass and objectId=:objectId "
+				+ " order by modified desc")
+				.setParameter("objectClass", className)
+				.setParameter("objectId", id)
+				.getResultList();
 		return result;
-		
 	}
 	/*
 	 * Save object in audit trail
 	 */
-	private static void saveObjectRevision(Session session, Long id, int version, Object o) {
+	private static void saveObjectRevision(EntityManager em, Long id, int version, Object o) {
 
 		String query = "from ObjectHistory where objectId=" + id 
 		+ " and version=" + version;
-		List result = session.createQuery(query).list();
-		System.err.println ("saveObjectRevision(): query=" + query);
-		System.err.println ("saveObjectRevision(): query returned " + result.size() + " objects");
+		
+		@SuppressWarnings("unchecked")
+		List<ObjectHistory> result = em
+				.createQuery("from ObjectHistory where objectId=:objectId")
+				.setParameter("objectId", id)
+				.getResultList();
+		
+		log.info ("saveObjectRevision(): query=" + query);
+		log.info ("saveObjectRevision(): query returned " + result.size() + " objects");
 		ObjectHistory oh;
 		if (result.size() > 0) {
 			oh = (ObjectHistory)result.get(0);
 		} else {
-			System.err.println ("creating new ObjectHistory object");
+			log.info ("creating new ObjectHistory object");
 			oh = new ObjectHistory();
 			oh.setObjectId(id);
 			oh.setObjectClass(o.getClass().getName());
 			oh.setVersion(version);
+			em.persist(oh);;
 		}
 		oh.setModified(new Date());
 		
-		Session dom4jSession = session.getSession(EntityMode.DOM4J);
-		Element e = (Element) dom4jSession.load(o.getClass(), id);	
-		oh.setObjectXML(e.asXML());
-		session.saveOrUpdate(oh);
-		
-		
-		// TODO: experimantal
-		System.err.print ("object XML=");
-		XMLEncoder xe = new XMLEncoder(System.err);
-		xe.writeObject(o);
-		xe.flush();
-		System.err.println ("");
-
+		Gson gson = new Gson();
+		oh.setObjectJson(gson.toJson(o));
 	}
 	
 	private boolean isRecordId (String s) {

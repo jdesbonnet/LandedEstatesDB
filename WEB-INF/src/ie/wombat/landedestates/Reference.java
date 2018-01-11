@@ -4,11 +4,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.Store;
 
 /**
  * Reference. The Comparable interface sorts by the source name.
@@ -27,9 +33,12 @@ public class Reference implements Comparable<Reference> {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
+	@Lob
+	@Field(index = Index.TOKENIZED, store = Store.NO)
 	private String description;
 	
 	@ManyToOne
+	@NotFound(action = NotFoundAction.IGNORE)
 	private ReferenceSource source;
 	
 	public String getDescription() {
@@ -45,7 +54,6 @@ public class Reference implements Comparable<Reference> {
 		this.id = id;
 	}
 	public ReferenceSource getSource() {
-		//System.err.println ("warning: have reference without source!");
 		return source;
 	}
 	public void setSource(ReferenceSource source) {
