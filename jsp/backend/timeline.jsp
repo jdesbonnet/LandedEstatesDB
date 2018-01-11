@@ -5,9 +5,10 @@ if (!user.hasWriteAccess()) {
 	throw new ServletException ("No write access to this database");
 }
 
+// Add
 HashMap<String,List<Object>> yearMap = new HashMap<>();
 
-List<House> houses = em.createQuery("from House").getResultList();
+List<House> houses = em.createQuery("from House order by name").getResultList();
 for (House house : houses) {
 	Set<String> years = TimelineAnalysis.parseTextForDate(house.getDescription());
 	for (String year : years) {
@@ -18,7 +19,7 @@ for (House house : houses) {
 	}
 }
 
-List<Estate> estates = em.createQuery("from Estate").getResultList();
+List<Estate> estates = em.createQuery("from Estate order by name").getResultList();
 for (Estate estate : estates) {
 	Set<String> years = TimelineAnalysis.parseTextForDate(estate.getDescription());
 	for (String year : years) {
@@ -28,6 +29,8 @@ for (Estate estate : estates) {
 		yearMap.get(year).add(estate);
 	}
 }
+
+// TODO: sort properly
 
 List<String> years = new ArrayList<>(yearMap.keySet());
 Collections.sort(years);

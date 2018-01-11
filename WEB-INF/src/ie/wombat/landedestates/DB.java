@@ -714,6 +714,9 @@ public class DB {
 		context.put("YUIJS", "http://yui.yahooapis.com/2.8.2/");
 		context.put("YUICSS", "http://yui.yahooapis.com/2.8.2/");
 		
+		// Google Maps API key
+		context.put("GOOGLE_MAP_KEY",Configuration.getConfiguration("GOOGLE_MAP_KEY"));
+		
 		context.put("formatUtils", new FormatUtils());
 		context.put ("tabs",tabs);
 		

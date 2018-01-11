@@ -1,5 +1,10 @@
 $breadcrumbs.add("Houses","house-list.jsp").add($house.name)
 
+<style>
+#map {width:100%;height:100%;
+position: absolute; top: 0; right: 0; bottom: 0; left: 0;}
+</style>
+
 <a class="btn btn-primary pull-right" href="house-edit.jsp?id=$house.id">edit</a>
 
 
@@ -42,9 +47,9 @@ $breadcrumbs.add("Houses","house-list.jsp").add($house.name)
 <tr>
 <td>Townland:</td>
 <td>$!house.getTownland()</td>
-<td width="550" rowspan="9">
+<td width="550" rowspan="9" style="position:relative">
 #if ($house.hasGridReference())
-<div id="mapContainer" style="width:550px; height:300px;"></div>
+<div id="map"></div>
 #end
 </td>
 </tr>
@@ -141,8 +146,8 @@ ${image.caption}
 #end
 
 #if ($house.hasGridReference())
-#set ($cx=$house.longitudeDeg)
-#set ($cy=$house.latitudeDeg)
-##parse ("/backend/_google_map.vm")
+	#set ($cx=$house.longitudeDeg)
+	#set ($cy=$house.latitudeDeg)
+	#parse ("/backend/_google_map.vm")
 #end
 

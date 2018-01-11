@@ -3,114 +3,18 @@
 ## Input parameters: properties (list of Propery objects) cx,cy (center)
 ##
 
-<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=$key" type="text/javascript"></script> 
-<script type="text/javascript">
-    //<![CDATA[
-    
-    // Create a marker whose info window displays the given number.
-	function createMarker(lon,lat, html, markerIcon) {
-		var marker = new GMarker(new GLatLng(lat,lon), markerIcon);
-  		GEvent.addListener(marker, 'click', function() {
-			marker.openInfoWindowHtml(html);
-  		});
-		return marker;
-	}
-
-
-	function loadGoogleMap() {
+<script 
+src="https://maps.googleapis.com/maps/api/js?v=3&key=${GOOGLE_MAP_KEY}"></script>
+<script>
+var cx = $cx;
+var cy = $cy;
+jQuery(function(){
+	map = new google.maps.Map(document.getElementById('map'), {
+		center: {lat: cy, lng: cx},
+		zoom: 8
+	});
 	
-		var t = - new Date().getTime();
-		
-		if ( ! GBrowserIsCompatible()) {
-			alert ('browser not GMap compatible');
-			return;
-		}
-		
-		 
-		// Create red marker icon
-		var redMarkerIcon = new GIcon();
-		redMarkerIcon.image = "http://labs.google.com/ridefinder/images/mm_20_red.png";
-		redMarkerIcon.shadow = "http://labs.google.com/ridefinder/images/mm_20_shadow.png";
-		redMarkerIcon.iconSize = new GSize(12, 20);
-		redMarkerIcon.shadowSize = new GSize(22, 20);
-		redMarkerIcon.iconAnchor = new GPoint(6, 20);
-		redMarkerIcon.infoWindowAnchor = new GPoint(5, 1);
-
-		// Create green marker icon
-		var greenMarkerIcon = new GIcon();
-		greenMarkerIcon.image = "http://labs.google.com/ridefinder/images/mm_20_green.png";
-		greenMarkerIcon.shadow = "http://labs.google.com/ridefinder/images/mm_20_shadow.png";
-		greenMarkerIcon.iconSize = new GSize(12, 20);
-		greenMarkerIcon.shadowSize = new GSize(22, 20);
-		greenMarkerIcon.iconAnchor = new GPoint(6, 20);
-		greenMarkerIcon.infoWindowAnchor = new GPoint(5, 1);
-
-		// Create blue marker icon
-		var blueMarkerIcon = new GIcon();
-		blueMarkerIcon.image = "http://labs.google.com/ridefinder/images/mm_20_blue.png";
-		blueMarkerIcon.shadow = "http://labs.google.com/ridefinder/images/mm_20_shadow.png";
-		blueMarkerIcon.iconSize = new GSize(12, 20);
-		blueMarkerIcon.shadowSize = new GSize(22, 20);
-		blueMarkerIcon.iconAnchor = new GPoint(6, 20);
-		blueMarkerIcon.infoWindowAnchor = new GPoint(5, 1);
-		
-        var map = new GMap2(document.getElementById("mapContainer"));
-        map.addControl(new GSmallMapControl());
-		map.addControl(new GMapTypeControl());
-		map.addControl(new GScaleControl());
-      
-      
-		/*
-		GEvent.addListener(map, "click", function(marker, point) {
-			document.getElementById("location").value=point;
-			map.centerAndZoom(point,map.getZoomLevel());
-			map.addOverlay(new GMarker(point));
-		});
-		*/
-
-		var centerPoint = new GLatLng($cy, $cx);
-        map.setCenter(centerPoint, 8);
-        
-        #if ($markCenter)
-		var marker = new GMarker(centerPoint);
-		map.addOverlay(marker);
-      	#end
-      	
-      	var html;
-      	
-      	#foreach ($p in $properties)
-		html = "<a href=\"property-show.jsp?id=$p.getId()\">$p.getName()</a> "
-			+ " (townland of $p.getTownland())<br />$p.getGridReference()<br />"
-			+ " <a href=\"property-nearby.jsp?id=$p.getId()&r_km=$radiusKm\">[show nearby]</a>";
-		map.addOverlay(createMarker($p.getLongitudeDeg(), $p.getLatitudeDeg(),html,blueMarkerIcon));
-		#end
-	
-	 	#if ($property) 
- 		// Center property
- 		var html = "<a href=\"property-show.jsp?id=$property.getId()\">House: "
-		+ " $property.getName()</a> (townland of $property.getTownland())<br />"
-		+ " $property.getGridReference()";
-		var marker = createMarker($property.getLongitudeDeg(), $property.getLatitudeDeg(),html,redMarkerIcon);
-		map.addOverlay(marker);
-		#end
-	
-		#if ($radius)
-		var rLon = $radius*$degPerMLon;
-		var rLat = $radius*$degPerMLat;
-		var points = [];	
-		points.push(new GPoint($cx - rLon, $cy - rLat));
-		points.push(new GPoint($cx + rLon, $cy - rLat));
-		points.push(new GPoint($cx + rLon, $cy + rLat));
-		points.push(new GPoint($cx - rLon, $cy + rLat));
-		points.push(new GPoint($cx - rLon, $cy - rLat));
-		map.addOverlay(new GPolyline(points));
-		#end
-		
-		t += new Date().getTime();
-		//alert ('t=' + t + "ms");
-		
-    } // end loadGoogleMap()
-    
-    //]]>
-    
+	var marker = new google.maps.Marker({
+	position:{lat:cy,lng:cx},map:map});
+});
 </script>
