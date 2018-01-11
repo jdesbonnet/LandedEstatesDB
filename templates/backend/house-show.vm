@@ -46,7 +46,7 @@ position: absolute; top: 0; right: 0; bottom: 0; left: 0;}
 
 <tr>
 <td>Townland:</td>
-<td>$!house.getTownland()</td>
+<td>$!{house.townland}</td>
 <td width="550" rowspan="9" style="position:relative">
 #if ($house.hasGridReference())
 <div id="map"></div>
@@ -57,8 +57,8 @@ position: absolute; top: 0; right: 0; bottom: 0; left: 0;}
 <tr>
 <td>Civil Parish:</td>
 <td>
-#if ($house.getCivilParish())
-$!house.getCivilParish()
+#if ($house.civilParish)
+$!{house.civilParish}
 #else
 <em>n/a</em>
 #end
@@ -88,8 +88,8 @@ $!house.getDED()
 
 <tr><td>Barony:</td>
 <td>
-#if ($house.getBarony())
-$!house.getBarony()
+#if ($house.barony)
+$!{house.barony}
 #else 
 <em>n/a</em>
 #end
@@ -107,9 +107,11 @@ $!house.getBarony()
 <tr><td>Latitude/Longitude:</td>
 <td>$jsp.formatLatLon($house)
 <br>
-[
-<a href="house-kml.jsp?id=$house.getId()">Google Earth</a>
-]
+## New Google Earth: https://www.gearthblog.com/blog/archives/2017/04/fun-stuff-new-google-earth-url.html
+
+##[<a href="house-kml.jsp?id=${house.id}">Google Earth</a>]
+[<a href="https://earth.google.com/web/@${house.latitudeDeg},${house.longitudeDeg},500a">Google Earth</a>]
+
 </td></tr>
 #else
 <tr><td>OSI Grid Reference:</td><td><em>n/a</em></td></tr>
@@ -118,9 +120,7 @@ $!house.getBarony()
 </table>
 
 <p>
-[
-<a href="house-edit.jsp?id=$house.getId()">edit</a>
-]
+[<a href="house-edit.jsp?id=${house.id}">edit</a>]
 &nbsp;
 [
 <a href="house-nearby.jsp?id=$house.getId()">show nearby</a>

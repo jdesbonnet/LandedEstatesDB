@@ -63,12 +63,12 @@ import org.hibernate.Transaction;
 public class ImageDB {
 
 	public static final String VERSION = "0.7.10";
+	private static final String DEFAULT_IMAGE_ENTITY_NAME="Image";
 	
-	// Bypass Hibernate for blob access
-	private static final boolean DIRECT_TO_JDBC_HACK=true;
-	
+	/** Quality factor used in thumbnail JPEG compression */
 	static final double TN_JPEG_Q = 0.75;
 
+	/** Quality factor used in intermediate size image JPEG compression */
 	static final double IM_JPEG_Q = 0.85;
 
 	private static final int MAX_AGE = 3600000;
@@ -413,25 +413,7 @@ public class ImageDB {
 		return md.digest(data);
 	}
 	
-	/**
-	 * Handle image upload from form (from image-new.jsp).
-	 * Request requirements: form must use POST method 
-	 * and enctype="multipart/form-data".
-	 * The uploaded file can be in parameter 'file1'
-	 * or as a URL in 'url'
-	 * 
-	 * @param em EntityManager
-	 * @param request HttpServletRequest object containing the image
-	 * @return Upload images (normally array of one element, but in case of ZIP archive that
-	 * can be more than one).	
-	 * @throws IOException
-	 * @throws FileUploadException
-	 */
-	public static List<Image> handleImageUpload(EntityManager em, HttpServletRequest request) 
-	throws IOException, FileUploadException, UnrecognizedImageType {
-		return handleImageUpload(em, request, null);
-	}
-	
+
 	/**
 	 * Handle image upload from form (from image-new.jsp).
 	 * Request requirements: form must use POST method 
@@ -456,40 +438,23 @@ public class ImageDB {
 	 */
 	
 	public static List<Image> handleImageUpload(EntityManager em, 
-			HttpServletRequest request, Properties params) 
+			ImageUpload imageUpload) 
 	throws IOException, FileUploadException, UnrecognizedImageType {
 
 		log.info("handleImageUpload() called");
 		
-		DiskFileUpload upload = new DiskFileUpload();
-		List<FileItem> items = upload.parseRequest(request);
-
-		HashMap<String, String> param = new HashMap<String, String>();
-		List<FileItem> fileItems = new ArrayList<FileItem> ();
-		for (FileItem item : items) {
-			if (item.isFormField()) {
-				String name = item.getFieldName();
-				String value = item.getString();
-				param.put(name, value);
-				// TODO: refactor -- parms and parm can be
-				// the same object
-				if (params!=null) {
-					params.setProperty(name,value);
-					log.info ("  param[" + name + "] = " + value);
-				}
-			} else {
-				fileItems.add(item);
-			}
-		}
+		List<FileItem> fileItems = imageUpload.getFileItems();
+		Properties param = imageUpload.getProperties();
 		
 		// Now have parameters in 'params' and list of files in 'fileItems'
 		
 		log.info("Found " + fileItems.size() + " file items.");
 		
-		String imageEntityName = (String)param.get("entity_name");
+		String imageEntityName = param.getProperty("entity_name");
 		if (imageEntityName == null) {
-			log.error ("missing entity_name parameter");
-			throw new FileUploadException ("missing entity_name parameter");
+			imageEntityName = DEFAULT_IMAGE_ENTITY_NAME;
+			log.warn ("missing entity_name parameter, using default");
+			//throw new FileUploadException ("missing entity_name parameter");
 		}
 		
 		ImageDB db = ImageDB.getInstance(imageEntityName);
@@ -499,9 +464,9 @@ public class ImageDB {
 		}
 		
 
-		String caption =  param.get("caption");
-		String description =  param.get("description");
-		String attribution =  param.get("attribution");
+		String caption =  param.getProperty("caption");
+		String description =  param.getProperty("description");
+		String attribution =  param.getProperty("attribution");
 		
 		// TODO: get tags
 		// Tags can be specified by the presence of tag_nnn params, or

@@ -1,19 +1,18 @@
-<%@include file="_header.jsp"%><%House property;
-try {
-	Long id = new Long(request.getParameter("id"));
-	property = (House)hsession.load(House.class,id);
-} catch (Exception e) {
-	out.println ("error: " + e);
-	return;
-}
+<%@include file="_header.jsp"%><%
 
-out.clear();
+	Long houseId = new Long(request.getParameter("id"));
+	House house = em.find(House.class,houseId);
+	out.clear();
 response.setContentType("application/vnd.google-earth.kml+xml");%><?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://earth.google.com/kml/2.0">
-  <Placemark>
-    <name> <%=TextUtil.xmlSafe(property.getName())%></name>
-    <Point>
-      <coordinates><%=property.getLongitudeDeg()%>,<%=property.getLatitudeDeg()%>,0</coordinates>
-    </Point>
-  </Placemark>
+	<Placemark>
+		<name> <%=TextUtil.xmlSafe(house.getName())%></name>
+		<Point>
+			<coordinates>
+			<%=house.getLongitudeDeg()%>,
+			<%=house.getLatitudeDeg()%>,
+			0
+			</coordinates>
+		</Point>
+	</Placemark>
 </kml>

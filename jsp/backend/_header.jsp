@@ -22,6 +22,7 @@ import="ie.wombat.ui.Tab"
 import="ie.wombat.landedestates.*"
 import="ie.wombat.imagetable.ImageDB"
 import="ie.wombat.imagetable.Image"
+import="ie.wombat.imagetable.ImageUpload"
 %><%request.setCharacterEncoding("utf-8");%><%!// errorPage="error.jsp"
 
 public static final DecimalFormat latlonf = new DecimalFormat ("###.00000");

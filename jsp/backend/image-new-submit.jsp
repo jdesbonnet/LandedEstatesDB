@@ -5,16 +5,19 @@
 	}
 
 
+	ImageUpload  upload = new ImageUpload(request);
+	Properties props = upload.getProperties();
+	Long houseId = new Long(props.getProperty("house_id"));
+	House house = em.find(House.class,houseId);
+
 	// How much memory available prior to upload?
-			 
 	Runtime rt = Runtime.getRuntime();
 	System.err.println("LandedEstates: memory prior to upload: total=" + rt.totalMemory()
 		+ " free=" + rt.freeMemory());
 	
-	Long houseId = new Long(request.getParameter("house_id"));
-	House house = em.find(House.class,houseId);
-
-	List<Image> images = ImageDB.getInstance("Image").handleImageUpload (em, request);	
+	
+	ImageDB imageDb = ImageDB.getInstance("Image");
+	List<Image> images = imageDb.handleImageUpload (em, upload);	
 
 	System.err.println("LandedEstates: memory after image upload: total=" + rt.totalMemory()
 			+ " free=" + rt.freeMemory());
