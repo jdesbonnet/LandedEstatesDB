@@ -18,16 +18,26 @@
 	);
 	
 	org.apache.lucene.search.Query query = parser.parse(q);
+	
+	List<Object> results = fullTextEntityManager.createFullTextQuery(query).getResultList();
+	
+	if (request.getParameter("filter")!=null) {
+		String entity = XSSClean.clean(request.getParameter("filter").toLowerCase());
+		List<Object> filteredResults = new ArrayList<>();
+		for (Object o : results) {
+			if (o.getClass().getName().toLowerCase().contains(entity)) {
+				filteredResults.add(o);
+			}
+		}
+		results = filteredResults;
+		context.put ("filter",entity);
+	}
+	
+	context.put ("results",results);
+	
+	//SearchResultFormatter formatter = new SearchResultFormatter(analyzer, query, "userDetails");
+	//context.put ("formatter",formatter);
 
-	
-	/*
-	List results = fullTextEntityManager.createFullTextQuery(query).getResultList();
-	SearchResultFormatter formatter = new SearchResultFormatter(analyzer, query, "userDetails");
-	context.put ("formatter",formatter);
-	*/
-	
-	
-	context.put ("results",fullTextEntityManager.createFullTextQuery(query).getResultList());
 	context.put ("pageId","./search-results");
 	templates.merge ("/backend/master.vm",context,out);
 %>

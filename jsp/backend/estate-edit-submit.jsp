@@ -8,6 +8,8 @@
 	Estate estate = (Estate)em.find(Estate.class,id);
 	
 
+	// TODO: XSS clean these inputs
+	
 	/*
 	 * Check for some change before going to the trouble of saving to DB
 	 */

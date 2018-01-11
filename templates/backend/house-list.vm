@@ -1,5 +1,6 @@
 $breadcrumbs.add("Houses","house-list.jsp")
 
+#if($FALSE)
 <div class="a-z">
 |&nbsp;
 #foreach ($l in $alphabet)
@@ -10,12 +11,24 @@ $breadcrumbs.add("Houses","house-list.jsp")
 	#end
 	&nbsp;|&nbsp;
 #end
-
 <br />
-
 <a href="house-list.jsp?letter=_all&p=$!phase">List all houses</a>
-
 </div>
+#end
+
+
+<form  action="search.jsp" method="POST">
+<input type="hidden" name="filter" value="house" />
+<div class="form-group">
+<label>Search in house records</label>
+<div class="input-group">
+	<input type="text" class="form-control" name="q" />
+	<input class="input-group-addon btn btn-primary" type="submit" 
+	class="form-control" value="Search" 
+	aria-label="search for house record"/>
+</div>
+</div>
+</form>
 
 #if ($houses) 
 <table class="stdTable">

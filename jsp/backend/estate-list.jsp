@@ -37,6 +37,7 @@
 	} 
 	
 	context.put("pageId","./estate-list");
+	context.put("showSideCol","true");
 	
 	//templates.merge ("/backend/estate-list.vm",context,out);
 	templates.merge ("/backend/master.vm",context,out);

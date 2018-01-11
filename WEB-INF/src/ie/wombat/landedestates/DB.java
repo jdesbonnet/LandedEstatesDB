@@ -505,6 +505,11 @@ public class DB {
 				
 	}
 
+	public void index(EntityManager em, Object o) {
+		FullTextEntityManager fullTextEm = Search.getFullTextEntityManager(em);
+		fullTextEm.index(o);
+	}
+	
 	/**
 	 * Return Estate records matching query 'q'. Return empty array if none found.
 	 * 

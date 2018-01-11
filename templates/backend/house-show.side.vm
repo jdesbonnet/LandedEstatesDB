@@ -1,0 +1,5 @@
+<a class="btn btn-primary form-control" href="house-edit.jsp?id=${house.id}">Edit House Record</a>
+
+#if ($PROJECT_ID=="ERDB")
+<a class="btn btn-primary form-control" href="employee-record-add.jsp?house_id=$house.getId()">Add employee record</a>
+#end

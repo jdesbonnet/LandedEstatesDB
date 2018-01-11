@@ -4,27 +4,16 @@
 		throw new ServletException ("No write access to this database");
 	}
 
-	Long id = null;
-	if (request.getParameter("id") != null) {
-		try {
-			id = new Long(request.getParameter("id"));
-		} catch (NumberFormatException e) {
-		}
-	}
-	
-	Family family;
-	if (id != null) {
-		family = (Family)hsession.load(Family.class,id);
-	} else {
-		family = new Family ();
-	}
-	
+	Long id = new Long(request.getParameter("id"));
+	Family family = (Family)em.find(Family.class,id);
+
+	// TODO: XSS clean inputs
 	
 	family.setName (request.getParameter("name"));
 	family.setTitle (request.getParameter("title"));
 	family.setDescription (request.getParameter("description"));
 	
-	hsession.save(family);
+	db.index(em, family);
 	
 	//response.sendRedirect("family-show.jsp?id=" + family.getId());
 	String next = request.getParameter("next");

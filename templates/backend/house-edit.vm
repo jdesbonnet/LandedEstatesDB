@@ -1,6 +1,6 @@
 $breadcrumbs.add("Houses","house-list.jsp").add($house.name,"house-show.jsp?id=$house.id").add("edit")
 
-<form action="property-edit-submit.jsp" method="POST">
+<form action="house-edit-submit.jsp" method="POST">
 
 <input type="hidden" name="id" value="${house.id}" />
 <input type="hidden" name="estate_id" value="${estate.id}" />
@@ -18,39 +18,46 @@ value="$!{house.name}" />
 rows="5" cols="80"/>$!{house.description}</textarea>
 </div>
 
-<div class="form-group">
+
+<div class="row">
+
+<div class="col-md-4 form-group">
 <label for="field_townloand">Townland</label>
 <input type="text" class="form-control" id="field_townland" name="townland"
 value="$!{house.townland}" />
 </div>
 
-<div class="form-group">
+<div class="col-md-4 form-group">
 <label for="field_civil_parish">Civil Parish</label>
 <input type="text" class="form-control" id="field_civil_parish" name="civil_parish"
 value="$!{house.civilParish}" />
 </div>
 
 
-<div class="form-group">
+<div class="col-md-4 form-group">
 <label for="field_plu">Poor Law Union (PLU)</label>
 <input type="text" class="form-control" id="field_plu" name="plu"
 value="$!{house.plu}" />
 </div>
 
-<div  class="form-group">
+</div>
+
+<div class="row">
+
+<div  class="col-md-4 form-group">
 <label for="field_ded">DED</label>
 <input type="text" class="form-control" id="field_ded" name="ded"
 value="$!{house.ded}" />
 </div>
 
 
-<div class="form-group">
+<div class="col-md-4 form-group">
 <label for="field_barony">Barony</label>
 <input type="text" class="form-control" id="field_barony" name="barony"
 value="$!{house.barony}" />
 </div>
 
-<div class="form-group">
+<div class="col-md-4 form-group">
 <label for="field_county">County</label>
 <select id="field_county" name="county" class="form-control">
 #foreach ($county in $counties)
@@ -63,16 +70,17 @@ value="$!{house.barony}" />
 </select>
 </div>
 
+</div>
 
-<h3>Map/Grid Reference</h3>
+<div class="row">
 
-<div class="form-group">
+<div class="col-md-4 form-group">
 <label for="os_sheet">OS Sheet Number</label>
 <input type="text" id="os_sheet" name="os_sheet" class="form-control"
 size="4" value="$!{house.osSheet}" />
 </div>
 
-<div class="form-group">
+<div class="col-md-4 form-group">
 <label for="discovery_map">Discovery Series Map#</label>
 <input type="text" class="form-control"
 id="field_discovery_map" name="discovery_map"
@@ -80,12 +88,14 @@ size="4" value="$!{house.discoveryMap}" />
 </div>
 
 
-<div class="form-group">
-<label for="field_grid_ref">Grid Reference: </label>
+<div class="col-md-4 form-group">
+<label for="field_grid_ref">Lat/Lng or Grid Reference</label>
 <input type="text" 
 id="field_grid_ref" name="grid_ref" class="form-control"
 size="48"
 value="$!{house.gridReference}" />
+
+</div>
 
 <button type="button"
 onClick="window.open('popup-map.jsp?id=${house.id}', 'popupMap', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=420,height=450');"

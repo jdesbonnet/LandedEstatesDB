@@ -7,5 +7,6 @@
 	House house = (House)em.find(House.class, id);
 	context.put ("house", house);
 	context.put ("pageId","./house-edit");
+	context.put ("showSideCol","true");
 	templates.merge ("/backend/master.vm",context,out);
 %>

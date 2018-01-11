@@ -7,6 +7,9 @@ import="ie.wombat.gis.convert.OSILLAConvert"
 	Long id = new Long(request.getParameter("id"));
 	House property = (House)em.find(House.class, id);
 
+	
+	// TODO: XSS clean all these inputs
+	
 	property.setName(request.getParameter("name"));
 	property.setDescription(request.getParameter("description"));
 	

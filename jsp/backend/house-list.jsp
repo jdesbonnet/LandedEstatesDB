@@ -1,6 +1,7 @@
-<%@include file="_header.jsp"%><%long time = -System.currentTimeMillis();
+<%@include file="_header.jsp"%><%
 
-	context.put ("tabId","houses");
+
+	long time = -System.currentTimeMillis();
 	
 	String letter = request.getParameter("letter");
 	context.put ("letter",letter);
@@ -34,9 +35,7 @@
 		context.put ("houses",houses);	
 	} 
 	
+	context.put("showSideCol","true");
 	context.put("pageId","./house-list");
 	templates.merge ("/backend/master.vm",context,out);
-	
-
-	
 %>

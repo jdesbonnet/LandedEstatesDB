@@ -1,6 +1,10 @@
 #parse ("/backend/_search_result_item.vm")
 
-<h2>Search Results for '$q'</h2>
+<h2>Search results for '$q'
+#if ($filter)
+(filtered for $filter)
+#end
+</h2>
 
 <p>Found  $results.size() results.</p>
 

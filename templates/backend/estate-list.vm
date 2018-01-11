@@ -1,5 +1,6 @@
 $breadcrumbs.add("Estates","estate-list.jsp")
 
+#if($FALSE)
 <div class="a-z">
 |&nbsp;
 #foreach ($l in $alphabet)
@@ -10,64 +11,58 @@ $breadcrumbs.add("Estates","estate-list.jsp")
 	#end
 	&nbsp;|&nbsp;
 #end
-
 <br />
-
 <a href="estate-list.jsp?letter=_all">List all estates</a>
-&nbsp; | &nbsp;
-<a href="estate-new.jsp">Add new estate</a>
-
 </div>
+#end
 
+<form  action="search.jsp" method="POST">
+<input type="hidden" name="filter" value="estate" />
+<div class="form-group">
+<label>Search in estate records</label>
+<div class="input-group">
+	<input type="text" class="form-control" name="q" />
+	<input class="input-group-addon btn btn-primary" type="submit" 
+	class="form-control" value="Search" 
+	aria-label="search for estate record"/>
+</div>
+</div>
+</form>
 
 
 #if ($estates) 
-<table border="1" class="stdTable">
+<table class="stdTable">
 <thead>
 <tr>
-<th>Phase</th>
-<th>Estate name</th>
-<th>Associated families</th>
-<th>Houses</th>
+<th>Estate name / description</th>
 </tr>
 </thead>
 
-#foreach ($estate in $estates) 
-<tr>
+<tbody>
+#foreach ($estate in $estates)
+	<tr><td>
+	#if ($estate.name && $estate.name.length()>0)
+		<b><a href="estate-show.jsp?id=${estate.id}">${estate.name}</a></b>
+	#else
+		<b><a href="estate-show.jsp?id=${estate.id}"><em>no name</em></a></b>
+	#end
+	
+	(families 
+	#foreach ($family in $estate.families)
+		<a class="badge badge-success" href="family-show.jsp?id=${family.id}">${family.name}</a>
+	#end
+	,
+	houses
+	#foreach ($house in $estate.houses)
+		<a class="badge badge-info" href="house-show.jsp?id=${house.id}">${house.name}</a>
+	#end
+	)
+	
+	$!{estate.description}
 
-<td>${estate.projectPhase}</td>
-
-<td>
-<a href="estate-show.jsp?id=$estate.getId()">${estate.name}</a>
-</td>
-
-<td>
-#foreach ($family in $estate.getFamilies())
-<a href="family-show.jsp?id=$family.getId()">$family.getName()</a>
-#if ($family.title && $family.title.length() > 0)
-<em>(${family.title})</em>
+	<tag>Phase${estate.projectPhase}</tag>
+	</td></tr>
 #end
-&nbsp; &nbsp;
-#end
-&nbsp;
-</td>
-
-<td>
-#foreach ($house in $estate.houses)
-<a href="house-show.jsp?id=${house.id}&estate_id=${estate.id}">${house.name}</a>
-&nbsp; &nbsp;
-#end
-</td>
-
-
-</tr>
-#end
+</tbody>
 </table>
-
-<a href="estate-new.jsp">
-<img alt="add icon" title="Add new estate record"
-src="$contextPath/gr/add.png" width="16" height="16" border="0" />
-Add new estate record</a>
-
-
 #end

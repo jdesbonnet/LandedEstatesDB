@@ -21,8 +21,10 @@
 	<main role="main" class="container-fluid">
 	<div class="row">
 	
+	#if ($showSideCol)
+	
 	##
-	## Main content column
+	## Main content column (9/12 width)
 	##
 	<div class="col-md-9">
 	#set($templateFileName=$pageId+".vm")
@@ -33,22 +35,47 @@
 	## Right-side column
 	##
 	<div class="col-md-3">
-	#if ($showSideCol)
 	#set($sideFileName=$pageId+".side.vm")
 	#parse($sideFileName)
-	#end
-	
 	#if ($revisionHistory && $revisionHistory.size() > 0 )
 	<h3>Revision History</h3>
+	<ul>
 	#foreach ($o in $revisionHistory)
 	<li> $o.modified</li>
 	#end
+	</ul>
 	#end
+	
+	<h3>Search tips</h3>
+	<p>
+	To search only in names use "name:" prefix (for example "name:smith"). To
+	search in description fields use prefix "description:".
+	</p>
+	
+	<p>
+	The * symbol acts
+	as a wildcard. For example to search for all names starting with
+	<em>sm</em> use 'name:sm*'.
+	</p>
 	</div>
 	
-
+	
+	#else
+	
+	##
+	## Main content column (full width)
+	##
+	<div class="col-md-12">
+	#set($templateFileName=$pageId+".vm")
+	#parse ($templateFileName)
 	</div>
-    </main><!-- /.container -->
-#parse ("_inc_footer.vm")
+	
+	#end
+
+	</div><!-- /.row -->
+	</main><!-- /.container -->
+	
+	#parse ("_inc_footer.vm")
+	
   </body>
 </html>
