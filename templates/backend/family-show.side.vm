@@ -1,0 +1,2 @@
+<a class="btn btn-primary form-control" href="family-edit.jsp?id=${family.id}">
+Edit Family Record</a>

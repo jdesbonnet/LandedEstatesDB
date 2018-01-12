@@ -13,7 +13,7 @@
 	family.setTitle (request.getParameter("title"));
 	family.setDescription (request.getParameter("description"));
 	
-	db.index(em, family);
+	db.postEntityUpdate(em, user, family);
 	
 	//response.sendRedirect("family-show.jsp?id=" + family.getId());
 	String next = request.getParameter("next");

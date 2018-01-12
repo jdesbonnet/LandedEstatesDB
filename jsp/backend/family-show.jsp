@@ -15,5 +15,6 @@
 	context.put ("estates",estates);
 
 	context.put("pageId","./family-show");
+	context.put("showSideCol","true");
 	templates.merge ("/backend/master.vm",context,out);
 %>

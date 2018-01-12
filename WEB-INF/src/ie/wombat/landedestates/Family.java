@@ -1,5 +1,6 @@
 package ie.wombat.landedestates;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,12 +12,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
@@ -27,7 +31,7 @@ import org.hibernate.search.annotations.Store;
 @Indexed
 @Table(name="family")
 @XmlRootElement
-public class Family implements Indexable {
+public class Family implements Indexable,RevisionTracked {
 	
 	@Id
 	@DocumentId
@@ -52,6 +56,17 @@ public class Family implements Indexable {
 	
 	@Column(name="project_phase")
 	private Integer projectPhase;
+	
+	@Column(name="last_modified")
+	private Date lastModified;
+	
+	@ManyToOne
+	@NotFound(action = NotFoundAction.IGNORE)
+	@JoinColumn(name="last_modified_by")
+	private User lastModifiedBy;
+	
+	private Integer version;
+	
 	
 	public Long getId() {
 		return id;
@@ -96,6 +111,28 @@ public class Family implements Indexable {
 		return "F"+this.id;
 	}
 	
+	
+	
+	public Date getLastModified() {
+		return lastModified;
+	}
+	public void setLastModified(Date lastModified) {
+		this.lastModified = lastModified;
+	}
+	public User getLastModifiedBy() {
+		return lastModifiedBy;
+	}
+	public void setLastModifiedBy(User lastModifiedBy) {
+		this.lastModifiedBy = lastModifiedBy;
+	}
+	
+	
+	public Integer getVersion() {
+		return version;
+	}
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
 	@Transient
 	public String getNameAndTitle() {
 		if (getTitle() == null || getTitle().trim().length()==0) {

@@ -1,5 +1,6 @@
 $breadcrumbs.add("Families","family-list.jsp")
 
+#if($FALSE)
 <div class="a-z">
 |&nbsp;
 #foreach ($l in $alphabet)
@@ -10,13 +11,23 @@ $breadcrumbs.add("Families","family-list.jsp")
 	#end
 	&nbsp;|&nbsp;
 #end
-
 <br />
-
 <a href="family-list.jsp?letter=_all">List all families</a>
-
 </div>
+#end
 
+<form  action="search.jsp" method="POST">
+<input type="hidden" name="filter" value="family" />
+<div class="form-group">
+<label>Search in family records</label>
+<div class="input-group">
+	<input type="text" class="form-control" name="q" />
+	<input class="input-group-addon btn btn-primary" type="submit" 
+	class="form-control" value="Search" 
+	aria-label="search for family record"/>
+</div>
+</div>
+</form>
 
 #if ($families)
 <table border="1" class="listTable">

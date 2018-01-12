@@ -15,7 +15,7 @@ value="$!{family.name}" />
 
 
 <div class="form-group">
-<label for="field_title">Title</label>
+<label for="field_title">Family title</label>
 <input type="text" class="form-control" size="40" id="field_title" name="title"
 value="$!{family.title}" />
 </div>
@@ -27,5 +27,5 @@ value="$!{family.title}" />
 rows="5" cols="80"/>$!{family.description}</textarea>
 </div>
 
-<input type="submit" class="btn btn-primary" value="Submit" />
+<input type="submit" class="btn btn-primary" value="Save" />
 </form>
