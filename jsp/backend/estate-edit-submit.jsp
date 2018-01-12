@@ -24,6 +24,10 @@
 	Integer projectPhase = new Integer(request.getParameter("project_phase"));
 	estate.setProjectPhase(projectPhase);
 	
+	
+	// TODO: this is wrong
+	db.postEntityUpdate(em, user, estate);
+	
 	/*
 	 * What happens next depends on which save button was clicked
 	 */
@@ -73,9 +77,6 @@
 		return;
 	}
 	
-
-	estate.setLastModifiedBy(user);
-	db.index(em,estate);
 	
 	response.sendRedirect("estate-show.jsp?id=" + estate.getId());
 %><%!

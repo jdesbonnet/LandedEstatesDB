@@ -46,17 +46,6 @@
 	</ul>
 	#end
 	
-	<h3>Search tips</h3>
-	<p>
-	To search only in names use "name:" prefix (for example "name:smith"). To
-	search in description fields use prefix "description:".
-	</p>
-	
-	<p>
-	The * symbol acts
-	as a wildcard. For example to search for all names starting with
-	<em>sm</em> use 'name:sm*'.
-	</p>
 	</div>
 	
 	

@@ -43,6 +43,7 @@ public class Family implements Indexable {
 	private String description;
 	
 	@ManyToMany(mappedBy="families")
+	@Transient
 	//@JoinTable(name="estate_families",
 	//joinColumns=@JoinColumn(name="family_id")
 	//inverseJoinColumns = @JoinColumn(name="estate_id")

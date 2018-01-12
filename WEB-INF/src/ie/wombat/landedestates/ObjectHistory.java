@@ -8,7 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.search.annotations.DocumentId;
@@ -26,8 +28,9 @@ public class ObjectHistory implements Auditable {
 	@Column(name="last_modified")
 	private Date modified = Calendar.getInstance().getTime();
 	
-	@Column(name="user_id")
-	private Long userId;
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User user;
 	
 	@Column(name="object_id")
 	private Long objectId;
@@ -56,17 +59,18 @@ public class ObjectHistory implements Auditable {
 	public void setModified(Date modified) {
 		this.modified = modified;
 	}
+	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	public int getVersion() {
 		return version;
 	}
 	public void setVersion(int version) {
 		this.version = version;
-	}
-	public void setUserId (Long uid) {
-		this.userId = uid;
-	}
-	public Long getUserId () {
-		return this.userId;
 	}
 	public void setObjectId (Long objId) {
 		this.objectId = objId;

@@ -450,6 +450,20 @@ public class DB {
 		}
 				
 	}
+	
+	public void postEntityUpdate (EntityManager em, User user, RevisionTracked o) {
+		index(em,o);
+		o.setLastModifiedBy(user);
+		ObjectHistory oh = new ObjectHistory();
+		oh.setObjectClass(o.getClass().getName());
+		oh.setObjectId(o.getId());
+		
+		Gson gson = new Gson();
+		String objectJson = gson.toJson(o);
+		oh.setObjectJson(objectJson);
+		oh.setUser(user);
+		em.persist(oh);
+	}
 
 	/**
 	 * Reindex an single entity object
