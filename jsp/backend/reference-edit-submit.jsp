@@ -18,5 +18,5 @@
 	
 	db.index(em,reference);
 
-	response.sendRedirect("estate-edit.jsp?id=" + estate.getId());
+	response.sendRedirect("estate-edit.jsp?id=" + estate.getId()+"#references");
 %>

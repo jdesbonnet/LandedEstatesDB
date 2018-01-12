@@ -93,6 +93,7 @@ public class Estate implements Indexable, RevisionTracked {
 		joinColumns=@JoinColumn(name="estate_id"),
 		inverseJoinColumns = @JoinColumn(name="reference_id")
 	)
+	@OrderBy("id")
 	private Set<Reference> references = new HashSet<Reference>();
 	
 	public Long getId() {

@@ -1,29 +1,20 @@
 <%@include file="_header.jsp"%><%
 	
-if (!user.hasWriteAccess()) {
-	throw new ServletException ("No write access to this database");
-}
-
-
-	Reference reference;
-	try {
-		Long id = new Long(request.getParameter("id"));
-		reference = (Reference)hsession.load(Reference.class, id);
-	} catch (Exception e) {
-		throw new ServletException ("no 'id'");
+	if (!user.hasWriteAccess()) {
+		throw new ServletException ("No write access to this database");
 	}
-	
 
-	try {
-		Long estateId = new Long (request.getParameter("estate_id"));
-		context.put ("estate", hsession.load(Estate.class,estateId));
-	} catch (Exception e) {
-		throw new ServletException ("error: no estate_id");
-	}
-	
+	Long referenceId = new Long(request.getParameter("id"));
+	Reference reference = em.find(Reference.class,referenceId);
 	context.put ("reference", reference);
-	context.put ("referenceSources", hsession.createQuery("from ReferenceSource order by name").list());
+
+	Long estateId = new Long(request.getParameter("estate_id"));
+	Estate estate = em.find(Estate.class,estateId);
+	context.put("estate",estate);
 	
-	templates.merge ("/backend/reference-edit.vm",context,out);
+	context.put ("referenceSources", em.createQuery("from ReferenceSource order by name").getResultList());
+	
+	context.put ("pageId","reference-edit");
+	templates.merge ("/backend/master.vm",context,out);
 	
 %>

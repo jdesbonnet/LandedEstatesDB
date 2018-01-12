@@ -1,11 +1,8 @@
 $breadcrumbs.add("Estates","estate-list.jsp").add("$estate.name","estate-show.jsp?id=$estate.id").add("edit")
 
-<form name="editform" action="estate-edit-submit.jsp" method="POST">
-<input type="hidden" name="id" 
-value="$!estate.getId()" />
+<form id="estate_edit_form" action="estate-edit-submit.jsp" method="POST">
 
-
-
+<input type="hidden" name="id" value="$!{estate.id}" />
 
 <div class="form-group">
 <div class="row">
@@ -35,22 +32,20 @@ rows="5" cols="80"/>$!{estate.description}</textarea>
 <div class="form-group">
 <label for="families">Associated families</label>
 <table class="stdTable">
-<thead>
-<tr>
-<th>Family name / Title</td>
-<th width="10%"></th>
-</tr>
-</thead>
-
 <tbody>
 #foreach ($family in $estate.families)
 <tr>
-<td>${family.nameAndTitle}</td>
 <td>
+<a href="family-show.jsp?id=${family.id}" 
+title="F${family.id}">${family.nameAndTitle}</a></td>
 
-<a class="btn btn-primary btn-sm" 
-href="estate-remove-family.jsp?estate_id=${estate.id}&family_id=${family.id}"
-onClick="return confirm('Are you sure you want to remove family association from estate record?');">remove association</a>
+<td width="24">
+
+<button type="submit" class="btn btn-danger btn-sm" 
+onClick="return confirm('Are you sure you want to remove family association from estate record?');"
+name="_submit_family_remove_${family.id}">
+<b class="fa fa-remove"></b>
+</button>
 
 </td>
 </tr>
@@ -71,10 +66,8 @@ value="Add family association" />
 #parse ("_estate_houses_table.vm")
 <input type="submit" class="btn btn-primary btn-sm" name="_submit_new_house"
 value="Add new house record" />
-
 <input type="submit" class="btn btn-primary btn-sm" name="_submit_existing_house"
 value="Associate existing house record" />
-
 </div>
 
 
@@ -99,15 +92,23 @@ value="Associate existing house record" />
 <div class="form-group">
 <label for="references">References</label>
 #parse ("_estate_reference_table.vm")
-
 <input type="submit" class="btn btn-primary btn-sm" name="_submit_new_reference"
 value="Add reference" />
-
-
 </div>
-
 
 
 <input type="submit" class="btn btn-primary" value="Save" />
 </form>
 
+<script>
+var needToSave = false;
+jQuery(function(){
+	$(document).click("a", function(event){
+		if (needToSave == true) {
+			alert("You need to save first");
+			event.preventDefault();
+			return;
+		}
+	});
+});
+</script>

@@ -41,9 +41,13 @@ $reference.source.name
 
 <td>
 <div class="btn-group">
-<a class="btn btn-primary btn-sm" href="reference-edit.jsp?id=${reference.id}()&estate_id=${estate.id}">edit</a>
-<a class="btn btn-danger btn-sm" href="estate-remove-reference.jsp?estate_id=${estate.id}&reference_id=${reference.id}"
-onClick="return confirm ('Are you sure you want to delete reference?');">delete</a>
+<button type="submit" class="btn btn-primary btn-sm"
+name="_submit_reference_edit_${reference.id}">
+edit</button>
+<button type="submit" class="btn btn-danger btn-sm"
+name="_submit_reference_delete_${reference.id}"
+onClick="return confirm ('Are you sure you want to delete reference?');">
+<b class="fa fa-remove"></b></button>
 </div>
 </td>
 

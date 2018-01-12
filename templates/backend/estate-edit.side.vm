@@ -1,0 +1,40 @@
+
+
+<div class="form-group">
+<button class="btn btn-primary form-control" id="btn_associate_with_house">
+Associate with house record
+</button>
+</div>
+
+<div class="form-group">
+<button class="btn btn-primary form-control" id="btn_new_house">
+Add new house record
+</button>
+</div>
+
+<div class="form-group">
+<button class="btn btn-primary form-control" id="btn_associate_with_family">
+Add family association
+</button>
+</div>
+
+<div class="form-group">
+<input type="submit" class="btn btn-primary form-control" name="_submit_new_reference"
+value="Add reference" />
+</div>
+
+<script>
+jQuery(function(){
+
+	// Side buttons simulate a click of buttons in the main form
+	jQuery("#btn_associate_with_house").click(function(){
+		jQuery("input[name='_submit_existing_house']").click();
+	});
+	jQuery("#btn_new_house").click(function(){
+		jQuery("input[name='_submit_new_house']").click();
+	});
+	jQuery("#btn_associate_with_family").click(function(){
+		jQuery("input[name='_submit_add_family']").click();
+	});
+});
+</script>

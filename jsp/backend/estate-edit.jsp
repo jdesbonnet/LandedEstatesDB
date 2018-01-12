@@ -7,8 +7,8 @@
 	Long id = new Long (request.getParameter("id"));
 	Estate estate = (Estate)em.find(Estate.class,id);
 
-	context.put ("tabId","estates");
 	context.put ("estate", estate);
 	context.put ("pageId","./estate-edit");
+	context.put ("showSideCol","true");
 	templates.merge ("/backend/master.vm",context,out);
 %>
