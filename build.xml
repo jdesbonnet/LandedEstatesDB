@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <project name="LandedEstatesDB" default="dist" basedir=".">
 	<property name="name" value="LEDB"/>
-	<property name="version" value="1.2"/>
+	<property name="version" value="1.4"/>
 
 	<property name="tomcat.dir" value="/opt/tomcat/current" />
 
