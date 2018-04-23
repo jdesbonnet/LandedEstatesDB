@@ -9,8 +9,8 @@
 
     <title>Landed Estates Database Administration</title>
 
-#include("_inc_header.vm")
-    
+#parse("_inc_header.vm")
+
   </head>
 
   <body>
