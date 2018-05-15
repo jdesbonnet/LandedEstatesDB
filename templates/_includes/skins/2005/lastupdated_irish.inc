@@ -1,1 +1,0 @@
-<br /><span class="arialblacksmall">Nuashonraíodh an leathanach seo <!--#config timefmt="%d / %m / %Y" --><!--#echo var="LAST_MODIFIED" --></span>

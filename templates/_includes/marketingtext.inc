@@ -1,1 +1,0 @@
-Embrace life,<br/>embrace knowledge,<br/>embrace the future<br/>with NUI Galway!

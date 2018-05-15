@@ -1,1 +1,0 @@
-<br /><span class="arialblacksmall"><!--#config timefmt="%A, %B %d, %Y" -->This page was last updated <!--#echo var="LAST_MODIFIED" --></span>
