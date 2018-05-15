@@ -27,7 +27,8 @@ public class AppContextStart implements ServletContextListener{
 	}
 
 	public void contextInitialized(ServletContextEvent event) {
-		System.err.println ("********** LEDB STARTING **********");
+		System.err.println ("********** LEDB STARTING context=" 
+				+ event.getServletContext().getContextPath());
 		
 		File appRoot = new File(event.getServletContext().getRealPath("/"));
 		Configuration.init(appRoot);
