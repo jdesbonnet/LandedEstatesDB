@@ -1,3 +1,9 @@
+14 May 2017: 2.0.0
+ * Migrate build system to use Apache Maven
+ * Update Hibernate to current latest (5.2.x).
+ * Update Hibernate Search and Lucene to latest versions
+
+
 1 Jan 2017: 1.4.0
   * Update to admin/backend UI
   * Changes to facilitate Phase 3
