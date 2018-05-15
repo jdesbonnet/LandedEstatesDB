@@ -1,63 +1,47 @@
-<?xml version="1.0" encoding="ISO-8859-1"?> 
+<?xml version="1.0" ?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+  http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	version="3.1">
 
-<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.2//EN"  "http://java.sun.com/j2ee/dtds/web-app_2_2.dtd"> 
-	
-<web-app>
+	<servlet>
+		<servlet-name>BackupServlet</servlet-name>
+		<servlet-class>ie.wombat.landedestates.BackupServlet</servlet-class>
+	</servlet>
 
-<!-- 
-<servlet>
-<servlet-name>ConfigServlet</servlet-name>
-<servlet-class>ie.wombat.landedestates.ConfigServlet</servlet-class>
-<load-on-startup>1</load-on-startup>
-<init-param>
-	<param-name>indexDir</param-name>
-	<param-value>/var/tmp/le/idx</param-value>
-</init-param>
-</servlet>
--->
-
-<servlet>
-<servlet-name>BackupServlet</servlet-name>
-<servlet-class>ie.wombat.landedestates.BackupServlet</servlet-class>
-</servlet>
-
-<servlet>
-<servlet-name>ImageServlet</servlet-name>
-<servlet-class>ie.wombat.imagetable.ImageServlet</servlet-class>
-<init-param>
-	<param-name>imageEntityName</param-name>
-	<param-value>Image</param-value>
-</init-param>
-<init-param>
-	<param-name>cacheDir</param-name>
-	<param-value>/var/tmp/le/ImageCache</param-value>
-</init-param>
-</servlet>
+	<servlet>
+		<servlet-name>ImageServlet</servlet-name>
+		<servlet-class>ie.wombat.imagetable.ImageServlet</servlet-class>
+		<init-param>
+			<param-name>imageEntityName</param-name>
+			<param-value>Image</param-value>
+		</init-param>
+		<init-param>
+			<param-name>cacheDir</param-name>
+			<param-value>/var/tmp/le/ImageCache</param-value>
+		</init-param>
+	</servlet>
 
 
 
-<servlet-mapping>
-<servlet-name>BackupServlet</servlet-name>
-<url-pattern>/backup/*</url-pattern>
-</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>BackupServlet</servlet-name>
+		<url-pattern>/backup/*</url-pattern>
+	</servlet-mapping>
 
-<servlet-mapping>
-<servlet-name>ImageServlet</servlet-name>
-<url-pattern>/img/*</url-pattern>
-</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ImageServlet</servlet-name>
+		<url-pattern>/img/*</url-pattern>
+	</servlet-mapping>
 
-<listener>
-	<listener-class>ie.wombat.landedestates.AppContextStart</listener-class>
-	<listener-class>ie.wombat.landedestates.EndOfRequestCleanup</listener-class>
-</listener>
+	<listener>
+		<listener-class>ie.wombat.landedestates.AppContextStart</listener-class>
+	</listener>
 
-<!--
-<locale-encoding-mapping-list>
-<locale-encoding-mapping>
-<locale>en</locale>
-<encoding>UTF-8</encoding>
-</locale-encoding-mapping>
-</locale-encoding-mapping-list>
--->
+	<listener>
+		<listener-class>ie.wombat.landedestates.EndOfRequestCleanup</listener-class>
+	</listener>
+
 
 </web-app>
