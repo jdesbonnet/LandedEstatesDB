@@ -17,6 +17,7 @@
 		<listener-class>ie.wombat.landedestates.EndOfRequestCleanup</listener-class>
 	</listener>
 
+
 	<servlet>
 		<servlet-name>BackupServlet</servlet-name>
 		<servlet-class>ie.wombat.landedestates.BackupServlet</servlet-class>
@@ -47,8 +48,5 @@
 		<url-pattern>/img/*</url-pattern>
 	</servlet-mapping>
 
-
-	<!-- <locale-encoding-mapping-list> <locale-encoding-mapping> <locale>en</locale> 
-		<encoding>UTF-8</encoding> </locale-encoding-mapping> </locale-encoding-mapping-list> -->
 
 </web-app>
