@@ -130,8 +130,8 @@ $image.getCaption()
 #end
 
 #if ($property.hasGridReference())
-#set ($cx=$property.getLongitudeDeg())
-#set ($cy=$property.getLatitudeDeg())
+#set ($cx=$property.longitudeDeg)
+#set ($cy=$property.latitudeDeg)
 ##parse ("/backend/_google_map.vm")
 #end
 

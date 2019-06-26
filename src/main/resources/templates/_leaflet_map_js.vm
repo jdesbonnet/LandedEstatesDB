@@ -1,0 +1,30 @@
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
+   integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+   crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
+   integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+   crossorigin=""></script>
+   
+<script>
+jQuery(function(){
+
+	// The property-show page will set drawMarker=true if drawing a marker
+	// is all that is required. Else do a full big map.
+	 
+	if (typeof drawMarker === "undefined") {
+    	g_map = L.map("mapContainer").setView([53.0,-7],13);
+    	L.tileLayer('https://b.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+			maxZoom: 18,
+		}).addTo(g_map);
+	} else {
+		g_map = L.map("mapContainer").setView([markerLoc[0], markerLoc[1]],13);
+    	L.tileLayer('https://b.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+			maxZoom: 18,
+		}).addTo(g_map);
+		var marker = L.marker([markerLoc[0], markerLoc[1]]).addTo(g_map);
+		marker.bindPopup(markerLoc[0].toFixed(6) + "," + markerLoc[1].toFixed(6)).openPopup();
+ 	}
+});
+</script>

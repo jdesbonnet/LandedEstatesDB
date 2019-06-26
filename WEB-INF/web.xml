@@ -5,6 +5,19 @@
   http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	version="3.1">
 
+
+	<display-name>Landed Estates Database</display-name>
+
+
+	<listener>
+		<listener-class>ie.wombat.landedestates.AppContextStart</listener-class>
+	</listener>
+
+	<listener>
+		<listener-class>ie.wombat.landedestates.EndOfRequestCleanup</listener-class>
+	</listener>
+
+
 	<servlet>
 		<servlet-name>BackupServlet</servlet-name>
 		<servlet-class>ie.wombat.landedestates.BackupServlet</servlet-class>
@@ -34,14 +47,6 @@
 		<servlet-name>ImageServlet</servlet-name>
 		<url-pattern>/img/*</url-pattern>
 	</servlet-mapping>
-
-	<listener>
-		<listener-class>ie.wombat.landedestates.AppContextStart</listener-class>
-	</listener>
-
-	<listener>
-		<listener-class>ie.wombat.landedestates.EndOfRequestCleanup</listener-class>
-	</listener>
 
 
 </web-app>
