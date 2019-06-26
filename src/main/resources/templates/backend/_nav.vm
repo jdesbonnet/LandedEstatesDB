@@ -15,7 +15,8 @@
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Extra</a>
 			<div class="dropdown-menu" aria-labelledby="dropdown01">
-				<a class="dropdown-item" href="refsource-list.jsp">Reference Sources</a>
+				<a class="dropdown-item" href="refsource-list.jsp">List reference sources</a>
+				<a class="dropdown-item" href="refsource-new.jsp">Add reference source</a>
 				<a class="dropdown-item" href="images.jsp">Images</a>
 				<a class="dropdown-item" href="timeline.jsp">Timeline</a>
 			</div>
