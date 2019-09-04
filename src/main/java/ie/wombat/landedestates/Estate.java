@@ -1,5 +1,6 @@
 package ie.wombat.landedestates;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -31,18 +33,18 @@ import org.hibernate.search.annotations.Store;
 @Indexed
 @Table(name="estate")
 @XmlRootElement
-public class Estate implements Indexable, RevisionTracked {
-	
+public class Estate implements Serializable, Indexable, RevisionTracked {
 	
 	@Id
-	@DocumentId
-	@GeneratedValue(strategy=GenerationType.AUTO)
+        @DocumentId
+        @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
 	@Field(index = Index.YES, store = Store.NO)
 	private String name;
 	
 	//@Field(index = Index.NO, store = Store.NO)
+        @Lob
 	private String description;
 	
 	private Integer version;
@@ -69,6 +71,10 @@ public class Estate implements Indexable, RevisionTracked {
 	private Set<Family> families = new HashSet<Family>();
 	
 	
+        /**
+         * Houses (sometimes refered to as 'properties' in earlier code/doc)
+         * associated with this estate record.
+         */
 	@OneToMany
 	@JoinTable(name="estate_properties",
 		joinColumns=@JoinColumn(name="estate_id"),
@@ -76,18 +82,17 @@ public class Estate implements Indexable, RevisionTracked {
 	)
 	private Set<House> houses = new HashSet<House>();
 	
-	/*
-	@ManyToOne
-	@JoinColumn(name="primary_house_id")
-	private House primaryHouse;
-	*/
-	
-	
+
+	/**
+         * From Employee Records project.
+         */
 	@OneToMany
 	@JoinColumn(name="estate_id")
 	private Set<EmployeeRecord> employeeRecords = new HashSet<EmployeeRecord>();
 	
-	
+	/**
+         * References in literature and other documentation.
+         */
 	@OneToMany
 	@JoinTable(name="estate_references",
 		joinColumns=@JoinColumn(name="estate_id"),

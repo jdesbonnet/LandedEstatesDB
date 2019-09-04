@@ -29,24 +29,27 @@ import org.slf4j.LoggerFactory;
 import ie.wombat.gis.InvalidGridReferenceException;
 import ie.wombat.gis.OSIGridReference;
 import ie.wombat.imagetable.Image;
+import java.io.Serializable;
+import javax.persistence.Lob;
 
 @Entity
 @Indexed
 @Table(name="property")
 @XmlRootElement
-public class House implements Indexable {
+public class House implements Serializable, Indexable {
 
 	private static Logger log = LoggerFactory.getLogger(House.class);
 	
 	@Id
 	@DocumentId
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
 	@Field(index = Index.YES, store = Store.NO)
 	private String name;
 	
 	@Field(index = Index.NO, store = Store.NO)
+        @Lob
 	private String description;
 	
 	private String townland;
@@ -94,6 +97,8 @@ public class House implements Indexable {
 	public void setId(Long id) {
 		this.id = id;
 	}
+        
+        @Override
 	public String getName() {
 		return name;
 	}
@@ -101,6 +106,7 @@ public class House implements Indexable {
 		this.name = name;
 	}
 	
+        @Override
 	public String getDescription() {
 		return description;
 	}
@@ -159,10 +165,7 @@ public class House implements Indexable {
 	}
 	
 	public boolean hasGridReference () {
-		if ( (getEasting() > 0 ) &&  (getNorthing() > 0) ) {
-			return true;
-		}
-		return false;
+            return ( (getEasting() > 0 ) &&  (getNorthing() > 0) );
 	}
 	
 	/**
@@ -215,13 +218,13 @@ public class House implements Indexable {
 	}
 	
 	/**
-	 * Longitude in degress.
+	 * Longitude in degrees.
 	 * @return
 	 */
 	public void setLongitude(Double longitude) {
 		if (latitude != null) {
 			if (longitude < -11 || longitude > -5) {
-				System.err.println ("WARNING OUT OF RANGE: House#" + getId() + " setting longitude=" + longitude);
+				log.error ("WARNING OUT OF RANGE: House#" + getId() + " setting longitude=" + longitude);
 			}
 		}
 		this.longitude = longitude;
@@ -319,6 +322,8 @@ public class House implements Indexable {
 		}
 		return null;
 	}
+        
+        @Override
 	public String getLuceneId () {
 		return "H" + this.id;
 	}

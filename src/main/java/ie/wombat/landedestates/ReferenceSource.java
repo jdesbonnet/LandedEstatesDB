@@ -1,23 +1,27 @@
 package ie.wombat.landedestates;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="reference_source")
-public class ReferenceSource implements Indexable {
+public class ReferenceSource implements Serializable, Indexable {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
 	
 	private String name;
+        
+        @Lob
 	private String description;
 	
 	//private String categoryName;
@@ -85,6 +89,7 @@ public class ReferenceSource implements Indexable {
 		this.category = category;
 	}
 	
+        @Override
 	public String getLuceneId () {
 		return "R" + this.id;
 	}

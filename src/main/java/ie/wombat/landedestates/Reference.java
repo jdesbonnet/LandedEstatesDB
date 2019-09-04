@@ -1,5 +1,6 @@
 package ie.wombat.landedestates;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,7 +27,7 @@ import org.hibernate.search.annotations.Store;
 @Entity
 @Indexed
 @Table(name="reference")
-public class Reference implements Comparable<Reference> {
+public class Reference implements Serializable, Comparable<Reference> {
 
 	@Id
 	@DocumentId

@@ -1,5 +1,6 @@
 package ie.wombat.landedestates;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -31,11 +33,11 @@ import org.hibernate.search.annotations.Store;
 @Indexed
 @Table(name="family")
 @XmlRootElement
-public class Family implements Indexable,RevisionTracked {
+public class Family implements Serializable,Indexable,RevisionTracked {
 	
 	@Id
 	@DocumentId
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
 	@Field(index = Index.YES, store = Store.NO)
@@ -44,6 +46,7 @@ public class Family implements Indexable,RevisionTracked {
 	private String title;
 	
 	//@Field(index = Index.NO, store = Store.NO)
+        @Lob
 	private String description;
 	
 	@ManyToMany(mappedBy="families")
