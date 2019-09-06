@@ -209,6 +209,15 @@ private static Double degPerMLat =  new Double (180 /  (Math.PI * re));
 
 	DB.getInstance().initTemplateContext(context);
 
+	{
+		String contextPath = request.getContextPath();
+		String leafletVersion = "1.5.1";
+		context.put("LEAFLET_SCRIPT",contextPath+"/webjars/leaflet/" + leafletVersion + "/leaflet.js");
+		context.put("LEAFLET_CSS",contextPath+"/webjars/leaflet/" + leafletVersion + "/leaflet.css");
+		
+		String typeAheadVersion = "0.11.1";
+		context.put("TYPEAHEAD_SCRIPT", contextPath+"/webjars/typeahead.js/" + typeAheadVersion + "/dist/typeahead.bundle.js");
+	}
 
 	// Yahoo stuff obsolete
 	//context.put ("yahooMapKey","YahooDemo");

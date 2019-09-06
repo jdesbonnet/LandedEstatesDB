@@ -6,10 +6,15 @@ $breadcrumbs.add("Estates","estate-list.jsp").add("$estate.name","estate-show.js
 
 <div class="form-group">
 <div class="row">
-<div class="col-md-9">
+<div class="col-md-6">
 <label for="name">Estate name</label>
 <input type="text" class="form-control" id="name" name="name"
 value="$!{estate.name}" />
+</div>
+<div class="col-md-3">
+<label for="name">Tags</label>
+<input type="text" class="form-control" name="tags"
+value="$!{estate.tags}" />
 </div>
 <div class="col-md-3">
 <label for="name">Project phase</label>

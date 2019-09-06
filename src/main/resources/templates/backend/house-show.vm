@@ -103,11 +103,11 @@ $!{house.barony}
 
 
 <tr><td>County:</td><td>$!house.getCounty()</td></tr>
-<tr><td>OS Sheet Number:</td><td>$!house.getOsSheet()</td></tr>
+<tr><td>OSI Sheet Number:</td><td>$!house.getOsSheet()</td></tr>
 #if ($house.hasGridReference())
 <tr>
 <td>OSI Grid Reference:</td>
-<td><a href="javascript:popupMap('gridref=$house.getGridReference()');">$house.getGridReference()</a></td>
+<td>$house.getGridReference()</td>
 </tr>
 <tr><td>Latitude/Longitude:</td>
 <td>$jsp.formatLatLon($house)
@@ -125,11 +125,9 @@ $!{house.barony}
 </table>
 
 <p>
-[<a href="house-edit.jsp?id=${house.id}">edit</a>]
+<a class="btn btn-primary" href="house-edit.jsp?id=${house.id}">edit</a>
 &nbsp;
-[
-<a href="house-nearby.jsp?id=$house.getId()">show nearby</a>
-]
+<a class="btn btn-primary" href="house-nearby.jsp?id=${house.id}">show nearby</a>
 </p>
 
 
@@ -153,6 +151,6 @@ ${image.caption}
 #if ($house.hasGridReference())
 	#set ($cx=$house.longitudeDeg)
 	#set ($cy=$house.latitudeDeg)
-	#parse ("/backend/_google_map.vm")
+	#parse ("/backend/_leaflet_osm_map.vm")
 #end
 

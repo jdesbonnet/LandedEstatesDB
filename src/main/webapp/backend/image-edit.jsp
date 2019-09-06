@@ -10,9 +10,8 @@ if (!user.hasWriteAccess()) {
 	context.put ("image",image);
 	context.put ("next", request.getHeader("Referer"));
 	
-	//context.put ("alltags", ImageDB.getInstance().getAllTags(hsession));
-	
-	context.put ("tabId","images");
-	templates.merge ("/backend/image-edit.vm",context,out);
-	
+	context.put("pageId","./image-edit");
+	//context.put("showSideCol","true");
+	templates.merge ("/backend/master.vm",context,out);
+
 %>

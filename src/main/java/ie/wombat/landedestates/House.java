@@ -49,7 +49,7 @@ public class House implements Serializable, Indexable {
 	private String name;
 	
 	@Field(index = Index.NO, store = Store.NO)
-        @Lob
+	@Lob
 	private String description;
 	
 	private String townland;

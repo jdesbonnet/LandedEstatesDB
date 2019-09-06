@@ -1,6 +1,7 @@
-#parse ("/backend/_header.vm")
+$breadcrumbs.add("Images").add("Image #${image.id}")
 
-<h3>Image #$image.getId(), $property.getName()</h3>
+
+<h3>Image #$image.getId(), ${house.name}</h3>
 
 
 
@@ -14,18 +15,18 @@ Click on image for original full size version.
 <br />
 
 
-<table>
+<table class="stdTable">
 <tr>
 <td>House:</td>
 <td>
-<a href="property-show.jsp?id=$property.getId()">$property.getName()</a>
+<a href="property-house.jsp?id=${house.id}">${house.name}</a>
 of 
 #if ($estates.size() == 1)
-estate <a href="estate-show.jsp?id=$estate.getId()">$estate.getName()</a>
+estate <a href="estate-show.jsp?id=${estate.id}">${estate.name}</a>
 #else
-of estates
+estates
 #foreach ($estate in $estates)
-<a href="estate-show.jsp?id=$estate.getId()">$estate.getName()</a>,
+<a href="estate-show.jsp?id=${estate.id}">${estate.name}</a>,
 #end
 #end
 
@@ -46,10 +47,6 @@ of estates
 
 
 <p>
-[
-<a href="image-edit.jsp?id=$image.getId()">Edit</a>
-]
+<a class="btn btn-primary" href="image-edit.jsp?id=${image.id}">Edit</a>
 </p>
 
-
-#parse ("/backend/_footer.vm")

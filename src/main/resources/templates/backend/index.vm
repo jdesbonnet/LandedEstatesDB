@@ -1,1 +1,11 @@
+
+<table class="stdTable">
+<tr><td>Number of Estate records:</td> <td class="n">${numberOfEstateRecords}</td></tr>
+<tr><td>Number of House records:</td> <td class="n">${numberOfHouseRecords}</td></tr>
+<tr><td>Number of Family records:</td> <td class="n">${numberOfFamilyRecords}</td></tr>
+
+</table>
+
+
+
 Software version: $VERSION

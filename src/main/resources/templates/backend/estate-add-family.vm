@@ -1,13 +1,14 @@
+$breadcrumbs.add("Estates","estate-list.jsp").add("$estate.name","estate-show.jsp?id=$estate.id").add("associate family")
+
 
 ## Update to use https://twitter.github.io/typeahead.js/examples/
-
-<h2>Add family to estate ${estate.name}</h2>
+<script src="${TYPEAHEAD_SCRIPT}"></script>
 
 <form action="estate-add-family-submit.jsp" method="POST">
 
 <input type="hidden" name="estate_id" value="${estate.id}" />
 
-<div>
+<div class="form-group">
 <label for="acinput" >Family to add:</label>
 <input id="acinput" class="typeahead" type="text" name="family" size="32" />
 <input type="hidden" name="family_id" value="" />

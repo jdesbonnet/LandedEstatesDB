@@ -33,7 +33,7 @@
 				value="convertToNull" />
 
 			<!-- Disable in production -->
-			<!-- <property name="hibernate.hbm2ddl.auto" value="update" /> -->
+			<property name="hibernate.hbm2ddl.auto" value="update" />
 
 			<!-- http://blog.hpxn.net/2009/02/05/using-c3p0-and-hibernate-3/ -->
 			<property name="hibernate.connection.provider_class"

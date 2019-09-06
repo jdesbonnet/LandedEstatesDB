@@ -10,23 +10,25 @@ package ie.wombat.landedestates;
  */
 public interface Indexable {
 
-    /**
-     * Returns a unique document ID. Must be unique across the application.
-     * @return unique document ID 
-     */
-    public String getLuceneId ();
-    
-    /**
-     * One short line name of the document
-     * @return One line document name
-     */
-    public String getName();
-    
-    /**
-     * Longer document description / summary.
-     * 
-     * @return Document description 
-     */
-    public String getDescription();
+	/**
+	 * Returns a unique document ID. Must be unique across the application.
+	 * 
+	 * @return unique document ID
+	 */
+	public String getLuceneId();
+
+	/**
+	 * One short line name of the document
+	 * 
+	 * @return One line document name
+	 */
+	public String getName();
+
+	/**
+	 * Longer document description / summary.
+	 * 
+	 * @return Document description
+	 */
+	public String getDescription();
 	
 }

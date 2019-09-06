@@ -12,7 +12,7 @@
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
-		<hibernate.version>5.2.17.Final</hibernate.version>		
+		<hibernate.version>5.4.4.Final</hibernate.version>		
 		<jackson.version>2.6.2</jackson.version>
 		<spring.version>5.0.5.RELEASE</spring.version>
 	</properties>
@@ -87,7 +87,7 @@
 <dependency>
    <groupId>org.hibernate</groupId>
    <artifactId>hibernate-search-orm</artifactId>
-   <version>5.9.1.Final</version>
+   <version>5.11.2.Final</version>
 </dependency>
 
 <!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-queryparser -->
@@ -180,6 +180,29 @@
 
 
 
+<dependency>
+    <groupId>javax.xml.bind</groupId>
+    <artifactId>jaxb-api</artifactId>
+    <version>2.2.11</version>
+</dependency>
+<dependency>
+    <groupId>com.sun.xml.bind</groupId>
+    <artifactId>jaxb-core</artifactId>
+    <version>2.2.11</version>
+</dependency>
+<dependency>
+    <groupId>com.sun.xml.bind</groupId>
+    <artifactId>jaxb-impl</artifactId>
+    <version>2.2.11</version>
+</dependency>
+<dependency>
+    <groupId>javax.activation</groupId>
+    <artifactId>activation</artifactId>
+    <version>1.1.1</version>
+</dependency>
+
+
+
 
 		<dependency>
 			<groupId>org.webjars</groupId>
@@ -212,7 +235,20 @@
 			<version>1.5</version>
 		</dependency>
 
-
+		<!-- https://mvnrepository.com/artifact/org.webjars/leaflet -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>leaflet</artifactId>
+			<version>1.5.1</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.webjars.bower/typeahead.js -->
+		<dependency>
+			<groupId>org.webjars.bower</groupId>
+			<artifactId>typeahead.js</artifactId>
+			<version>0.11.1</version>
+		</dependency>
+	
 	</dependencies>
 	<build>
 		<finalName>ledb</finalName>

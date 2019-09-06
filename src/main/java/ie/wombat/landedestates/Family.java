@@ -35,6 +35,11 @@ import org.hibernate.search.annotations.Store;
 @XmlRootElement
 public class Family implements Serializable,Indexable,RevisionTracked {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@DocumentId
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -46,7 +51,7 @@ public class Family implements Serializable,Indexable,RevisionTracked {
 	private String title;
 	
 	//@Field(index = Index.NO, store = Store.NO)
-        @Lob
+	@Lob
 	private String description;
 	
 	@ManyToMany(mappedBy="families")

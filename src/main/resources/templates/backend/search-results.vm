@@ -1,3 +1,5 @@
+$breadcrumbs.add("Search")
+
 #parse ("/backend/_search_result_item.vm")
 
 <h2>Search results for '$q'

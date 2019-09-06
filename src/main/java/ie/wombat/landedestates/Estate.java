@@ -31,155 +31,152 @@ import org.hibernate.search.annotations.Store;
 
 @Entity
 @Indexed
-@Table(name="estate")
+@Table(name = "estate")
 @XmlRootElement
 public class Estate implements Serializable, Indexable, RevisionTracked {
-	
+
 	@Id
-        @DocumentId
-        @GeneratedValue(strategy=GenerationType.IDENTITY)
+	@DocumentId
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Field(index = Index.YES, store = Store.NO)
 	private String name;
-	
-	//@Field(index = Index.NO, store = Store.NO)
-        @Lob
+
+	// @Field(index = Index.NO, store = Store.NO)
+	@Lob
 	private String description;
-	
+
+	@Lob
+	private String tags;
+
 	private Integer version;
-	
-	@Column(name="project_phase")
+
+	@Column(name = "project_phase")
 	private Integer projectPhase;
-	
-	@Column(name="last_modified")
+
+	@Column(name = "last_modified")
 	private Date lastModified;
-	
+
 	@ManyToOne
 	@NotFound(action = NotFoundAction.IGNORE)
-	@JoinColumn(name="last_modified_by")
+	@JoinColumn(name = "last_modified_by")
 	private User lastModifiedBy;
-	
-	
-	
+
 	@ManyToMany
-	@JoinTable(name="estate_families",
-		joinColumns=@JoinColumn(name="estate_id"),
-		inverseJoinColumns = @JoinColumn(name="family_id")
-	)
+	@JoinTable(name = "estate_families", joinColumns = @JoinColumn(name = "estate_id"), inverseJoinColumns = @JoinColumn(name = "family_id"))
 	@OrderBy("name")
 	private Set<Family> families = new HashSet<Family>();
-	
-	
-        /**
-         * Houses (sometimes refered to as 'properties' in earlier code/doc)
-         * associated with this estate record.
-         */
-	@OneToMany
-	@JoinTable(name="estate_properties",
-		joinColumns=@JoinColumn(name="estate_id"),
-		inverseJoinColumns = @JoinColumn(name="property_id")
-	)
-	private Set<House> houses = new HashSet<House>();
-	
 
 	/**
-         * From Employee Records project.
-         */
+	 * Houses (sometimes refered to as 'properties' in earlier code/doc) associated
+	 * with this estate record.
+	 */
 	@OneToMany
-	@JoinColumn(name="estate_id")
-	private Set<EmployeeRecord> employeeRecords = new HashSet<EmployeeRecord>();
-	
+	@JoinTable(name = "estate_properties", joinColumns = @JoinColumn(name = "estate_id"), inverseJoinColumns = @JoinColumn(name = "property_id"))
+	private Set<House> houses = new HashSet<House>();
+
 	/**
-         * References in literature and other documentation.
-         */
+	 * From Employee Records project.
+	 */
 	@OneToMany
-	@JoinTable(name="estate_references",
-		joinColumns=@JoinColumn(name="estate_id"),
-		inverseJoinColumns = @JoinColumn(name="reference_id")
-	)
+	@JoinColumn(name = "estate_id")
+	private Set<EmployeeRecord> employeeRecords = new HashSet<EmployeeRecord>();
+
+	/**
+	 * References in literature and other documentation.
+	 */
+	@OneToMany
+	@JoinTable(name = "estate_references", joinColumns = @JoinColumn(name = "estate_id"), inverseJoinColumns = @JoinColumn(name = "reference_id"))
 	@OrderBy("id")
 	private Set<Reference> references = new HashSet<Reference>();
-	
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	public String getTags() {
+		return tags;
+	}
+
+	public void setTags(String tags) {
+		this.tags = tags;
+	}
+
 	public Set<Family> getFamilies() {
 		return families;
 	}
+
 	public void setFamilies(Set<Family> families) {
 		this.families = families;
 	}
-	
-	
+
 	public Set<Reference> getReferences() {
 		return references;
 	}
+
 	public void setReferences(Set<Reference> references) {
 		this.references = references;
 	}
-	
+
 	public void setVersion(int version) {
 		this.version = version;
 	}
-	
-	
-	
-	
+
 	@XmlTransient
 	public Set<House> getHouses() {
 		return houses;
 	}
+
 	public void setHouses(Set<House> houses) {
 		this.houses = houses;
 	}
+
 	public Integer getProjectPhase() {
 		return projectPhase;
 	}
+
 	public void setProjectPhase(Integer projectPhase) {
 		this.projectPhase = projectPhase;
 	}
-	
-	
-	//@XmlTransient
+
+	// @XmlTransient
 	/*
-	public House getPrimaryHouse() {
-		return primaryHouse;
-	}
-	public void setPrimaryHouse(House primaryHouse) {
-		this.primaryHouse = primaryHouse;
-	}
-	*/
-	
-	
+	 * public House getPrimaryHouse() { return primaryHouse; } public void
+	 * setPrimaryHouse(House primaryHouse) { this.primaryHouse = primaryHouse; }
+	 */
+
 	@XmlTransient
 	public Set<EmployeeRecord> getEmployeeRecords() {
 		return employeeRecords;
 	}
+
 	public void setEmployeeRecords(Set<EmployeeRecord> employeeRecords) {
 		this.employeeRecords = employeeRecords;
 	}
-	
-	
+
 	// TODO: direct comparison of family objects should be possible
-	public boolean hasFamily (Family family) {
+	public boolean hasFamily(Family family) {
 		for (Family f : families) {
 			if (family.getId().equals(f.getId())) {
 				return true;
@@ -187,28 +184,33 @@ public class Estate implements Serializable, Indexable, RevisionTracked {
 		}
 		return false;
 	}
-	
-	public String getLuceneId () {
+
+	public String getLuceneId() {
 		return "E" + this.id;
 	}
+
 	public Integer getVersion() {
 		return version;
 	}
+
 	public void setVersion(Integer version) {
 		this.version = version;
 	}
+
 	public Date getLastModified() {
 		return lastModified;
 	}
+
 	public void setLastModified(Date lastModified) {
 		this.lastModified = lastModified;
 	}
+
 	public User getLastModifiedBy() {
 		return lastModifiedBy;
 	}
+
 	public void setLastModifiedBy(User lastModifiedBy) {
 		this.lastModifiedBy = lastModifiedBy;
 	}
 
-	
 }

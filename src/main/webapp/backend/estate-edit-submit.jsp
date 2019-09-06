@@ -21,6 +21,8 @@
 	Integer projectPhase = new Integer(request.getParameter("project_phase"));
 	estate.setProjectPhase(projectPhase);
 	
+	estate.setTags(XSS.clean(request.getParameter("tags")));
+	
 	
 	// TODO: this is wrong
 	db.postEntityUpdate(em, user, estate);

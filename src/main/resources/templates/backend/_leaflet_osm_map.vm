@@ -1,0 +1,25 @@
+## 
+## Javascript to generate map. Map will be rendered in div#mapContainer
+## Input parameters: properties (list of Propery objects) cx,cy (center)
+##
+
+<link rel="stylesheet" type="text/css" href="${LEAFLET_CSS}" />
+<script src="${LEAFLET_SCRIPT}"></script>
+
+<script>
+var cx = $cx;
+var cy = $cy;
+jQuery(function(){
+	var map = L.map('map').setView([cy, cx], 13);
+
+
+	// create the tile layer with correct attribution
+	var osmUrl='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+	var osmAttrib='Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors';
+	var osm = new L.TileLayer(osmUrl, {minZoom: 6, maxZoom: 16, attribution: osmAttrib});		
+	
+	map.addLayer(osm);
+	
+	L.marker([cy, cx]).addTo(map); // .bindPopup("<b>Hello world!</b><br />I am a popup.").openPopup();
+});
+</script>

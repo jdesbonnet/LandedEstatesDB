@@ -10,16 +10,20 @@ jQuery(function(){
 
 	// The property-show page will set drawMarker=true if drawing a marker
 	// is all that is required. Else do a full big map.
+	
+	//var tileServer = "https://b.tile.openstreetmap.org/{z}/{x}/{y}.png";
+	var tileServer = "${contextPath}/tile/std/{z}/{x}/{y}.png";
+	
 	 
 	if (typeof drawMarker === "undefined") {
     	g_map = L.map("mapContainer").setView([53.0,-7],13);
-    	L.tileLayer('https://b.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    	L.tileLayer(tileServer, {
 			attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
 			maxZoom: 18,
 		}).addTo(g_map);
 	} else {
 		g_map = L.map("mapContainer").setView([markerLoc[0], markerLoc[1]],13);
-    	L.tileLayer('https://b.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    	L.tileLayer(tileServer, {
 			attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
 			maxZoom: 18,
 		}).addTo(g_map);

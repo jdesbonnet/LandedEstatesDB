@@ -1,4 +1,4 @@
-#parse ("/backend/_header.vm")
+$breadcrumbs.add("Images","image-show.jsp?id=${image.id}")
 
 <h2>Edit image #$image.getId()</h2>
 
@@ -24,8 +24,6 @@ rows="4" cols="80"/>$!image.getDescription()</textarea>
 </div>
 
 
-<input type="submit" value="Save" />
+<input class="btn btn-primary" type="submit" value="Save" />
 </form>
-
-#parse ("/backend/_footer.vm")
 

@@ -10,4 +10,4 @@
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     
     <script src="${contextPath}/webjars/jquery/2.2.4/jquery.min.js" crossorigin="anonymous"></script>
-    <script src="${contextPath}/js/typeahead.bundle.min.js"></script>
+    ##<script src="${contextPath}/js/typeahead.bundle.min.js"></script>

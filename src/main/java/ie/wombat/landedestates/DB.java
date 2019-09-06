@@ -52,7 +52,7 @@ public class DB {
 	//public static final String VERSION = "1.2.4 28 Sep 2009";
 	//public static final String VERSION = "1.2.5b3 13 Dec 2010";
 	//public static final String VERSION = "1.3.2, July 2013";
-	public static final String VERSION = "1.4.0, Jan 2018";
+	public static final String VERSION = "2.0.0 alpha 1, Jan 2018";
 
 	
 	public static final int DEFAULT_NEARBY_RADIUS = 10000;
@@ -704,7 +704,7 @@ public class DB {
 	public void initTemplateContext(Context context) {
 		context.put("VERSION", DB.VERSION);
 		
-		// Obsolute YUI
+		// Obsolete YUI
 		context.put("YUI", "http://yui.yahooapis.com/2.8.2");
 		context.put("YUIJS", "http://yui.yahooapis.com/2.8.2/");
 		context.put("YUICSS", "http://yui.yahooapis.com/2.8.2/");
@@ -722,6 +722,11 @@ public class DB {
 		
 		// Latitude degrees per meter
 		context.put ("degPerMLat",degPerMLat);
+		
+		//String contextPath = request.getContextPath();
+		//context.put("LEAFLET_SCRIPT",contextPath+"/webjars/leaflet/" + leafletVersion + "/leaflet.js");
+		//context.put("LEAFLET_CSS",contextPath+"/webjars/leaflet/" + leafletVersion + "/leaflet.css");
+		
 	}
 	
 }
