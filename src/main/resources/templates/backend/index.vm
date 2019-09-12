@@ -6,6 +6,12 @@
 
 </table>
 
+<div class="form-group">
+<a class="btn btn-primary" href="estate-new.jsp">Add Estate</a>
+</div>
 
 
+
+<p>
 Software version: $VERSION
+</p>

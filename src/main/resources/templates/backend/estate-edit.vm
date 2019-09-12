@@ -36,30 +36,7 @@ rows="5" cols="80"/>$!{estate.description}</textarea>
 <a name="families"></a>
 <div class="form-group">
 <label for="families">Associated families</label>
-<table class="stdTable">
-<tbody>
-#foreach ($family in $estate.families)
-<tr>
-
-<td>
-<a href="family-show.jsp?id=${family.id}" 
-title="F${family.id}">${family.nameAndTitle}</a> 
-#if ($family.description && $family.description.length()>0)
-– ${family.description}
-#end
-##</td>
-
-##<td width="24">
-<button type="submit" class="btn btn-danger btn-sm pull-right" 
-onClick="return confirm('Are you sure you want to remove family association from estate record?');"
-name="_submit_family_remove_${family.id}">
-<b class="fa fa-remove"></b>
-</button>
-</td>
-</tr>
-#end
-</tbody>
-</table>
+#parse("_estate_families_table.vm")
 <button type="submit" class="btn btn-primary btn-sm" name="_submit_add_family">
 <b class="fa fa-plus"></b> Add family association
 </button>

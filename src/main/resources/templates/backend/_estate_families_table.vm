@@ -1,0 +1,28 @@
+#if ($estate.families.size()==0)
+	<div class="alert alert-info"><b class="fa fa-info-circle"></b> There are no families associated with this estate.</div>
+#else
+<table class="stdTable">
+<tbody>
+#foreach ($family in $estate.families)
+<tr>
+
+<td>
+<a href="family-show.jsp?id=${family.id}" 
+title="F${family.id}">${family.nameAndTitle}</a> 
+#if ($family.description && $family.description.length()>0)
+– ${family.description}
+#end
+##</td>
+
+##<td width="24">
+<button type="submit" class="btn btn-danger btn-sm pull-right" 
+onClick="return confirm('Are you sure you want to remove family association from estate record?');"
+name="_submit_family_remove_${family.id}">
+<b class="fa fa-remove"></b>
+</button>
+</td>
+</tr>
+#end
+</tbody>
+</table>
+#end
