@@ -1,6 +1,5 @@
-<h2>Houses near 
-<a href="house-show.jsp?id=$house.id">${property.name}</a>
- (search radius $radiusKm km)</h2>
+$breadcrumbs.add("Houses","house-list.jsp").add($house.name,"house-show.jsp?id=$house.id").add("what is nearby? ($radiusKm km)")
+
 
 <div id="mapContainer"></div>
 

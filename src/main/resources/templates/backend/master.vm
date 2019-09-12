@@ -21,7 +21,7 @@
 	<main role="main" class="container-fluid">
 	<div class="row">
 	
-	#if ($showSideCol)
+	#if ($showSideCol=="true")
 	
 	##
 	## Main content column (9/12 width)
