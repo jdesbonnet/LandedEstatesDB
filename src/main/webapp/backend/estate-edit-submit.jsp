@@ -13,7 +13,7 @@
 	if (!request.getParameter("name").equals(estate.getName())
 		|| !request.getParameter("description").equals(estate.getDescription()) ) {
 		
-		estate.setVersion (estate.getVersion() + 1);
+		//estate.setVersion (estate.getVersion() + 1);
 		estate.setName (XSS.clean(request.getParameter("name")));
 		estate.setDescription (XSS.clean(request.getParameter("description")));
 	} 
