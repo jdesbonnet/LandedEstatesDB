@@ -4,36 +4,16 @@
 	String letter = request.getParameter("letter");
 	context.put ("letter",letter);
 	context.put ("alphabet",alphabet);
-
-	if ("_all".equals(letter)) {
-		List<Estate> estates;
-		if (phase == null || phase == 0) {
-			estates = em.createQuery("from Estate order by name")
-			.getResultList();
-		} else {
-			estates = em.createQuery("from Estate where projectPhase=:phase order by name")
-			.setParameter("phase",phase)
-			.getResultList();
-		}
-		context.put ("estates",estates);
-	}	
 	
-	if (letter != null && letter.length() == 1) {
-
-		List<Estate> estates;
-		if (phase == null || phase == 0) {
-			estates = em.createQuery("from Estate where name like :letter order by name")
-			.setParameter("letter",letter + "%")
+	// Recently modified records
+	Date since = new Date (System.currentTimeMillis() - 7*24*3600*1000);
+	List<Estate> recent = em.createQuery("from Estate where lastModified>:since order by lastModified desc")
+			.setParameter("since", since)
+			.setMaxResults(20)
 			.getResultList();
-		} else {
-			estates = em.createQuery("from Estate where name like :letter and projectPhase=:phase order by name")
-			.setParameter("letter",letter + "%")
-			.setParameter("phase",phase)
-			.getResultList();
-		}
-		context.put ("estates",estates);
-		
-	} 
+	log.info("found " + recent.size()  + " recent estate records");
+	
+	context.put ("recent", recent);
 	
 	context.put("pageId","./estate-list");
 	context.put("showSideCol","true");
