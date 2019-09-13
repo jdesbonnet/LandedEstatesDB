@@ -1,10 +1,9 @@
 <%
 
-if (!user.hasWriteAccess()) {
-	throw new ServletException ("No write access to this database");
-}
-
-
+	if (!user.hasWriteAccess()) {
+		throw new ServletException ("No write access to this database");
+	}
+	
 	String estateIdStr = request.getParameter("estate_id");
 	if (estateIdStr == null) {
 			throw new ServletException ("no estate_id");
@@ -12,7 +11,7 @@ if (!user.hasWriteAccess()) {
 	
 	// Was Cancel button pressed
 	if (request.getParameter("_submit_cancel") != null) {
-		response.sendRedirect ("estate-edit.jsp?id="+estateIdStr);
+		response.sendRedirect (getReturnUrl(session,"estate-edit.jsp?id="+estateIdStr));
 		return;
 	}
 	
@@ -32,5 +31,5 @@ if (!user.hasWriteAccess()) {
 
 	estate.getFamilies().add(family);
 	
-	response.sendRedirect ("estate-edit.jsp?id="+estate.getId()+"#families");
+	response.sendRedirect (getReturnUrl(session,"estate-edit.jsp?id="+estate.getId()+"#families"));
 %>

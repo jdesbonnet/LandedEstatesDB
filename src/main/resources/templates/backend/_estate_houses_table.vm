@@ -5,7 +5,7 @@
 ##
 
 #if (! $estate.houses || $estate.houses.size()==0)
-	<div class="alert alert-info"><b class="fa fa-info-circle"></b> There are no house records associated with this estate.</div>
+	<div class="alert alert-info"><b class="fa fa-info-circle"></b> There are no houses associated with this estate.</div>
 #else
 <table class="stdTable">
 <thead>

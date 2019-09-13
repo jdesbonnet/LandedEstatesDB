@@ -78,8 +78,8 @@ rows="5" cols="80"/>$!{estate.description}</textarea>
 <div class="form-group">
 <label for="references">References</label>
 #parse ("_estate_reference_table.vm")
-<input type="submit" class="btn btn-primary btn-sm" name="_submit_new_reference"
-value="Add reference" />
+<button type="submit" class="btn btn-primary btn-sm" name="_submit_new_reference">
+<b class="fa fa-plus"></b> Add reference</button>
 </div>
 
 
