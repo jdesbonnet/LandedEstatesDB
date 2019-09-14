@@ -1,5 +1,6 @@
 package ie.wombat.landedestates;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,7 +14,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -36,7 +36,9 @@ import javax.persistence.Lob;
 @Indexed
 @Table(name="property")
 @XmlRootElement
-public class House implements Serializable, Indexable {
+public class House implements Serializable, Indexable, RevisionTracked {
+
+	private static final long serialVersionUID = 1L;
 
 	private static Logger log = LoggerFactory.getLogger(House.class);
 	
@@ -327,4 +329,24 @@ public class House implements Serializable, Indexable {
 	public String getLuceneId () {
 		return "H" + this.id;
 	}
+		@Override
+		public Date getLastModified() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		@Override
+		public User getLastModifiedBy() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		@Override
+		public void setLastModifiedBy(User user) {
+			// TODO Auto-generated method stub
+			
+		}
+		@Override
+		public Integer getVersion() {
+			// TODO Auto-generated method stub
+			return null;
+		}
 }

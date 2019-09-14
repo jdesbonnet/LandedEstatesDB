@@ -2,9 +2,9 @@ package ie.wombat.landedestates;
 
 import java.util.Date;
 
-public interface RevisionTracked {
+public interface RevisionTracked extends LEDBEntity {
 	
-	public Long getId();
+	//public Long getId();
 	public Date getLastModified();
 	public User getLastModifiedBy();
 	public void setLastModifiedBy(User user);

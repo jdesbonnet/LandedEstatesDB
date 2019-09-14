@@ -743,6 +743,11 @@ public class ImageDB {
 		// Retrieve from db, renderImage() does the heavy lifting here
 			
 		Image image = em.find(Image.class,imageId);
+		
+		// Image not found
+		if (image == null) {
+			return null;
+		}
 			
 		if (log.isDebugEnabled()) {
 				log.debug ("getImageData(): " + imageId + " " + imageSize  

@@ -39,6 +39,8 @@ import org.slf4j.LoggerFactory;
  */
 public class ImageServlet extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
+
 	private static final long DEFAULT_CACHE_PERIOD = 24*3600*1000;
 
 
@@ -53,10 +55,7 @@ public class ImageServlet extends HttpServlet {
 	private ImageDB imagedb;
 	private long cacheFor = DEFAULT_CACHE_PERIOD;
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+
 	private static Logger log = LoggerFactory.getLogger (ImageServlet.class);
 
 	/**

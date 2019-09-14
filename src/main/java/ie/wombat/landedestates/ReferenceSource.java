@@ -12,7 +12,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="reference_source")
-public class ReferenceSource implements Serializable, Indexable {
+public class ReferenceSource implements Serializable, Indexable, LEDBEntity {
+
+	private static final long serialVersionUID = 1L;
+
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

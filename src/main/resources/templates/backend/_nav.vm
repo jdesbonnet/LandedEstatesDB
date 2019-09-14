@@ -30,7 +30,7 @@
 				<a class="dropdown-item" href="tools-dbbackup.jsp">Backup database</a>
 				<a class="dropdown-item" href="tool-reindex.jsp">Reindex search</a>
 				<a class="dropdown-item" href="tool-static-make.jsp">Generate static site</a>
-				
+				<a class="dropdown-item" href="tool-export-all.jsp">Generate data export</a>
 			</div>
 		</li>
 	</ul>

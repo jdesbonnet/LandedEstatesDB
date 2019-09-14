@@ -91,7 +91,7 @@ public  class Image {
 	}
 	/**
 	 * Return a suitable filename suffix for the 
-	 * mimetype of the original image. Eg 
+	 * mimetype of the original image. The suffix includes the dot. Eg 
 	 * return ".png" for PNG images.
 	 * @return
 	 */
