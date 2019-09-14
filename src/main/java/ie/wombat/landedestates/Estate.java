@@ -35,6 +35,11 @@ import org.hibernate.search.annotations.Store;
 @XmlRootElement
 public class Estate implements Serializable, Indexable, RevisionTracked {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@DocumentId
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
