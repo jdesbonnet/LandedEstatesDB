@@ -19,9 +19,11 @@ Click on image for original full size version.
 <tr>
 <td>House:</td>
 <td>
-<a href="property-house.jsp?id=${house.id}">${house.name}</a>
+<a href="house-show.jsp?id=${house.id}">${house.name}</a>
 of 
-#if ($estates.size() == 1)
+#if ($estates.size() == 0)
+no estate
+#elseif ($estates.size() == 1)
 estate <a href="estate-show.jsp?id=${estate.id}">${estate.name}</a>
 #else
 estates

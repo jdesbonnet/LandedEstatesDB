@@ -12,7 +12,7 @@
 
 	// How much memory available prior to upload?
 	Runtime rt = Runtime.getRuntime();
-	System.err.println("LandedEstates: memory prior to upload: total=" + rt.totalMemory()
+	log.info("LandedEstates: memory prior to upload: total=" + rt.totalMemory()
 		+ " free=" + rt.freeMemory());
 	
 	

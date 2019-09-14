@@ -1,7 +1,27 @@
-<div class="form-group">
-<input type="submit" class="btn btn-primary form-control" name="_add_image" value="Add House Image" />
-</div>
 
-<div class="form-group">
-<input type="submit" class="btn btn-primary form-control" value="Save" />
-</div>
+#if ($house.images.size() == 0) 
+	<div class="alert alert-info"><b class="fa fa-info-circle"></b> No images.</div>
+#else
+	#foreach ($image in $house.images)
+		<div style="margin-bottom: 5px;">
+			<a href="image-show.jsp?id=$image.getId()"><img border="1"
+			alt="image #${image.id}" title="image #$image.getId()"
+			src="${contextPath}/img/tn/${image.id}.jpg" align="left"/></a>
+			<br>
+			<b>Caption:</b> $!{image.caption}.
+			<b>Description:</b> $!{image.descrption}
+
+			<p>
+
+			<a href="image-show.jsp?id=${image.id}" class="btn btn-primary btn-sm">edit</a>
+			<a href="image-delete.jsp?id=${image.id}&house_id=${house.id}" class="btn btn-danger btn-sm"
+			onClick="return confirm('Are you sure you want to delete this image?');">delete</a>
+		</div>
+	#end
+
+#end
+
+
+
+<a href="image-new.jsp?house_id=${house.id}" class="btn btn-primary"><b class="fa fa-plus"></b> Add image</a>
+

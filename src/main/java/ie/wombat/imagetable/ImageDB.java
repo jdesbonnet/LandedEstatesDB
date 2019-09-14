@@ -305,6 +305,7 @@ public class ImageDB {
 			imData.setSize((int)imFile.length());
 			imData.setMimetype("image/jpeg");
 			imData.setData(IOUtils.toByteArray(new FileInputStream(imFile)));
+			em.persist(imData);
 			
 			// In theory we can work this out mathematically, but to be
 			// safe we re-read the image

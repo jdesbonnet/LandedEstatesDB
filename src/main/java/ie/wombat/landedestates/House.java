@@ -12,11 +12,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
@@ -32,6 +35,12 @@ import ie.wombat.imagetable.Image;
 import java.io.Serializable;
 import javax.persistence.Lob;
 
+/**
+ * A 'house' (a physical building). An {@link Estate} can comprise one or more {@link House} records.
+ * 
+ * @author Joe Desbonnet
+ *
+ */
 @Entity
 @Indexed
 @Table(name="property")
@@ -47,35 +56,93 @@ public class House implements Serializable, Indexable, RevisionTracked {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
+	
+	@Column(name = "last_modified")
+	private Date lastModified = new Date();
+
+	@ManyToOne
+	@NotFound(action = NotFoundAction.IGNORE)
+	@JoinColumn(name = "last_modified_by")
+	private User lastModifiedBy;
+	
+	
+	/**
+	 * One line name of house
+	 */
 	@Field(index = Index.YES, store = Store.NO)
 	private String name;
 	
+	/**
+	 * Full house description. LEDB markup supported.
+	 */
 	@Field(index = Index.NO, store = Store.NO)
 	@Lob
 	private String description;
 	
+	/**
+	 * Townland names.  See https://www.townlands.ie/
+	 */
 	private String townland;
 	
+	/**
+	 * Civil parish.
+	 */
 	@Column(name="civil_parish")
 	private String civilParish;
 	
+	/**
+	 * Barony. See https://en.wikipedia.org/wiki/Barony_(Ireland) and https://en.wikipedia.org/wiki/List_of_baronies_of_Ireland
+	 */
 	private String barony;
+	
+	/**
+	 * District Electoral Division
+	 */
 	private String ded;
+	
+	/**
+	 * Pool Law Union
+	 */
 	private String plu;
+	
+	/**
+	 * One of the traditional 32 counties of Ireland.
+	 */
 	private String county;
 	
 	@Column(name="osi_grid_ref")
 	private String gridReference;
 	
+	/**
+	 * Ordnance Survey of Ireland (?) sheet number
+	 */
 	@Column(name="os_sheet")
 	private String osSheet;
 	
+	/**
+	 * Ordnance Survey of Ireland Discovery Series map number. See https://www.osi.ie/products/professional-mapping/discovery-series-digital/
+	 */
 	@Column(name="discovery_map")
 	private String discoveryMap;
 	
+	/**
+	 * House latitude in degrees (WGS84)
+	 */
 	private Double latitude;
+	
+	/**
+	 * House longitude in degrees (WGS84)
+	 */
 	private Double longitude;
+	
+	/**
+	 * TM65 / EPSG:29902 grid reference easting. Note that this is the old Irish grid and is now deprecated.
+	 */
 	private int easting;
+	
+	/**
+	 * TM65 / EPSG:29902 grid reference easting. Note that this is the old Irish grid and is now deprecated.
+	 */
 	private int northing;
 	
 	@ManyToMany
@@ -85,10 +152,17 @@ public class House implements Serializable, Indexable, RevisionTracked {
 		inverseJoinColumns=@JoinColumn(name="image_id", referencedColumnName="id"))
 	private Set<Image> images = new HashSet<Image>();
 	
+	/**
+	 * From historic houses employee records project.
+	 */
 	@OneToMany
 	@JoinColumn(name="house_id")
 	private Set<EmployeeRecord> employeeRecords = new HashSet<EmployeeRecord>();
 	
+	/**
+	 * Project phase: was used to allow data entry and suppress phases in development from
+	 * being displayed on the public facing database.
+	 */
 	@Column(name="project_phase")
 	private Integer projectPhase;
 	
@@ -325,28 +399,28 @@ public class House implements Serializable, Indexable, RevisionTracked {
 		return null;
 	}
         
-        @Override
-	public String getLuceneId () {
+	@Override
+	public String getLuceneId() {
 		return "H" + this.id;
 	}
-		@Override
-		public Date getLastModified() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-		@Override
-		public User getLastModifiedBy() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-		@Override
-		public void setLastModifiedBy(User user) {
-			// TODO Auto-generated method stub
-			
-		}
-		@Override
-		public Integer getVersion() {
-			// TODO Auto-generated method stub
-			return null;
-		}
+
+	@Override
+	public Date getLastModified() {
+		return lastModified;
+	}
+
+	@Override
+	public User getLastModifiedBy() {
+		return lastModifiedBy;
+	}
+
+	@Override
+	public void setLastModifiedBy(User user) {
+		this.lastModifiedBy = user;
+	}
+
+	@Override
+	public Integer getVersion() {
+		return null;
+	}
 }

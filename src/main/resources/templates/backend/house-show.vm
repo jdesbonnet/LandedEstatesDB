@@ -8,11 +8,15 @@ position: absolute; top: 0; right: 0; bottom: 0; left: 0;}
 
 <b>${house.name}</b> 
 
+#if ($estates.size() == 0)
+(no estate)
+#else
 (estates 
 #foreach ($estate in $estates)
 <a class="badge badge-primary" href="estate-show.jsp?id=${estate.id}">${estate.name}</a>
 #end
 )
+#end
 
 $!{house.description}
 

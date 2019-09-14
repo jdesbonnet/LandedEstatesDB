@@ -13,6 +13,8 @@
 	.setParameter("image",image)
 	.getResultList();
 	
+	context.put("houses", houses);
+	
 	if (houses.size() == 0) {
 		throw new ServletException ("associated House for image " + id + " not found");
 	}

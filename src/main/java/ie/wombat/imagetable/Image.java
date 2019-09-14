@@ -3,8 +3,6 @@
  */
 package ie.wombat.imagetable;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,7 +36,7 @@ public  class Image {
 	public static final String DEFAULT_SUFFIX = SUFFIX_JPEG;
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
 	private Integer state = NORMAL;

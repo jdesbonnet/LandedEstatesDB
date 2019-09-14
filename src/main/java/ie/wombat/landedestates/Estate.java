@@ -32,6 +32,12 @@ import org.hibernate.search.annotations.Store;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * An Estate record. Can comprise one or more {@link House} records.
+ * 
+ * @author Joe Desbonnet
+ *
+ */
 @Entity
 @Indexed
 @Table(name = "estate")
@@ -57,8 +63,15 @@ public class Estate implements Serializable, Indexable, RevisionTracked {
 	@Lob
 	private String tags;
 
-	private Integer version;
+	/**
+	 * Edit version. This is incremented by one on each edit.
+	 */
+	private Integer version = 1;
 
+	/**
+	 * Project phase: was used to allow data entry and suppress phases in development from
+	 * being displayed on the public facing database.
+	 */
 	@Column(name = "project_phase")
 	private Integer projectPhase;
 
