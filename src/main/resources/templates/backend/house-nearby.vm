@@ -1,7 +1,7 @@
-#parse ("/backend/_header.vm")
+$breadcrumbs.add("Houses","house-list.jsp").add($house.name,"house-show.jsp?id=$house.id").add("what is nearby")
 
 <h2>Houses near 
-<a href="house-show.jsp?id=$property.getId()">$property.getName()</a>
+<a href="house-show.jsp?id=${house.id}">${house.name}</a>
  (search radius $radiusKm km)</h2>
 
 <ul>

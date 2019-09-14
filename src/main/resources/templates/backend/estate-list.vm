@@ -66,3 +66,8 @@ $breadcrumbs.add("Estates","estate-list.jsp")
 </tbody>
 </table>
 #end
+
+Recent:
+#foreach ($estate in $recent)
+<li> ${estate.name}</li>
+#end

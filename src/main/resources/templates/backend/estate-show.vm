@@ -1,10 +1,17 @@
 $breadcrumbs.add("Estates","estate-list.jsp").add("${estate.name} (phase${estate.projectPhase})")
 
-<b>${estate.name}</b> (families 
-#foreach ($family in $estate.families)
-<a class="badge badge-success" href="family-show.jsp?id=$family.id">$family.name</a> 
-#end
+<b>${estate.name}</b> 
+
+#if ($estate.families.size()==0)
+	<div class="alert alert-info"><b class="fa fa-info-circle"></b> There are no associated families. 
+	<a href="estate-add-family.jsp?estate_id=${estate.id}&return=_referrer">Add family.</a></div>
+#else
+(families 
+	#foreach ($family in $estate.families)
+	<a class="badge badge-success" href="family-show.jsp?id=$family.id">$family.name</a> 
+	#end
 ).
+#end
 
 $!{estate.description}
 

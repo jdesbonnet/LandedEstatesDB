@@ -1,5 +1,7 @@
 $breadcrumbs.add("Estates","estate-list.jsp").add("$estate.name","estate-edit.jsp?id=$estate.id").add("associate house")
 
+<script src="${TYPEAHEAD_SCRIPT}"></script>
+
 <form action="house-add-existing-submit.jsp" method="POST">
 <input type="hidden" name="estate_id" value="${estate.id}" />
 

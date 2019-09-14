@@ -180,7 +180,7 @@ public class House implements Serializable, Indexable {
 	 * Get latitude in degrees.
 	 * @return Latitude in degrees.
 	 */
-	public double getLatitudeDeg () {
+	public Double getLatitudeDeg () {
 		return latitude;
 	}
 	
@@ -213,7 +213,7 @@ public class House implements Serializable, Indexable {
 	 * @return Longitude in degrees.
 	 */
 	
-	public double getLongitudeDeg () {
+	public Double getLongitudeDeg () {
 		return longitude;
 	}
 	

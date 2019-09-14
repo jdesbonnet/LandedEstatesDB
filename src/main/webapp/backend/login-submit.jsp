@@ -8,5 +8,7 @@
 		return;
 	}
 	session.setAttribute("_user",user);
-	response.sendRedirect("estate-list.jsp");
+	
+	// Jump to dashboard
+	response.sendRedirect("index.jsp");
 %>

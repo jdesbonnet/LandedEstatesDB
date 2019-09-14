@@ -22,7 +22,7 @@ $!{r.description}
 #elseif ($resultClass.startsWith("ie.wombat.landedestates.Reference"))
 <a href="reference-show.jsp?id=${r.id}">R${r.id}</a>
 ${r.source.name}
-${r.description}
+$!{r.description}
 #else
 ? $resultClass $r.id
 #end

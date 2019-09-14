@@ -17,6 +17,8 @@ import="java.sql.ResultSet"
 import="java.sql.SQLException"
 import="javax.persistence.EntityManager"
 import="net.sf.json.util.JSONUtils"
+import="org.slf4j.Logger"
+import="org.slf4j.LoggerFactory"
 import="ie.wombat.template.*"
 import="ie.wombat.ui.Tab"
 import="ie.wombat.landedestates.*"
@@ -24,6 +26,8 @@ import="ie.wombat.imagetable.ImageDB"
 import="ie.wombat.imagetable.Image"
 import="ie.wombat.imagetable.ImageUpload"
 %><%request.setCharacterEncoding("utf-8");%><%!// errorPage="error.jsp"
+
+    public static final Logger log = LoggerFactory.getLogger("jsp");
 
 public static final DecimalFormat latlonf = new DecimalFormat ("###.00000");
 
@@ -148,55 +152,66 @@ private static Double degPerMLat =  new Double (180 /  (Math.PI * re));
 		return latlonf.format(prop.getLatitude())
 				+ " "
 				+ latlonf.format(prop.getLongitude());
-	}%><%
+	}
+
+	public String getReturnUrl(HttpSession session, String defaultReturnUrl) {
+		log.info("getReturnUrl() defaultUrl=" + defaultReturnUrl);
+		String returnUrl = (String)session.getAttribute("return");
+		log.info("savedReturnUrl=" + returnUrl);
+		if (returnUrl == null) {
+			return defaultReturnUrl;
+		}
+		session.removeAttribute("return");
+		return returnUrl;
+	}
+%><%
 
 	
 	// Debug info block (enclosed to prevent namespace polution)
 	{
-	System.err.println ("\n\n____ Start of Request ____");
-	System.err.println ("Timestamp = "  + timestampDateFormat.format(new Date()));
-	System.err.println ("Remote Host = " + request.getRemoteHost() + "(" + request.getRemoteAddr() + ")");
-	System.err.println ("HTTPMethod = " + request.getMethod() );
-    System.err.println ("ServerName = " + request.getServerName());
-    StringBuffer requestURL = request.getRequestURL();
-    if (request.getQueryString() != null) {
-        requestURL.append("?").append(request.getQueryString());
-    }
-    String completeURL = requestURL.toString();
-    System.err.println ("requestURL = " + completeURL);
-	System.err.println ("requestURLLen = " + completeURL.length());
-    
-    
-    System.err.println ("Headers:");
-    java.util.Enumeration en = request.getHeaderNames();
-    while (en.hasMoreElements()) {
-        String headerName = (String) en.nextElement();
-        System.err.println ("    " + headerName + " = " + request.getHeader(headerName));
-    }
-    
-    System.err.println ("Cookies:");
-    Cookie[] cookies = request.getCookies();
-    if (cookies == null || cookies.length==0) {
-            System.err.println ("    (what??! no cookie!)");
-    }
-    if (cookies != null) {
-    	for (Cookie cookie : cookies) {
-			System.err.println ("    " + cookie.getName() + " = " + cookie.getValue());
+		log.info ("\n\n____ Start of Request ____");
+		log.info ("Timestamp = "  + timestampDateFormat.format(new Date()));
+		log.info ("Remote Host = " + request.getRemoteHost() + "(" + request.getRemoteAddr() + ")");
+		log.info ("HTTPMethod = " + request.getMethod() );
+		log.info("ServerName = " + request.getServerName());
+		StringBuffer requestURL = request.getRequestURL();
+		if (request.getQueryString() != null) {
+			requestURL.append("?").append(request.getQueryString());
 		}
-	}
-    
-    System.err.println ("Parameters:");
-    en = request.getParameterNames();
-    while (en.hasMoreElements()) {
-        String paramName = (String) en.nextElement();
-        System.err.println ("    " + paramName + " = " + request.getParameter(paramName));
-    }
+		String completeURL = requestURL.toString();
+		log.info ("requestURL = " + completeURL);
+		log.info ("requestURLLen = " + completeURL.length());
+
+	
+		log.info ("Headers:");
+		java.util.Enumeration en = request.getHeaderNames();
+		while (en.hasMoreElements()) {
+			String headerName = (String) en.nextElement();
+			log.info ("    " + headerName + " = " + request.getHeader(headerName));
+		}
+
+		log.info ("Cookies:");
+		Cookie[] cookies = request.getCookies();
+		if (cookies == null || cookies.length==0) {
+			log.info ("    (what??! no cookie!)");
+		}
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				log.info ("    " + cookie.getName() + " = " + cookie.getValue());
+			}
+		}
+
+		log.info ("Parameters:");
+		en = request.getParameterNames();
+		while (en.hasMoreElements()) {
+			String paramName = (String) en.nextElement();
+			log.info ("    " + paramName + " = " + request.getParameter(paramName));
+		}
+
+	} // end debug info block
 
 
-    } // end debug info block
 
-    
-    
 	// Create a transaction
 	EntityManager em = HibernateUtil.getEntityManager();
 	em.getTransaction().begin();
@@ -222,7 +237,7 @@ private static Double degPerMLat =  new Double (180 /  (Math.PI * re));
 	// Yahoo stuff obsolete
 	//context.put ("yahooMapKey","YahooDemo");
 	// new key obtained for http://landedestates.nuigalway.ie 8 Sep 2009.
-	context.put ("yahooMapKey","KozUJ.TV34Hl5WEiVy2GxjMUXdYHUbjXGWjn63ZXBD5LyAmoAKvcalQwmzbWdeOTGw--");
+	//context.put ("yahooMapKey","KozUJ.TV34Hl5WEiVy2GxjMUXdYHUbjXGWjn63ZXBD5LyAmoAKvcalQwmzbWdeOTGw--");
 
     
     /*
@@ -287,5 +302,15 @@ private static Double degPerMLat =  new Double (180 /  (Math.PI * re));
 	context.put("breadcrumbs", breadcrumbs);
 	
 	String backend="true";
+	
+	// Note 'referrer' misspelled in HTTP spec.
+	if (request.getParameter("return")!=null) {
+		String returnTo = request.getParameter("return");
+		if (returnTo.equals("_referrer")) {
+			returnTo = request.getHeader("referer");
+		}
+		log.info("saving return url: " + returnTo);
+		session.setAttribute("return", returnTo);
+	}
 	
 %>

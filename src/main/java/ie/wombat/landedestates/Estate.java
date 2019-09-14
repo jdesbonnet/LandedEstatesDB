@@ -17,6 +17,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -28,6 +29,8 @@ import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.Store;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Entity
 @Indexed
@@ -35,11 +38,10 @@ import org.hibernate.search.annotations.Store;
 @XmlRootElement
 public class Estate implements Serializable, Indexable, RevisionTracked {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
+	private static Logger log = LoggerFactory.getLogger(Estate.class);
+	
 	@Id
 	@DocumentId
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,7 +63,7 @@ public class Estate implements Serializable, Indexable, RevisionTracked {
 	private Integer projectPhase;
 
 	@Column(name = "last_modified")
-	private Date lastModified;
+	private Date lastModified = new Date();
 
 	@ManyToOne
 	@NotFound(action = NotFoundAction.IGNORE)
@@ -218,4 +220,10 @@ public class Estate implements Serializable, Indexable, RevisionTracked {
 		this.lastModifiedBy = lastModifiedBy;
 	}
 
+	// Experimental
+	@PrePersist
+	public void onPrePersist() {
+		log.info("onPrePersist()");
+		this.lastModified = new Date();
+	}
 }

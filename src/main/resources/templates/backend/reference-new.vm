@@ -1,25 +1,26 @@
 $breadcrumbs.add("Estates","estate-list.jsp").add($estate.name,"estate-show.jsp?id=${estate.id}").add("Add reference")
 
+<script src="${TYPEAHEAD_SCRIPT}"></script>
+
 <form action="reference-new-submit.jsp" method="POST">
 
 <input type="hidden" name="estate_id" value="${estate.id}" />
 
 <div class="form-group">
-<label for="field_description">Reference description</label>
-<textarea id="field_description" name="description" class="form-control"
-rows="5" cols="60" wrap="virtual"></textarea>
+    <label for="field_description">Reference description</label>
+    <textarea id="field_description" name="description" class="form-control"
+    rows="5" cols="60" wrap="virtual"></textarea>
 </div>
 
 <div class="form-group">
-<label for="refsource">Reference source:</label>
-<input id="refsource" class="form-control typeahead" type="text" size="80" />
-<input type="hidden" name="refsource_id" />
-</div>
+    <label for="refsource">Reference source:</label>
+    <input id="refsource" class="form-control typeahead" type="text" size="80" />
+    <input type="hidden" name="refsource_id" />
 </div>
 
 <div class="form-group">
-<input type="submit" class="btn btn-primary" name="_submit_continue" value="Save and continue to add references" />
-<input type="submit" class="btn btn-primary" name="_submit_exit" value="Save and return to estate record"  />
+<button type="submit" class="btn btn-primary" name="_submit_continue">Save and continue to add references</button>
+<button type="submit" class="btn btn-primary" name="_submit_exit">Save and return to estate record</button>
 </div>
 
 </form>

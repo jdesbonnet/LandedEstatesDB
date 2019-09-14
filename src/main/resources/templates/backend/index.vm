@@ -3,11 +3,12 @@
 <tr><td>Number of Estate records:</td> <td class="n">${numberOfEstateRecords}</td></tr>
 <tr><td>Number of House records:</td> <td class="n">${numberOfHouseRecords}</td></tr>
 <tr><td>Number of Family records:</td> <td class="n">${numberOfFamilyRecords}</td></tr>
+<tr><td>Number of Image records:</td> <td class="n">${numberOfImageRecords}</td></tr>
 
 </table>
 
 <div class="form-group">
-<a class="btn btn-primary" href="estate-new.jsp">Add Estate</a>
+<a class="btn btn-primary" href="estate-new.jsp"><b class="fa fa-plus"></b> Add Estate</a>
 </div>
 
 
