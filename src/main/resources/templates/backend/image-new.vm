@@ -28,7 +28,7 @@ rows="4" cols="80"/>$!image.getDescription()</textarea>
 
 
 <div class="form-group">
-<input type="submit" class="btn btn-primary" value="Upload File" />
+<input type="submit" class="btn btn-primary" value="Upload Image File" />
 </div>
 
 </form>

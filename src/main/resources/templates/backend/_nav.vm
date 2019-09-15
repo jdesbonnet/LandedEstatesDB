@@ -26,7 +26,6 @@
 			<a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tools</a>
 			<div class="dropdown-menu" aria-labelledby="dropdown02">
 				<a class="dropdown-item" href="change-list.jsp">Recent changes</a>
-				<a class="dropdown-item" href="export.jsp">Export database to XML</a>
 				<a class="dropdown-item" href="tools-dbbackup.jsp">Backup database</a>
 				<a class="dropdown-item" href="tool-reindex.jsp">Reindex search</a>
 				<a class="dropdown-item" href="tool-static-make.jsp">Generate static site</a>

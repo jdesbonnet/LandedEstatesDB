@@ -1,8 +1,5 @@
 $breadcrumbs.add("Houses","house-list.jsp").add($house.name,"house-show.jsp?id=$house.id").add("what is nearby? ($radiusKm km)")
 
-
-<div id="mapContainer"></div>
-
 <ul class="bulletList">
 #foreach ($h in $houses)
 #if ($h.id != $house.id)

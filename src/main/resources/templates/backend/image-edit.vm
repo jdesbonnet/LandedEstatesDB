@@ -1,6 +1,5 @@
-$breadcrumbs.add("Images","image-show.jsp?id=${image.id}")
+$breadcrumbs.add("${house.name}").add("Image #${image.id}").add("edit")
 
-<h2>Edit image #$image.getId()</h2>
 
 <form action="image-edit-submit.jsp" method="POST">
 <input type="hidden" name="id" value="$image.getId()" />

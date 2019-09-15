@@ -40,8 +40,8 @@
 	// reference to this JSP for utility methods defined above
 	context.put ("jsp", this);
 	        
-        context.put("pageId","./house-nearby-map");
+	context.put("pageId","./house-nearby-map");
 	context.put("showSideCol","false");
 	templates.merge ("/backend/master.vm",context,out);
-        
-        %>
+    
+%>

@@ -1,8 +1,4 @@
-$breadcrumbs.add("Images").add("Image #${image.id}")
-
-
-<h3>Image #$image.getId(), ${house.name}</h3>
-
+$breadcrumbs.add("${house.name}","house-show.jsp?id=${house.id}").add("Image #${image.id}")
 
 
 <a href="$contextPath/img/orig/${image.getId()}.jpg"><img alt="image"
@@ -48,7 +44,7 @@ estates
 
 
 
-<p>
-<a class="btn btn-primary" href="image-edit.jsp?id=${image.id}">Edit</a>
-</p>
 
+<a class="btn btn-primary" href="image-edit.jsp?id=${image.id}"><b class="fa fa-pencil"></b> edit</a>
+
+<a class="btn btn-primary" href="${contextPath}/img/orig/${image.getId()}.jpg"><b class="fa fa-search"></b> full size</a>

@@ -1,21 +1,27 @@
 
+<div id="map" style="width:100%;height:350px;"></div>
+<button type="button" id="btn_map" class="btn btn-primary"><b class="fa fa-map"></b> Enlarge</button>
+
+<br />
+
+<h4>Images</h4>
+
 #if ($house.images.size() == 0) 
 	<div class="alert alert-info"><b class="fa fa-info-circle"></b> No images.</div>
 #else
 	#foreach ($image in $house.images)
-		<div style="margin-bottom: 5px;">
+		<div style="margin-bottom: 4px; border-bottom:1px solid #eee;padding-bottom:4px;">
 			<a href="image-show.jsp?id=$image.getId()"><img border="1"
 			alt="image #${image.id}" title="image #$image.getId()"
 			src="${contextPath}/img/tn/${image.id}.jpg" align="left"/></a>
-			<br>
-			<b>Caption:</b> $!{image.caption}.
-			<b>Description:</b> $!{image.descrption}
+			<b>Caption:</b> $!{image.caption}
+			<b>Description:</b> $!{image.description}
 
-			<p>
+			<br clear="all" />
 
-			<a href="image-show.jsp?id=${image.id}" class="btn btn-primary btn-sm">edit</a>
+			<a href="image-edit.jsp?id=${image.id}" class="btn btn-primary btn-sm"><b class="fa fa-pencil"></b> edit</a>
 			<a href="image-delete.jsp?id=${image.id}&house_id=${house.id}" class="btn btn-danger btn-sm"
-			onClick="return confirm('Are you sure you want to delete this image?');">delete</a>
+			onClick="return confirm('Are you sure you want to delete this image?');"><b class="fa fa-trash"></b> delete</a>
 		</div>
 	#end
 
@@ -24,4 +30,7 @@
 
 
 <a href="image-new.jsp?house_id=${house.id}" class="btn btn-primary"><b class="fa fa-plus"></b> Add image</a>
+
+
+
 

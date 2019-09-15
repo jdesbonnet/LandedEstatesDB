@@ -129,7 +129,7 @@ $!{house.barony}
 </table>
 
 <p>
-<a class="btn btn-primary" href="house-edit.jsp?id=${house.id}">edit</a>
+<a class="btn btn-primary" href="house-edit.jsp?id=${house.id}"><b class="fa fa-pencil"></b> edit</a>
 &nbsp;
 <a class="btn btn-primary" href="house-nearby.jsp?id=${house.id}">show nearby</a>
 </p>
@@ -149,7 +149,7 @@ ${image.caption}
 #end
 </ul>
 #else
-<em>no images</em>
+<div class="alert alert-info"><b class="fa fa-info-circle"></b> No images. <a href="image-new.jsp?house_id=${house.id}">Add image</a>.</div>
 #end
 
 #if ($house.hasGridReference())

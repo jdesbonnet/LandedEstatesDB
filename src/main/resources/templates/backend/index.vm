@@ -7,10 +7,13 @@
 <div class="col-md-6 full-height">
 
 <table class="stdTable">
-<tr><td>Number of Estate records:</td> <td class="n">${numberOfEstateRecords}</td></tr>
-<tr><td>Number of House records:</td> <td class="n">${numberOfHouseRecords}</td></tr>
-<tr><td>Number of Family records:</td> <td class="n">${numberOfFamilyRecords}</td></tr>
-<tr><td>Number of Image records:</td> <td class="n">${numberOfImageRecords}</td></tr>
+<thead>
+<tr><td>Estates <span class="badge badge-pill badge-primary">${numberOfEstateRecords}</span></td>
+<td>Houses: <span class="badge badge-pill badge-primary">${numberOfHouseRecords}</span></td>
+<td>Families: <span class="badge badge-pill badge-primary">${numberOfFamilyRecords}</span></td>
+<td>Images: <span class="badge badge-pill badge-primary">${numberOfImageRecords}</span></td></tr>
+</thead>
+
 </table>
 
 
@@ -80,7 +83,7 @@ Software version: $VERSION
 <script>
 jQuery(function(){
 
-	var map = L.map('map').setView([53, -8], 8);
+	var map = L.map('map').setView([53, -8], 7);
 
 	// create the tile layer with correct attribution
 	var osmUrl='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
