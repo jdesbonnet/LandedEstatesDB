@@ -18,23 +18,23 @@
 #parse("_nav_header.vm")
 
 
-	<main role="main" class="container-fluid">
-	<div class="row">
+	<main role="main" class="container-fluid full-height">
+	<div class="row full-height">
 	
 	#if ($showSideCol=="true")
 	
 	##
-	## Main content column (9/12 width)
+	## Two column layout: Main content column (9/12 width)
 	##
-	<div class="col-md-9">
+	<div class="col-md-9 mh-100">
 	#set($templateFileName=$pageId+".vm")
 	#parse ($templateFileName)
 	</div>
 	
 	##
-	## Right-side column
+	## Two column layout: Right-side column
 	##
-	<div class="col-md-3">
+	<div class="col-md-3 mh-100">
 	#set($sideFileName=$pageId+".side.vm")
 	#parse($sideFileName)
 	#if ($revisionHistory && $revisionHistory.size() > 0 )
@@ -52,9 +52,9 @@
 	#else
 	
 	##
-	## Main content column (full width)
+	## One column layout: main content column (full width)
 	##
-	<div class="col-md-12">
+	<div class="col-md-12 full-height" xstyle="background-color:yellow">
 	#set($templateFileName=$pageId+".vm")
 	#parse ($templateFileName)
 	</div>

@@ -15,6 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -28,6 +29,8 @@ import org.hibernate.search.annotations.Store;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.gson.annotations.Expose;
 
 import ie.wombat.gis.InvalidGridReferenceException;
 import ie.wombat.gis.OSIGridReference;
@@ -408,6 +411,10 @@ public class House implements Serializable, Indexable, RevisionTracked {
 	public Date getLastModified() {
 		return lastModified;
 	}
+	
+	public void setLastModified(Date d) {
+		this.lastModified = d;
+	}
 
 	@Override
 	public User getLastModifiedBy() {
@@ -423,4 +430,5 @@ public class House implements Serializable, Indexable, RevisionTracked {
 	public Integer getVersion() {
 		return null;
 	}
+	
 }

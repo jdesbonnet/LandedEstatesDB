@@ -1,5 +1,4 @@
-#parse ("/backend/_header.vm")
 
-Logged out.
+<div class="alert alert-info"><b class="fa fa-info-circle"></b> You are now logged out.  <a href="login.jsp">Login.</a> </div>
 
-#parse ("/backend/_footer.vm")
+

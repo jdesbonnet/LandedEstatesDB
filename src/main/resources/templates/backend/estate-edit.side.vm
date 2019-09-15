@@ -1,5 +1,5 @@
 
-
+#if ($FALSE)
 <div class="form-group">
 <button class="btn btn-primary form-control" id="btn_associate_with_house">
 Associate with house record
@@ -36,5 +36,15 @@ jQuery(function(){
 	jQuery("#btn_associate_with_family").click(function(){
 		jQuery("input[name='_submit_add_family']").click();
 	});
+});
+</script>
+
+#end
+
+
+<button id="btn_save" class="btn btn-primary form-control">Save</button>
+<script>
+jQuery("#btn_save").click(function(){
+	jQuery("#estate_edit_form").submit();
 });
 </script>

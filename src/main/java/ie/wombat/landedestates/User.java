@@ -1,11 +1,15 @@
 package ie.wombat.landedestates;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import ie.wombat.landedestates.api.Role;
 
 @Entity
 @Table(name="user")
@@ -15,14 +19,27 @@ public class User {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
+	//@Column (name="name")
+	//private String name;
+	
+
+	/**
+	 * Username and email are (currently) identical
+	 */
 	@Column(name="username")
 	private String username;
+	
+	@Column(name="email")
+	private String email;
 	
 	@Column(name="password")
 	private String password;
 	
 	@Column(name="write_access")
 	private boolean writeAccess = false;
+	
+	@Column(name="last_login")
+	private Date lastLogin;
 	
 	public User () {
 	}
@@ -46,6 +63,14 @@ public class User {
 		this.username = username;
 	}
 	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public boolean isWriteAccess() {
 		return writeAccess;
 	}
@@ -56,5 +81,17 @@ public class User {
 		return writeAccess;
 	}
 	
+	
+	public Date getLastLogin() {
+		return lastLogin;
+	}
+
+	public void setLastLogin(Date lastLogin) {
+		this.lastLogin = lastLogin;
+	}
+
+	public boolean hasRole (Role role) {
+		return true;
+	}
 	
 }

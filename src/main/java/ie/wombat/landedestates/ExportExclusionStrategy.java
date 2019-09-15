@@ -19,9 +19,18 @@ public class ExportExclusionStrategy implements ExclusionStrategy {
 	public boolean shouldSkipField(FieldAttributes f) {
 		
 		
+		// Exclude image data fields
+		if (f.getName().equals("data")) {
+			return true;
+		}
+		
+		if (f.getName().equals("password")) {
+			return true;
+		}
+		
 		if (f.getDeclaringClass() == House.class) {
 			if (f.getName().equals("images")) {
-				return true;
+				//return true;
 			}
 		}
 		if (f.getDeclaringClass() == Estate.class) {

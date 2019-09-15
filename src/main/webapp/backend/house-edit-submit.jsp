@@ -46,8 +46,10 @@ import="ie.wombat.gis.convert.OSILLAConvert"
 	} else {
 		house.setGridReference(gridRef);
 	}
-	em.persist(house);
 	
+
+	db.postEntityUpdate(em, user, house);
+
 	db.index(em,house);
 	
 	response.sendRedirect ("house-show.jsp?id="+house.getId());%>

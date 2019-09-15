@@ -8,7 +8,9 @@
 		return;
 	}
 	session.setAttribute("_user",user);
-	
+	session.setAttribute("user_id",user.getId());
+	user.setLastLogin(new Date());
+
 	// Jump to dashboard
 	response.sendRedirect("index.jsp");
 %>

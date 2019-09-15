@@ -1,0 +1,35 @@
+$breadcrumbs.add("Users","user-list.jsp").add("${u.username}")
+
+
+<table class="stdTable">
+
+<thead>
+<tr>
+<td>ID</td>
+<td>Name</td>
+<td>Last login</td>
+</tr>
+</thead>
+
+<tbody>
+
+#foreach ($u in $users)
+<tr>
+<td><a href="user-show.jsp?id=${u.id}">${u.username}</td>
+<td><a href="user-show.jsp?id=${u.id}">${u.email}</td>
+<td>$!{r.lastLogin}</td>
+</tr>
+#end
+
+#foreach ($r in $recentEstates)
+<tr>
+<td><a href="estate-show.jsp?id=${estate.id}">${r.luceneId}</td>
+<td>${r.name}</td>
+<td>$!{r.lastModified}</td>
+</tr>
+#end
+
+</tbody>
+
+</table>
+

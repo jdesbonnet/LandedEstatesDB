@@ -1,9 +1,53 @@
+<style>
+.house-label {}
+</style>
+
+<div class="row full-height">
+
+<div class="col-md-6 full-height">
 
 <table class="stdTable">
 <tr><td>Number of Estate records:</td> <td class="n">${numberOfEstateRecords}</td></tr>
 <tr><td>Number of House records:</td> <td class="n">${numberOfHouseRecords}</td></tr>
 <tr><td>Number of Family records:</td> <td class="n">${numberOfFamilyRecords}</td></tr>
 <tr><td>Number of Image records:</td> <td class="n">${numberOfImageRecords}</td></tr>
+</table>
+
+
+Recent edits:
+
+<table class="stdTable">
+
+<thead>
+<tr>
+<td>Record ID</td>
+<td>Name</td>
+<td>When</td>
+<td>User</td>
+</tr>
+</thead>
+
+<tbody>
+
+#foreach ($r in $recentHouses)
+<tr>
+<td><a href="estate-show.jsp?id=${estate.id}">$r.luceneId</td>
+<td>$r.name</td>
+<td>$r.lastModified</td>
+<td><a href="user-show.jsp?id=$r.lastModifiedBy.id">${r.lastModifiedBy.username}</a></td>
+</tr>
+#end
+
+#foreach ($r in $recentEstates)
+<tr>
+<td><a href="estate-show.jsp?id=${estate.id}">$r.luceneId</td>
+<td>$r.name</td>
+<td>$r.lastModified</td>
+<td><a href="user-show.jsp?id=$r.lastModifiedBy.id">${r.lastModifiedBy.username}</a></td>
+</tr>
+#end
+
+</tbody>
 
 </table>
 
@@ -11,8 +55,64 @@
 <a class="btn btn-primary" href="estate-new.jsp"><b class="fa fa-plus"></b> Add Estate</a>
 </div>
 
-
-
 <p>
 Software version: $VERSION
 </p>
+
+</div><!-- end col -->
+
+<div class="col-md-6 full-height">
+<div id="map" style="width:100%;height:800px"></div>
+</div>
+
+</div><!-- end .row -->
+
+
+
+
+
+<link rel="stylesheet" type="text/css" href="${LEAFLET_CSS}" />
+<script src="${LEAFLET_SCRIPT}"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster-src.js"></script>
+<link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+<link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+
+<script>
+jQuery(function(){
+
+	var map = L.map('map').setView([53, -8], 8);
+
+	// create the tile layer with correct attribution
+	var osmUrl='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+	var osmAttrib='Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors';
+	var osm = new L.TileLayer(osmUrl, {minZoom: 6, maxZoom: 16, attribution: osmAttrib});		
+	
+	map.addLayer(osm);	
+	
+	jQuery.ajax({
+		url: "$contextPath/api/v0/MapQuery",
+		method: "GET",
+		dataType: "json"
+	}).done(function(response){
+		var markers = L.markerClusterGroup();
+		var houses = response.result;
+		houses.forEach(function(house){
+			if (! house  || ! house.lat ) {
+				return;
+			}
+			console.log("house=" + house.name + " lat=" + house.lat + " lng=" + house.lng);
+			var marker = L.marker([house.lat,house.lng], {
+				icon: new L.DivIcon({
+					iconAnchor: [13,41],
+					className: 'house-name-icon',
+					html: "<img src='https://unpkg.com/leaflet@1.0.3/dist/images/marker-icon.png'/><br />"
+					+ "<div class='house-label'>" + house.name + "</div>"
+				}),
+			});
+			marker.bindPopup("<a href='house-show.jsp?id=" + house.id + "'>" + house.name + "</a>");
+			markers.addLayer(marker);
+		});
+		map.addLayer(markers);
+	});
+});
+</script>

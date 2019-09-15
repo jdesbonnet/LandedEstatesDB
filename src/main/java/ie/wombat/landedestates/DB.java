@@ -466,6 +466,7 @@ public class DB {
 	 */
 	public void postEntityUpdate (EntityManager em, User user, RevisionTracked o) {
 		index(em,o);
+		o.setLastModified(new Date());
 		o.setLastModifiedBy(user);
 		ObjectHistory oh = new ObjectHistory();
 		oh.setUser(user);

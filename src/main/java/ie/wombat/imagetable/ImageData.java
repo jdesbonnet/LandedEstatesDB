@@ -15,6 +15,8 @@ import javax.persistence.Transient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.gson.annotations.Expose;
+
 
 @Entity
 @Table(name="image_data")
@@ -37,6 +39,7 @@ public class ImageData {
 	private Integer size;
 	
 	@Lob
+	@Expose(serialize = false)
 	private byte[] data;
 	
 	
