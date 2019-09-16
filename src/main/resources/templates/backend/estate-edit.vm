@@ -49,6 +49,7 @@ rows="5" cols="80"/>$!{estate.description}</textarea>
 <a name="houses"></a>
 <div class="form-group">
 <label for="properties">Houses</label>
+#set($showActionsColumn="true")
 #parse ("_estate_houses_table.vm")
 <button type="submit" class="btn btn-primary btn-sm" name="_submit_new_house">
 <b class="fa fa-plus"></b> Add new house record</button>

@@ -91,7 +91,7 @@ size="4" value="$!{house.discoveryMap}" />
 
 
 <div class="col-md-4 form-group">
-<label for="field_grid_ref">Lat/Lng or Grid Reference</label>
+<label for="field_grid_ref">Grid Reference</label>
 <input type="text" 
 id="field_grid_ref" name="grid_ref" class="form-control"
 size="48"
@@ -100,6 +100,21 @@ value="$!{house.gridReference}" />
 
 </div><!-- end .row -->
 
+<div class="row">
+<div class="col-md-4">
+<label>Latitude</label>
+<input type="text" class="form-control" name="latitude" value="$!{house.latitude}" />
+</div>
+<div class="col-md-4">
+<label>Longitude</label>
+<input type="text" class="form-control" name="longitude" value="$!{house.longitude}" />
+</div>
+<div class="col-md-4">
+<label>Project phase</label>
+<input type="text" class="form-control" name="longitude" value="$!{house.projectPhase}" />
+</div>
+</div>
+
 ##</div><!-- end col -->
 ##</div class="col-md-3">
 ##	<div id="map"></div>
@@ -107,6 +122,7 @@ value="$!{house.gridReference}" />
 ##</div><!-- end row -->
 
 
+<br />
 
 <button class="btn btn-primary" type="submit">Save</button>
 
@@ -118,8 +134,15 @@ value="$!{house.gridReference}" />
 <script src="${LEAFLET_SCRIPT}"></script>
 
 <script>
+#if ($house.latitude)
 var lat = $house.latitude;
 var lng = $house.longitude;
+var zoom = 10;
+#else
+var lat = 53;
+var lng = -8;
+var zoom = 6;
+#end
 jQuery(function(){
 
 	jQuery("#btn_map").click(function(){
@@ -127,7 +150,16 @@ jQuery(function(){
 		jQuery("#modal_map").modal("show");
 	});
 	
-	var map = L.map('map').setView([lat, lng], 7);
+	jQuery("#btn_osm").click(function(){
+		jQuery.ajax({
+			url:"$contextPath/api/v0/OSMQuery",
+			method: "GET",
+			data: {latitude:53, longitude:-9}
+		});
+	});
+	
+	
+	var map = L.map('map').setView([lat, lng], zoom);
 
 	// create the tile layer with correct attribution
 	var osmUrl='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
@@ -136,8 +168,28 @@ jQuery(function(){
 	
 	map.addLayer(osm);
 	
-	L.marker([lat,lng]).addTo(map);
-	
+	var marker = L.marker([lat,lng], {
+		draggable: true
+	}).addTo(map);
+	marker.on('drag', function (e) {
+		jQuery("INPUT[name='latitude']").val(e.latlng.lat);
+		jQuery("INPUT[name='longitude']").val(e.latlng.lng);
+	});
+        
+	marker.on('dragend', function (e) {
+		console.log(e);
+		var latlng = e.target.getLatLng();
+		jQuery.ajax({
+			url: "${contextPath}/api/v0/LatLngToING",
+			method: "GET",
+			data: {latitude: latlng.lat, longitude: latlng.lng},
+			dataType: "json"
+		}).done(function(response){
+			var gr = response.result;
+			jQuery("INPUT[name='grid_ref']").val(gr);
+		});
+
+	});	
 
 });	
 </script>

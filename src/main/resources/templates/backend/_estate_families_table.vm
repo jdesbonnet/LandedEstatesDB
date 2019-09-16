@@ -18,7 +18,7 @@ title="F${family.id}">${family.nameAndTitle}</a>
 <button type="submit" class="btn btn-danger btn-sm pull-right" 
 onClick="return confirm('Are you sure you want to remove family association from estate record?');"
 name="_submit_family_remove_${family.id}">
-<b class="fa fa-remove"></b>
+<b class="fa fa-remove" title="remove association"></b>
 </button>
 </td>
 </tr>

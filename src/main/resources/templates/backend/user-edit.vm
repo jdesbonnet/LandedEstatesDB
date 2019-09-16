@@ -1,0 +1,12 @@
+$breadcrumbs.add("Users","user-list.jsp").add("${u.username}")
+
+<form method="POST" action="user-edit-submit.jsp">
+
+<div class="form-group">
+<label>Email address</label>
+<input type="email" class="form-control" />
+</div>
+
+
+
+

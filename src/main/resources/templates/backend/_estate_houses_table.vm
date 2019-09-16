@@ -42,7 +42,7 @@
 
 <td>
 #if ($house.hasGridReference())
-<a href="javascript:popupMap('gridref=${house.gridReference}')">${house.gridReference}</a>
+${house.gridReference}
 #end
 #if ($house.discoveryMap)
 Discovery map #${house.discoveryMap}.
@@ -63,10 +63,11 @@ no
 
 #if ($showActionsColumn=="true")
 <td>
-<a href="property-remove.jsp?id=${property.id}&estate_id=${estate.id}"
-class="btn btn-primary btn-sm"
+<a href="house-remove.jsp?id=${house.id}&estate_id=${estate.id}"
+class="btn btn-danger btn-sm"
 onClick="return confirm('Are you sure you want to remove this house?');"
->remove association</a>
+title="remove house association"
+><b class="fa fa-remove"></b></a>
 </td>
 #end
 

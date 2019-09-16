@@ -1,7 +1,5 @@
 $breadcrumbs.add("Estates","estate-list.jsp").add("$estate.name","estate-show.jsp?id=$estate.id").add("add house record")
 
-<h2>Create new house record belonging to $estate.getName()</h2>
-
 <form action="house-new-submit.jsp" method="POST">
 <input type="hidden" name="estate_id" 
 value="$estate.getId()" />

@@ -38,6 +38,18 @@ public class User {
 	@Column(name="write_access")
 	private boolean writeAccess = false;
 	
+	/**
+	 * Admin user can create/edit users
+	 */
+	@Column(name="admin", nullable=false, columnDefinition = "TINYINT(1)")
+	private boolean admin = false;
+	
+	/**
+	 * Super admin user has access to backups etc
+	 */
+	//@Column(name="super_admin")
+	//private boolean superAdmin = false;
+	
 	@Column(name="last_login")
 	private Date lastLogin;
 	

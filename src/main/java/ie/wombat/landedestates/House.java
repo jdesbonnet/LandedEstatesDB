@@ -14,6 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -153,6 +154,7 @@ public class House implements Serializable, Indexable, RevisionTracked {
 		name="property_images",
 		joinColumns=@JoinColumn(name="property_id", referencedColumnName="id"),
 		inverseJoinColumns=@JoinColumn(name="image_id", referencedColumnName="id"))
+	@OrderBy("id")
 	private Set<Image> images = new HashSet<Image>();
 	
 	/**

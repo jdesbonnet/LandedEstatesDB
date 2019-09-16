@@ -118,8 +118,9 @@ $!{house.barony}
 <br>
 ## New Google Earth: https://www.gearthblog.com/blog/archives/2017/04/fun-stuff-new-google-earth-url.html
 
-##[<a href="house-kml.jsp?id=${house.id}">Google Earth</a>]
-[<a href="https://earth.google.com/web/@${house.latitudeDeg},${house.longitudeDeg},500a">Google Earth</a>]
+<a class="btn btn-primary btn-sm" href="https://bing.com/maps/default.aspx?cp=${house.latitude}~${house.longitude}&lvl=20&style=a">Bing Maps</a>
+<a class="btn btn-primary btn-sm" href="https://earth.google.com/web/@${house.latitude},${house.longitude},500a">Google Earth</a>
+<a class="btn btn-primary btn-sm" href="https://maps.google.com/?q=${house.latitude},${house.longitude}">Google Maps</a>
 
 </td></tr>
 #else
@@ -144,7 +145,8 @@ $!{house.barony}
 <a href="image-show.jsp?id=${image.id}"><img 
 src="$contextPath/img/im/${image.id}.jpg" /></a>
 <br />
-${image.caption}
+<b>Caption:</b> $!{image.caption}.
+<b>Description:</b> $!{image.description}
 </div>
 #end
 </ul>

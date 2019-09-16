@@ -76,11 +76,17 @@ public class DB {
 	
 	static final String[] counties = { 
 		
+			"Antrim","Armagh","Carlow","Cavan","Clare","Cork","Derry","Donegal","Down","Dublin","Fermanagh",
+			"Galway","Kerry","Kildare","Kilkenny","Laois","Letrim","Limerick",
+			"Longford","Louth","Mayo","Meath","Monaghan", "Offaly","Roscommon","Sligo",
+			"Tipperary","Tyrone","Waterford","Westmeath","Wexford","Wicklow"
+			
+			
 			/* Phase 1 counties */
-			"Galway", "Mayo", "Roscommon", "Leitrim", "Sligo",
+			//"Galway", "Mayo", "Roscommon", "Leitrim", "Sligo",
 			
 			/* Phase 2 counties */
-			 "Clare", "Cork","Kerry","Limerick","Tipperary","Waterford",
+			// "Clare", "Cork","Kerry","Limerick","Tipperary","Waterford",
 			 
 			/*
 			"Carlow", "Cavan", "Dublin",  "Kildare",

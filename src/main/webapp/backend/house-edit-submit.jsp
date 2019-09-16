@@ -48,6 +48,9 @@ import="ie.wombat.gis.convert.OSILLAConvert"
 	}
 	
 
+	house.setLatitude(new Double(request.getParameter("latitude")));
+	house.setLongitude(new Double(request.getParameter("longitude")));
+
 	db.postEntityUpdate(em, user, house);
 
 	db.index(em,house);

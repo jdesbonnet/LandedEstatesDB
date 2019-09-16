@@ -68,6 +68,17 @@ $breadcrumbs.add("Estates","estate-list.jsp")
 #end
 
 Recent:
+<table class="stdTable">
+<thead>
+<tr><td>Record ID</td><td>Name</td><td>Last modified</td><td>User</td></tr>
+</thead>
+
+<tbody>
 #foreach ($estate in $recent)
-<li> ${estate.name}</li>
+<tr>
+<td><a href="estate-show.jsp?id=${estate.id}">${estate.luceneId}</a></td>
+<td>${estate.name}</td><td>${estate.lastModified}</td><td>${estate.lastModifiedBy.username}</td></tr>
 #end
+</tbody>
+
+</table>

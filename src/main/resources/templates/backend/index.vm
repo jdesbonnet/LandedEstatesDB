@@ -2,6 +2,9 @@
 .house-label {}
 </style>
 
+$breadcrumbs
+
+
 <div class="row full-height">
 
 <div class="col-md-6 full-height">
@@ -19,6 +22,10 @@
 
 Recent edits:
 
+#if ($recentHouses.size()==0 && $recentEstates.size()==0)
+<div class="alert alert-info"><b class="fa fa-info-circle"></b> No recent edits.</div>
+#else
+
 <table class="stdTable">
 
 <thead>
@@ -34,7 +41,7 @@ Recent edits:
 
 #foreach ($r in $recentHouses)
 <tr>
-<td><a href="estate-show.jsp?id=${estate.id}">$r.luceneId</td>
+<td><a href="house-show.jsp?id=${r.id}">$r.luceneId</td>
 <td>$r.name</td>
 <td>$r.lastModified</td>
 <td><a href="user-show.jsp?id=$r.lastModifiedBy.id">${r.lastModifiedBy.username}</a></td>
@@ -43,7 +50,7 @@ Recent edits:
 
 #foreach ($r in $recentEstates)
 <tr>
-<td><a href="estate-show.jsp?id=${estate.id}">$r.luceneId</td>
+<td><a href="estate-show.jsp?id=${r.id}">$r.luceneId</td>
 <td>$r.name</td>
 <td>$r.lastModified</td>
 <td><a href="user-show.jsp?id=$r.lastModifiedBy.id">${r.lastModifiedBy.username}</a></td>
@@ -53,6 +60,9 @@ Recent edits:
 </tbody>
 
 </table>
+
+#end
+
 
 <div class="form-group">
 <a class="btn btn-primary" href="estate-new.jsp"><b class="fa fa-plus"></b> Add Estate</a>

@@ -94,6 +94,7 @@ public class Estate implements Serializable, Indexable, RevisionTracked {
 	 */
 	@OneToMany
 	@JoinTable(name = "estate_properties", joinColumns = @JoinColumn(name = "estate_id"), inverseJoinColumns = @JoinColumn(name = "property_id"))
+	@OrderBy("name")
 	private Set<House> houses = new HashSet<House>();
 
 	/**

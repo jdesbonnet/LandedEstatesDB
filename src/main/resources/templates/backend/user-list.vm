@@ -1,13 +1,14 @@
-$breadcrumbs.add("Users","user-list.jsp").add("${u.username}")
+$breadcrumbs.add("Users")
 
 
 <table class="stdTable">
 
 <thead>
 <tr>
-<td>ID</td>
-<td>Name</td>
+<td>Username</td>
+<td>Email</td>
 <td>Last login</td>
+<td></td>
 </tr>
 </thead>
 
@@ -17,7 +18,8 @@ $breadcrumbs.add("Users","user-list.jsp").add("${u.username}")
 <tr>
 <td><a href="user-show.jsp?id=${u.id}">${u.username}</td>
 <td><a href="user-show.jsp?id=${u.id}">${u.email}</td>
-<td>$!{r.lastLogin}</td>
+<td>$!{u.lastLogin}</td>
+<td><a class="btn btn-primary btn-sm" href="user-edit.jsp?user_id=${u.id}"><b class="fa fa-pencil"></b></a></td>
 </tr>
 #end
 
@@ -33,3 +35,5 @@ $breadcrumbs.add("Users","user-list.jsp").add("${u.username}")
 
 </table>
 
+
+<a class="btn btn-primary" href="user-edit.jsp"><b class="fa fa-plus"></b> add user</a>
