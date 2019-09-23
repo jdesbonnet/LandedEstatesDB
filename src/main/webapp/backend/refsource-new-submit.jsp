@@ -6,7 +6,7 @@
 
 
 	ReferenceSource source = new ReferenceSource();
-	source.setName (request.getParameter("name"));
+	source.setName (XSS.clean(request.getParameter("name")));
 	em.persist(source);
 	
 	response.sendRedirect("refsource-edit.jsp?id=" + source.getId());

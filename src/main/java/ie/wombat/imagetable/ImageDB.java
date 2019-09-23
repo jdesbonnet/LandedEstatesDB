@@ -6,6 +6,7 @@ package ie.wombat.imagetable;
 
 
 import ie.wombat.landedestates.HibernateUtil;
+import ie.wombat.template.XSS;
 
 //import java.io.ByteArrayInputStream;
 
@@ -465,9 +466,9 @@ public class ImageDB {
 		}
 		
 
-		String caption =  param.getProperty("caption");
-		String description =  param.getProperty("description");
-		String attribution =  param.getProperty("attribution");
+		String caption = XSS.clean(param.getProperty("caption"));
+		String description = XSS.clean(param.getProperty("description"));
+		String attribution = XSS.clean(param.getProperty("attribution"));
 		
 		// TODO: get tags
 		// Tags can be specified by the presence of tag_nnn params, or

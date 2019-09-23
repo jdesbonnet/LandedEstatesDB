@@ -6,7 +6,7 @@ if (!user.hasWriteAccess()) {
 
 
 	Estate estate = new Estate ();
-	estate.setName (request.getParameter("name"));
+	estate.setName (XSS.clean(request.getParameter("name")));
 	
 	try {
 		estate.setProjectPhase (new Integer(request.getParameter("project_phase")));

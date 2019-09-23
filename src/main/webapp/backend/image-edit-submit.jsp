@@ -8,8 +8,8 @@ if (!user.hasWriteAccess()) {
 	Long id = new Long(request.getParameter("id"));
 	Image image = (Image)em.find(Image.class, id);
 	
-	image.setCaption(request.getParameter("caption"));
-	image.setDescription(request.getParameter("description"));
+	image.setCaption(XSS.clean(request.getParameter("caption")));
+	image.setDescription(XSS.clean(request.getParameter("description")));
 	
 	em.persist(image);
 

@@ -13,11 +13,11 @@
 		em.persist(source);
 	}
 
-	source.setName (request.getParameter("name"));
-	source.setDescription (request.getParameter("description"));
-	source.setContactPerson(request.getParameter("contact_person"));
-	source.setContactTelephone(request.getParameter("contact_telephone"));
-	source.setContactEmail(request.getParameter("contact_email"));
+	source.setName (XSS.clean(request.getParameter("name")));
+	source.setDescription (XSS.clean(request.getParameter("description")));
+	source.setContactPerson(XSS.clean(request.getParameter("contact_person")));
+	source.setContactTelephone(XSS.clean(request.getParameter("contact_telephone")));
+	source.setContactEmail(XSS.clean(request.getParameter("contact_email")));
 	
 
 	Long categoryId = new Long (request.getParameter("category_id"));

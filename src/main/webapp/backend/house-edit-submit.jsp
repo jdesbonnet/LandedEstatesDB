@@ -10,20 +10,20 @@ import="ie.wombat.gis.convert.OSILLAConvert"
 	
 	// TODO: XSS clean all these inputs
 	
-	house.setName(request.getParameter("name"));
-	house.setDescription(request.getParameter("description"));
+	house.setName(XSS.clean(request.getParameter("name")));
+	house.setDescription(XSS.clean(request.getParameter("description")));
 	
-	house.setTownland(request.getParameter("townland"));
-	house.setCivilParish(request.getParameter("civil_parish"));
-	house.setDed(request.getParameter("ded"));
-	house.setPlu(request.getParameter("plu"));
-	house.setBarony(request.getParameter("barony"));
-	house.setCounty(request.getParameter("county"));
+	house.setTownland(XSS.clean(request.getParameter("townland")));
+	house.setCivilParish(XSS.clean(request.getParameter("civil_parish")));
+	house.setDed(XSS.clean(request.getParameter("ded")));
+	house.setPlu(XSS.clean(request.getParameter("plu")));
+	house.setBarony(XSS.clean(request.getParameter("barony")));
+	house.setCounty(XSS.clean(request.getParameter("county")));
 	
-	house.setOsSheet(request.getParameter("os_sheet"));
-	house.setDiscoveryMap(request.getParameter("discovery_map"));
+	house.setOsSheet(XSS.clean(request.getParameter("os_sheet")));
+	house.setDiscoveryMap(XSS.clean(request.getParameter("discovery_map")));
 	
-	String gridRef = request.getParameter("grid_ref").trim();
+	String gridRef = XSS.clean(request.getParameter("grid_ref").trim());
 	
 	// If in (lat,lon) format convert to OSI XEEENNN format (100m)
 	if (gridRef.startsWith("(") && gridRef.endsWith(")")) {
