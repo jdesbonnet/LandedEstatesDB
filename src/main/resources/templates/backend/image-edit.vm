@@ -1,28 +1,37 @@
-$breadcrumbs.add("${house.name}").add("Image #${image.id}").add("edit")
+$breadcrumbs.add("${house.name}","house-show.jsp?id=${house.id}").add("Image #${image.id}").add("edit")
 
+<div class="row">
 
+<div class="col-md-6">
 <form action="image-edit-submit.jsp" method="POST">
 <input type="hidden" name="id" value="$image.getId()" />
 <input type="hidden" name="next" value="$next" />
 
-<img alt="image $image.getId()" src="$contextPath/img/im/${image.getId()}.jpg" />
 
-<div>
+<div class="form-group">
 <label for="field_caption">Caption</label>
-<textarea
+<textarea class="form-control"
 name="caption" id="field_caption" 
-rows="4" cols="80"/>$!image.getCaption()</textarea>
+rows="4" cols="80"/>$!{image.caption}</textarea>
 </div>
 
 
-<div>
+<div class="form-group">
 <label for="field_description">Description</label>
-<textarea
+<textarea class="form-control"
 name="description" id="field_description" 
-rows="4" cols="80"/>$!image.getDescription()</textarea>
+rows="4" cols="80"/>$!{image.description}</textarea>
 </div>
 
+<br />
 
 <input class="btn btn-primary" type="submit" value="Save" />
 </form>
 
+</div>
+<div class="col-md-6">
+<img alt="Image#${image.id} of ${house.name}" 
+src="${contextPath}/img/im/${image.id}.jpg" />
+</div>
+
+</div><!-- end .row -->

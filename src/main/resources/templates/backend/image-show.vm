@@ -1,9 +1,9 @@
 $breadcrumbs.add("${house.name}","house-show.jsp?id=${house.id}").add("Image #${image.id}")
 
 
-<a href="$contextPath/img/orig/${image.getId()}.jpg"><img alt="image"
-src="$contextPath/img/im/${image.getId()}.jpg" 
-/></a>
+<a href="${contextPath}/img/orig/${image.id}.jpg"><img 
+alt="Image#${image.id} of ${house.name}"
+src="$contextPath/img/im/${image.id}.jpg"  /></a>
 <br />
 Click on image for original full size version.
 
@@ -40,6 +40,7 @@ estates
 <td>Description:</td>
 <td>$!image.getDescription()</td>
 </tr>
+
 </table>
 
 

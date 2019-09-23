@@ -6,20 +6,16 @@
 	
 	context.put ("image", image);
 	
-	
-	//	 Identify associated House records
-	List<House> houses = em
-	.createQuery("from House where :image MEMBER OF images")
-	.setParameter("image",image)
-	.getResultList();
-	
-	context.put("houses", houses);
-	
-	if (houses.size() == 0) {
-		throw new ServletException ("associated House for image " + id + " not found");
+		// What hose does this image belong to?
+	List<House> houses = em.createQuery("from House where :image MEMBER OF images")
+			.setParameter("image",image)
+			.getResultList();
+	if(houses.size()>1) {
+		log.error("Found Image#" + image.getId() + " used for more than one house record");
 	}
-	context.put ("house",houses.get(0));
-	
+	if (houses.size()>0) {
+		context.put("house",houses.get(0));
+	}
 	
 	// Find Estate or Estates associated with this House record
 	/*

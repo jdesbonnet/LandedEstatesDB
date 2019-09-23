@@ -27,7 +27,7 @@ import="ie.wombat.imagetable.Image"
 import="ie.wombat.imagetable.ImageUpload"
 %><%request.setCharacterEncoding("utf-8");%><%!// errorPage="error.jsp"
 
-    public static final Logger log = LoggerFactory.getLogger("jsp");
+public static final Logger log = LoggerFactory.getLogger("jsp");
 
 public static final DecimalFormat latlonf = new DecimalFormat ("###.00000");
 
@@ -126,8 +126,8 @@ private static Double degPerMLat =  new Double (180 /  (Math.PI * re));
 		try {
 			return new String(latinIn.getBytes("ISO-8859-1"), "UTF-8");
 		} catch (Exception e1) {
-            return e1.toString();
-        }
+			return e1.toString();
+		}
 	}
 	*/
 	
@@ -239,35 +239,35 @@ private static Double degPerMLat =  new Double (180 /  (Math.PI * re));
 	// new key obtained for http://landedestates.nuigalway.ie 8 Sep 2009.
 	//context.put ("yahooMapKey","KozUJ.TV34Hl5WEiVy2GxjMUXdYHUbjXGWjn63ZXBD5LyAmoAKvcalQwmzbWdeOTGw--");
 
-    
-    /*
-     * Set jspfile to name of JSP script file
-     */
-    String jspFile;
-    {
-    	String[] p = request.getRequestURI().split("/");
-    	jspFile = p[p.length-1];
-    	context.put ("jspfile", p[p.length-1]);
-    }
-  
-    User user = (User)session.getAttribute("_user");
- 
+
+	/*
+	 * Set jspfile to name of JSP script file
+	 */
+	String jspFile;
+	{
+		String[] p = request.getRequestURI().split("/");
+		jspFile = p[p.length-1];
+		context.put ("jspfile", p[p.length-1]);
+	}
+
+	User user = (User)session.getAttribute("_user");
+
 	/*
 	 * If user not logged in redirect to login.jsp. Skip this
 	 * test for scripts 'login.jsp' and 'login-submit.jsp'.
 	 */
-    if (user == null) {
-    	if (!jspFile.equals("login.jsp") 
-    		&& !jspFile.equals("login-submit.jsp") 
-    		&& !jspFile.equals("error.jsp")
-    		) {
-    		System.err.println ("not logged in, redirecting to login.jsp");
-    		response.sendRedirect("login.jsp");
-    		return;
-    	}
-    }
-    context.put ("user", user);
-    
+	if (user == null) {
+		if (!jspFile.equals("login.jsp") 
+			&& !jspFile.equals("login-submit.jsp") 
+			&& !jspFile.equals("error.jsp")
+			) {
+			System.err.println ("not logged in, redirecting to login.jsp");
+			response.sendRedirect("login.jsp");
+			return;
+		}
+	}
+	context.put ("user", user);
+	
 	DB db = DB.getInstance();
 	
 	
