@@ -23,7 +23,8 @@ import ie.wombat.landedestates.api.APIMethodResponse;
 import ie.wombat.landedestates.api.GetAllowed;
 
 /**
- * Return {@link House} record.
+ * Query nominatim.openstreetmap.org to convert lat,lng to address including
+ * enclosing administrative regions.
  * 
  * @author Joe Desbonnet
  *
@@ -45,8 +46,7 @@ public class OSMQuery implements APIMethodHandler {
 			apiResponse.setJsonStringResponse(true);
 			apiResponse.setResult(json);
 		} catch (KeyManagementException | NoSuchAlgorithmException | KeyStoreException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error(e.toString());
 		}
 		
 

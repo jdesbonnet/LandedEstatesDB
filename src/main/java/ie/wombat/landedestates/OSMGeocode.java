@@ -27,7 +27,20 @@ public class OSMGeocode {
 	private static Logger log = LoggerFactory.getLogger(OSMGeocode.class);
 	
 	/**
-	 * Convert latitude,longitude to address.
+	 * Convert latitude,longitude to address including administrative regions.
+	 * 
+	 * In the Irish context 'address' properties:
+	 * suburb = townland
+	 * city_district = DED
+	 * state_district = province
+	 * 
+	 * Ref https://wiki.openstreetmap.org/wiki/Tag%3aboundary=administrative
+	 * Level 5 = provence
+	 * Level 6 = County
+	 * Level 7 = Admin county
+	 * Level 8 = Borough & Town council, Dublin Postal Districts
+	 * Level 9 = ED
+	 * Level 10 = Townloand
 	 * 
 	 * @param latitude
 	 * @param longitude
@@ -48,10 +61,10 @@ public class OSMGeocode {
 		log.info("url=" + url);
 		
 		HttpClient httpClient = HttpClients
-	            .custom()
-	            .setSSLContext(new SSLContextBuilder().loadTrustMaterial(null, TrustAllStrategy.INSTANCE).build())
-	            .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE)
-	            .build();
+			.custom()
+			.setSSLContext(new SSLContextBuilder().loadTrustMaterial(null, TrustAllStrategy.INSTANCE).build())
+			.setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE)
+			.build();
 		
 		HttpGet get = new HttpGet(url);
 		
