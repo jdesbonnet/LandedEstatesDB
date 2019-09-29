@@ -94,13 +94,12 @@ Software version: $VERSION
 jQuery(function(){
 
 	var map = L.map('map').setView([53, -8], 7);
-
-	// create the tile layer with correct attribution
-	var osmUrl='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-	var osmAttrib='Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors';
-	var osm = new L.TileLayer(osmUrl, {minZoom: 6, maxZoom: 16, attribution: osmAttrib});		
 	
-	map.addLayer(osm);	
+	var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		minZoom: 6,
+		maxZoom:16,
+		attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
+	}).addTo(map);
 	
 	jQuery.ajax({
 		url: "$contextPath/api/v0/MapQuery",
@@ -113,7 +112,7 @@ jQuery(function(){
 			if (! house  || ! house.lat ) {
 				return;
 			}
-			console.log("house=" + house.name + " lat=" + house.lat + " lng=" + house.lng);
+			//console.log("house=" + house.name + " lat=" + house.lat + " lng=" + house.lng);
 			var marker = L.marker([house.lat,house.lng], {
 				icon: new L.DivIcon({
 					iconAnchor: [13,41],
@@ -126,6 +125,30 @@ jQuery(function(){
 			markers.addLayer(marker);
 		});
 		map.addLayer(markers);
+	});
+	
+	// Fetch extra map layers
+	jQuery.ajax({
+		url: "$contextPath/api/v0/GetMapTileLayers",
+		method: "GET",
+		dataType: "json"
+	}).done(function(response){
+		var tileLayers = response.result;
+		
+		var baseLayers = {
+			"OSM": osmLayer
+		};
+		var extraLayers = {};
+		tileLayers.forEach(function(layer){
+			console.log("layer=" + layer.name);
+			extraLayers[layer.name] = L.tileLayer(layer.url, {
+				minZoom: layer.minZoom, 
+				maxZoom: layer.maxZoom, 
+				tms: layer.tms,
+				attribution: layer.attribution
+			});
+		});
+		L.control.layers(baseLayers,extraLayers).addTo(map);
 	});
 });
 </script>
