@@ -4,7 +4,6 @@ import ie.wombat.gis.convert.OSILLAConvert;
 import ie.wombat.template.Context;
 import ie.wombat.ui.Tab;
 
-import java.beans.XMLEncoder;
 import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
@@ -16,25 +15,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 
-
-import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
-
-import org.apache.lucene.document.Document;
-import org.apache.lucene.document.Field;
-import org.apache.lucene.index.IndexReader;
-import org.apache.lucene.index.IndexWriter;
-
 import org.apache.lucene.search.IndexSearcher;
-import org.apache.lucene.search.Query;
-import org.dom4j.DocumentException;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
-import org.hibernate.EntityMode;
 import org.hibernate.ObjectNotFoundException;
-import org.hibernate.ReplicationMode;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.Search;
 //import org.hibernate.search.jpa.FullTextEntityManager;
@@ -52,7 +34,7 @@ public class DB {
 	//public static final String VERSION = "1.2.4 28 Sep 2009";
 	//public static final String VERSION = "1.2.5b3 13 Dec 2010";
 	//public static final String VERSION = "1.3.2, July 2013";
-	public static final String VERSION = "2.0.0 alpha 1, Jan 2018";
+	public static final String VERSION = "2.0.0 beta2, 2019-09-26";
 
 	
 	public static final int DEFAULT_NEARBY_RADIUS = 10000;
