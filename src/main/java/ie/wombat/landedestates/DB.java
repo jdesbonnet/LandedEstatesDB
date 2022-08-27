@@ -38,7 +38,7 @@ public class DB {
 
 	
 	public static final int DEFAULT_NEARBY_RADIUS = 10000;
-	private static final String DEFAULT_INDEX_DIR = "/var/tmp/leidx";
+	private static final String DEFAULT_INDEX_DIR = "/var/tmp/ledb2idx";
 	
 	private static DB instance = new DB();
 
