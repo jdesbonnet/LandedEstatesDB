@@ -1,6 +1,10 @@
 LandedEstatesDB
 ===============
 
+## Updates for hosting on AWS
+
+TODO
+
 
 ## Database setup
 
