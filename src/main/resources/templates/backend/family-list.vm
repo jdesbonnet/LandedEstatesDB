@@ -72,4 +72,6 @@ onClick="return confirm('Are you sure you want to delete family name?');"
 
 #end
 
+<a class="btn btn-primary" href="family-add.jsp">Add family</a>
+
 ##parse ("/backend/_footer.vm")

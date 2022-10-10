@@ -1,0 +1,29 @@
+<form action="family-add-submit.jsp" method="POST">
+<input type="hidden" name="id" 
+value="$!{family.id}" />
+
+#if ($next)
+<input type="hidden" name="next"
+value="$next" />
+#end
+
+<div class="form-group">
+<label for="name">Family name</label>
+<input type="text" class="form-control" size="40" id="name" name="name" />
+</div>
+
+
+<div class="form-group">
+<label for="field_title">Family title</label>
+<input type="text" class="form-control" size="40" id="field_title" name="title" />
+</div>
+
+
+<div class="form-group">
+<label for="name">Description</label>
+<textarea name="description" class="form-control"
+rows="5" cols="80"/></textarea>
+</div>
+
+<input type="submit" class="btn btn-primary" value="Save" />
+</form>
