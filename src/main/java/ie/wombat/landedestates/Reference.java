@@ -31,7 +31,7 @@ public class Reference implements Serializable, Comparable<Reference> {
 
 	@Id
 	@DocumentId
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@Lob

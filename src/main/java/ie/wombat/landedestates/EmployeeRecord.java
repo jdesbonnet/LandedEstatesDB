@@ -36,7 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class EmployeeRecord implements Indexable,Auditable {
 	
 	@Id	
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	//@DocumentId
 	private Long id;
 	
