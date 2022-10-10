@@ -29,6 +29,8 @@ import org.hibernate.search.annotations.Store;
 @Table(name="reference")
 public class Reference implements Serializable, Comparable<Reference> {
 
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@DocumentId
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
